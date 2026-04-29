@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gildia Innowacji – Program dla instytucji</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:     #0f0e0b;
+  --paper:   #f8f5f0;
+  --warm:    #ede9e1;
+  --orange:  #e8510a;
+  --orange2: #f5a623;
+  --green:   #1a6b4a;
+  --muted:   #6b6357;
+  --border:  rgba(15,14,11,0.1);
+  --white:   #ffffff;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 4rem;
+  background: rgba(248,245,240,0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 0.7rem;
+  text-decoration: none; color: var(--ink);
+}
+.nav-brand img { width: 34px; height: 34px; object-fit: contain; }
+.nav-brand-text { font-family: 'DM Serif Display', serif; font-size: 1.1rem; }
+.nav-brand-text span { color: var(--orange); }
+.nav-right { display: flex; align-items: center; gap: 2rem; }
+.nav-right a {
+  font-size: 0.82rem; font-weight: 500; color: var(--muted);
+  text-decoration: none; letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.nav-right a:hover { color: var(--ink); }
+.nav-cta {
+  background: var(--ink); color: var(--paper);
+  font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 0.65rem 1.5rem;
+  border: none; border-radius: 3px; cursor: pointer;
+  text-decoration: none; display: inline-block;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--orange); }
+
+/* ── HERO ── */
+.hero {
+  padding: 10rem 4rem 7rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.hero-kicker {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+  font-weight: 500; color: var(--orange);
+  margin-bottom: 2rem;
+  animation: fadeUp 0.8s ease both;
+}
+.kicker-line { width: 32px; height: 1.5px; background: var(--orange); }
+
+.hero-h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(3rem, 4.5vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.8s 0.08s ease both;
+}
+.hero-h1 em { color: var(--orange); font-style: italic; }
+
+.hero-lead {
+  font-size: 1.05rem; line-height: 1.8; color: var(--muted);
+  margin-bottom: 2.5rem;
+  animation: fadeUp 0.8s 0.16s ease both;
+}
+.hero-lead strong { color: var(--ink); font-weight: 500; }
+
+.hero-btns {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  animation: fadeUp 0.8s 0.24s ease both;
+}
+.btn-hero {
+  background: var(--orange); color: white;
+  font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em;
+  padding: 1rem 2rem; border: none; border-radius: 4px;
+  cursor: pointer; text-decoration: none; display: inline-block;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+.btn-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  box-shadow: 0 0 0 0 rgba(232,81,10,0.4);
+  transition: box-shadow 0.3s;
+}
+.btn-hero:hover::after {
+  box-shadow: 0 0 0 6px rgba(232,81,10,0.15);
+}
+.btn-hero:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232,81,10,0.3); }
+.btn-sec {
+  background: transparent; color: var(--ink);
+  font-size: 0.85rem; font-weight: 500;
+  padding: 1rem 2rem; border: 1.5px solid var(--border);
+  border-radius: 4px; cursor: pointer; text-decoration: none;
+  display: inline-block; transition: border-color 0.2s;
+}
+.btn-sec:hover { border-color: var(--ink); }
+
+/* hero right — credential box */
+.hero-right { animation: fadeIn 1s 0.3s ease both; }
+
+.cred-box {
+  background: var(--ink);
+  border-radius: 12px;
+  padding: 3rem;
+  color: var(--paper);
+  position: relative;
+  overflow: hidden;
+}
+.cred-box::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,81,10,0.25), transparent 70%);
+}
+
+.cred-label {
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(248,245,240,0.4); margin-bottom: 1.5rem;
+}
+.cred-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem; line-height: 1.2;
+  margin-bottom: 2rem;
+}
+.cred-title em { color: var(--orange2); font-style: italic; }
+
+.cred-items { display: flex; flex-direction: column; gap: 1rem; }
+.cred-item {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1rem;
+  background: rgba(248,245,240,0.04);
+  border: 1px solid rgba(248,245,240,0.06);
+  border-radius: 8px;
+}
+.cred-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
+.cred-text { font-size: 0.85rem; line-height: 1.5; color: rgba(248,245,240,0.7); }
+.cred-text strong { color: var(--paper); font-weight: 500; display: block; margin-bottom: 0.15rem; }
+
+.cred-bottom {
+  margin-top: 2rem; padding-top: 1.5rem;
+  border-top: 1px solid rgba(248,245,240,0.08);
+  display: flex; align-items: center; gap: 1rem;
+}
+.pilot-badge {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: rgba(232,81,10,0.2); border: 1px solid rgba(232,81,10,0.4);
+  color: var(--orange2); font-size: 0.7rem; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 0.35rem 0.8rem; border-radius: 100px;
+}
+.pilot-dot { width: 5px; height: 5px; background: var(--orange); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+.pilot-note { font-size: 0.78rem; color: rgba(248,245,240,0.45); line-height: 1.4; }
+
+/* ── PROBLEM ── */
+.problem {
+  background: var(--warm);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 7rem 4rem;
+}
+.problem-inner { max-width: 1200px; margin: 0 auto; }
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 6rem;
+  align-items: start;
+}
+.prob-h {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1.15;
+  position: sticky; top: 7rem;
+}
+.prob-h em { color: var(--orange); font-style: italic; }
+
+.prob-items { display: flex; flex-direction: column; gap: 1.5rem; }
+.prob-item {
+  padding: 1.8rem 2rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex; gap: 1.5rem; align-items: flex-start;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.prob-item:hover { box-shadow: 0 8px 30px rgba(15,14,11,0.08); transform: translateX(4px); }
+.prob-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem; line-height: 1; color: rgba(15,14,11,0.07);
+  flex-shrink: 0; width: 3rem;
+}
+.prob-content h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+.prob-content p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+/* ── SOLUTION ── */
+.solution { padding: 7rem 4rem; background: var(--white); }
+.solution-inner { max-width: 1200px; margin: 0 auto; }
+
+.eyebrow {
+  font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--orange); font-weight: 500; margin-bottom: 0.8rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.eyebrow::before { content: ''; width: 24px; height: 1.5px; background: var(--orange); }
+
+.sec-h {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.sec-h em { color: var(--orange); font-style: italic; }
+.sec-sub { font-size: 1rem; color: var(--muted); line-height: 1.8; max-width: 580px; margin-bottom: 4rem; }
+
+.solution-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.sol-card {
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.sol-card:hover {
+  border-color: var(--orange);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(15,14,11,0.09);
+}
+.sol-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--orange), var(--orange2));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
+}
+.sol-card:hover::after { transform: scaleX(1); }
+
+.sol-icon { font-size: 2rem; margin-bottom: 1.2rem; display: block; }
+.sol-title { font-family: 'DM Serif Display', serif; font-size: 1.2rem; margin-bottom: 0.7rem; }
+.sol-body { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
+.sol-tag {
+  display: inline-block; margin-top: 1rem;
+  font-size: 0.63rem; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.2rem 0.6rem; border-radius: 100px;
+  border: 1px solid var(--border); color: var(--muted);
+}
+
+/* ── PROCESS ── */
+.process { background: var(--ink); color: var(--paper); padding: 7rem 4rem; }
+.process-inner { max-width: 1200px; margin: 0 auto; }
+.process .eyebrow { color: var(--orange2); }
+.process .eyebrow::before { background: var(--orange2); }
+.process .sec-h { color: var(--paper); }
+.process .sec-h em { color: rgba(248,245,240,0.35); }
+.process .sec-sub { color: rgba(248,245,240,0.5); }
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  position: relative;
+  gap: 0;
+  margin-top: 1rem;
+}
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 2rem; left: 2rem; right: 2rem; height: 1px;
+  background: linear-gradient(90deg, var(--orange), transparent);
+  opacity: 0.2;
+}
+.ps {
+  padding: 2rem 1.5rem 1.5rem;
+  position: relative;
+  border-top: 2px solid rgba(248,245,240,0.06);
+  transition: border-top-color 0.3s;
+}
+.ps:hover { border-top-color: var(--orange); }
+.ps-dot {
+  width: 8px; height: 8px;
+  background: var(--orange); border-radius: 50%;
+  margin-bottom: 1.5rem;
+}
+.ps-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem; line-height: 1;
+  color: rgba(248,245,240,0.05);
+  margin-bottom: 0.5rem;
+}
+.ps-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; }
+.ps-body { font-size: 0.8rem; color: rgba(248,245,240,0.45); line-height: 1.65; }
+
+/* ── PACKAGES ── */
+.packages { padding: 7rem 4rem; background: var(--paper); }
+.packages-inner { max-width: 1200px; margin: 0 auto; }
+
+.pkg-note {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: rgba(26,107,74,0.08); border: 1px solid rgba(26,107,74,0.2);
+  color: var(--green); font-size: 0.78rem; font-weight: 500;
+  padding: 0.5rem 1rem; border-radius: 100px; margin-bottom: 3rem;
+}
+
+.pkg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+.pkg-card {
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--white);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.pkg-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(15,14,11,0.1); }
+
+.pkg-card.featured {
+  border-color: var(--orange);
+  position: relative;
+}
+.pkg-card.featured::before {
+  content: 'Rekomendowany';
+  position: absolute; top: 1rem; right: 1rem;
+  background: var(--orange); color: white;
+  font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.25rem 0.7rem; border-radius: 100px;
+}
+
+.pkg-head {
+  padding: 2rem 2rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.pkg-tier {
+  font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 0.5rem;
+}
+.pkg-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem; line-height: 1.1; margin-bottom: 0.5rem;
+}
+.pkg-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+.pkg-price {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--warm);
+}
+.pkg-price-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.pkg-price-val {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem; margin-top: 0.3rem;
+}
+.pkg-price-val em { font-size: 0.8rem; font-style: normal; color: var(--muted); font-family: 'DM Sans', sans-serif; }
+
+.pkg-body { padding: 2rem; }
+.pkg-items { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+.pkg-items li {
+  font-size: 0.85rem; line-height: 1.5;
+  display: flex; align-items: flex-start; gap: 0.7rem;
+}
+.pkg-items li::before { content: '✓'; color: var(--green); font-weight: 600; flex-shrink: 0; }
+.pkg-items li.no::before { content: '–'; color: rgba(15,14,11,0.2); }
+.pkg-items li.no { color: var(--muted); opacity: 0.5; }
+
+.pkg-cta {
+  margin: 0 2rem 2rem;
+  display: block; text-align: center;
+  padding: 0.9rem; border-radius: 6px;
+  font-size: 0.85rem; font-weight: 500; letter-spacing: 0.03em;
+  text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
+}
+.pkg-cta-outline {
+  border: 1.5px solid var(--border); color: var(--ink); background: transparent;
+}
+.pkg-cta-outline:hover { border-color: var(--orange); color: var(--orange); }
+.pkg-cta-fill { background: var(--orange); color: white; }
+.pkg-cta-fill:hover { background: #d4470a; }
+
+.pkg-custom {
+  background: var(--ink); color: var(--paper);
+  border-radius: 12px; padding: 2.5rem;
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 2rem;
+  margin-top: 1.5rem;
+}
+.pkg-custom-text h3 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 0.4rem; }
+.pkg-custom-text p { font-size: 0.85rem; color: rgba(248,245,240,0.55); line-height: 1.6; }
+.pkg-custom-btn {
+  background: var(--orange); color: white;
+  font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em;
+  padding: 0.9rem 1.8rem; border: none; border-radius: 6px;
+  cursor: pointer; white-space: nowrap; text-decoration: none;
+  display: inline-block; transition: background 0.2s;
+}
+.pkg-custom-btn:hover { background: #d4470a; }
+
+/* ── FINANCING ── */
+.financing { background: var(--warm); border-top: 1px solid var(--border); padding: 7rem 4rem; }
+.financing-inner { max-width: 1200px; margin: 0 auto; }
+.fin-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+}
+.fin-text .sec-sub { margin-bottom: 0; }
+
+.fin-sources { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+.fin-src {
+  display: flex; align-items: flex-start; gap: 1.2rem;
+  padding: 1.2rem 1.4rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.fin-src:hover { border-color: var(--green); transform: translateX(4px); }
+.fin-src-icon { font-size: 1.3rem; flex-shrink: 0; }
+.fin-src-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.2rem; }
+.fin-src-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+.fin-highlight {
+  background: var(--ink); color: var(--paper);
+  border-radius: 12px; padding: 3rem;
+}
+.fin-highlight h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem; margin-bottom: 1rem;
+}
+.fin-highlight p { font-size: 0.88rem; color: rgba(248,245,240,0.6); line-height: 1.75; margin-bottom: 1.5rem; }
+.fin-steps { display: flex; flex-direction: column; gap: 0.8rem; }
+.fin-step {
+  display: flex; align-items: center; gap: 1rem;
+  font-size: 0.85rem;
+}
+.fin-step-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(232,81,10,0.2); color: var(--orange2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.72rem; font-weight: 600; flex-shrink: 0;
+}
+
+/* ── CONTACT ── */
+.contact { background: var(--white); padding: 7rem 4rem; }
+.contact-inner { max-width: 1200px; margin: 0 auto; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+
+.contact-form {
+  background: var(--paper);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 2.5rem;
+}
+.cf-title { font-family: 'DM Serif Display', serif; font-size: 1.6rem; margin-bottom: 0.3rem; }
+.cf-sub { font-size: 0.83rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.5; }
+
+.fgroup { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+.flabel {
+  font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted); font-weight: 500;
+}
+.finput, .fselect, .ftextarea {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+  padding: 0.85rem 1rem; outline: none; border-radius: 6px;
+  transition: border-color 0.2s;
+}
+.finput::placeholder, .ftextarea::placeholder { color: rgba(15,14,11,0.25); }
+.finput:focus, .fselect:focus, .ftextarea:focus { border-color: var(--orange); }
+.ftextarea { resize: vertical; min-height: 100px; }
+.fselect { cursor: pointer; }
+
+.btn-send {
+  width: 100%;
+  background: var(--ink); color: var(--paper);
+  font-size: 0.88rem; font-weight: 500; letter-spacing: 0.05em;
+  padding: 1.1rem; border: none; border-radius: 6px;
+  cursor: pointer; margin-top: 0.5rem;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-send:hover { background: var(--orange); transform: translateY(-1px); }
+.form-note { text-align: center; font-size: 0.73rem; color: var(--muted); margin-top: 0.8rem; }
+
+.success-box { display: none; text-align: center; padding: 3rem 1rem; }
+.success-box .si { font-size: 2.5rem; margin-bottom: 1rem; }
+.success-box h3 { font-family: 'DM Serif Display', serif; font-size: 1.6rem; margin-bottom: 0.5rem; }
+.success-box p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+.contact-info { padding-top: 1rem; }
+.ci-block { margin-bottom: 3rem; }
+.ci-block h3 { font-family: 'DM Serif Display', serif; font-size: 1.3rem; margin-bottom: 1rem; }
+.ci-item {
+  display: flex; align-items: flex-start; gap: 1rem;
+  margin-bottom: 1rem; font-size: 0.88rem;
+}
+.ci-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+.ci-item a { color: var(--orange); text-decoration: none; }
+.ci-item a:hover { text-decoration: underline; }
+
+.trust-badges { display: flex; flex-direction: column; gap: 0.8rem; }
+.trust-badge {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 1.2rem;
+  background: var(--paper); border: 1px solid var(--border);
+  border-radius: 8px; font-size: 0.83rem;
+}
+.trust-badge-icon { font-size: 1.2rem; }
+
+/* ── EDUCATION ── */
+.education { background: var(--paper); padding: 7rem 4rem; border-top: 1px solid var(--border); }
+.education-inner { max-width: 1200px; margin: 0 auto; }
+
+.edu-intro-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center; margin-bottom: 5rem;
+}
+.edu-lead { font-size: 1rem; color: var(--muted); line-height: 1.8; }
+.edu-lead strong { color: var(--ink); font-weight: 500; }
+
+/* seed → tree metaphor */
+.growth-track {
+  display: flex; align-items: center; gap: 0;
+  margin: 4rem 0 1rem;
+  position: relative;
+}
+.growth-track::before {
+  content: '';
+  position: absolute; top: 50%; left: 0; right: 0;
+  height: 1px; background: var(--border); z-index: 0;
+}
+.gt-stage {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  gap: 0.8rem; position: relative; z-index: 1;
+  cursor: default;
+}
+.gt-node {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--white); border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.gt-stage:hover .gt-node {
+  border-color: var(--orange); transform: scale(1.12);
+  box-shadow: 0 4px 16px rgba(232,81,10,0.2);
+}
+.gt-label {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em;
+  text-align: center; color: var(--muted);
+  transition: color 0.3s;
+}
+.gt-stage:hover .gt-label { color: var(--orange); }
+.gt-sub { font-size: 0.65rem; color: rgba(107,99,87,0.6); text-align: center; line-height: 1.3; }
+
+/* methods grid */
+.methods-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem; margin-bottom: 1.5rem;
+}
+.methods-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 4rem;
+}
+.method-pill {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 8px; padding: 1.2rem 1rem;
+  text-align: center;
+  transition: border-color 0.2s, transform 0.2s, background 0.2s;
+  cursor: default;
+}
+.method-pill:hover { border-color: var(--orange); background: var(--warm); transform: translateY(-2px); }
+.method-pill-icon { font-size: 1.4rem; margin-bottom: 0.4rem; }
+.method-pill-name { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.2rem; }
+.method-pill-desc { font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
+
+/* outcomes */
+.outcomes-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+}
+.outcome-card {
+  background: var(--ink); color: var(--paper);
+  border-radius: 10px; padding: 2rem 1.8rem;
+  position: relative; overflow: hidden;
+  transition: transform 0.25s;
+}
+.outcome-card:hover { transform: translateY(-3px); }
+.outcome-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--orange), var(--orange2));
+}
+.outcome-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3rem; color: rgba(248,245,240,0.06); line-height: 1; margin-bottom: 0.5rem;
+}
+.outcome-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem; }
+.outcome-body { font-size: 0.82rem; color: rgba(248,245,240,0.5); line-height: 1.65; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink); color: rgba(248,245,240,0.4);
+  padding: 2.5rem 4rem;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.78rem;
+}
+.foot-brand { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--paper); }
+.foot-brand span { color: var(--orange); }
+.foot-links { display: flex; gap: 2rem; }
+.foot-links a { color: rgba(248,245,240,0.4); text-decoration: none; transition: color 0.2s; }
+.foot-links a:hover { color: var(--paper); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulse { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:0.4; transform:scale(0.6); } }
+
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.on { opacity: 1; transform: none; }
+.d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s}
+.d4{transition-delay:.32s} .d5{transition-delay:.4s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  nav,
+  .hero,
+  .problem,.solution,.process,.packages,.financing,.contact { padding-left:2rem; padding-right:2rem; }
+  .hero { grid-template-columns:1fr; gap:4rem; padding-top:8rem; }
+  .hero-right { order: -1; }
+  .problem-grid,.fin-grid,.contact-grid,.edu-intro-grid { grid-template-columns:1fr; gap:3rem; }
+  .methods-grid { grid-template-columns: repeat(2,1fr); }
+  .outcomes-grid { grid-template-columns:1fr; }
+  .prob-h { position:static; }
+  .solution-grid,.pkg-grid { grid-template-columns:1fr; }
+  .process-steps { grid-template-columns:1fr 1fr; }
+  .pkg-custom { grid-template-columns:1fr; }
+  footer { flex-direction:column; gap:1rem; text-align:center; padding:2rem; }
+}
+@media(max-width:640px){
+  .process-steps { grid-template-columns:1fr; }
+  .nav-right a:not(.nav-cta) { display:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    <img src="Gildia_innowacji.png" alt="Logo">
+    <span class="nav-brand-text">Gildia<span>.</span>Innowacji</span>
+  </a>
+  <div class="nav-right">
+    <a href="#oferta">Oferta</a>
+    <a href="#edukacja">Program</a>
+    <a href="#pakiety">Pakiety</a>
+    <a href="#finansowanie">Finansowanie</a>
+    <a href="#kontakt" class="nav-cta">Umów rozmowę</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background:var(--paper); overflow:hidden;">
+  <div class="hero">
+    <div>
+      <div class="hero-kicker"><span class="kicker-line"></span>Oferta dla instytucji</div>
+      <h1 class="hero-h1">
+        Edukacja<br>
+        przedsiębiorczości<br>
+        <em>dla Twojej gminy.</em>
+      </h1>
+      <p class="hero-lead">
+        Gildia Innowacji to gotowy program warsztatowy dla młodych ludzi, który <strong>rozwija kompetencje projektowe i przedsiębiorcze</strong> — od pomysłu do realnego działania. Wskazujemy źródła finansowania, piszemy projekt i realizujemy cały cykl.
+      </p>
+      <div class="hero-btns">
+        <a href="#kontakt" class="btn-hero">Umów 30-min konsultację →</a>
+        <a href="#pakiety" class="btn-sec">Zobacz pakiety</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="cred-box">
+        <div class="cred-label">Co dostaje instytucja</div>
+        <div class="cred-title">Kompleksowa realizacja — <em>od projektu do efektu.</em></div>
+        <div class="cred-items">
+          <div class="cred-item">
+            <div class="cred-icon">🗂️</div>
+            <div class="cred-text">
+              <strong>Wskazanie źródła finansowania</strong>
+              Pomagamy znaleźć odpowiedni fundusz lub program dotacyjny dopasowany do profilu instytucji.
+            </div>
+          </div>
+          <div class="cred-item">
+            <div class="cred-icon">✍️</div>
+            <div class="cred-text">
+              <strong>Napisanie projektu</strong>
+              Przygotowujemy pełną dokumentację aplikacyjną — gotową do złożenia.
+            </div>
+          </div>
+          <div class="cred-item">
+            <div class="cred-icon">🎓</div>
+            <div class="cred-text">
+              <strong>Realizacja programu</strong>
+              Warsztaty, wykłady i mentoring prowadzone przez nasz zespół. Dostęp do platformy projektowej.
+            </div>
+          </div>
+        </div>
+        <div class="cred-bottom">
+          <div class="pilot-badge"><span class="pilot-dot"></span>Faza pilotażu</div>
+          <div class="pilot-note">Program w fazie pilotażu — możliwość współtworzenia modelu wdrożenia.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCE STRIP -->
+<section style="padding:2rem 4rem; text-align:center; background:var(--white); border-bottom:1px solid var(--border);">
+  <p style="font-size:0.9rem; color:var(--muted);">
+    Program odpowiada na potrzeby:
+    <strong style="color:var(--ink);">gmin i urzędów, szkół i placówek edukacyjnych, domów kultury, bibliotek i organizacji społecznych</strong>
+  </p>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="problem-inner">
+    <div class="problem-grid">
+      <div>
+        <div class="eyebrow reveal">Wyzwanie</div>
+        <h2 class="prob-h reveal">Młodzi mają potencjał. <em>System go nie wykorzystuje.</em></h2>
+      </div>
+      <div class="prob-items">
+        <div class="prob-item reveal">
+          <div class="prob-num">01</div>
+          <div class="prob-content">
+            <h3>Brak kompetencji projektowych</h3>
+            <p>Młodzi ludzie nie uczą się w szkole jak definiować cel, planować działania i współpracować w zespole — umiejętności kluczowych na rynku pracy i w życiu społecznym.</p>
+          </div>
+        </div>
+        <div class="prob-item reveal d1">
+          <div class="prob-num">02</div>
+          <div class="prob-content">
+            <h3>Niska przedsiębiorczość lokalna</h3>
+            <p>Gminy i instytucje kultury poszukują narzędzi do aktywizacji młodzieży i budowania lokalnej przedsiębiorczości — bez gotowych, sprawdzonych programów.</p>
+          </div>
+        </div>
+        <div class="prob-item reveal d2">
+          <div class="prob-num">03</div>
+          <div class="prob-content">
+            <h3>Trudność w pozyskaniu finansowania</h3>
+            <p>Dostępne są środki unijne, rządowe i samorządowe na edukację i aktywizację — ale przygotowanie wniosków wymaga czasu i specjalistycznej wiedzy.</p>
+          </div>
+        </div>
+        <div class="prob-item reveal d3">
+          <div class="prob-num">04</div>
+          <div class="prob-content">
+            <h3>Brak efektów po jednorazowych działaniach</h3>
+            <p>Pojedyncze warsztaty nie budują trwałych kompetencji. Potrzebny jest cykl — z towarzyszeniem, mentorem i prawdziwym projektem do zrealizowania.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="solution" id="oferta">
+  <div class="solution-inner">
+    <div class="eyebrow reveal">Nasza odpowiedź</div>
+    <h2 class="sec-h reveal">Program, który <em>działa całościowo.</em></h2>
+    <p class="sec-sub reveal">Nie sprzedajemy jednorazowego szkolenia. Oferujemy kompletny ekosystem — od finansowania po efekt końcowy w postaci realnych projektów uczestników.</p>
+    <p class="sec-sub reveal" style="margin-top:0.5rem;">Efektem programu są konkretne projekty uczestników — społeczne lub biznesowe — gotowe do wdrożenia lub dalszego rozwoju.</p>
+    <div class="solution-grid">
+      <div class="sol-card reveal">
+        <div class="sol-title">Warsztaty i wykłady</div>
+        <p class="sol-body">Cykl zajęć prowadzonych przez nasz zespół. Uczestnicy uczą się design thinking, agile i zarządzania projektami — przez działanie, nie teorię. Program dostosowany do grupy wiekowej i profilu instytucji.</p>
+        <span class="sol-tag">Realizacja bezpośrednia</span>
+      </div>
+      <div class="sol-card reveal d1">
+        <span class="sol-icon">🧑‍🏫</span>
+        <div class="sol-title">Mentoring projektowy</div>
+        <p class="sol-body">Każda grupa realizuje własny projekt — społeczny lub biznesowy. Mentor towarzyszy zespołowi od pomysłu przez prototyp do prezentacji wyników. Prawdziwe doświadczenie, nie symulacja.</p>
+        <span class="sol-tag">Indywidualne wsparcie</span>
+      </div>
+      <div class="sol-card reveal d2">
+        <span class="sol-icon">🗂️</span>
+        <div class="sol-title">Platforma projektowa</div>
+        <p class="sol-body">Uczestnicy otrzymują dostęp do bazy projektów — gotowych koncepcji społecznych i biznesowych w różnych kategoriach oraz bazę wiedzy z szablonami, narzędziami i materiałami edukacyjnymi.</p>
+        <span class="sol-tag">Narzędzie ciągłe</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="education" id="edukacja">
+  <div class="education-inner">
+
+    <div class="edu-intro-grid">
+      <div>
+        <div class="eyebrow reveal">Program edukacyjny</div>
+        <h2 class="sec-h reveal">Uczymy <em>myślenia projektowego</em> — od nasienia do drzewa.</h2>
+      </div>
+      <p class="edu-lead reveal">
+        Naszym celem jest <strong>edukacja w kierunku definiowania i realizacji celu</strong>. Nie uczymy teorii — prowadzimy uczestników przez prawdziwy cykl innowacji: od dostrzeżenia problemu, przez budowanie pomysłu, po prototyp i wdrożenie. Inspirujemy do przedsiębiorczości — zarówno społecznej, jak i biznesowej.
+      </p>
+    </div>
+
+    <!-- SEED → TREE PATH -->
+    <div class="eyebrow reveal"><span style="width:0;margin:0"></span>Jak rodzi się innowacja — ścieżka uczestnika</div>
+    <div class="growth-track reveal">
+      <div class="gt-stage">
+        <div class="gt-node">🌱</div>
+        <div class="gt-label">Wydarzenie</div>
+        <div class="gt-sub">Bodziec, który uruchamia myślenie</div>
+      </div>
+      <div class="gt-stage">
+        <div class="gt-node">💡</div>
+        <div class="gt-label">Przekonanie</div>
+        <div class="gt-sub">„Da się to zrobić inaczej"</div>
+      </div>
+      <div class="gt-stage">
+        <div class="gt-node">🔍</div>
+        <div class="gt-label">Potrzeba</div>
+        <div class="gt-sub">Zrozumienie odbiorcy i kontekstu</div>
+      </div>
+      <div class="gt-stage">
+        <div class="gt-node">⚙️</div>
+        <div class="gt-label">Problem</div>
+        <div class="gt-sub">Precyzyjna definicja wyzwania</div>
+      </div>
+      <div class="gt-stage">
+        <div class="gt-node">🧩</div>
+        <div class="gt-label">Idea</div>
+        <div class="gt-sub">Burza mózgów i prototypowanie</div>
+      </div>
+      <div class="gt-stage">
+        <div class="gt-node">🗺️</div>
+        <div class="gt-label">Koncepcja</div>
+        <div class="gt-sub">Gotowy plan do realizacji</div>
+      </div>
+      <div class="gt-stage">
+        <div class="gt-node">🌳</div>
+        <div class="gt-label">Projekt</div>
+        <div class="gt-sub">Realny efekt — zmiana w otoczeniu</div>
+      </div>
+    </div>
+
+    <!-- METHODS -->
+    <div class="methods-title reveal" style="margin-top:4rem;">Metodyki, które stosujemy</div>
+    <div class="methods-grid">
+      <div class="method-pill reveal">
+        <div class="method-pill-icon">🎨</div>
+        <div class="method-pill-name">Design Thinking</div>
+        <div class="method-pill-desc">Empatia, prototypowanie, testowanie rozwiązań</div>
+      </div>
+      <div class="method-pill reveal d1">
+        <div class="method-pill-icon">🔄</div>
+        <div class="method-pill-name">Agile / Scrum</div>
+        <div class="method-pill-desc">Iteracyjna praca w sprintach, retrospektywy</div>
+      </div>
+      <div class="method-pill reveal d2">
+        <div class="method-pill-icon">📋</div>
+        <div class="method-pill-name">Kanban</div>
+        <div class="method-pill-desc">Wizualizacja przepływu pracy i zadań</div>
+      </div>
+      <div class="method-pill reveal d3">
+        <div class="method-pill-icon">⚡</div>
+        <div class="method-pill-name">Lean</div>
+        <div class="method-pill-desc">Eliminacja marnotrawstwa, MVP, szybki feedback</div>
+      </div>
+    </div>
+
+    <!-- OUTCOMES -->
+    <div class="eyebrow reveal">Co uczestnik wynosi z programu</div>
+    <div class="outcomes-grid" style="margin-top:1.5rem;">
+      <div class="outcome-card reveal">
+        <div class="outcome-num">01</div>
+        <div class="outcome-title">Umiejętność definiowania celu</div>
+        <div class="outcome-body">Uczestnik wie jak przejść od ogólnego marzenia do konkretnego, mierzalnego celu — i jak go zrealizować krok po kroku.</div>
+      </div>
+      <div class="outcome-card reveal d1">
+        <div class="outcome-num">02</div>
+        <div class="outcome-title">Doświadczenie pracy projektowej</div>
+        <div class="outcome-body">Realne portfolio — dokumentacja projektu, praca w zespole, prezentacja wyników. Gotowe do pokazania szkole, uczelni lub pracodawcy.</div>
+      </div>
+      <div class="outcome-card reveal d2">
+        <div class="outcome-num">03</div>
+        <div class="outcome-title">Myślenie przedsiębiorcze</div>
+        <div class="outcome-body">Zdolność dostrzegania problemów jako szans, testowania pomysłów i iterowania — kompetencja kluczowa w życiu zawodowym i społecznym.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="process-inner">
+    <div class="eyebrow reveal">Jak przebiega współpraca</div>
+    <h2 class="sec-h reveal">Od pierwszego kontaktu <em>do gotowego programu.</em></h2>
+    <p class="sec-sub reveal">Zajmujemy się wszystkim — instytucja dostaje gotowy, działający program bez zbędnego nakładu administracyjnego.</p>
+    <div class="process-steps">
+      <div class="ps reveal">
+        <div class="ps-dot"></div>
+        <div class="ps-num">01</div>
+        <div class="ps-title">Bezpłatna konsultacja <small style="font-weight:400;color:rgba(248,245,240,0.35);font-size:0.78em;">(30 min)</small></div>
+        <p class="ps-body">Omawiamy potrzeby instytucji, grupę docelową i możliwy zakres programu.</p>
+      </div>
+      <div class="ps reveal d1">
+        <div class="ps-dot"></div>
+        <div class="ps-num">02</div>
+        <div class="ps-title">Analiza finansowania <small style="font-weight:400;color:rgba(248,245,240,0.35);font-size:0.78em;">(do 7 dni)</small></div>
+        <p class="ps-body">Wskazujemy dostępne źródła dotacji i funduszy dopasowane do profilu instytucji.</p>
+      </div>
+      <div class="ps reveal d2">
+        <div class="ps-dot"></div>
+        <div class="ps-num">03</div>
+        <div class="ps-title">Przygotowanie projektu <small style="font-weight:400;color:rgba(248,245,240,0.35);font-size:0.78em;">(2–3 tyg.)</small></div>
+        <p class="ps-body">Piszemy wniosek aplikacyjny. Instytucja go podpisuje i składa.</p>
+      </div>
+      <div class="ps reveal d3">
+        <div class="ps-dot"></div>
+        <div class="ps-num">04</div>
+        <div class="ps-title">Realizacja programu <small style="font-weight:400;color:rgba(248,245,240,0.35);font-size:0.78em;">(1–3 mies.)</small></div>
+        <p class="ps-body">Prowadzimy cykl warsztatów, wykładów i mentoringu. Uczestnicy tworzą realne projekty.</p>
+      </div>
+      <div class="ps reveal d4">
+        <div class="ps-dot"></div>
+        <div class="ps-num">05</div>
+        <div class="ps-title">Raport i ewaluacja</div>
+        <p class="ps-body">Dostarczamy dokumentację wyników — gotową do sprawozdania z realizacji projektu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages" id="pakiety">
+  <div class="packages-inner">
+    <div class="eyebrow reveal">Pakiety</div>
+    <h2 class="sec-h reveal">Wycena <em>indywidualna</em> — trzy punkty startowe.</h2>
+    <p class="sec-sub reveal">Ostateczna cena zależy od liczby uczestników, czasu trwania programu i zakresu usług. Poniższe pakiety to punkty wyjścia do rozmowy.</p>
+
+    <div class="pkg-note reveal">
+      <span>💡</span>
+      Program może być finansowany ze środków zewnętrznych — nie musi obciążać budżetu instytucji.
+    </div>
+    <p style="margin-bottom:2rem; font-size:0.9rem; color:var(--muted);">W praktyce większość instytucji realizuje program w modelu dotacyjnym — bez angażowania własnych środków.</p>
+
+    <div class="pkg-grid">
+      <!-- STARTER -->
+      <div class="pkg-card reveal">
+        <div class="pkg-head">
+          <div class="pkg-tier">Pakiet podstawowy</div>
+          <div class="pkg-name">Gildia Start</div>
+          <div class="pkg-desc">Dla instytucji stawiającej pierwsze kroki w edukacji projektowej.</div>
+        </div>
+        <div class="pkg-price">
+          <div class="pkg-price-label">Wycena od</div>
+          <div class="pkg-price-val">do uzgodnienia <em>/ grupa</em></div>
+        </div>
+        <div class="pkg-body">
+          <ul class="pkg-items">
+            <li>Cykl 6 warsztatów (design thinking + agile)</li>
+            <li>Do 20 uczestników</li>
+            <li>Dostęp do platformy projektowej (3 mies.)</li>
+            <li>Materiały i szablony projektowe</li>
+            <li>Raport końcowy</li>
+            <li class="no">Mentoring projektowy</li>
+            <li class="no">Wsparcie w pozyskaniu finansowania</li>
+            <li class="no">Pisanie wniosku</li>
+          </ul>
+        </div>
+        <a href="#kontakt" class="pkg-cta pkg-cta-outline">Zapytaj o wycenę</a>
+      </div>
+
+      <!-- FEATURED -->
+      <div class="pkg-card featured reveal d1">
+        <div class="pkg-head">
+          <div class="pkg-tier">Pakiet rozszerzony</div>
+          <div class="pkg-name">Gildia Pro</div>
+          <div class="pkg-desc">Pełny cykl edukacyjny z mentoringiem i projektem końcowym uczestników.</div>
+        </div>
+        <div class="pkg-price">
+          <div class="pkg-price-label">Wycena od</div>
+          <div class="pkg-price-val">do uzgodnienia <em>/ program</em></div>
+        </div>
+        <div class="pkg-body">
+          <ul class="pkg-items">
+            <li>Cykl 12 warsztatów i 2 wykładów</li>
+            <li>Do 30 uczestników</li>
+            <li>Mentoring grupowy i indywidualny</li>
+            <li>Dostęp do platformy projektowej (12 mies.)</li>
+            <li>Materiały, szablony i zasoby graficzne</li>
+            <li>Prezentacja projektów końcowych</li>
+            <li>Raport i dokumentacja ewaluacyjna</li>
+            <li class="no">Wsparcie w pozyskaniu finansowania</li>
+          </ul>
+        </div>
+        <a href="#kontakt" class="pkg-cta pkg-cta-fill">Zapytaj o wycenę</a>
+      </div>
+
+      <!-- FULL -->
+      <div class="pkg-card reveal d2">
+        <div class="pkg-head">
+          <div class="pkg-tier">Pakiet kompleksowy</div>
+          <div class="pkg-name">Gildia Full</div>
+          <div class="pkg-desc">Obsługa od A do Z — finansowanie, projekt, realizacja, raport.</div>
+        </div>
+        <div class="pkg-price">
+          <div class="pkg-price-label">Wycena od</div>
+          <div class="pkg-price-val">do uzgodnienia <em>/ projekt</em></div>
+        </div>
+        <div class="pkg-body">
+          <ul class="pkg-items">
+            <li>Wszystko z pakietu Pro</li>
+            <li>Analiza dostępnych źródeł finansowania</li>
+            <li>Napisanie wniosku aplikacyjnego</li>
+            <li>Wsparcie w rozliczeniu projektu</li>
+            <li>Nieograniczona liczba uczestników</li>
+            <li>Dedykowany opiekun programu</li>
+            <li>Dostęp do platformy (24 mies.)</li>
+          </ul>
+        </div>
+        <a href="#kontakt" class="pkg-cta pkg-cta-outline">Zapytaj o wycenę</a>
+      </div>
+    </div>
+
+    <div class="pkg-custom reveal">
+      <div class="pkg-custom-text">
+        <h3>Masz niestandardowe potrzeby?</h3>
+        <p>Każda instytucja jest inna. Chętnie skrojemy program na miarę — pod konkretną grupę, budżet i cel strategiczny.</p>
+      </div>
+      <a href="#kontakt" class="pkg-custom-btn">Porozmawiajmy →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FINANCING -->
+<section class="financing" id="finansowanie">
+  <div class="financing-inner">
+    <div class="fin-grid">
+      <div class="fin-text">
+        <div class="eyebrow reveal">Finansowanie</div>
+        <h2 class="sec-h reveal">Program może <em>nic nie kosztować</em> instytucji.</h2>
+        <p class="sec-sub reveal">Pomagamy zidentyfikować i pozyskać środki zewnętrzne — tak, aby program był realizowany ze środków dotacyjnych, nie z budżetu bieżącego.</p>
+        <p class="sec-sub reveal" style="margin-top:-1rem;">Pracujemy na realnych programach finansowania — nie ogólnych założeniach.</p>
+        <div class="fin-sources reveal">
+          <div class="fin-src">
+            <div class="fin-src-icon">🇪🇺</div>
+            <div>
+              <div class="fin-src-title">Fundusze UE (FEdR, EFS+)</div>
+              <div class="fin-src-desc">Programy regionalne i krajowe na edukację, aktywizację i rozwój kompetencji.</div>
+            </div>
+          </div>
+          <div class="fin-src">
+            <div class="fin-src-icon">🏛️</div>
+            <div>
+              <div class="fin-src-title">Programy rządowe i MEN</div>
+              <div class="fin-src-desc">Laboratoria przyszłości, programy aktywizacji młodzieży, granty ministerialne.</div>
+            </div>
+          </div>
+          <div class="fin-src">
+            <div class="fin-src-icon">🌍</div>
+            <div>
+              <div class="fin-src-title">Fundusze norweskie i EOG</div>
+              <div class="fin-src-desc">Inicjatywy wspierające edukację obywatelską i przedsiębiorczość.</div>
+            </div>
+          </div>
+          <div class="fin-src">
+            <div class="fin-src-icon">🤝</div>
+            <div>
+              <div class="fin-src-title">Granty samorządowe i CSR</div>
+              <div class="fin-src-desc">Programy grantowe urzędów marszałkowskich oraz programy CSR firm lokalnych.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fin-highlight reveal d1">
+        <h3>Jak to robimy?</h3>
+        <p>Przeprowadzamy instytucję przez cały proces aplikacyjny — od analizy po złożenie wniosku.</p>
+        <div class="fin-steps">
+          <div class="fin-step"><div class="fin-step-num">1</div><span>Diagnoza potrzeb i możliwości instytucji</span></div>
+          <div class="fin-step"><div class="fin-step-num">2</div><span>Wskazanie 2–3 optymalnych źródeł finansowania</span></div>
+          <div class="fin-step"><div class="fin-step-num">3</div><span>Przygotowanie dokumentacji aplikacyjnej</span></div>
+          <div class="fin-step"><div class="fin-step-num">4</div><span>Wsparcie przy składaniu wniosku</span></div>
+          <div class="fin-step"><div class="fin-step-num">5</div><span>Pomoc w rozliczeniu i sprawozdaniu</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="kontakt">
+  <div class="contact-inner">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="eyebrow reveal">Kontakt</div>
+        <h2 class="sec-h reveal">Zacznijmy <em>rozmowę.</em></h2>
+        <p class="sec-sub reveal">Bezpłatna konsultacja trwa 30 minut i kończy się konkretną rekomendacją działania.</p>
+
+        <div class="ci-block reveal">
+          <h3>Dane kontaktowe</h3>
+          <div class="ci-item">
+            <div class="ci-icon">👤</div>
+            <div>Wojciech Wolanin<br><small style="color:var(--muted)">Kreatywne Klocki · Kielce</small></div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon">📧</div>
+            <div><a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a></div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon">📞</div>
+            <div><a href="tel:+48793738281">793 738 281</a></div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon">🌐</div>
+            <div><a href="https://www.kreatywneklocki.edu.pl">kreatywneklocki.edu.pl</a></div>
+          </div>
+        </div>
+
+        <div class="trust-badges reveal d1">
+          <div class="trust-badge">
+            <span class="trust-badge-icon">🧪</span>
+            <span>Program w fazie pilotażu — możliwość współtworzenia modelu wdrożenia na preferencyjnych warunkach.</span>
+          </div>
+          <div class="trust-badge">
+            <span class="trust-badge-icon">📋</span>
+            <span>Dostarczamy pełną dokumentację programu przed podpisaniem umowy.</span>
+          </div>
+          <div class="trust-badge">
+            <span class="trust-badge-icon">🤝</span>
+            <span>Elastyczne warunki dopasowane do budżetu i harmonogramu instytucji.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal d1">
+        <div class="contact-form" id="contact-form">
+          <div class="cf-title">Umów konsultację</div>
+          <div class="cf-sub">Odpiszemy w ciągu 24 godzin i zaproponujemy termin rozmowy.</div>
+          <form onsubmit="submitContact(event)">
+            <div class="fgroup">
+              <label class="flabel">Imię i nazwisko</label>
+              <input type="text" class="finput" placeholder="Anna Kowalska" required>
+            </div>
+            <div class="fgroup">
+              <label class="flabel">Instytucja / organizacja</label>
+              <input type="text" class="finput" placeholder="Urząd Gminy w..." required>
+            </div>
+            <div class="fgroup">
+              <label class="flabel">Rodzaj instytucji</label>
+              <select class="fselect" required>
+                <option value="" disabled selected>Wybierz</option>
+                <option>Gmina / urząd</option>
+                <option>Szkoła / placówka edukacyjna</option>
+                <option>Dom kultury / biblioteka</option>
+                <option>NGO / fundacja</option>
+                <option>Inne</option>
+              </select>
+            </div>
+            <div class="fgroup">
+              <label class="flabel">E-mail służbowy</label>
+              <input type="email" class="finput" placeholder="a.kowalska@gmina.pl" required>
+            </div>
+            <div class="fgroup">
+              <label class="flabel">Telefon (opcjonalnie)</label>
+              <input type="tel" class="finput" placeholder="+48 ...">
+            </div>
+            <div class="fgroup">
+              <label class="flabel">Czego szukasz? (opcjonalnie)</label>
+              <textarea class="ftextarea finput" placeholder="Np. szukamy programu dla 50 uczniów szkoły średniej, mamy budżet z funduszu..."></textarea>
+            </div>
+            <button type="submit" class="btn-send">Wysyłam zapytanie →</button>
+            <p class="form-note">Odpowiadamy w 24h • Bez zobowiązań • Bez spamu</p>
+          </form>
+          <div class="success-box" id="success-box">
+            <div class="si">✉️</div>
+            <h3>Zapytanie wysłane!</h3>
+            <p>Dziękujemy. Odpiszemy w ciągu 24 godzin i zaproponujemy termin bezpłatnej konsultacji.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-brand">Gildia<span>.</span>Innowacji</div>
+  <div class="foot-links">
+    <a href="https://www.kreatywneklocki.edu.pl">kreatywneklocki.edu.pl</a>
+    <a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a>
+    <a href="https://patronite.pl/KreatywneKlocki">Patronite</a>
+  </div>
+  <div>© 2025 Kreatywne Klocki · Kielce</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+function submitContact(e) {
+  e.preventDefault();
+  e.target.style.display = 'none';
+  document.getElementById('success-box').style.display = 'block';
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({ behavior:'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
