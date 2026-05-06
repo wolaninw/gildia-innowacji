@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gildia Innowacji – Edukacja przedsiębiorczości dla młodych</title>
+<meta name="description" content="Gildia Innowacji to program edukacyjny rozwijający kompetencje projektowe i przedsiębiorcze u młodych ludzi. Oferta dla gmin, szkół i instytucji kultury.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Cabinet+Grotesk:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #faf7f2;
+  --ink:     #1a0f0a;
+  --warm:    #f2ebe0;
+  --purple:  #45276e;
+  --orange:  #f4643a;
+  --gold:    #f7bb35;
+  --teal:    #0d7c66;
+  --amber:   #e8860a;
+  --muted:   #6b5c4e;
+  --border:  rgba(26,15,10,0.1);
+  --white:   #ffffff;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 4rem;
+  background: rgba(250,247,242,0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-brand { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
+.nav-brand img {
+  width: 44px; height: 44px; object-fit: contain; border-radius: 50%;
+  box-shadow: 0 2px 12px rgba(244,100,58,0.3), 0 0 0 2px rgba(244,100,58,0.12);
+  background: var(--bg); padding: 2px;
+}
+.nav-brand-text { font-weight: 900; font-size: 1.05rem; color: var(--ink); }
+.nav-brand-text span { color: var(--orange); }
+.nav-links { display: flex; align-items: center; gap: 2.5rem; }
+.nav-links a {
+  font-size: 0.82rem; font-weight: 500; color: var(--muted);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  background: var(--orange); color: white;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 0.65rem 1.6rem;
+  border: none; border-radius: 100px; cursor: pointer;
+  text-decoration: none; display: inline-block;
+  box-shadow: 0 4px 16px rgba(244,100,58,0.35);
+  transition: background 0.2s, transform 0.15s;
+}
+.nav-cta:hover { background: #d4470a; transform: translateY(-2px); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  padding: 9rem 2rem 5rem;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 50% 60% at 20% 40%, rgba(69,39,110,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 80% 60%, rgba(13,124,102,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 40% at 50% 20%, rgba(244,100,58,0.07) 0%, transparent 60%);
+}
+.hero-content { position: relative; z-index: 1; max-width: 860px; }
+
+.hero-kicker {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--orange); font-weight: 700; margin-bottom: 2rem;
+  animation: fadeUp 0.7s ease both;
+}
+.kicker-dot { width: 6px; height: 6px; background: var(--orange); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+
+.hero-logo {
+  width: 100px; height: 100px; object-fit: contain; border-radius: 50%;
+  box-shadow: 0 8px 32px rgba(244,100,58,0.3), 0 0 0 3px rgba(244,100,58,0.15);
+  background: var(--white); padding: 4px;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.7s 0.05s ease both;
+}
+
+.hero-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 900; line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+.hero-h1 .o { color: var(--orange); }
+.hero-h1 .t { color: var(--teal); }
+.hero-h1 em { font-style: italic; font-weight: 700; }
+
+.hero-lead {
+  font-size: 1.1rem; line-height: 1.8; color: var(--muted);
+  max-width: 600px; margin: 0 auto 3rem;
+  animation: fadeUp 0.7s 0.18s ease both;
+}
+.hero-lead strong { color: var(--ink); font-weight: 700; }
+
+/* AUDIENCE SPLIT */
+.audience {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1.5rem; max-width: 840px; margin: 0 auto;
+  animation: fadeUp 0.7s 0.26s ease both;
+}
+.aud-card {
+  border-radius: 16px; padding: 2.5rem 2rem;
+  text-decoration: none; color: white;
+  position: relative; overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+  display: flex; flex-direction: column;
+}
+.aud-card:hover { transform: translateY(-5px); }
+.aud-card-gmina {
+  background: linear-gradient(135deg, var(--purple) 0%, #621708 100%);
+  box-shadow: 0 8px 32px rgba(69,39,110,0.3);
+}
+.aud-card-gmina:hover { box-shadow: 0 16px 48px rgba(69,39,110,0.4); }
+.aud-card-szkola {
+  background: linear-gradient(135deg, var(--teal) 0%, #0a5c4c 100%);
+  box-shadow: 0 8px 32px rgba(13,124,102,0.3);
+}
+.aud-card-szkola:hover { box-shadow: 0 16px 48px rgba(13,124,102,0.4); }
+
+.aud-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.aud-label {
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.6); font-weight: 600; margin-bottom: 0.5rem;
+}
+.aud-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700; font-size: 1.6rem; line-height: 1.15; margin-bottom: 0.8rem;
+}
+.aud-desc { font-size: 0.85rem; color: rgba(255,255,255,0.72); line-height: 1.65; flex: 1; }
+.aud-cta {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  margin-top: 1.8rem; font-size: 0.82rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  background: rgba(255,255,255,0.15); color: white;
+  padding: 0.7rem 1.4rem; border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: background 0.2s;
+  width: fit-content;
+}
+.aud-cta:hover { background: rgba(255,255,255,0.25); }
+
+/* ABOUT */
+.about { padding: 8rem 4rem; }
+.about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+.eyebrow {
+  font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--orange); font-weight: 700;
+  display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem;
+}
+.eyebrow::before { content:''; width:20px; height:2px; background:var(--orange); border-radius:2px; }
+.about-h {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700; font-size: clamp(2rem, 3.5vw, 2.8rem);
+  line-height: 1.12; letter-spacing: -0.01em; margin-bottom: 1.2rem;
+}
+.about-h em { color: var(--orange); font-style: italic; }
+.about-lead { font-size: 1rem; color: var(--muted); line-height: 1.8; }
+
+.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.stat-box {
+  padding: 1.8rem 1.6rem;
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: 12px; position: relative;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.stat-box:hover { border-color: var(--orange); transform: translateY(-2px); }
+.stat-box::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  border-radius: 12px 12px 0 0;
+}
+.sb-orange::before { background: linear-gradient(90deg, var(--orange), var(--gold)); }
+.sb-teal::before { background: linear-gradient(90deg, var(--teal), var(--amber)); }
+.sb-purple::before { background: linear-gradient(90deg, var(--purple), var(--orange)); }
+.sb-green::before { background: linear-gradient(90deg, var(--teal), #0d7c66); }
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900; font-size: 2.5rem; line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.stat-num.c-orange { color: var(--orange); }
+.stat-num.c-teal { color: var(--teal); }
+.stat-num.c-purple { color: var(--purple); }
+.stat-label { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
+
+/* HOW */
+.how { background: var(--warm); padding: 8rem 4rem; }
+.how-inner { max-width: 1100px; margin: 0 auto; }
+.how-h {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700; font-size: clamp(2rem, 3.5vw, 2.8rem);
+  line-height: 1.12; margin-bottom: 1rem;
+}
+.how-h em { color: var(--teal); font-style: italic; }
+.how-sub { font-size: 1rem; color: var(--muted); line-height: 1.8; max-width: 560px; margin-bottom: 4rem; }
+
+.how-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.how-step {
+  background: var(--white); border-radius: 12px;
+  border: 1.5px solid var(--border);
+  padding: 2rem 1.6rem;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.how-step:hover { border-color: var(--teal); transform: translateY(-3px); box-shadow: 0 10px 32px rgba(28,20,16,0.08); }
+.step-n {
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: 3rem; line-height: 1; color: rgba(26,15,10,0.05); margin-bottom: 0.4rem;
+}
+.step-icon { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; }
+.step-title { font-weight: 800; font-size: 0.95rem; margin-bottom: 0.4rem; }
+.step-body { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+/* METHODOLOGY */
+.method { padding: 8rem 4rem; }
+.method-inner { max-width: 1100px; margin: 0 auto; }
+.method-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; margin-top: 3rem; }
+.method-card {
+  padding: 2rem 1.6rem; border-radius: 12px;
+  border: 1.5px solid var(--border); background: var(--white);
+  text-align: center;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.method-card:hover { border-color: var(--orange); transform: translateY(-3px); }
+.mc-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.mc-name { font-weight: 800; font-size: 1rem; margin-bottom: 0.4rem; }
+.mc-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+/* PATH */
+.path { background: var(--ink); color: white; padding: 8rem 4rem; }
+.path-inner { max-width: 1100px; margin: 0 auto; }
+.path .eyebrow { color: var(--gold); }
+.path .eyebrow::before { background: var(--gold); }
+.path-h {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900; font-size: clamp(2rem, 3.5vw, 3rem);
+  color: white; margin-bottom: 1rem;
+}
+.path-h em { color: var(--gold); font-style: italic; }
+.path-sub { font-size: 1rem; color: rgba(255,255,255,0.55); line-height: 1.8; max-width: 560px; margin-bottom: 4rem; }
+
+.path-track {
+  display: flex; align-items: center; gap: 0;
+  position: relative; overflow-x: auto; padding-bottom: 1rem;
+}
+.path-track::before {
+  content: '';
+  position: absolute; top: 2.8rem; left: 2rem; right: 2rem; height: 1px;
+  background: linear-gradient(90deg, var(--orange), var(--gold), var(--teal));
+  opacity: 0.2; z-index: 0;
+}
+.path-stage {
+  flex: 1; min-width: 140px;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; position: relative; z-index: 1; padding: 0 0.5rem;
+  cursor: default;
+}
+.ps-dot {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--orange); border: 3px solid var(--ink);
+  box-shadow: 0 0 0 2px var(--orange);
+  margin-bottom: 1.2rem; flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.path-stage:hover .ps-dot { transform: scale(1.3); }
+.ps-title { font-weight: 700; font-size: 0.85rem; margin-bottom: 0.3rem; color: white; }
+.ps-sub { font-size: 0.72rem; color: rgba(255,255,255,0.45); line-height: 1.4; }
+
+/* MVP SECTION */
+.mvp { background: var(--orange); color: white; padding: 8rem 4rem; }
+.mvp-inner { max-width: 1100px; margin: 0 auto; }
+.mvp .eyebrow { color: white; }
+.mvp .eyebrow::before { background: rgba(255,255,255,0.6); }
+.mvp-h {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900; font-size: clamp(2.5rem, 4vw, 4rem);
+  line-height: 1.05; color: white; margin-bottom: 1rem;
+}
+.mvp-h em { font-style: italic; font-weight: 400; color: rgba(255,255,255,0.75); }
+.mvp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3rem; }
+.mvp-list { display: flex; flex-direction: column; gap: 1rem; }
+.mvp-item {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: 1.2rem 1.4rem;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px; font-size: 0.88rem; line-height: 1.5; color: rgba(255,255,255,0.9);
+}
+.mvp-item-icon { font-size: 1.1rem; flex-shrink: 0; }
+.mvp-item strong { display: block; font-weight: 700; margin-bottom: 0.15rem; color: white; }
+.mvp-next {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px; padding: 2.5rem;
+}
+.mvp-next h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700; font-size: 1.4rem; margin-bottom: 1rem;
+}
+.mvp-next-list { display: flex; flex-direction: column; gap: 0.7rem; }
+.mn-item { display: flex; gap: 0.8rem; font-size: 0.84rem; color: rgba(255,255,255,0.8); }
+.mn-num {
+  width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(255,255,255,0.2); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.68rem; font-weight: 700; margin-top: 0.05rem;
+}
+
+/* CONTACT CTA */
+.cta-sec { padding: 8rem 4rem; text-align: center; }
+.cta-inner { max-width: 680px; margin: 0 auto; }
+.cta-h {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900; font-size: clamp(2.5rem, 4vw, 3.5rem);
+  line-height: 1.1; margin-bottom: 1.2rem;
+}
+.cta-h em { color: var(--orange); font-style: italic; }
+.cta-sub { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 3rem; }
+.cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn-big {
+  font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+  padding: 1.1rem 2.4rem; border-radius: 100px; text-decoration: none; display: inline-block;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-big:hover { transform: translateY(-3px); }
+.btn-orange { background: var(--orange); color: white; box-shadow: 0 6px 20px rgba(244,100,58,0.35); }
+.btn-orange:hover { box-shadow: 0 10px 30px rgba(244,100,58,0.5); background: #d4470a; }
+.btn-teal-big { background: var(--teal); color: white; box-shadow: 0 6px 20px rgba(13,124,102,0.3); }
+.btn-teal-big:hover { box-shadow: 0 10px 30px rgba(13,124,102,0.45); background: #0a5c4c; }
+.cta-contact {
+  margin-top: 3rem; padding-top: 3rem;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
+  font-size: 0.88rem; color: var(--muted);
+}
+.cc-item { display: flex; align-items: center; gap: 0.5rem; }
+.cc-item a { color: var(--orange); text-decoration: none; font-weight: 600; }
+.cc-item a:hover { text-decoration: underline; }
+
+/* FOOTER */
+footer {
+  background: var(--ink); color: rgba(255,255,255,0.35);
+  padding: 2.5rem 4rem;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.78rem;
+}
+.foot-brand { font-weight: 900; font-size: 1rem; color: white; }
+.foot-brand span { color: var(--orange); }
+.foot-links { display: flex; gap: 2.5rem; }
+.foot-links a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+.foot-links a:hover { color: white; }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:none;} }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.6);} }
+.reveal { opacity:0; transform:translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.on { opacity:1; transform:none; }
+.d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s} .d4{transition-delay:.32s}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  nav { padding:1rem 1.5rem; }
+  nav .nav-links a:not(.nav-cta){ display:none; }
+  .hero { padding:8rem 1.5rem 4rem; }
+  .audience { grid-template-columns:1fr; max-width:480px; }
+  .about-inner,.mvp-grid { grid-template-columns:1fr; gap:3rem; }
+  .about,.how,.method,.path,.mvp,.cta-sec { padding:5rem 1.5rem; }
+  .how-steps,.method-grid { grid-template-columns:1fr 1fr; gap:1rem; }
+  .path-track { flex-direction:column; align-items:flex-start; gap:1.5rem; }
+  .path-track::before { display:none; }
+  .path-stage { flex-direction:row; text-align:left; min-width:unset; gap:1rem; }
+  footer { flex-direction:column; gap:1rem; text-align:center; padding:1.5rem; }
+}
+@media(max-width:640px){
+  .how-steps,.method-grid { grid-template-columns:1fr; }
+  .cta-contact { flex-direction:column; gap:1rem; align-items:center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-brand">
+    <img src="assets/logo.png" alt="Logo Gildii Innowacji">
+    <div class="nav-brand-text">Gildia<span>.</span>Innowacji</div>
+  </a>
+  <div class="nav-links">
+    <a href="#o-programie">O programie</a>
+    <a href="#metodyki">Metodyki</a>
+    <a href="#mvp">MVP</a>
+    <a href="#kontakt" class="nav-cta">Skontaktuj się</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-kicker"><span class="kicker-dot"></span>Edukacja przedsiębiorczości · Kielce 2025</div>
+    <img src="assets/logo.png" alt="Logo" class="hero-logo">
+    <h1 class="hero-h1">
+      <span class="o">Gildia</span> <em>Innowacji</em><br>
+      <span class="t">—</span> definiuj i realizuj cele.
+    </h1>
+    <p class="hero-lead">
+      Program rozwijający <strong>kompetencje projektowe i przedsiębiorcze</strong> u młodych ludzi — przez realne działanie, nie teorię. Dla gmin, szkół i instytucji kultury.
+    </p>
+    <div class="audience">
+      <a href="pages/gmina.html" class="aud-card aud-card-gmina">
+        <div class="aud-icon">🏛️</div>
+        <div class="aud-label">Oferta dla</div>
+        <div class="aud-title">Gmin i JST</div>
+        <div class="aud-desc">Aktywizacja młodzieży, finansowanie zewnętrzne, dokumentacja gotowa do sprawozdań. Obsługa A–Z.</div>
+        <div class="aud-cta">Zobacz ofertę →</div>
+      </a>
+      <a href="pages/szkola.html" class="aud-card aud-card-szkola">
+        <div class="aud-icon">🎓</div>
+        <div class="aud-label">Oferta dla</div>
+        <div class="aud-title">Szkół i placówek</div>
+        <div class="aud-desc">Realne projekty uczniowskie, kompetencje przyszłości, minimalne obciążenie nauczycieli.</div>
+        <div class="aud-cta">Zobacz ofertę →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="o-programie">
+  <div class="about-inner">
+    <div>
+      <div class="eyebrow reveal">Czym jest Gildia Innowacji</div>
+      <h2 class="about-h reveal">Innowacyjny program<br><em>wspierający młodych</em><br>przez projekty.</h2>
+      <p class="about-lead reveal">
+        Gildia Innowacji angażuje uczniów i studentów w projekty oparte na ich pasjach — festiwale muzyczne, koła naukowe, wydarzenia sportowe, inicjatywy społeczne. Uczymy jak efektywnie definiować i osiągać cele.
+      </p>
+      <p class="about-lead reveal" style="margin-top:1rem;">
+        Współpracujemy z placówkami edukacyjnymi i samorządami tworząc katalog projektów, do których młodzi mogą dołączać i wspólnie je realizować.
+      </p>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat-box sb-orange">
+        <div class="stat-num c-orange">0 zł</div>
+        <div class="stat-label">Uczestnictwo dla uczniów jest zawsze bezpłatne</div>
+      </div>
+      <div class="stat-box sb-teal">
+        <div class="stat-num c-teal">A–Z</div>
+        <div class="stat-label">Kompleksowa obsługa — od finansowania po raport</div>
+      </div>
+      <div class="stat-box sb-purple">
+        <div class="stat-num c-purple">∞</div>
+        <div class="stat-label">Kategorii projektów — sport, kultura, tech, ekologia</div>
+      </div>
+      <div class="stat-box sb-green">
+        <div class="stat-num c-teal">MVP</div>
+        <div class="stat-label">Działający prototyp gotowy do pierwszego wdrożenia</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="how">
+  <div class="how-inner">
+    <div class="eyebrow reveal">Jak działa program</div>
+    <h2 class="how-h reveal">Od pomysłu do <em>działającego projektu.</em></h2>
+    <p class="how-sub reveal">Cztery kroki, które zamieniają pasję w realne działanie — z mentorem, dokumentacją i efektem.</p>
+    <div class="how-steps">
+      <div class="how-step reveal">
+        <div class="step-n">01</div>
+        <span class="step-icon">📝</span>
+        <div class="step-title">Rejestracja i profil</div>
+        <p class="step-body">Wypełnij formularz i wykonaj test 16Personalities — poznaj swoje mocne strony i optymalną rolę w projekcie.</p>
+      </div>
+      <div class="how-step reveal d1">
+        <div class="step-n">02</div>
+        <span class="step-icon">🗂️</span>
+        <div class="step-title">Katalog Idei</div>
+        <p class="step-body">Przeglądaj kilkadziesiąt gotowych projektów z dokumentacją lub zaproponuj własny. Dołącz do istniejącego zespołu.</p>
+      </div>
+      <div class="how-step reveal d2">
+        <div class="step-n">03</div>
+        <span class="step-icon">🧪</span>
+        <div class="step-title">Prototyp i testowanie</div>
+        <p class="step-body">Tworzysz minimalną wersję projektu gotową do testowania. Mentor towarzyszy od pomysłu do prezentacji wyników.</p>
+      </div>
+      <div class="how-step reveal d3">
+        <div class="step-n">04</div>
+        <span class="step-icon">🚀</span>
+        <div class="step-title">Wdrożenie i feedback</div>
+        <p class="step-body">Projekt trafia do Katalogu Innowacji — testujemy, zbieramy opinie, doskonalimy. Realna zmiana w otoczeniu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section class="method" id="metodyki">
+  <div class="method-inner">
+    <div class="eyebrow reveal">Metodyki</div>
+    <h2 class="about-h reveal">Narzędzia, które <em>naprawdę działają.</em></h2>
+    <p class="about-lead reveal" style="max-width:560px;">Stosujemy metodyki używane przez liderów globalnego biznesu — w dostępnym, angażującym wydaniu dla młodych.</p>
+    <div class="method-grid">
+      <div class="method-card reveal">
+        <span class="mc-icon">🎨</span>
+        <div class="mc-name">Design Thinking</div>
+        <div class="mc-desc">Empatia, definiowanie problemu, prototypowanie i testowanie rozwiązań.</div>
+      </div>
+      <div class="method-card reveal d1">
+        <span class="mc-icon">🔄</span>
+        <div class="mc-name">Agile / Scrum</div>
+        <div class="mc-desc">Iteracyjna praca w sprintach, codzienne retrospektywy, adaptacja do zmian.</div>
+      </div>
+      <div class="method-card reveal d2">
+        <span class="mc-icon">📋</span>
+        <div class="mc-name">Kanban</div>
+        <div class="mc-desc">Wizualizacja przepływu pracy i zadań — przejrzystość dla całego zespołu.</div>
+      </div>
+      <div class="method-card reveal d3">
+        <span class="mc-icon">⚡</span>
+        <div class="mc-name">Lean</div>
+        <div class="mc-desc">Eliminacja marnotrawstwa, MVP, szybki feedback od odbiorców projektu.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEED → PROJECT PATH -->
+<section class="path">
+  <div class="path-inner">
+    <div class="eyebrow reveal">Ścieżka uczestnika</div>
+    <h2 class="path-h reveal">Jak rodzi się <em>innowacja.</em></h2>
+    <p class="path-sub reveal">Każdy projekt przechodzi przez ten sam cykl — od impulsu do realnej zmiany w otoczeniu.</p>
+    <div class="path-track reveal">
+      <div class="path-stage">
+        <div class="ps-dot"></div>
+        <div class="ps-title">Wydarzenie</div>
+        <div class="ps-sub">Bodziec, który uruchamia myślenie</div>
+      </div>
+      <div class="path-stage">
+        <div class="ps-dot" style="background:var(--gold)"></div>
+        <div class="ps-title">Przekonanie</div>
+        <div class="ps-sub">„Da się to zrobić inaczej"</div>
+      </div>
+      <div class="path-stage">
+        <div class="ps-dot" style="background:var(--amber)"></div>
+        <div class="ps-title">Potrzeba</div>
+        <div class="ps-sub">Zrozumienie odbiorcy</div>
+      </div>
+      <div class="path-stage">
+        <div class="ps-dot" style="background:var(--orange)"></div>
+        <div class="ps-title">Problem</div>
+        <div class="ps-sub">Precyzyjna definicja wyzwania</div>
+      </div>
+      <div class="path-stage">
+        <div class="ps-dot" style="background:#d4470a"></div>
+        <div class="ps-title">Idea</div>
+        <div class="ps-sub">Burza mózgów i prototyp</div>
+      </div>
+      <div class="path-stage">
+        <div class="ps-dot" style="background:var(--teal)"></div>
+        <div class="ps-title">Koncepcja</div>
+        <div class="ps-sub">Gotowy plan realizacji</div>
+      </div>
+      <div class="path-stage">
+        <div class="ps-dot" style="background:#0a5c4c; box-shadow:0 0 0 3px rgba(13,124,102,0.3)"></div>
+        <div class="ps-title">🌳 Projekt</div>
+        <div class="ps-sub">Realna zmiana w otoczeniu</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MVP -->
+<section class="mvp" id="mvp">
+  <div class="mvp-inner">
+    <div class="eyebrow reveal">Stan projektu</div>
+    <h2 class="mvp-h reveal">MVP — co mamy <em>dziś.</em></h2>
+    <div class="mvp-grid">
+      <div class="mvp-list">
+        <div class="mvp-item reveal">
+          <div class="mvp-item-icon">✅</div>
+          <div><strong>Dokumentacja programu</strong>Gotowa struktura, scenariusze zajęć, szablony projektowe i metodyki.</div>
+        </div>
+        <div class="mvp-item reveal d1">
+          <div class="mvp-item-icon">✅</div>
+          <div><strong>Landing pages</strong>Dedykowane strony dla gmin i szkół z pełną ofertą i formularzem kontaktowym.</div>
+        </div>
+        <div class="mvp-item reveal d2">
+          <div class="mvp-item-icon">✅</div>
+          <div><strong>Materiały marketingowe</strong>Plakaty, grafiki social media, prezentacja wstępna, film o projekcie.</div>
+        </div>
+        <div class="mvp-item reveal d3">
+          <div class="mvp-item-icon">✅</div>
+          <div><strong>Katalog przykładowych projektów</strong>Kilkadziesiąt gotowych koncepcji w różnych kategoriach z dokumentacją.</div>
+        </div>
+        <div class="mvp-item reveal d4">
+          <div class="mvp-item-icon">✅</div>
+          <div><strong>Narzędzia cyfrowe</strong>Formularz zgłoszeniowy, test profilujący (16Personalities), newsletter.</div>
+        </div>
+      </div>
+      <div class="mvp-next reveal d1">
+        <h3>Kolejne kroki po pilotażu</h3>
+        <div class="mvp-next-list">
+          <div class="mn-item"><div class="mn-num">1</div><span>Pozyskanie pierwszego partnera — gminy lub szkoły do pilotażu</span></div>
+          <div class="mn-item"><div class="mn-num">2</div><span>Realizacja pierwszego cyklu warsztatów i zebranie feedbacku</span></div>
+          <div class="mn-item"><div class="mn-num">3</div><span>Uruchomienie cyfrowej platformy projektowej z katalogiem</span></div>
+          <div class="mn-item"><div class="mn-num">4</div><span>Kanał YouTube — filmy dokumentujące projekty uczestników</span></div>
+          <div class="mn-item"><div class="mn-num">5</div><span>Złożenie pierwszego wniosku dotacyjnego z partnerem</span></div>
+          <div class="mn-item"><div class="mn-num">6</div><span>Skalowanie — kolejne szkoły i gminy w regionie</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="kontakt">
+  <div class="cta-inner">
+    <h2 class="cta-h reveal">Zacznijmy razem<br><em>budować program.</em></h2>
+    <p class="cta-sub reveal">Szukamy pierwszych partnerów do pilotażu. Gminy i szkoły, które zdecydują się teraz, współtworzą model wdrożenia na preferencyjnych warunkach.</p>
+    <div class="cta-btns reveal">
+      <a href="pages/gmina.html" class="btn-big btn-orange">Oferta dla gmin →</a>
+      <a href="pages/szkola.html" class="btn-big btn-teal-big">Oferta dla szkół →</a>
+    </div>
+    <div class="cta-contact reveal">
+      <div class="cc-item">👤 <span>Wojciech Wolanin · Kreatywne Klocki</span></div>
+      <div class="cc-item">📞 <a href="tel:+48793738281">793 738 281</a></div>
+      <div class="cc-item">📧 <a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a></div>
+      <div class="cc-item">🌐 <a href="https://www.kreatywneklocki.edu.pl">kreatywneklocki.edu.pl</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-brand">Gildia<span>.</span>Innowacji</div>
+  <div class="foot-links">
+    <a href="pages/gmina.html">Dla gmin</a>
+    <a href="pages/szkola.html">Dla szkół</a>
+    <a href="https://www.kreatywneklocki.edu.pl">kreatywneklocki.edu.pl</a>
+    <a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a>
+  </div>
+  <div>© 2025 Kreatywne Klocki · Kielce</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+</script>
+</body>
+</html>
