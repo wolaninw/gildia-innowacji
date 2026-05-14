@@ -3,678 +3,1292 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gildia Innowacji – Edukacja przedsiębiorczości dla młodych</title>
-<meta name="description" content="Gildia Innowacji to program edukacyjny rozwijający kompetencje projektowe i przedsiębiorcze u młodych ludzi. Oferta dla gmin, szkół i instytucji kultury.">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Cabinet+Grotesk:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<title>Gildia Innowacji</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
 <style>
+/* ── TOKENS — DARK (default) ── */
 :root {
-  --bg:      #faf7f2;
-  --ink:     #1a0f0a;
-  --warm:    #f2ebe0;
-  --purple:  #45276e;
-  --orange:  #f4643a;
-  --gold:    #f7bb35;
-  --teal:    #0d7c66;
-  --amber:   #e8860a;
-  --muted:   #6b5c4e;
-  --border:  rgba(26,15,10,0.1);
-  --white:   #ffffff;
+  --o1: #F47C28;
+  --o2: #F69F37;
+  --gold: #F7C146;
+  --v1: #471F7D;
+  --v2: #83109E;
+  --v3: #BF01BF;
+  --radius: 12px;
+
+  --bg:      #1e1a1c;
+  --bg2:     #252022;
+  --bg3:     #2e282a;
+  --surface: #332d2f;
+  --surface2:#3d3538;
+  --text:    #f5f0ea;
+  --text2:   rgba(245,240,234,0.62);
+  --text3:   rgba(245,240,234,0.35);
+  --border:  rgba(245,240,234,0.07);
+  --shadow:  rgba(0,0,0,0.35);
+  --topbar-bg: rgba(30,26,28,0.92);
+  --sidebar-footer-bg: transparent;
 }
+
+/* ── TOKENS — LIGHT ── */
+[data-theme="light"] {
+  --bg:      #ede5cc;
+  --bg2:     #e4dbbf;
+  --bg3:     #d9cfb0;
+  --surface: #f5f0e4;
+  --surface2:#faf7ef;
+  --text:    #2a2017;
+  --text2:   rgba(42,32,23,0.65);
+  --text3:   rgba(42,32,23,0.38);
+  --border:  rgba(42,32,23,0.1);
+  --shadow:  rgba(42,32,23,0.12);
+  --topbar-bg: rgba(237,229,204,0.92);
+  --sidebar-footer-bg: transparent;
+}
+
+/* ── RESET ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
-  color: var(--ink);
-  font-family: 'Cabinet Grotesk', sans-serif;
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
   font-weight: 400;
+  overflow-x: hidden;
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ── LAYOUT ── */
+.layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
   overflow-x: hidden;
 }
 
-/* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 1rem 4rem;
-  background: rgba(250,247,242,0.92);
-  backdrop-filter: blur(14px);
+/* ── SIDEBAR ── */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: 260px;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.sidebar-brand {
+  padding: 1.8rem 1.5rem 1.4rem;
   border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 0.8rem;
+  cursor: pointer;
 }
-.nav-brand { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
-.nav-brand img {
-  width: 44px; height: 44px; object-fit: contain; border-radius: 50%;
-  box-shadow: 0 2px 12px rgba(244,100,58,0.3), 0 0 0 2px rgba(244,100,58,0.12);
-  background: var(--bg); padding: 2px;
+.sidebar-logo {
+  width: 42px; height: 42px; border-radius: 50%;
+  object-fit: contain;
+  box-shadow: 0 0 0 2px rgba(244,124,40,0.3), 0 4px 12px rgba(244,124,40,0.25);
+  background: var(--bg3); padding: 2px; flex-shrink: 0;
 }
-.nav-brand-text { font-weight: 900; font-size: 1.05rem; color: var(--ink); }
-.nav-brand-text span { color: var(--orange); }
-.nav-links { display: flex; align-items: center; gap: 2.5rem; }
-.nav-links a {
-  font-size: 0.82rem; font-weight: 500; color: var(--muted);
-  text-decoration: none; transition: color 0.2s;
+.brand-text { line-height: 1.1; }
+.brand-name {
+  font-size: 0.95rem; font-weight: 800; letter-spacing: -0.01em;
+  background: linear-gradient(135deg, var(--o1), var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
-.nav-links a:hover { color: var(--ink); }
-.nav-cta {
-  background: var(--orange); color: white;
-  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em;
-  text-transform: uppercase; padding: 0.65rem 1.6rem;
-  border: none; border-radius: 100px; cursor: pointer;
-  text-decoration: none; display: inline-block;
-  box-shadow: 0 4px 16px rgba(244,100,58,0.35);
-  transition: background 0.2s, transform 0.15s;
-}
-.nav-cta:hover { background: #d4470a; transform: translateY(-2px); }
+.brand-sub { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); margin-top: 0.1rem; }
 
-/* HERO */
-.hero {
-  min-height: 100vh;
-  display: flex; flex-direction: column;
-  justify-content: center; align-items: center;
-  text-align: center;
-  padding: 9rem 2rem 5rem;
-  position: relative; overflow: hidden;
-}
-.hero-bg {
-  position: absolute; inset: 0; z-index: 0;
-  background:
-    radial-gradient(ellipse 50% 60% at 20% 40%, rgba(69,39,110,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 50% at 80% 60%, rgba(13,124,102,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 30% 40% at 50% 20%, rgba(244,100,58,0.07) 0%, transparent 60%);
-}
-.hero-content { position: relative; z-index: 1; max-width: 860px; }
-
-.hero-kicker {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--orange); font-weight: 700; margin-bottom: 2rem;
-  animation: fadeUp 0.7s ease both;
-}
-.kicker-dot { width: 6px; height: 6px; background: var(--orange); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
-
-.hero-logo {
-  width: 100px; height: 100px; object-fit: contain; border-radius: 50%;
-  box-shadow: 0 8px 32px rgba(244,100,58,0.3), 0 0 0 3px rgba(244,100,58,0.15);
-  background: var(--white); padding: 4px;
-  margin-bottom: 2rem;
-  animation: fadeUp 0.7s 0.05s ease both;
+.nav-section { padding: 1.2rem 0.8rem 0.6rem; }
+.nav-section-label {
+  font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text3); font-weight: 600; padding: 0 0.7rem; margin-bottom: 0.4rem;
 }
 
-.hero-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(3rem, 6vw, 6rem);
-  font-weight: 900; line-height: 1.02;
-  letter-spacing: -0.025em;
-  margin-bottom: 1.5rem;
-  animation: fadeUp 0.7s 0.1s ease both;
+.nav-item {
+  display: flex; align-items: center; gap: 0.7rem;
+  padding: 0.65rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem; font-weight: 600; color: var(--text2);
+  transition: all 0.18s;
+  user-select: none;
+  position: relative;
 }
-.hero-h1 .o { color: var(--orange); }
-.hero-h1 .t { color: var(--teal); }
-.hero-h1 em { font-style: italic; font-weight: 700; }
-
-.hero-lead {
-  font-size: 1.1rem; line-height: 1.8; color: var(--muted);
-  max-width: 600px; margin: 0 auto 3rem;
-  animation: fadeUp 0.7s 0.18s ease both;
+.nav-item:hover { background: var(--surface); color: var(--text); }
+.nav-item.active {
+  background: linear-gradient(135deg, rgba(244,124,40,0.15), rgba(131,16,158,0.15));
+  color: var(--text);
 }
-.hero-lead strong { color: var(--ink); font-weight: 700; }
-
-/* AUDIENCE SPLIT */
-.audience {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 1.5rem; max-width: 840px; margin: 0 auto;
-  animation: fadeUp 0.7s 0.26s ease both;
-}
-.aud-card {
-  border-radius: 16px; padding: 2.5rem 2rem;
-  text-decoration: none; color: white;
-  position: relative; overflow: hidden;
-  transition: transform 0.25s, box-shadow 0.25s;
-  display: flex; flex-direction: column;
-}
-.aud-card:hover { transform: translateY(-5px); }
-.aud-card-gmina {
-  background: linear-gradient(135deg, var(--purple) 0%, #621708 100%);
-  box-shadow: 0 8px 32px rgba(69,39,110,0.3);
-}
-.aud-card-gmina:hover { box-shadow: 0 16px 48px rgba(69,39,110,0.4); }
-.aud-card-szkola {
-  background: linear-gradient(135deg, var(--teal) 0%, #0a5c4c 100%);
-  box-shadow: 0 8px 32px rgba(13,124,102,0.3);
-}
-.aud-card-szkola:hover { box-shadow: 0 16px 48px rgba(13,124,102,0.4); }
-
-.aud-icon { font-size: 2.5rem; margin-bottom: 1rem; }
-.aud-label {
-  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: rgba(255,255,255,0.6); font-weight: 600; margin-bottom: 0.5rem;
-}
-.aud-title {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700; font-size: 1.6rem; line-height: 1.15; margin-bottom: 0.8rem;
-}
-.aud-desc { font-size: 0.85rem; color: rgba(255,255,255,0.72); line-height: 1.65; flex: 1; }
-.aud-cta {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  margin-top: 1.8rem; font-size: 0.82rem; font-weight: 700;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  background: rgba(255,255,255,0.15); color: white;
-  padding: 0.7rem 1.4rem; border-radius: 100px;
-  border: 1px solid rgba(255,255,255,0.2);
-  transition: background 0.2s;
-  width: fit-content;
-}
-.aud-cta:hover { background: rgba(255,255,255,0.25); }
-
-/* ABOUT */
-.about { padding: 8rem 4rem; }
-.about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-.eyebrow {
-  font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--orange); font-weight: 700;
-  display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem;
-}
-.eyebrow::before { content:''; width:20px; height:2px; background:var(--orange); border-radius:2px; }
-.about-h {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700; font-size: clamp(2rem, 3.5vw, 2.8rem);
-  line-height: 1.12; letter-spacing: -0.01em; margin-bottom: 1.2rem;
-}
-.about-h em { color: var(--orange); font-style: italic; }
-.about-lead { font-size: 1rem; color: var(--muted); line-height: 1.8; }
-
-.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.stat-box {
-  padding: 1.8rem 1.6rem;
-  background: var(--white); border: 1.5px solid var(--border);
-  border-radius: 12px; position: relative;
-  transition: border-color 0.2s, transform 0.2s;
-}
-.stat-box:hover { border-color: var(--orange); transform: translateY(-2px); }
-.stat-box::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  border-radius: 12px 12px 0 0;
-}
-.sb-orange::before { background: linear-gradient(90deg, var(--orange), var(--gold)); }
-.sb-teal::before { background: linear-gradient(90deg, var(--teal), var(--amber)); }
-.sb-purple::before { background: linear-gradient(90deg, var(--purple), var(--orange)); }
-.sb-green::before { background: linear-gradient(90deg, var(--teal), #0d7c66); }
-.stat-num {
-  font-family: 'Playfair Display', serif;
-  font-weight: 900; font-size: 2.5rem; line-height: 1;
-  margin-bottom: 0.3rem;
-}
-.stat-num.c-orange { color: var(--orange); }
-.stat-num.c-teal { color: var(--teal); }
-.stat-num.c-purple { color: var(--purple); }
-.stat-label { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
-
-/* HOW */
-.how { background: var(--warm); padding: 8rem 4rem; }
-.how-inner { max-width: 1100px; margin: 0 auto; }
-.how-h {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700; font-size: clamp(2rem, 3.5vw, 2.8rem);
-  line-height: 1.12; margin-bottom: 1rem;
-}
-.how-h em { color: var(--teal); font-style: italic; }
-.how-sub { font-size: 1rem; color: var(--muted); line-height: 1.8; max-width: 560px; margin-bottom: 4rem; }
-
-.how-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-.how-step {
-  background: var(--white); border-radius: 12px;
-  border: 1.5px solid var(--border);
-  padding: 2rem 1.6rem;
-  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-}
-.how-step:hover { border-color: var(--teal); transform: translateY(-3px); box-shadow: 0 10px 32px rgba(28,20,16,0.08); }
-.step-n {
-  font-family: 'Playfair Display', serif; font-weight: 900;
-  font-size: 3rem; line-height: 1; color: rgba(26,15,10,0.05); margin-bottom: 0.4rem;
-}
-.step-icon { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; }
-.step-title { font-weight: 800; font-size: 0.95rem; margin-bottom: 0.4rem; }
-.step-body { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
-
-/* METHODOLOGY */
-.method { padding: 8rem 4rem; }
-.method-inner { max-width: 1100px; margin: 0 auto; }
-.method-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; margin-top: 3rem; }
-.method-card {
-  padding: 2rem 1.6rem; border-radius: 12px;
-  border: 1.5px solid var(--border); background: var(--white);
-  text-align: center;
-  transition: border-color 0.2s, transform 0.2s;
-}
-.method-card:hover { border-color: var(--orange); transform: translateY(-3px); }
-.mc-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
-.mc-name { font-weight: 800; font-size: 1rem; margin-bottom: 0.4rem; }
-.mc-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
-
-/* PATH */
-.path { background: var(--ink); color: white; padding: 8rem 4rem; }
-.path-inner { max-width: 1100px; margin: 0 auto; }
-.path .eyebrow { color: var(--gold); }
-.path .eyebrow::before { background: var(--gold); }
-.path-h {
-  font-family: 'Playfair Display', serif;
-  font-weight: 900; font-size: clamp(2rem, 3.5vw, 3rem);
-  color: white; margin-bottom: 1rem;
-}
-.path-h em { color: var(--gold); font-style: italic; }
-.path-sub { font-size: 1rem; color: rgba(255,255,255,0.55); line-height: 1.8; max-width: 560px; margin-bottom: 4rem; }
-
-.path-track {
-  display: flex; align-items: center; gap: 0;
-  position: relative; overflow-x: auto; padding-bottom: 1rem;
-}
-.path-track::before {
+.nav-item.active::before {
   content: '';
-  position: absolute; top: 2.8rem; left: 2rem; right: 2rem; height: 1px;
-  background: linear-gradient(90deg, var(--orange), var(--gold), var(--teal));
-  opacity: 0.2; z-index: 0;
+  position: absolute; left: 0; top: 20%; bottom: 20%;
+  width: 3px; border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--o1), var(--v2));
 }
-.path-stage {
-  flex: 1; min-width: 140px;
-  display: flex; flex-direction: column; align-items: center;
-  text-align: center; position: relative; z-index: 1; padding: 0 0.5rem;
-  cursor: default;
-}
-.ps-dot {
-  width: 22px; height: 22px; border-radius: 50%;
-  background: var(--orange); border: 3px solid var(--ink);
-  box-shadow: 0 0 0 2px var(--orange);
-  margin-bottom: 1.2rem; flex-shrink: 0;
-  transition: transform 0.2s;
-}
-.path-stage:hover .ps-dot { transform: scale(1.3); }
-.ps-title { font-weight: 700; font-size: 0.85rem; margin-bottom: 0.3rem; color: white; }
-.ps-sub { font-size: 0.72rem; color: rgba(255,255,255,0.45); line-height: 1.4; }
-
-/* MVP SECTION */
-.mvp { background: var(--orange); color: white; padding: 8rem 4rem; }
-.mvp-inner { max-width: 1100px; margin: 0 auto; }
-.mvp .eyebrow { color: white; }
-.mvp .eyebrow::before { background: rgba(255,255,255,0.6); }
-.mvp-h {
-  font-family: 'Playfair Display', serif;
-  font-weight: 900; font-size: clamp(2.5rem, 4vw, 4rem);
-  line-height: 1.05; color: white; margin-bottom: 1rem;
-}
-.mvp-h em { font-style: italic; font-weight: 400; color: rgba(255,255,255,0.75); }
-.mvp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3rem; }
-.mvp-list { display: flex; flex-direction: column; gap: 1rem; }
-.mvp-item {
-  display: flex; gap: 1rem; align-items: flex-start;
-  padding: 1.2rem 1.4rem;
-  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 10px; font-size: 0.88rem; line-height: 1.5; color: rgba(255,255,255,0.9);
-}
-.mvp-item-icon { font-size: 1.1rem; flex-shrink: 0; }
-.mvp-item strong { display: block; font-weight: 700; margin-bottom: 0.15rem; color: white; }
-.mvp-next {
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 12px; padding: 2.5rem;
-}
-.mvp-next h3 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700; font-size: 1.4rem; margin-bottom: 1rem;
-}
-.mvp-next-list { display: flex; flex-direction: column; gap: 0.7rem; }
-.mn-item { display: flex; gap: 0.8rem; font-size: 0.84rem; color: rgba(255,255,255,0.8); }
-.mn-num {
-  width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(255,255,255,0.2); color: white;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.68rem; font-weight: 700; margin-top: 0.05rem;
+.nav-icon { font-size: 1rem; flex-shrink: 0; width: 20px; text-align: center; }
+.nav-badge {
+  margin-left: auto; font-size: 0.6rem; font-weight: 700;
+  background: var(--o1); color: white;
+  padding: 0.12rem 0.45rem; border-radius: 100px;
 }
 
-/* CONTACT CTA */
-.cta-sec { padding: 8rem 4rem; text-align: center; }
-.cta-inner { max-width: 680px; margin: 0 auto; }
-.cta-h {
-  font-family: 'Playfair Display', serif;
-  font-weight: 900; font-size: clamp(2.5rem, 4vw, 3.5rem);
-  line-height: 1.1; margin-bottom: 1.2rem;
-}
-.cta-h em { color: var(--orange); font-style: italic; }
-.cta-sub { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 3rem; }
-.cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-.btn-big {
-  font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
-  padding: 1.1rem 2.4rem; border-radius: 100px; text-decoration: none; display: inline-block;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.btn-big:hover { transform: translateY(-3px); }
-.btn-orange { background: var(--orange); color: white; box-shadow: 0 6px 20px rgba(244,100,58,0.35); }
-.btn-orange:hover { box-shadow: 0 10px 30px rgba(244,100,58,0.5); background: #d4470a; }
-.btn-teal-big { background: var(--teal); color: white; box-shadow: 0 6px 20px rgba(13,124,102,0.3); }
-.btn-teal-big:hover { box-shadow: 0 10px 30px rgba(13,124,102,0.45); background: #0a5c4c; }
-.cta-contact {
-  margin-top: 3rem; padding-top: 3rem;
+.nav-sub { padding-left: 2.5rem; }
+.nav-sub .nav-item { font-size: 0.8rem; font-weight: 500; padding: 0.5rem 0.8rem; }
+
+.sidebar-footer {
+  margin-top: auto; padding: 1.2rem 1.5rem;
   border-top: 1px solid var(--border);
-  display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
-  font-size: 0.88rem; color: var(--muted);
+  font-size: 0.72rem; color: var(--text3); line-height: 1.6;
 }
-.cc-item { display: flex; align-items: center; gap: 0.5rem; }
-.cc-item a { color: var(--orange); text-decoration: none; font-weight: 600; }
-.cc-item a:hover { text-decoration: underline; }
+.sidebar-footer a { color: var(--o2); text-decoration: none; }
 
-/* FOOTER */
-footer {
-  background: var(--ink); color: rgba(255,255,255,0.35);
-  padding: 2.5rem 4rem;
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: 0.78rem;
+/* ── MAIN ── */
+.main {
+  margin-left: 260px;
+  flex: 1;
+  min-width: 0;
+  width: calc(100% - 260px);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
 }
-.foot-brand { font-weight: 900; font-size: 1rem; color: white; }
-.foot-brand span { color: var(--orange); }
-.foot-links { display: flex; gap: 2.5rem; }
-.foot-links a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
-.foot-links a:hover { color: white; }
 
-/* ANIMATIONS */
-@keyframes fadeUp { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:none;} }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.6);} }
-.reveal { opacity:0; transform:translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.reveal.on { opacity:1; transform:none; }
-.d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s} .d4{transition-delay:.32s}
-
-/* RESPONSIVE */
-@media(max-width:1024px){
-  nav { padding:1rem 1.5rem; }
-  nav .nav-links a:not(.nav-cta){ display:none; }
-  .hero { padding:8rem 1.5rem 4rem; }
-  .audience { grid-template-columns:1fr; max-width:480px; }
-  .about-inner,.mvp-grid { grid-template-columns:1fr; gap:3rem; }
-  .about,.how,.method,.path,.mvp,.cta-sec { padding:5rem 1.5rem; }
-  .how-steps,.method-grid { grid-template-columns:1fr 1fr; gap:1rem; }
-  .path-track { flex-direction:column; align-items:flex-start; gap:1.5rem; }
-  .path-track::before { display:none; }
-  .path-stage { flex-direction:row; text-align:left; min-width:unset; gap:1rem; }
-  footer { flex-direction:column; gap:1rem; text-align:center; padding:1.5rem; }
+/* ── TOPBAR ── */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--topbar-bg);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.9rem 2rem;
+  width: 100%;
+  min-width: 0;
+  transition: background 0.3s, border-color 0.3s;
 }
-@media(max-width:640px){
-  .how-steps,.method-grid { grid-template-columns:1fr; }
-  .cta-contact { flex-direction:column; gap:1rem; align-items:center; }
+.topbar-title { font-size: 0.85rem; font-weight: 700; color: var(--text2); }
+.topbar-right { display: flex; align-items: center; gap: 0.7rem; }
+.topbar-contact {
+  background: linear-gradient(135deg, var(--o1), var(--v2));
+  color: white; font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.5rem 1.2rem; border-radius: 100px; border: none; cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+/* ── THEME TOGGLE ── */
+.theme-toggle {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text); font-size: 1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s, transform 0.25s;
+}
+.theme-toggle:hover { border-color: var(--o1); transform: rotate(22deg) scale(1.05); }
+.icon-sun  { display: none; }
+.icon-moon { display: inline; }
+[data-theme="light"] .icon-sun  { display: inline; }
+[data-theme="light"] .icon-moon { display: none; }
+.topbar-contact:hover { opacity: 0.85; transform: translateY(-1px); }
+
+/* ── PAGE ── */
+.page { display: none; flex: 1; padding: 2rem; max-width: 100%; overflow-x: hidden; }
+.page.active { display: block; }
+
+/* ── AKTUALNOŚCI ── */
+.news-hero {
+  background: linear-gradient(135deg, var(--v1) 0%, var(--bg3) 60%, rgba(244,124,40,0.12) 100%);
+  border-radius: var(--radius);
+  padding: 3.5rem;
+  margin-bottom: 2rem;
+  position: relative; overflow: hidden;
+}
+[data-theme="light"] .news-hero {
+  background: linear-gradient(135deg, rgba(71,31,125,0.85) 0%, rgba(131,16,158,0.7) 60%, rgba(244,124,40,0.2) 100%);
+}
+.news-hero::before {
+  content: '';
+  position: absolute; top: -40px; right: -40px;
+  width: 280px; height: 280px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(191,1,191,0.2), transparent 70%);
+}
+.news-hero::after {
+  content: '';
+  position: absolute; bottom: -60px; left: 20%;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(244,124,40,0.15), transparent 70%);
+}
+.news-hero-tag {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); font-weight: 700; margin-bottom: 1.2rem;
+}
+.tag-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+.news-hero-h {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 700; line-height: 1.1;
+  margin-bottom: 1rem; position: relative; z-index: 1;
+}
+.news-hero-h em { color: var(--gold); font-style: italic; }
+.news-hero-p { font-size: 0.95rem; color: var(--text2); line-height: 1.75; max-width: 560px; position: relative; z-index: 1; }
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 1.2rem; margin-bottom: 2rem;
+}
+.news-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.6rem;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  position: relative; overflow: hidden;
+}
+.news-card:hover { transform: translateY(-3px); border-color: rgba(244,124,40,0.3); box-shadow: 0 8px 24px var(--shadow); }
+.nc-cat {
+  font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
+  font-weight: 700; margin-bottom: 0.8rem;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.cat-orange { color: var(--o1); }
+.cat-violet { color: var(--v3); }
+.cat-gold { color: var(--gold); }
+.nc-title { font-size: 1rem; font-weight: 700; line-height: 1.35; margin-bottom: 0.7rem; }
+.nc-body { font-size: 0.8rem; color: var(--text2); line-height: 1.65; }
+.nc-footer {
+  margin-top: 1.2rem; padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 0.72rem; color: var(--text3);
+}
+.nc-date { }
+.nc-more { color: var(--o2); font-weight: 600; }
+
+.news-card.featured {
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;
+  background: linear-gradient(135deg, rgba(71,31,125,0.25), var(--surface));
+  border-color: rgba(131,16,158,0.25);
+}
+[data-theme="light"] .news-card.featured {
+  background: linear-gradient(135deg, rgba(71,31,125,0.12), rgba(131,16,158,0.06));
+  border-color: rgba(71,31,125,0.2);
+}
+.news-card:hover { transform: translateY(-3px); border-color: rgba(244,124,40,0.3); box-shadow: 0 8px 24px var(--shadow); }
+.featured-content { }
+.featured-meta { display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; margin-bottom: 1.2rem; }
+.featured-tag {
+  font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 100px;
+}
+.ft-new { background: rgba(244,124,40,0.2); color: var(--o1); }
+.ft-hot { background: rgba(191,1,191,0.2); color: var(--v3); }
+.featured-h {
+  font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700;
+  line-height: 1.2; margin-bottom: 0.8rem;
+}
+.featured-p { font-size: 0.85rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.5rem; }
+.btn-sm {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.6rem 1.2rem; border-radius: 100px; border: none; cursor: pointer;
+  transition: transform 0.15s, opacity 0.15s;
+}
+.btn-sm:hover { transform: translateY(-1px); opacity: 0.9; }
+.btn-orange { background: var(--o1); color: white; }
+.btn-ghost-sm {
+  background: transparent; color: var(--text2);
+  border: 1px solid var(--border);
+}
+
+.featured-visual {
+  background: linear-gradient(135deg, rgba(191,1,191,0.08), rgba(71,31,125,0.12));
+  border: 1px solid rgba(131,16,158,0.2);
+  border-radius: 10px; padding: 2rem;
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.fv-stat { display: flex; align-items: center; gap: 1rem; }
+.fv-num {
+  font-family: 'Fraunces', serif; font-weight: 700; font-size: 2rem;
+  background: linear-gradient(135deg, var(--o1), var(--v3));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; line-height: 1;
+}
+.fv-label { font-size: 0.78rem; color: var(--text2); line-height: 1.4; }
+.fv-divider { height: 1px; background: var(--border); }
+
+/* ── OFERTA ── */
+.offer-tabs {
+  display: flex; gap: 0.5rem; margin-bottom: 2rem;
+  background: var(--surface); padding: 0.4rem;
+  border-radius: 100px; width: fit-content;
+}
+.offer-tab {
+  padding: 0.55rem 1.4rem; border-radius: 100px;
+  font-size: 0.78rem; font-weight: 700; cursor: pointer;
+  color: var(--text2); transition: all 0.2s; border: none; background: transparent;
+}
+.offer-tab.active { background: linear-gradient(135deg, var(--o1), var(--v2)); color: white; }
+
+.offer-content { display: none; }
+.offer-content.active { display: block; }
+
+.offer-hero {
+  border-radius: var(--radius); padding: 3rem;
+  margin-bottom: 2rem; position: relative; overflow: hidden;
+}
+.oh-gmina { background: linear-gradient(135deg, rgba(71,31,125,0.18), var(--bg3)); border: 1px solid rgba(71,31,125,0.25); }
+.oh-szkola { background: linear-gradient(135deg, rgba(13,124,102,0.15), var(--bg3)); border: 1px solid rgba(13,124,102,0.25); }
+.oh-uczelnia { background: linear-gradient(135deg, rgba(191,1,191,0.12), var(--bg3)); border: 1px solid rgba(191,1,191,0.2); }
+
+.oh-eyebrow {
+  font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+  font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem;
+}
+.oh-eyebrow::before { content:''; width:20px; height:2px; border-radius:2px; }
+.oe-orange::before { background: var(--o1); color: var(--o1); }
+.oe-teal { color: #0d7c66; }
+.oe-teal::before { background: #0d7c66; }
+.oe-violet { color: var(--v3); }
+.oe-violet::before { background: var(--v3); }
+.oe-orange { color: var(--o1); }
+
+.oh-h {
+  font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 700; line-height: 1.1; margin-bottom: 0.8rem;
+}
+.oh-h em { font-style: italic; }
+.oh-p { font-size: 0.92rem; color: var(--text2); line-height: 1.75; max-width: 600px; margin-bottom: 2rem; }
+
+.offer-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1.2rem; margin-bottom: 2rem; }
+.offer-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1.8rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.offer-card:hover { border-color: rgba(244,124,40,0.3); transform: translateY(-2px); }
+.oc-icon { font-size: 1.8rem; margin-bottom: 1rem; display: block; }
+.oc-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
+.oc-body { font-size: 0.82rem; color: var(--text2); line-height: 1.7; }
+
+/* ── KATALOG ── */
+.catalog-filters {
+  display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem;
+}
+.filter-btn {
+  padding: 0.45rem 1rem; border-radius: 100px;
+  font-size: 0.75rem; font-weight: 700; cursor: pointer;
+  border: 1.5px solid var(--border); color: var(--text2);
+  background: transparent; transition: all 0.2s;
+}
+.filter-btn:hover, .filter-btn.active {
+  border-color: var(--o1); color: var(--o1);
+  background: rgba(244,124,40,0.08);
+}
+
+.catalog-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1.2rem; }
+.cat-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+.cat-card:hover { transform: translateY(-3px); border-color: rgba(244,124,40,0.25); }
+.cat-card-top {
+  height: 80px; display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem; position: relative; overflow: hidden;
+}
+.cc-sport { background: linear-gradient(135deg, #0d1f3c, #1a3a5c); }
+.cc-kultura { background: linear-gradient(135deg, #1a0d30, #3a1a60); }
+.cc-tech { background: linear-gradient(135deg, #0d2a1a, #1a5c3a); }
+.cc-ekologia { background: linear-gradient(135deg, #1a2a0d, #3a5c1a); }
+.cc-media { background: linear-gradient(135deg, #2a0d0d, #5c1a1a); }
+.cc-edukacja { background: linear-gradient(135deg, #0d1a2a, #1a3a5c); }
+
+.cat-card-body { padding: 1.2rem 1.4rem; }
+.cc-cat {
+  font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 700; color: var(--text3); margin-bottom: 0.4rem;
+}
+.cc-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 0.4rem; line-height: 1.3; }
+.cc-desc { font-size: 0.78rem; color: var(--text2); line-height: 1.55; }
+.cc-footer {
+  padding: 0.8rem 1.4rem;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.7rem; color: var(--text3);
+}
+.cc-status {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+}
+.status-open { background: #2ed573; }
+.status-soon { background: var(--gold); }
+
+/* ── HOW TO JOIN ── */
+.join-steps { display: flex; flex-direction: column; gap: 1px; margin-top: 2rem; }
+.join-step {
+  display: grid; grid-template-columns: 5rem 1fr auto;
+  gap: 2rem; align-items: start;
+  background: var(--surface); padding: 2rem;
+  border-radius: var(--radius); margin-bottom: 0.8rem;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s;
+}
+.join-step:hover { border-color: rgba(244,124,40,0.25); }
+.js-num {
+  font-family: 'Fraunces', serif; font-weight: 700;
+  font-size: 3rem; line-height: 1; color: rgba(245,240,234,0.06);
+}
+.js-content h3 { font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
+.js-content p { font-size: 0.83rem; color: var(--text2); line-height: 1.65; }
+.js-time {
+  font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+  background: rgba(244,124,40,0.1); color: var(--o1);
+  padding: 0.3rem 0.8rem; border-radius: 100px; white-space: nowrap; font-weight: 700;
+  align-self: flex-start; margin-top: 0.3rem;
+}
+
+/* ── SUPPORT ── */
+.support-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1.5rem; margin-top: 2rem; }
+.support-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 2rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.support-card:hover { border-color: rgba(244,124,40,0.3); transform: translateY(-2px); }
+.supp-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.supp-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.6rem; }
+.supp-body { font-size: 0.84rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.5rem; }
+.btn-support {
+  display: inline-block; padding: 0.65rem 1.4rem; border-radius: 100px;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: transform 0.15s, opacity 0.15s;
+}
+.btn-support:hover { transform: translateY(-1px); opacity: 0.9; }
+.bs-orange { background: var(--o1); color: white; }
+.bs-violet { background: var(--v2); color: white; }
+.bs-gold { background: var(--gold); color: var(--ink); }
+.bs-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text2); }
+
+/* ── ABOUT ── */
+.about-tabs {
+  display: flex; gap: 0.5rem; margin-bottom: 2rem;
+  background: var(--surface); padding: 0.4rem;
+  border-radius: 100px; width: fit-content;
+}
+.about-tab {
+  padding: 0.55rem 1.4rem; border-radius: 100px;
+  font-size: 0.78rem; font-weight: 700; cursor: pointer;
+  color: var(--text2); transition: all 0.2s; border: none; background: transparent;
+}
+.about-tab.active { background: linear-gradient(135deg, var(--v1), var(--v3)); color: white; }
+.about-content { display: none; }
+.about-content.active { display: block; }
+
+.vision-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 3rem; align-items: start; margin-top: 2rem; }
+.vision-text h2 {
+  font-family: 'Fraunces', serif; font-weight: 700;
+  font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.15; margin-bottom: 1rem;
+}
+.vision-text h2 em { color: var(--o1); font-style: italic; }
+.vision-text p { font-size: 0.9rem; color: var(--text2); line-height: 1.8; margin-bottom: 1rem; }
+.vision-goals { display: flex; flex-direction: column; gap: 0.8rem; }
+.vg-item {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: 1rem 1.2rem;
+  background: var(--surface); border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.vg-icon { font-size: 1.1rem; flex-shrink: 0; }
+.vg-text h4 { font-weight: 700; font-size: 0.88rem; margin-bottom: 0.2rem; }
+.vg-text p { font-size: 0.78rem; color: var(--text2); line-height: 1.5; }
+
+/* ── CONTACT ── */
+.contact-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 2rem; }
+.contact-form-box {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 2rem;
+}
+.cf-h { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.5rem; margin-bottom: 0.4rem; }
+.cf-sub { font-size: 0.82rem; color: var(--text2); margin-bottom: 1.8rem; line-height: 1.5; }
+.fgroup { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+.flabel { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text3); font-weight: 600; }
+.finput, .fselect, .ftextarea {
+  background: var(--bg3); border: 1.5px solid var(--border);
+  color: var(--text); font-family: 'Syne', sans-serif; font-size: 0.88rem;
+  padding: 0.8rem 1rem; outline: none; border-radius: 8px;
+  transition: border-color 0.2s;
+}
+.finput::placeholder, .ftextarea::placeholder { color: var(--text3); }
+.finput:focus, .fselect:focus, .ftextarea:focus { border-color: var(--o1); }
+.fselect option { background: var(--bg3); }
+.ftextarea { resize: vertical; min-height: 90px; }
+.btn-submit {
+  width: 100%; background: linear-gradient(135deg, var(--o1), var(--v2));
+  color: white; font-family: 'Syne', sans-serif; font-size: 0.85rem;
+  font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 1rem; border: none; border-radius: 100px; cursor: pointer; margin-top: 0.5rem;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.btn-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+.form-note { text-align: center; font-size: 0.7rem; color: var(--text3); margin-top: 0.7rem; }
+.success-box { display: none; text-align: center; padding: 2.5rem; }
+.success-box h3 { font-family: 'Fraunces', serif; font-size: 1.4rem; margin-bottom: 0.4rem; }
+.success-box p { font-size: 0.85rem; color: var(--text2); }
+
+.contact-info-box {
+  display: flex; flex-direction: column; gap: 1.2rem;
+}
+.ci-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.6rem;
+}
+.ci-card-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 1rem; color: var(--text2); }
+.ci-item { display: flex; gap: 0.8rem; align-items: center; font-size: 0.85rem; margin-bottom: 0.7rem; }
+.ci-icon { font-size: 1rem; flex-shrink: 0; }
+.ci-item a { color: var(--o2); text-decoration: none; }
+.ci-item a:hover { text-decoration: underline; }
+.ci-item span { color: var(--text2); }
+
+.social-row { display: flex; gap: 0.6rem; margin-top: 0.5rem; }
+.social-btn {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--bg3); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; cursor: pointer; text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.social-btn:hover { border-color: var(--o1); background: rgba(244,124,40,0.1); }
+
+/* ── PAGE HEADERS ── */
+.page-header { margin-bottom: 2rem; }
+.page-eyebrow {
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--o1); font-weight: 700; margin-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.page-eyebrow::before { content:''; width:16px; height:2px; background:var(--o1); border-radius:2px; }
+.page-h {
+  font-family: 'Fraunces', serif; font-weight: 700;
+  font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.12;
+}
+.page-h em { color: var(--o1); font-style: italic; }
+.page-sub { font-size: 0.92rem; color: var(--text2); line-height: 1.75; max-width: 600px; margin-top: 0.6rem; }
+
+/* ── UTILITIES ── */
+.divider { height: 1px; background: var(--border); margin: 2rem 0; }
+.section-label {
+  font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+  font-weight: 700; color: var(--text3); margin-bottom: 1rem;
+}
+.chip {
+  display: inline-block; font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.2rem 0.6rem; border-radius: 100px;
+}
+.chip-orange { background: rgba(244,124,40,0.15); color: var(--o1); }
+.chip-violet { background: rgba(191,1,191,0.15); color: var(--v3); }
+.chip-gold { background: rgba(247,193,70,0.15); color: var(--gold); }
+.chip-green { background: rgba(46,213,115,0.15); color: #2ed573; }
+
+/* ── MOBILE NAV ── */
+.mobile-nav { display: none; }
+.mobile-overlay { display: none; }
+
+/* ── MEDIUM SCREENS (sidebar + narrow content) ── */
+@media(max-width:1200px) and (min-width:901px){
+  .news-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .offer-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .catalog-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .news-card.featured { grid-template-columns: 1fr; }
+  .goals-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .layout { flex-direction: column; }
+  .sidebar { transform: translateX(-100%); transition: transform 0.3s; width: 260px; }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; width: 100%; }
+  .mobile-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: var(--bg2); border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 150;
+  }
+  .mobile-brand { font-weight: 800; font-size: 0.9rem; background: linear-gradient(135deg, var(--o1), var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hamburger { font-size: 1.3rem; cursor: pointer; color: var(--text); background: none; border: none; }
+  .page { padding: 1.2rem; }
+  .news-grid { grid-template-columns: 1fr; }
+  .news-card.featured { grid-template-columns: 1fr; }
+  .offer-grid, .catalog-grid, .support-grid, .vision-grid, .contact-grid { grid-template-columns: 1fr; }
+  .goals-grid { grid-template-columns: 1fr; }
+  .mobile-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99;
+  }
+  .mobile-overlay.open { display: block; }
 }
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="#" class="nav-brand">
-    <img src="assets/logo.png" alt="Logo Gildii Innowacji">
-    <div class="nav-brand-text">Gildia<span>.</span>Innowacji</div>
-  </a>
-  <div class="nav-links">
-    <a href="#o-programie">O programie</a>
-    <a href="#metodyki">Metodyki</a>
-    <a href="#mvp">MVP</a>
-    <a href="#kontakt" class="nav-cta">Skontaktuj się</a>
-  </div>
-</nav>
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-brand">Gildia Innowacji</div>
+  <button class="hamburger" onclick="toggleSidebar()">☰</button>
+</div>
+<div class="mobile-overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <div class="hero-kicker"><span class="kicker-dot"></span>Edukacja przedsiębiorczości · Kielce 2025</div>
-    <img src="assets/logo.png" alt="Logo" class="hero-logo">
-    <h1 class="hero-h1">
-      <span class="o">Gildia</span> <em>Innowacji</em><br>
-      <span class="t">—</span> definiuj i realizuj cele.
-    </h1>
-    <p class="hero-lead">
-      Program rozwijający <strong>kompetencje projektowe i przedsiębiorcze</strong> u młodych ludzi — przez realne działanie, nie teorię. Dla gmin, szkół i instytucji kultury.
-    </p>
-    <div class="audience">
-      <a href="pages/gmina.html" class="aud-card aud-card-gmina">
-        <div class="aud-icon">🏛️</div>
-        <div class="aud-label">Oferta dla</div>
-        <div class="aud-title">Gmin i JST</div>
-        <div class="aud-desc">Aktywizacja młodzieży, finansowanie zewnętrzne, dokumentacja gotowa do sprawozdań. Obsługa A–Z.</div>
-        <div class="aud-cta">Zobacz ofertę →</div>
-      </a>
-      <a href="pages/szkola.html" class="aud-card aud-card-szkola">
-        <div class="aud-icon">🎓</div>
-        <div class="aud-label">Oferta dla</div>
-        <div class="aud-title">Szkół i placówek</div>
-        <div class="aud-desc">Realne projekty uczniowskie, kompetencje przyszłości, minimalne obciążenie nauczycieli.</div>
-        <div class="aud-cta">Zobacz ofertę →</div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about" id="o-programie">
-  <div class="about-inner">
-    <div>
-      <div class="eyebrow reveal">Czym jest Gildia Innowacji</div>
-      <h2 class="about-h reveal">Innowacyjny program<br><em>wspierający młodych</em><br>przez projekty.</h2>
-      <p class="about-lead reveal">
-        Gildia Innowacji angażuje uczniów i studentów w projekty oparte na ich pasjach — festiwale muzyczne, koła naukowe, wydarzenia sportowe, inicjatywy społeczne. Uczymy jak efektywnie definiować i osiągać cele.
-      </p>
-      <p class="about-lead reveal" style="margin-top:1rem;">
-        Współpracujemy z placówkami edukacyjnymi i samorządami tworząc katalog projektów, do których młodzi mogą dołączać i wspólnie je realizować.
-      </p>
-    </div>
-    <div class="about-stats reveal">
-      <div class="stat-box sb-orange">
-        <div class="stat-num c-orange">0 zł</div>
-        <div class="stat-label">Uczestnictwo dla uczniów jest zawsze bezpłatne</div>
-      </div>
-      <div class="stat-box sb-teal">
-        <div class="stat-num c-teal">A–Z</div>
-        <div class="stat-label">Kompleksowa obsługa — od finansowania po raport</div>
-      </div>
-      <div class="stat-box sb-purple">
-        <div class="stat-num c-purple">∞</div>
-        <div class="stat-label">Kategorii projektów — sport, kultura, tech, ekologia</div>
-      </div>
-      <div class="stat-box sb-green">
-        <div class="stat-num c-teal">MVP</div>
-        <div class="stat-label">Działający prototyp gotowy do pierwszego wdrożenia</div>
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand" onclick="navigate('aktualnosci')">
+      <img src="assets/logo.png" alt="Logo" class="sidebar-logo" onerror="this.style.display='none'">
+      <div class="brand-text">
+        <div class="brand-name">Gildia Innowacji</div>
+        <div class="brand-sub">Edukacja · Przedsiębiorczość</div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- HOW -->
-<section class="how">
-  <div class="how-inner">
-    <div class="eyebrow reveal">Jak działa program</div>
-    <h2 class="how-h reveal">Od pomysłu do <em>działającego projektu.</em></h2>
-    <p class="how-sub reveal">Cztery kroki, które zamieniają pasję w realne działanie — z mentorem, dokumentacją i efektem.</p>
-    <div class="how-steps">
-      <div class="how-step reveal">
-        <div class="step-n">01</div>
-        <span class="step-icon">📝</span>
-        <div class="step-title">Rejestracja i profil</div>
-        <p class="step-body">Wypełnij formularz i wykonaj test 16Personalities — poznaj swoje mocne strony i optymalną rolę w projekcie.</p>
-      </div>
-      <div class="how-step reveal d1">
-        <div class="step-n">02</div>
-        <span class="step-icon">🗂️</span>
-        <div class="step-title">Katalog Idei</div>
-        <p class="step-body">Przeglądaj kilkadziesiąt gotowych projektów z dokumentacją lub zaproponuj własny. Dołącz do istniejącego zespołu.</p>
-      </div>
-      <div class="how-step reveal d2">
-        <div class="step-n">03</div>
-        <span class="step-icon">🧪</span>
-        <div class="step-title">Prototyp i testowanie</div>
-        <p class="step-body">Tworzysz minimalną wersję projektu gotową do testowania. Mentor towarzyszy od pomysłu do prezentacji wyników.</p>
-      </div>
-      <div class="how-step reveal d3">
-        <div class="step-n">04</div>
-        <span class="step-icon">🚀</span>
-        <div class="step-title">Wdrożenie i feedback</div>
-        <p class="step-body">Projekt trafia do Katalogu Innowacji — testujemy, zbieramy opinie, doskonalimy. Realna zmiana w otoczeniu.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- METHODOLOGY -->
-<section class="method" id="metodyki">
-  <div class="method-inner">
-    <div class="eyebrow reveal">Metodyki</div>
-    <h2 class="about-h reveal">Narzędzia, które <em>naprawdę działają.</em></h2>
-    <p class="about-lead reveal" style="max-width:560px;">Stosujemy metodyki używane przez liderów globalnego biznesu — w dostępnym, angażującym wydaniu dla młodych.</p>
-    <div class="method-grid">
-      <div class="method-card reveal">
-        <span class="mc-icon">🎨</span>
-        <div class="mc-name">Design Thinking</div>
-        <div class="mc-desc">Empatia, definiowanie problemu, prototypowanie i testowanie rozwiązań.</div>
-      </div>
-      <div class="method-card reveal d1">
-        <span class="mc-icon">🔄</span>
-        <div class="mc-name">Agile / Scrum</div>
-        <div class="mc-desc">Iteracyjna praca w sprintach, codzienne retrospektywy, adaptacja do zmian.</div>
-      </div>
-      <div class="method-card reveal d2">
-        <span class="mc-icon">📋</span>
-        <div class="mc-name">Kanban</div>
-        <div class="mc-desc">Wizualizacja przepływu pracy i zadań — przejrzystość dla całego zespołu.</div>
-      </div>
-      <div class="method-card reveal d3">
-        <span class="mc-icon">⚡</span>
-        <div class="mc-name">Lean</div>
-        <div class="mc-desc">Eliminacja marnotrawstwa, MVP, szybki feedback od odbiorców projektu.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SEED → PROJECT PATH -->
-<section class="path">
-  <div class="path-inner">
-    <div class="eyebrow reveal">Ścieżka uczestnika</div>
-    <h2 class="path-h reveal">Jak rodzi się <em>innowacja.</em></h2>
-    <p class="path-sub reveal">Każdy projekt przechodzi przez ten sam cykl — od impulsu do realnej zmiany w otoczeniu.</p>
-    <div class="path-track reveal">
-      <div class="path-stage">
-        <div class="ps-dot"></div>
-        <div class="ps-title">Wydarzenie</div>
-        <div class="ps-sub">Bodziec, który uruchamia myślenie</div>
-      </div>
-      <div class="path-stage">
-        <div class="ps-dot" style="background:var(--gold)"></div>
-        <div class="ps-title">Przekonanie</div>
-        <div class="ps-sub">„Da się to zrobić inaczej"</div>
-      </div>
-      <div class="path-stage">
-        <div class="ps-dot" style="background:var(--amber)"></div>
-        <div class="ps-title">Potrzeba</div>
-        <div class="ps-sub">Zrozumienie odbiorcy</div>
-      </div>
-      <div class="path-stage">
-        <div class="ps-dot" style="background:var(--orange)"></div>
-        <div class="ps-title">Problem</div>
-        <div class="ps-sub">Precyzyjna definicja wyzwania</div>
-      </div>
-      <div class="path-stage">
-        <div class="ps-dot" style="background:#d4470a"></div>
-        <div class="ps-title">Idea</div>
-        <div class="ps-sub">Burza mózgów i prototyp</div>
-      </div>
-      <div class="path-stage">
-        <div class="ps-dot" style="background:var(--teal)"></div>
-        <div class="ps-title">Koncepcja</div>
-        <div class="ps-sub">Gotowy plan realizacji</div>
-      </div>
-      <div class="path-stage">
-        <div class="ps-dot" style="background:#0a5c4c; box-shadow:0 0 0 3px rgba(13,124,102,0.3)"></div>
-        <div class="ps-title">🌳 Projekt</div>
-        <div class="ps-sub">Realna zmiana w otoczeniu</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MVP -->
-<section class="mvp" id="mvp">
-  <div class="mvp-inner">
-    <div class="eyebrow reveal">Stan projektu</div>
-    <h2 class="mvp-h reveal">MVP — co mamy <em>dziś.</em></h2>
-    <div class="mvp-grid">
-      <div class="mvp-list">
-        <div class="mvp-item reveal">
-          <div class="mvp-item-icon">✅</div>
-          <div><strong>Dokumentacja programu</strong>Gotowa struktura, scenariusze zajęć, szablony projektowe i metodyki.</div>
-        </div>
-        <div class="mvp-item reveal d1">
-          <div class="mvp-item-icon">✅</div>
-          <div><strong>Landing pages</strong>Dedykowane strony dla gmin i szkół z pełną ofertą i formularzem kontaktowym.</div>
-        </div>
-        <div class="mvp-item reveal d2">
-          <div class="mvp-item-icon">✅</div>
-          <div><strong>Materiały marketingowe</strong>Plakaty, grafiki social media, prezentacja wstępna, film o projekcie.</div>
-        </div>
-        <div class="mvp-item reveal d3">
-          <div class="mvp-item-icon">✅</div>
-          <div><strong>Katalog przykładowych projektów</strong>Kilkadziesiąt gotowych koncepcji w różnych kategoriach z dokumentacją.</div>
-        </div>
-        <div class="mvp-item reveal d4">
-          <div class="mvp-item-icon">✅</div>
-          <div><strong>Narzędzia cyfrowe</strong>Formularz zgłoszeniowy, test profilujący (16Personalities), newsletter.</div>
+    <nav>
+      <div class="nav-section">
+        <div class="nav-section-label">Menu</div>
+        <div class="nav-item active" onclick="navigate('aktualnosci')" id="nav-aktualnosci">
+          <span class="nav-icon">📰</span> Aktualności
+          <span class="nav-badge">3</span>
         </div>
       </div>
-      <div class="mvp-next reveal d1">
-        <h3>Kolejne kroki po pilotażu</h3>
-        <div class="mvp-next-list">
-          <div class="mn-item"><div class="mn-num">1</div><span>Pozyskanie pierwszego partnera — gminy lub szkoły do pilotażu</span></div>
-          <div class="mn-item"><div class="mn-num">2</div><span>Realizacja pierwszego cyklu warsztatów i zebranie feedbacku</span></div>
-          <div class="mn-item"><div class="mn-num">3</div><span>Uruchomienie cyfrowej platformy projektowej z katalogiem</span></div>
-          <div class="mn-item"><div class="mn-num">4</div><span>Kanał YouTube — filmy dokumentujące projekty uczestników</span></div>
-          <div class="mn-item"><div class="mn-num">5</div><span>Złożenie pierwszego wniosku dotacyjnego z partnerem</span></div>
-          <div class="mn-item"><div class="mn-num">6</div><span>Skalowanie — kolejne szkoły i gminy w regionie</span></div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">Oferta</div>
+        <div class="nav-item" onclick="navigate('oferta'); setOfferTab('szkoly')" id="nav-oferta-szkoly">
+          <span class="nav-icon">🎓</span> Dla szkół
+        </div>
+        <div class="nav-item" onclick="navigate('oferta'); setOfferTab('jst')" id="nav-oferta-jst">
+          <span class="nav-icon">🏛️</span> Dla JST / gmin
+        </div>
+        <div class="nav-item" onclick="navigate('oferta'); setOfferTab('uczelnie')" id="nav-oferta-uczelnie">
+          <span class="nav-icon">🏫</span> Dla uczelni
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">Projekt</div>
+        <div class="nav-item" onclick="navigate('katalog')" id="nav-katalog">
+          <span class="nav-icon">🗂️</span> Katalog Innowacji
+        </div>
+        <div class="nav-item" onclick="navigate('dolacz')" id="nav-dolacz">
+          <span class="nav-icon">➕</span> Jak dołączyć?
+        </div>
+        <div class="nav-item" onclick="navigate('wsparcie')" id="nav-wsparcie">
+          <span class="nav-icon">💛</span> Jak wspomóc?
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-label">O nas</div>
+        <div class="nav-item" onclick="navigate('onas'); setAboutTab('wizja')" id="nav-onas-wizja">
+          <span class="nav-icon">🔭</span> Cele i wizja
+        </div>
+        <div class="nav-item" onclick="navigate('onas'); setAboutTab('kontakt')" id="nav-onas-kontakt">
+          <span class="nav-icon">📞</span> Kontakt
+        </div>
+        <div class="nav-item" onclick="navigate('onas'); setAboutTab('teleadres')" id="nav-onas-teleadres">
+          <span class="nav-icon">📍</span> Dane teleadresowe
+        </div>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      Kreatywne Klocki · Kielce<br>
+      <a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a><br>
+      <a href="https://www.kreatywneklocki.edu.pl">kreatywneklocki.edu.pl</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title" id="topbar-title">Aktualności</div>
+      <div class="topbar-right">
+        <button class="theme-toggle" onclick="toggleTheme()" title="Zmień motyw" aria-label="Zmień motyw">
+          <span class="icon-moon">🌙</span>
+          <span class="icon-sun">☀️</span>
+        </button>
+        <button class="topbar-contact" onclick="navigate('onas'); setAboutTab('kontakt')">Skontaktuj się</button>
+      </div>
+    </div>
+
+    <!-- ── PAGE: AKTUALNOŚCI ── -->
+    <div class="page active fade-in" id="page-aktualnosci">
+
+      <div class="news-card featured">
+        <div class="featured-content">
+          <div class="featured-meta">
+            <span class="featured-tag ft-new">🆕 Nowość</span>
+            <span class="featured-tag ft-hot">🔥 Wyróżnione</span>
+          </div>
+          <div class="featured-h">Gildia Innowacji startuje — szukamy pierwszych partnerów do pilotażu</div>
+          <div class="featured-p">Program edukacji przedsiębiorczości gotowy do wdrożenia. Szkoły i gminy, które dołączą teraz, współtworzą model wdrożenia i korzystają z preferencyjnych warunków. Zapraszamy na bezpłatną konsultację.</div>
+          <div style="display:flex; gap:0.7rem; flex-wrap:wrap;">
+            <button class="btn-sm btn-orange" onclick="navigate('dolacz')">Dołącz do programu</button>
+            <button class="btn-sm btn-ghost-sm" onclick="navigate('oferta')">Zobacz ofertę →</button>
+          </div>
+        </div>
+        <div class="featured-visual">
+          <div class="fv-stat">
+            <div class="fv-num">100%</div>
+            <div class="fv-label">bezpłatny udział<br>dla uczniów</div>
+          </div>
+          <div class="fv-divider"></div>
+          <div class="fv-stat">
+            <div class="fv-num">A→Z</div>
+            <div class="fv-label">obsługa od finansowania<br>po raport końcowy</div>
+          </div>
+          <div class="fv-divider"></div>
+          <div class="fv-stat">
+            <div class="fv-num">MVP</div>
+            <div class="fv-label">działający prototyp<br>gotowy do wdrożenia</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-label">Ostatnie wpisy</div>
+      <div class="news-grid">
+        <div class="news-card" onclick="navigate('katalog')">
+          <div class="nc-cat cat-orange">🗂️ Katalog</div>
+          <div class="nc-title">Katalog Innowacji — kilkadziesiąt projektów czeka na realizatorów</div>
+          <div class="nc-body">Uruchamiamy bazę gotowych projektów społecznych i biznesowych z dokumentacją. Sport, kultura, technologie, ekologia — znajdź coś dla siebie.</div>
+          <div class="nc-footer">
+            <span class="nc-date">Maj 2025</span>
+            <span class="nc-more">Przejdź →</span>
+          </div>
+        </div>
+        <div class="news-card" onclick="navigate('wsparcie')">
+          <div class="nc-cat cat-violet">💛 Wsparcie</div>
+          <div class="nc-title">Patronite — wspomóż rozwój kanału YouTube i platformy</div>
+          <div class="nc-body">Budujemy kanał dokumentujący projekty uczestników Gildii. Każda złotówka idzie bezpośrednio na produkcję — sprzęt, montaż, promocję.</div>
+          <div class="nc-footer">
+            <span class="nc-date">Kwiecień 2025</span>
+            <span class="nc-more">Dowiedz się więcej →</span>
+          </div>
+        </div>
+        <div class="news-card" onclick="navigate('dolacz')">
+          <div class="nc-cat cat-gold">➕ Dołącz</div>
+          <div class="nc-title">Spotkania online — poznaj Gildię Innowacji przed dołączeniem</div>
+          <div class="nc-body">Organizujemy otwarte spotkania online dla zainteresowanych. Pokażemy program w działaniu i odpowiemy na wszystkie pytania. Bez zobowiązań.</div>
+          <div class="nc-footer">
+            <span class="nc-date">Maj 2025</span>
+            <span class="nc-more">Zapisz się →</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- CTA -->
-<section class="cta-sec" id="kontakt">
-  <div class="cta-inner">
-    <h2 class="cta-h reveal">Zacznijmy razem<br><em>budować program.</em></h2>
-    <p class="cta-sub reveal">Szukamy pierwszych partnerów do pilotażu. Gminy i szkoły, które zdecydują się teraz, współtworzą model wdrożenia na preferencyjnych warunkach.</p>
-    <div class="cta-btns reveal">
-      <a href="pages/gmina.html" class="btn-big btn-orange">Oferta dla gmin →</a>
-      <a href="pages/szkola.html" class="btn-big btn-teal-big">Oferta dla szkół →</a>
-    </div>
-    <div class="cta-contact reveal">
-      <div class="cc-item">👤 <span>Wojciech Wolanin · Kreatywne Klocki</span></div>
-      <div class="cc-item">📞 <a href="tel:+48793738281">793 738 281</a></div>
-      <div class="cc-item">📧 <a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a></div>
-      <div class="cc-item">🌐 <a href="https://www.kreatywneklocki.edu.pl">kreatywneklocki.edu.pl</a></div>
-    </div>
-  </div>
-</section>
+    <!-- ── PAGE: OFERTA ── -->
+    <div class="page fade-in" id="page-oferta">
+      <div class="page-header">
+        <div class="page-eyebrow">Oferta</div>
+        <h1 class="page-h">Program <em>dla instytucji.</em></h1>
+        <p class="page-sub">Kompleksowy program edukacji przedsiębiorczości — od finansowania po raport końcowy. Dostosowany do potrzeb każdej instytucji.</p>
+      </div>
 
-<footer>
-  <div class="foot-brand">Gildia<span>.</span>Innowacji</div>
-  <div class="foot-links">
-    <a href="pages/gmina.html">Dla gmin</a>
-    <a href="pages/szkola.html">Dla szkół</a>
-    <a href="https://www.kreatywneklocki.edu.pl">kreatywneklocki.edu.pl</a>
-    <a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a>
-  </div>
-  <div>© 2025 Kreatywne Klocki · Kielce</div>
-</footer>
+      <div class="offer-tabs">
+        <button class="offer-tab active" onclick="setOfferTab('szkoly')">🎓 Dla szkół</button>
+        <button class="offer-tab" onclick="setOfferTab('jst')">🏛️ Dla JST</button>
+        <button class="offer-tab" onclick="setOfferTab('uczelnie')">🏫 Dla uczelni</button>
+      </div>
+
+      <div class="offer-content active" id="offer-szkoly">
+        <div class="offer-hero oh-szkola">
+          <div class="oh-eyebrow oe-teal">Oferta dla szkół</div>
+          <div class="oh-h">Uczniowie, którzy <em style="color:#0d7c66">tworzą</em> — nie tylko słuchają.</div>
+          <div class="oh-p">Gildia Innowacji wprowadza do Twojej szkoły realne projekty uczniowskie — oparte na pasjach, metodykach design thinking i agile. Minimalne obciążenie nauczycieli, maksymalny efekt dla uczniów.</div>
+          <button class="btn-sm btn-orange" onclick="navigate('onas'); setAboutTab('kontakt')">Umów konsultację →</button>
+        </div>
+        <div class="offer-grid">
+          <div class="offer-card"><span class="oc-icon">🎓</span><div class="oc-title">Centrum Edukacji</div><div class="oc-body">Warsztaty i sympozja z zarządzania projektami, design thinking i agile. Program dostosowany do wieku i profilu klasy.</div></div>
+          <div class="offer-card"><span class="oc-icon">🧪</span><div class="oc-title">Centrum Prototypowania</div><div class="oc-body">Każdy uczeń zapisuje projekt i poddaje go ocenie. Mentor towarzyszy od pomysłu przez prototyp do gotowego projektu.</div></div>
+          <div class="offer-card"><span class="oc-icon">🗂️</span><div class="oc-title">Katalog Idei</div><div class="oc-body">Kilkadziesiąt gotowych projektów z dokumentacją — szkolne radio, festiwale, turnieje, ogrody społeczne i inne.</div></div>
+          <div class="offer-card"><span class="oc-icon">📋</span><div class="oc-title">Szablony i materiały</div><div class="oc-body">Gotowe szablony projektowe, materiały marketingowe do druku i social mediów.</div></div>
+          <div class="offer-card"><span class="oc-icon">🛠️</span><div class="oc-title">Narzędzia cyfrowe</div><div class="oc-body">Formularz zgłoszeniowy, test profilujący 16Personalities, newsletter — wszystko dostarczone.</div></div>
+          <div class="offer-card"><span class="oc-icon">📊</span><div class="oc-title">Raport ewaluacyjny</div><div class="oc-body">Dokumentacja wyników gotowa do sprawozdań, raportów rocznych i wniosków dotacyjnych szkoły.</div></div>
+        </div>
+      </div>
+
+      <div class="offer-content" id="offer-jst">
+        <div class="offer-hero oh-gmina">
+          <div class="oh-eyebrow oe-orange">Oferta dla gmin i JST</div>
+          <div class="oh-h">Aktywizacja młodzieży, <em style="color:var(--gold)">która przynosi efekty.</em></div>
+          <div class="oh-p">Gotowy program dla Twojej gminy — z finansowaniem zewnętrznym, dokumentacją i realizacją po naszej stronie. Instytucja dostaje efekt, nie biurokrację. W modelu dotacyjnym koszt może wynosić 0 zł.</div>
+          <button class="btn-sm btn-orange" onclick="navigate('onas'); setAboutTab('kontakt')">Umów konsultację →</button>
+        </div>
+        <div class="offer-grid">
+          <div class="offer-card"><span class="oc-icon">🇪🇺</span><div class="oc-title">Finansowanie zewnętrzne</div><div class="oc-body">Wskazujemy fundusze UE (FEdR, EFS+), programy rządowe i granty samorządowe. Program może być w pełni dotacyjny.</div></div>
+          <div class="offer-card"><span class="oc-icon">✍️</span><div class="oc-title">Pisanie wniosku</div><div class="oc-body">Przygotowujemy pełną dokumentację aplikacyjną — gotową do podpisu i złożenia. Czas: 2–3 tygodnie.</div></div>
+          <div class="offer-card"><span class="oc-icon">🎓</span><div class="oc-title">Realizacja programu</div><div class="oc-body">Warsztaty, wykłady i mentoring prowadzone przez nasz zespół. Dostęp do platformy projektowej.</div></div>
+          <div class="offer-card"><span class="oc-icon">📈</span><div class="oc-title">Wskaźniki i raport</div><div class="oc-body">Dokumentacja wyników gotowa do sprawozdania z realizacji projektu dotacyjnego — wskaźniki UE.</div></div>
+          <div class="offer-card"><span class="oc-icon">🤝</span><div class="oc-title">Obsługa A–Z</div><div class="oc-body">Od analizy finansowania przez wniosek, realizację, po rozliczenie. Gmina dostaje efekt bez biurokracji.</div></div>
+          <div class="offer-card"><span class="oc-icon">🌱</span><div class="oc-title">Kapitał społeczny</div><div class="oc-body">Realne projekty w lokalnej społeczności — młodzież angażuje się w życie gminy i buduje postawy obywatelskie.</div></div>
+        </div>
+      </div>
+
+      <div class="offer-content" id="offer-uczelnie">
+        <div class="offer-hero oh-uczelnia">
+          <div class="oh-eyebrow oe-violet">Oferta dla uczelni</div>
+          <div class="oh-h">Studenci, którzy <em style="color:var(--v3)">działają</em> — nie tylko studiują.</div>
+          <div class="oh-p">Program dla uczelni wyższych rozwijający kompetencje projektowe i przedsiębiorcze u studentów — przez realne projekty społeczne i biznesowe realizowane poza uczelnianymi murami.</div>
+          <button class="btn-sm btn-orange" onclick="navigate('onas'); setAboutTab('kontakt')">Umów konsultację →</button>
+        </div>
+        <div class="offer-grid">
+          <div class="offer-card"><span class="oc-icon">🚀</span><div class="oc-title">Startup Thinking</div><div class="oc-body">Warsztaty z lean startup, design thinking i agile — kompetencje poszukiwane przez pracodawców i inwestorów.</div></div>
+          <div class="offer-card"><span class="oc-icon">💼</span><div class="oc-title">Portfolio dla studentów</div><div class="oc-body">Realne projekty gotowe do CV i portfolio — studenci wychodzą z doświadczeniem i dokumentacją.</div></div>
+          <div class="offer-card"><span class="oc-icon">🔗</span><div class="oc-title">Sieciowanie i mentoring</div><div class="oc-body">Połączenie z mentorami z biznesu i innymi studentami o podobnych pasjach. Przestrzeń do współpracy.</div></div>
+          <div class="offer-card"><span class="oc-icon">🎓</span><div class="oc-title">Moduły akademickie</div><div class="oc-body">Program może być wdrożony jako zajęcia fakultatywne lub koło naukowe z udziałem prowadzącego zewnętrznego.</div></div>
+          <div class="offer-card"><span class="oc-icon">🌐</span><div class="oc-title">Projekty interdyscyplinarne</div><div class="oc-body">Łączymy studentów z różnych wydziałów — techniczne + humanistyczne + biznesowe = innowacja.</div></div>
+          <div class="offer-card"><span class="oc-icon">📊</span><div class="oc-title">Raport dla uczelni</div><div class="oc-body">Dokumentacja wyników do sprawozdań, raportów ewaluacyjnych i wniosków o finansowanie badań.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PAGE: KATALOG ── -->
+    <div class="page fade-in" id="page-katalog">
+      <div class="page-header">
+        <div class="page-eyebrow">Katalog Innowacji</div>
+        <h1 class="page-h">Znajdź projekt <em>dla siebie.</em></h1>
+        <p class="page-sub">Kilkadziesiąt gotowych projektów z dokumentacją — dołącz do istniejącego lub zaproponuj własny.</p>
+      </div>
+      <div class="catalog-filters">
+        <button class="filter-btn active" onclick="filterCatalog('all', this)">Wszystkie</button>
+        <button class="filter-btn" onclick="filterCatalog('sport', this)">⚽ Sport</button>
+        <button class="filter-btn" onclick="filterCatalog('kultura', this)">🎭 Kultura</button>
+        <button class="filter-btn" onclick="filterCatalog('tech', this)">💻 Technologia</button>
+        <button class="filter-btn" onclick="filterCatalog('ekologia', this)">🌱 Ekologia</button>
+        <button class="filter-btn" onclick="filterCatalog('media', this)">🎙 Media</button>
+        <button class="filter-btn" onclick="filterCatalog('edukacja', this)">📚 Edukacja</button>
+      </div>
+      <div class="catalog-grid" id="catalogGrid">
+        <div class="cat-card" data-cat="sport">
+          <div class="cat-card-top cc-sport">⚽</div>
+          <div class="cat-card-body">
+            <div class="cc-cat">Sport</div>
+            <div class="cc-title">Turniej Sportowy Integracyjny</div>
+            <div class="cc-desc">Wielodyscyplinarne zawody promujące aktywność fizyczną i integrację społeczną uczniów.</div>
+          </div>
+          <div class="cc-footer"><div class="cc-status status-open"></div> Otwarte na uczestników</div>
+        </div>
+        <div class="cat-card" data-cat="kultura">
+          <div class="cat-card-top cc-kultura">🎭</div>
+          <div class="cat-card-body">
+            <div class="cc-cat">Kultura</div>
+            <div class="cc-title">Festiwal Kultury Lokalnej</div>
+            <div class="cc-desc">Organizacja festiwalu prezentującego lokalne talenty — muzyka, taniec, plastyka, rękodzieło.</div>
+          </div>
+          <div class="cc-footer"><div class="cc-status status-open"></div> Otwarte na uczestników</div>
+        </div>
+        <div class="cat-card" data-cat="tech">
+          <div class="cat-card-top cc-tech">💻</div>
+          <div class="cat-card-body">
+            <div class="cc-cat">Technologia</div>
+            <div class="cc-title">Warsztaty Technologiczne Przyszłości</div>
+            <div class="cc-desc">Nauka programowania, robotyki i tworzenia stron — eksploracja nowoczesnych technologii.</div>
+          </div>
+          <div class="cc-footer"><div class="cc-status status-soon"></div> Wkrótce</div>
+        </div>
+        <div class="cat-card" data-cat="ekologia">
+          <div class="cat-card-top cc-ekologia">🌱</div>
+          <div class="cat-card-body">
+            <div class="cc-cat">Ekologia</div>
+            <div class="cc-title">Ekologiczny Ogród Szkolny</div>
+            <div class="cc-desc">Zakładanie ekologicznych ogrodów na terenie szkoły z warsztatami o znaczeniu ekologii.</div>
+          </div>
+          <div class="cc-footer"><div class="cc-status status-open"></div> Otwarte na uczestników</div>
+        </div>
+        <div class="cat-card" data-cat="media">
+          <div class="cat-card-top cc-media">🎙</div>
+          <div class="cat-card-body">
+            <div class="cc-cat">Media</div>
+            <div class="cc-title">Radio On-Air — Szkolne Radio Online</div>
+            <div class="cc-desc">Tworzenie własnej stacji radiowej — nagrywanie, redagowanie, prowadzenie programu.</div>
+          </div>
+          <div class="cc-footer"><div class="cc-status status-open"></div> Otwarte na uczestników</div>
+        </div>
+        <div class="cat-card" data-cat="kultura">
+          <div class="cat-card-top cc-kultura">👗</div>
+          <div class="cat-card-body">
+            <div class="cc-cat">Kultura</div>
+            <div class="cc-title">Pokaz Mody — Niedzielny Kiermasz</div>
+            <div class="cc-desc">Organizacja pokazu mody i kiermaszu — uczniowie projektują, szyją i prezentują kolekcje.</div>
+          </div>
+          <div class="cc-footer"><div class="cc-status status-soon"></div> Wkrótce</div>
+        </div>
+        <div class="cat-card" data-cat="edukacja">
+          <div class="cat-card-top cc-edukacja">📚</div>
+          <div class="cat-card-body">
+            <div class="cc-cat">Edukacja</div>
+            <div class="cc-title">Koło Naukowe — Inżynieria Innowacji</div>
+            <div class="cc-desc">Interdyscyplinarne koło łączące nauki ścisłe z projektowaniem i myśleniem systemowym.</div>
+          </div>
+          <div class="cc-footer"><div class="cc-status status-open"></div> Otwarte na uczestników</div>
+        </div>
+        <div class="cat-card" data-cat="sport">
+          <div class="cat-card-top cc-sport">🎮</div>
+          <div class="cat-card-body">
+            <div class="cc-cat">Sport / Gaming</div>
+            <div class="cc-title">Turniej NERF — Arena Innowacji</div>
+            <div class="cc-desc">Organizacja turnieju NERF z zasadami projektowymi — strategia, teamwork, fair play.</div>
+          </div>
+          <div class="cc-footer"><div class="cc-status status-open"></div> Otwarte na uczestników</div>
+        </div>
+        <div class="cat-card" data-cat="ekologia">
+          <div class="cat-card-top cc-ekologia">♻️</div>
+          <div class="cat-card-body">
+            <div class="cc-cat">Ekologia</div>
+            <div class="cc-title">Upcycling — Nowe Życie Przedmiotów</div>
+            <div class="cc-desc">Projekt twórczego przetwarzania odpadów — warsztaty plastyczne i sprzedaż na kiermaszu.</div>
+          </div>
+          <div class="cc-footer"><div class="cc-status status-soon"></div> Wkrótce</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PAGE: JAK DOŁĄCZYĆ ── -->
+    <div class="page fade-in" id="page-dolacz">
+      <div class="page-header">
+        <div class="page-eyebrow">Jak dołączyć?</div>
+        <h1 class="page-h">Sześć kroków do <em>pierwszego projektu.</em></h1>
+        <p class="page-sub">Proces jest prosty — wypełniasz formularz, poznajesz swój styl działania i wybierasz projekt. Resztą zajmujemy się my.</p>
+      </div>
+      <div class="join-steps">
+        <div class="join-step">
+          <div class="js-num">01</div>
+          <div class="js-content">
+            <h3>Zarejestruj się</h3>
+            <p>Wypełnij krótki formularz zgłoszeniowy zostawiając nam swoje dane kontaktowe. To wszystko — zaczynasz od razu.</p>
+          </div>
+          <div class="js-time">1–2 min</div>
+        </div>
+        <div class="join-step">
+          <div class="js-num">02</div>
+          <div class="js-content">
+            <h3>Daj się poznać — test profilujący</h3>
+            <p>Przejdź przez krótki test 16Personalities, aby inni wiedzieli kim jesteś. Poznasz swoje mocne i słabe strony oraz optymalną rolę w projekcie.</p>
+          </div>
+          <div class="js-time">10–15 min</div>
+        </div>
+        <div class="join-step">
+          <div class="js-num">03</div>
+          <div class="js-content">
+            <h3>Poznaj Katalog Projektów</h3>
+            <p>W katalogu znajdziesz kilkadziesiąt projektów o charakterze społecznym w różnych kategoriach — sport, kultura, technologia, ekologia i inne.</p>
+          </div>
+          <div class="js-time">Kiedy chcesz</div>
+        </div>
+        <div class="join-step">
+          <div class="js-num">04</div>
+          <div class="js-content">
+            <h3>Dołącz lub załóż swój projekt</h3>
+            <p>W każdym projekcie są różne zadania dopasowane do każdej chętnej osoby. Możesz też skopiować projekt od innych i uruchomić własną wersję.</p>
+          </div>
+          <div class="js-time">1 spotkanie</div>
+        </div>
+        <div class="join-step">
+          <div class="js-num">05</div>
+          <div class="js-content">
+            <h3>Sieciuj swoją ideę</h3>
+            <p>Daj projektom życie — wyślij link do projektów innym osobom, zaproś znajomych i buduj swój zespół wokół wspólnej pasji.</p>
+          </div>
+          <div class="js-time">Na bieżąco</div>
+        </div>
+        <div class="join-step">
+          <div class="js-num">06</div>
+          <div class="js-content">
+            <h3>Przygotuj się na feedback</h3>
+            <p>Przygotuj się na opinię innych, która nie zawsze jest pozytywna. Pamiętaj — najważniejsze są wnioski! Feedback to paliwo innowacji.</p>
+          </div>
+          <div class="js-time">Iteracyjnie</div>
+        </div>
+      </div>
+      <div style="margin-top:2rem;">
+        <button class="btn-sm btn-orange" style="font-size:0.85rem; padding:0.9rem 2rem;" onclick="navigate('onas'); setAboutTab('kontakt')">Zapisz się na spotkanie →</button>
+      </div>
+    </div>
+
+    <!-- ── PAGE: JAK WSPOMÓC ── -->
+    <div class="page fade-in" id="page-wsparcie">
+      <div class="page-header">
+        <div class="page-eyebrow">Jak wspomóc?</div>
+        <h1 class="page-h">Wesprzyj <em>Gildię Innowacji.</em></h1>
+        <p class="page-sub">Gildia Innowacji to projekt społeczny — działa dzięki ludziom, którzy wierzą w siłę edukacji przez działanie.</p>
+      </div>
+      <div class="support-grid">
+        <div class="support-card">
+          <span class="supp-icon">☕</span>
+          <div class="supp-title">Wesprzyj na Patronite</div>
+          <div class="supp-body">Budujemy kanał YouTube dokumentujący projekty uczestników Gildii. Każda złotówka idzie bezpośrednio na produkcję treści — sprzęt, montaż, promocję. Trzy progi wsparcia: 10 zł, 30 zł, 100 zł miesięcznie.</div>
+          <a href="https://patronite.pl/KreatywneKlocki" class="btn-support bs-orange">Wesprzyj na Patronite</a>
+        </div>
+        <div class="support-card">
+          <span class="supp-icon">🤝</span>
+          <div class="supp-title">Zostań Partnerem Merytorycznym</div>
+          <div class="supp-body">Jesteś ekspertem, mentorem lub praktykiem? Podziel się wiedzą z uczestnikami Gildii — prowadź warsztaty, webinary lub zostań mentorem projektowym. Twoja wiedza zmienia życie młodych.</div>
+          <button class="btn-support bs-violet" onclick="navigate('onas'); setAboutTab('kontakt')">Skontaktuj się</button>
+        </div>
+        <div class="support-card">
+          <span class="supp-icon">🏢</span>
+          <div class="supp-title">Sponsoring Firmowy</div>
+          <div class="supp-body">Twoja firma może wesprzeć program Gildii Innowacji w modelu CSR. Dostarcz narzędzia, sfinansuj warsztaty lub ufunduj nagrody dla uczestników. Widoczność marki wśród młodych, kreatywnych ludzi.</div>
+          <button class="btn-support bs-gold" onclick="navigate('onas'); setAboutTab('kontakt')">Porozmawiajmy</button>
+        </div>
+        <div class="support-card">
+          <span class="supp-icon">📣</span>
+          <div class="supp-title">Promuj projekt</div>
+          <div class="supp-body">Udostępnij informacje o Gildii Innowacji w swoich mediach społecznościowych, opowiedz znajomym, nauczycielom i dyrektorom szkół. Każde polecenie pomaga nam dotrzeć do kolejnych młodych ludzi.</div>
+          <button class="btn-support bs-outline">Pobierz materiały</button>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="section-label">Progi wsparcia Patronite</div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1rem;">
+        <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem; text-align:center;">
+          <div style="font-size:1.8rem; margin-bottom:0.5rem;">☕</div>
+          <div style="font-family:'Fraunces',serif; font-size:1.5rem; color:var(--o1); margin-bottom:0.3rem;">10 zł/mc</div>
+          <div style="font-weight:700; margin-bottom:0.5rem;">Sympatyk Gildii</div>
+          <div style="font-size:0.8rem; color:var(--text2);">Podziękowanie z imienia w każdym filmie na YouTube</div>
+        </div>
+        <div style="background:var(--surface); border:1.5px solid rgba(244,124,40,0.3); border-radius:var(--radius); padding:1.5rem; text-align:center;">
+          <div style="font-size:1.8rem; margin-bottom:0.5rem;">🛠️</div>
+          <div style="font-family:'Fraunces',serif; font-size:1.5rem; color:var(--o1); margin-bottom:0.3rem;">30 zł/mc</div>
+          <div style="font-weight:700; margin-bottom:0.5rem;">Budowniczy</div>
+          <div style="font-size:0.8rem; color:var(--text2);">Dostęp do materiałów projektowych — szablony, scenariusze, checklisty</div>
+        </div>
+        <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem; text-align:center;">
+          <div style="font-size:1.8rem; margin-bottom:0.5rem;">🚀</div>
+          <div style="font-family:'Fraunces',serif; font-size:1.5rem; color:var(--v3); margin-bottom:0.3rem;">100 zł/mc</div>
+          <div style="font-weight:700; margin-bottom:0.5rem;">Partner Gildii</div>
+          <div style="font-size:0.8rem; color:var(--text2);">Wpływ na tematy filmów + logo w opisie każdego odcinka</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PAGE: O NAS ── -->
+    <div class="page fade-in" id="page-onas">
+      <div class="page-header">
+        <div class="page-eyebrow">O nas</div>
+        <h1 class="page-h">Gildia <em>Innowacji.</em></h1>
+      </div>
+
+      <div class="about-tabs">
+        <button class="about-tab active" onclick="setAboutTab('wizja')">🔭 Cele i wizja</button>
+        <button class="about-tab" onclick="setAboutTab('kontakt')">📞 Kontakt</button>
+        <button class="about-tab" onclick="setAboutTab('teleadres')">📍 Dane teleadresowe</button>
+      </div>
+
+      <!-- WIZJA -->
+      <div class="about-content active" id="about-wizja">
+        <div class="vision-grid">
+          <div class="vision-text">
+            <h2>Edukacja, która <em>naprawdę zmienia</em> rzeczy.</h2>
+            <p>Gildia Innowacji to innowacyjny projekt wspierający rozwój uczniów i studentów poprzez realizację różnorodnych inicjatyw społecznych i edukacyjnych.</p>
+            <p>Naszym celem jest angażowanie młodych ludzi w projekty oparte na ich pasjach — co pozwala im rozwijać umiejętności, efektywnie definiować i osiągać cele.</p>
+            <p>Stosujemy metodyki design thinking i agile — narzędzia używane przez Google, Apple i najlepsze start-upy — w dostępnym, angażującym wydaniu dla młodych.</p>
+          </div>
+          <div class="vision-goals">
+            <div class="vg-item"><div class="vg-icon">🧠</div><div class="vg-text"><h4>Rozwój kompetencji projektowych</h4><p>Zarządzanie projektami, komunikacja, kreatywne myślenie i praca zespołowa.</p></div></div>
+            <div class="vg-item"><div class="vg-icon">🎯</div><div class="vg-text"><h4>Indywidualizacja edukacji</h4><p>Projekty oparte na zainteresowaniach — większe zaangażowanie i motywacja.</p></div></div>
+            <div class="vg-item"><div class="vg-icon">💼</div><div class="vg-text"><h4>Praktyczne doświadczenie</h4><p>Realne projekty w portfolio — przygotowanie do rynku pracy.</p></div></div>
+            <div class="vg-item"><div class="vg-icon">🤝</div><div class="vg-text"><h4>Budowanie społeczności</h4><p>Przestrzeń do współpracy między uczniami, nauczycielami i ekspertami.</p></div></div>
+            <div class="vg-item"><div class="vg-icon">🏛️</div><div class="vg-text"><h4>Postawy obywatelskie</h4><p>Projekty społeczne angażujące młodych w życie lokalnej społeczności.</p></div></div>
+            <div class="vg-item"><div class="vg-icon">🚀</div><div class="vg-text"><h4>Promocja przedsiębiorczości</h4><p>Myślenie projektowe i innowacyjne jako fundament przyszłej kariery.</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KONTAKT -->
+      <div class="about-content" id="about-kontakt">
+        <div class="contact-grid">
+          <div class="contact-form-box" id="contact-form-wrap">
+            <div class="cf-h">Napisz do nas</div>
+            <div class="cf-sub">Odpiszemy w ciągu 24h. Bezpłatna konsultacja trwa 30 minut i kończy się konkretną rekomendacją.</div>
+            <form onsubmit="submitContact(event)">
+              <div class="fgroup"><label class="flabel">Imię i nazwisko</label><input type="text" class="finput" placeholder="Jan Kowalski" required></div>
+              <div class="fgroup"><label class="flabel">Instytucja</label><input type="text" class="finput" placeholder="Szkoła / Gmina / Uczelnia..."></div>
+              <div class="fgroup">
+                <label class="flabel">Rodzaj instytucji</label>
+                <select class="fselect" required>
+                  <option value="" disabled selected>Wybierz</option>
+                  <option>Szkoła podstawowa</option>
+                  <option>Liceum / Technikum</option>
+                  <option>Uczelnia wyższa</option>
+                  <option>Gmina / Urząd</option>
+                  <option>Dom kultury / Biblioteka</option>
+                  <option>Inne</option>
+                </select>
+              </div>
+              <div class="fgroup"><label class="flabel">E-mail</label><input type="email" class="finput" placeholder="jan@email.pl" required></div>
+              <div class="fgroup"><label class="flabel">Telefon (opcjonalnie)</label><input type="tel" class="finput" placeholder="+48 ..."></div>
+              <div class="fgroup"><label class="flabel">Wiadomość</label><textarea class="ftextarea finput" placeholder="Czego szukasz? Opowiedz nam o swoich potrzebach..."></textarea></div>
+              <button type="submit" class="btn-submit">Wyślij wiadomość →</button>
+              <p class="form-note">Odpowiadamy w 24h • Bez zobowiązań • Bez spamu</p>
+            </form>
+            <div class="success-box" id="contact-success">
+              <div style="font-size:2.5rem; margin-bottom:0.8rem">✉️</div>
+              <h3>Wiadomość wysłana!</h3>
+              <p style="color:var(--text2); margin-top:0.4rem;">Odezwiemy się w ciągu 24h z propozycją terminu konsultacji.</p>
+            </div>
+          </div>
+
+          <div class="contact-info-box">
+            <div class="ci-card">
+              <div class="ci-card-title">Dane kontaktowe</div>
+              <div class="ci-item"><span class="ci-icon">👤</span><span>Wojciech Wolanin</span></div>
+              <div class="ci-item"><span class="ci-icon">📞</span><a href="tel:+48793738281">793 738 281</a></div>
+              <div class="ci-item"><span class="ci-icon">📧</span><a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a></div>
+              <div class="ci-item"><span class="ci-icon">🌐</span><a href="https://www.kreatywneklocki.edu.pl">kreatywneklocki.edu.pl</a></div>
+            </div>
+            <div class="ci-card">
+              <div class="ci-card-title">Media społecznościowe</div>
+              <div class="social-row">
+                <a href="https://patronite.pl/KreatywneKlocki" class="social-btn" title="Patronite">🎗</a>
+                <a href="#" class="social-btn" title="YouTube">▶</a>
+                <a href="#" class="social-btn" title="Instagram">📷</a>
+                <a href="#" class="social-btn" title="Facebook">𝐟</a>
+                <a href="#" class="social-btn" title="LinkedIn">in</a>
+              </div>
+            </div>
+            <div class="ci-card">
+              <div class="ci-card-title">Spotkania online</div>
+              <div style="font-size:0.83rem; color:var(--text2); line-height:1.7;">
+                Organizujemy bezpłatne spotkania online prezentujące Gildię Innowacji w działaniu.<br><br>
+                Napisz do nas aby ustalić termin konsultacji dopasowany do Twoich potrzeb.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TELEADRES -->
+      <div class="about-content" id="about-teleadres">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+          <div class="ci-card">
+            <div class="ci-card-title">Dane organizacji</div>
+            <div class="ci-item"><span class="ci-icon">🏢</span><span>Kreatywne Klocki</span></div>
+            <div class="ci-item"><span class="ci-icon">📍</span><span>Dewońska 15/2, Kielce</span></div>
+            <div class="ci-item"><span class="ci-icon">🌐</span><a href="https://www.kreatywneklocki.edu.pl">kreatywneklocki.edu.pl</a></div>
+          </div>
+          <div class="ci-card">
+            <div class="ci-card-title">Osoba kontaktowa</div>
+            <div class="ci-item"><span class="ci-icon">👤</span><span>Wojciech Wolanin</span></div>
+            <div class="ci-item"><span class="ci-icon">📞</span><a href="tel:+48793738281">(+48) 793-738-281</a></div>
+            <div class="ci-item"><span class="ci-icon">📧</span><a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a></div>
+          </div>
+          <div class="ci-card" style="grid-column:1/-1;">
+            <div class="ci-card-title">Linki</div>
+            <div style="display:flex; flex-wrap:wrap; gap:0.8rem; margin-top:0.5rem;">
+              <a href="https://www.kreatywneklocki.edu.pl" style="color:var(--o2); font-size:0.85rem;">🌐 kreatywneklocki.edu.pl</a>
+              <a href="https://patronite.pl/KreatywneKlocki" style="color:var(--o2); font-size:0.85rem;">🎗 Patronite</a>
+              <a href="https://zrzutka.pl/user/whip-rounds/active" style="color:var(--o2); font-size:0.85rem;">💰 Zrzutka</a>
+              <a href="https://www.youtube.com/watch?v=OMD_hzfnVJU" style="color:var(--o2); font-size:0.85rem;">▶ YouTube</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end main -->
+</div><!-- end layout -->
 
 <script>
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } });
-}, { threshold: 0.08 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const t = document.querySelector(a.getAttribute('href'));
-    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+const pages = ['aktualnosci','oferta','katalog','dolacz','wsparcie','onas'];
+const titles = {
+  aktualnosci:'Aktualności', oferta:'Oferta', katalog:'Katalog Innowacji',
+  dolacz:'Jak dołączyć?', wsparcie:'Jak wspomóc?', onas:'O nas'
+};
+
+function navigate(id) {
+  pages.forEach(p => {
+    document.getElementById('page-'+p)?.classList.remove('active');
   });
-});
+  const pg = document.getElementById('page-'+id);
+  if(pg){ pg.classList.add('active'); pg.classList.remove('fade-in'); void pg.offsetWidth; pg.classList.add('fade-in'); }
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll(`[id^="nav-${id}"]`).forEach(n => n.classList.add('active'));
+  document.getElementById('topbar-title').textContent = titles[id] || id;
+  if(window.innerWidth <= 900) closeSidebar();
+}
+
+function setOfferTab(tab) {
+  document.querySelectorAll('.offer-tab').forEach((t,i) => {
+    t.classList.toggle('active', ['szkoly','jst','uczelnie'][i] === tab);
+  });
+  ['szkoly','jst','uczelnie'].forEach(t => {
+    document.getElementById('offer-'+t)?.classList.toggle('active', t === tab);
+  });
+  ['nav-oferta-szkoly','nav-oferta-jst','nav-oferta-uczelnie'].forEach(id => {
+    document.getElementById(id)?.classList.remove('active');
+  });
+  document.getElementById('nav-oferta-'+tab.replace('szkoly','szkoly').replace('jst','jst').replace('uczelnie','uczelnie'))?.classList.add('active');
+}
+
+function setAboutTab(tab) {
+  navigate('onas');
+  document.querySelectorAll('.about-tab').forEach((t,i) => {
+    t.classList.toggle('active', ['wizja','kontakt','teleadres'][i] === tab);
+  });
+  ['wizja','kontakt','teleadres'].forEach(t => {
+    document.getElementById('about-'+t)?.classList.toggle('active', t === tab);
+  });
+  ['nav-onas-wizja','nav-onas-kontakt','nav-onas-teleadres'].forEach(id => document.getElementById(id)?.classList.remove('active'));
+  document.getElementById('nav-onas-'+tab)?.classList.add('active');
+}
+
+function filterCatalog(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.cat-card').forEach(card => {
+    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'block' : 'none';
+  });
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+
+function submitContact(e) {
+  e.preventDefault();
+  e.target.style.display = 'none';
+  document.getElementById('contact-success').style.display = 'block';
+}
+
+/* ── THEME ── */
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('gildia-theme', next);
+}
+
+(function initTheme() {
+  const saved = localStorage.getItem('gildia-theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = saved || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+})();
 </script>
 </body>
 </html>
