@@ -1182,8 +1182,8 @@ body {
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
           <div class="ci-card">
             <div class="ci-card-title">Dane organizacji</div>
-            <div class="ci-item"><span class="ci-icon">🏢</span><span>NaszaPolska</span></div>
-            <div class="ci-item"><span class="ci-icon">📍</span><span></span>Kielce</span></div>
+            <div class="ci-item"><span class="ci-icon">🏢</span><span>Kreatywne Klocki</span></div>
+            <div class="ci-item"><span class="ci-icon">📍</span><span>Kielce</span></div>
             <div class="ci-item"><span class="ci-icon">🌐</span><a href="https://www.kreatywneklocki.edu.pl">kreatywneklocki.edu.pl</a></div>
           </div>
           <div class="ci-card">
@@ -1286,7 +1286,7 @@ function toggleTheme() {
 (function initTheme() {
   const saved = localStorage.getItem('gildia-theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const theme = saved || 'dark';
+  const theme = saved || (prefersDark ? 'dark' : 'light');
   document.documentElement.setAttribute('data-theme', theme);
 })();
 </script>
