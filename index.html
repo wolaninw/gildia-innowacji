@@ -702,8 +702,8 @@ body {
         <div class="nav-item" onclick="navigate('onas'); setAboutTab('kontakt')" id="nav-onas-kontakt">
           <span class="nav-icon">📞</span> Kontakt
         </div>
-        <div class="nav-item" onclick="navigate('onas'); setAboutTab('teleadres')" id="nav-onas-teleadres">
-          <span class="nav-icon">📍</span> Dane teleadresowe
+        <div class="nav-item" onclick="navigate('onas'); setAboutTab('kontakt')" id="nav-onas-kontakt">
+          <span class="nav-icon">📞</span> Kontakt
         </div>
       </div>
     </nav>
@@ -724,7 +724,7 @@ body {
           <span class="icon-moon">🌙</span>
           <span class="icon-sun">☀️</span>
         </button>
-        <button class="topbar-contact" onclick="navigate('onas'); setAboutTab('kontakt')">Skontaktuj się</button>
+        <button class="topbar-contact" onclick="window.open('https://forms.gle/WSTAW_LINK_DO_FORMULARZA','_blank')">Dołącz →</button>
       </div>
     </div>
 
@@ -1041,7 +1041,7 @@ body {
           <span class="supp-icon">🤝</span>
           <div class="supp-title">Zostań Partnerem Merytorycznym</div>
           <div class="supp-body">Jesteś ekspertem, mentorem lub praktykiem? Podziel się wiedzą z uczestnikami Gildii — prowadź warsztaty, webinary lub zostań mentorem projektowym. Twoja wiedza zmienia życie młodych.</div>
-          <button class="btn-support bs-violet" onclick="navigate('onas'); setAboutTab('kontakt')">Skontaktuj się</button>
+          <a href="https://forms.gle/WSTAW_LINK_DO_FORMULARZA" target="_blank" class="btn-support bs-violet">Wypełnij formularz →</a>
         </div>
         <div class="support-card">
           <span class="supp-icon">🏢</span>
@@ -1091,7 +1091,6 @@ body {
       <div class="about-tabs">
         <button class="about-tab active" onclick="setAboutTab('wizja')">🔭 Cele i wizja</button>
         <button class="about-tab" onclick="setAboutTab('kontakt')">📞 Kontakt</button>
-        <button class="about-tab" onclick="setAboutTab('teleadres')">📍 Dane teleadresowe</button>
       </div>
 
       <!-- WIZJA -->
@@ -1117,35 +1116,14 @@ body {
       <!-- KONTAKT -->
       <div class="about-content" id="about-kontakt">
         <div class="contact-grid">
-          <div class="contact-form-box" id="contact-form-wrap">
-            <div class="cf-h">Napisz do nas</div>
-            <div class="cf-sub">Odpiszemy w ciągu 24h. Bezpłatna konsultacja trwa 30 minut i kończy się konkretną rekomendacją.</div>
-            <form onsubmit="submitContact(event)">
-              <div class="fgroup"><label class="flabel">Imię i nazwisko</label><input type="text" class="finput" placeholder="Jan Kowalski" required></div>
-              <div class="fgroup"><label class="flabel">Instytucja</label><input type="text" class="finput" placeholder="Szkoła / Gmina / Uczelnia..."></div>
-              <div class="fgroup">
-                <label class="flabel">Rodzaj instytucji</label>
-                <select class="fselect" required>
-                  <option value="" disabled selected>Wybierz</option>
-                  <option>Szkoła podstawowa</option>
-                  <option>Liceum / Technikum</option>
-                  <option>Uczelnia wyższa</option>
-                  <option>Gmina / Urząd</option>
-                  <option>Dom kultury / Biblioteka</option>
-                  <option>Inne</option>
-                </select>
-              </div>
-              <div class="fgroup"><label class="flabel">E-mail</label><input type="email" class="finput" placeholder="jan@email.pl" required></div>
-              <div class="fgroup"><label class="flabel">Telefon (opcjonalnie)</label><input type="tel" class="finput" placeholder="+48 ..."></div>
-              <div class="fgroup"><label class="flabel">Wiadomość</label><textarea class="ftextarea finput" placeholder="Czego szukasz? Opowiedz nam o swoich potrzebach..."></textarea></div>
-              <button type="submit" class="btn-submit">Wyślij wiadomość →</button>
-              <p class="form-note">Odpowiadamy w 24h • Bez zobowiązań • Bez spamu</p>
-            </form>
-            <div class="success-box" id="contact-success">
-              <div style="font-size:2.5rem; margin-bottom:0.8rem">✉️</div>
-              <h3>Wiadomość wysłana!</h3>
-              <p style="color:var(--text2); margin-top:0.4rem;">Odezwiemy się w ciągu 24h z propozycją terminu konsultacji.</p>
-            </div>
+          <div class="contact-form-box">
+            <div class="cf-h">Dołącz do Gildii</div>
+            <div class="cf-sub">Wypełnij formularz zgłoszeniowy — to pierwszy krok do udziału w programie. Bezpłatny dla wszystkich uczestników.</div>
+            <a href="https://forms.gle/WSTAW_LINK_DO_FORMULARZA" target="_blank" rel="noopener"
+               style="display:block;width:100%;background:linear-gradient(135deg,var(--o1),var(--v2));color:white;text-align:center;font-size:0.88rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:1.1rem;border-radius:100px;text-decoration:none;box-shadow:0 4px 16px rgba(244,124,40,0.35);transition:opacity 0.2s,transform 0.15s;margin-bottom:1rem">
+              Wypełnij formularz zgłoszeniowy →
+            </a>
+            <p style="text-align:center;font-size:0.72rem;color:var(--text3)">Udział zawsze bezpłatny · Bez zobowiązań</p>
           </div>
 
           <div class="contact-info-box">
@@ -1163,7 +1141,6 @@ body {
                 <a href="#" class="social-btn" title="YouTube">▶</a>
                 <a href="#" class="social-btn" title="Instagram">📷</a>
                 <a href="#" class="social-btn" title="Facebook">𝐟</a>
-                <a href="#" class="social-btn" title="LinkedIn">in</a>
               </div>
             </div>
             <div class="ci-card">
@@ -1172,33 +1149,6 @@ body {
                 Organizujemy bezpłatne spotkania online prezentujące Gildię Innowacji w działaniu.<br><br>
                 Napisz do nas aby ustalić termin konsultacji dopasowany do Twoich potrzeb.
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- TELEADRES -->
-      <div class="about-content" id="about-teleadres">
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
-          <div class="ci-card">
-            <div class="ci-card-title">Dane organizacji</div>
-            <div class="ci-item"><span class="ci-icon">🏢</span><span>Nasza Polska</span></div>
-            <div class="ci-item"><span class="ci-icon">📍</span><span>Kielce</span></div>
-            <div class="ci-item"><span class="ci-icon">🌐</span><a href="https://naszapolska.org.pl/">www.naszapolska.org.pl</a></div>
-          </div>
-          <div class="ci-card">
-            <div class="ci-card-title">Osoba kontaktowa</div>
-            <div class="ci-item"><span class="ci-icon">👤</span><span>Wojciech Wolanin</span></div>
-            <div class="ci-item"><span class="ci-icon">📞</span><a href="tel:+48793738281">(+48) 793-738-281</a></div>
-            <div class="ci-item"><span class="ci-icon">📧</span><a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a></div>
-          </div>
-          <div class="ci-card" style="grid-column:1/-1;">
-            <div class="ci-card-title">Linki</div>
-            <div style="display:flex; flex-wrap:wrap; gap:0.8rem; margin-top:0.5rem;">
-              <a href="https://www.kreatywneklocki.edu.pl" style="color:var(--o2); font-size:0.85rem;">🌐 kreatywneklocki.edu.pl</a>
-              <a href="https://patronite.pl/KreatywneKlocki" style="color:var(--o2); font-size:0.85rem;">🎗 Patronite</a>
-              <a href="https://zrzutka.pl/user/whip-rounds/active" style="color:var(--o2); font-size:0.85rem;">💰 Zrzutka</a>
-              <a href="https://www.youtube.com/watch?v=OMD_hzfnVJU" style="color:var(--o2); font-size:0.85rem;">▶ YouTube</a>
             </div>
           </div>
         </div>
@@ -1243,12 +1193,12 @@ function setOfferTab(tab) {
 function setAboutTab(tab) {
   navigate('onas');
   document.querySelectorAll('.about-tab').forEach((t,i) => {
-    t.classList.toggle('active', ['wizja','kontakt','teleadres'][i] === tab);
+    t.classList.toggle('active', ['wizja','kontakt'][i] === tab);
   });
-  ['wizja','kontakt','teleadres'].forEach(t => {
+  ['wizja','kontakt'].forEach(t => {
     document.getElementById('about-'+t)?.classList.toggle('active', t === tab);
   });
-  ['nav-onas-wizja','nav-onas-kontakt','nav-onas-teleadres'].forEach(id => document.getElementById(id)?.classList.remove('active'));
+  ['nav-onas-wizja','nav-onas-kontakt'].forEach(id => document.getElementById(id)?.classList.remove('active'));
   document.getElementById('nav-onas-'+tab)?.classList.add('active');
 }
 

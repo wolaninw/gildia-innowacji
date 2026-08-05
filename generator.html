@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generator projektu — Gildia Innowacji</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --o1:#F47C28; --o2:#F69F37; --gold:#F7C146;
+  --v1:#471F7D; --v2:#83109E; --v3:#BF01BF;
+  --bg:#1e1a1c; --bg2:#252022; --bg3:#2e282a;
+  --surface:#332d2f; --surface2:#3d3538;
+  --text:#f5f0ea; --text2:rgba(245,240,234,0.62); --text3:rgba(245,240,234,0.35);
+  --border:rgba(245,240,234,0.08); --radius:10px;
+  --green:#2ed573; --blue:#60a5fa;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;padding:2rem 1rem;}
+
+.wrap{max-width:860px;margin:0 auto;}
+
+/* HEADER */
+.hdr{display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);}
+.hdr-logo{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;background:linear-gradient(135deg,var(--o1),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hdr-sub{font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);}
+.hdr-badge{margin-left:auto;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;background:rgba(244,124,40,0.12);color:var(--o1);border:1px solid rgba(244,124,40,0.2);padding:0.25rem 0.8rem;border-radius:100px;font-weight:700;}
+
+/* SECTIONS */
+.section{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.6rem;margin-bottom:1.2rem;}
+.section-title{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--o1);font-weight:700;margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem;}
+.section-title::before{content:'';width:16px;height:2px;background:var(--o1);border-radius:2px;}
+
+/* GRID */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.8rem;}
+@media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+/* FIELD */
+.field{display:flex;flex-direction:column;gap:0.4rem;}
+.field label{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);font-weight:600;}
+.field label .req{color:var(--o1);}
+.field input,.field select,.field textarea{
+  background:var(--bg3);border:1.5px solid var(--border);color:var(--text);
+  font-family:'Syne',sans-serif;font-size:0.88rem;
+  padding:0.7rem 0.9rem;border-radius:8px;outline:none;
+  transition:border-color 0.2s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--o1);}
+.field input::placeholder,.field textarea::placeholder{color:var(--text3);}
+.field select option{background:var(--bg3);}
+.field textarea{resize:vertical;min-height:80px;line-height:1.6;}
+.field .hint{font-size:0.7rem;color:var(--text3);line-height:1.5;}
+
+/* DYNAMIC LISTS */
+.dyn-list{display:flex;flex-direction:column;gap:0.6rem;}
+.dyn-item{display:flex;gap:0.5rem;align-items:flex-start;}
+.dyn-item input,.dyn-item select{flex:1;}
+.dyn-item input.narrow{flex:0 0 90px;}
+.btn-remove{background:rgba(244,124,40,0.1);border:1px solid rgba(244,124,40,0.2);color:var(--o1);width:32px;height:36px;border-radius:6px;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:background 0.2s;}
+.btn-remove:hover{background:rgba(244,124,40,0.2);}
+.btn-add{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--o2);background:transparent;border:1px dashed rgba(244,124,40,0.3);border-radius:6px;padding:0.45rem 0.9rem;cursor:pointer;margin-top:0.4rem;transition:border-color 0.2s,color 0.2s;}
+.btn-add:hover{border-color:var(--o1);color:var(--o1);}
+
+/* MEDIA TYPE toggle */
+.media-tabs{display:flex;gap:0.4rem;margin-bottom:0.8rem;}
+.mtab{padding:0.35rem 0.9rem;border-radius:100px;font-size:0.72rem;font-weight:700;cursor:pointer;border:1.5px solid var(--border);color:var(--text2);background:transparent;transition:all 0.2s;}
+.mtab.active{border-color:var(--o1);color:var(--o1);background:rgba(244,124,40,0.08);}
+.media-field{display:none;}
+.media-field.active{display:flex;flex-direction:column;gap:0.4rem;}
+
+/* GENERATE BUTTON */
+.btn-gen{width:100%;background:linear-gradient(135deg,var(--o1),var(--v2));color:white;font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:1.1rem;border:none;border-radius:100px;cursor:pointer;margin-bottom:1.5rem;box-shadow:0 4px 20px rgba(244,124,40,0.3);transition:opacity 0.2s,transform 0.15s;}
+.btn-gen:hover{opacity:0.9;transform:translateY(-1px);}
+
+/* OUTPUT */
+.output-wrap{display:none;}
+.output-wrap.visible{display:block;}
+.output-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem;}
+.output-title{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--green);font-weight:700;display:flex;align-items:center;gap:0.5rem;}
+.output-title::before{content:'';width:16px;height:2px;background:var(--green);border-radius:2px;}
+.btn-copy{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;background:rgba(46,213,115,0.1);border:1px solid rgba(46,213,115,0.25);color:var(--green);padding:0.45rem 1rem;border-radius:100px;cursor:pointer;transition:all 0.2s;}
+.btn-copy:hover{background:rgba(46,213,115,0.2);}
+.btn-copy.copied{color:var(--text2);border-color:var(--border);}
+.output-box{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.2rem;font-family:'Courier New',monospace;font-size:0.78rem;line-height:1.7;color:var(--text2);white-space:pre;overflow-x:auto;max-height:480px;overflow-y:auto;}
+
+/* INSTRUKCJA */
+.info-box{background:rgba(247,193,70,0.06);border:1px solid rgba(247,193,70,0.15);border-radius:10px;padding:1rem 1.2rem;margin-bottom:1.5rem;}
+.info-box p{font-size:0.8rem;color:var(--text2);line-height:1.7;}
+.info-box code{background:var(--bg3);padding:1px 5px;border-radius:4px;font-size:0.75rem;color:var(--gold);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <div class="hdr-logo">Gildia Innowacji</div>
+      <div class="hdr-sub">Generator projektu → JSON</div>
+    </div>
+    <span class="hdr-badge">Narzędzie wewnętrzne</span>
+  </div>
+
+  <div class="info-box">
+    <p>Wypełnij formularz i kliknij <strong>Generuj JSON</strong>. Gotowy blok skopiuj i wklej do pliku <code>projekty.json</code> — przed ostatnim <code>]</code>, po przecinku. Zdjęcie lub link do YouTube dodaj w sekcji Media.</p>
+  </div>
+
+  <!-- 1. PODSTAWOWE -->
+  <div class="section">
+    <div class="section-title">1. Informacje podstawowe</div>
+    <div class="grid2" style="margin-bottom:1rem">
+      <div class="field">
+        <label>ID projektu <span class="req">★</span></label>
+        <input type="text" id="f-id" placeholder="p046">
+        <span class="hint">Sprawdź ostatni ID w projekty.json i dodaj 1</span>
+      </div>
+      <div class="field">
+        <label>Miejsce <span class="req">★</span></label>
+        <input type="text" id="f-miejsce" placeholder="Kielce">
+      </div>
+    </div>
+    <div class="field" style="margin-bottom:1rem">
+      <label>Tytuł projektu <span class="req">★</span></label>
+      <input type="text" id="f-tytul" placeholder="Krótki, chwytliwy tytuł — max 50 znaków">
+    </div>
+    <div class="grid2" style="margin-bottom:1rem">
+      <div class="field">
+        <label>Kategoria <span class="req">★</span></label>
+        <select id="f-kategoria">
+          <option value="spoleczne">Społeczne</option>
+          <option value="biznesowe">Biznesowe</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Podkategoria <span class="req">★</span></label>
+        <select id="f-podkategoria">
+          <option>Projekty dla szkoły</option>
+          <option>Projekty dla otoczenia</option>
+          <option>Projekty dla innych organizacji</option>
+          <option>Projekty dla kultury</option>
+          <option>Projekty pod media</option>
+          <option>Projekty natury komunikacyjnej</option>
+          <option>Projekty związane z Hobby</option>
+          <option>Projekty DIY</option>
+          <option>Wydarzenia</option>
+          <option>Edukacja i rozwój osobisty</option>
+        </select>
+      </div>
+    </div>
+    <div class="field" style="margin-bottom:1rem">
+      <label>Pitch — opis projektu <span class="req">★</span></label>
+      <textarea id="f-pitch" placeholder="Dwa zdania — co to jest i po co. Max 200 znaków."></textarea>
+    </div>
+    <div class="grid2">
+      <div class="field">
+        <label>Status <span class="req">★</span></label>
+        <select id="f-status" onchange="syncPostep()">
+          <option value="koncepcja">Koncepcja</option>
+          <option value="backlog">Backlog</option>
+          <option value="realizacja">Realizacja</option>
+          <option value="prototypowanie">Prototypowanie</option>
+          <option value="testowanie">Testowanie</option>
+          <option value="zakonczone">Zakończone</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Postęp</label>
+        <input type="text" id="f-postep" value="1. Koncepcja" readonly style="opacity:0.6;cursor:default">
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MEDIA -->
+  <div class="section">
+    <div class="section-title">2. Media</div>
+    <div class="media-tabs">
+      <button class="mtab active" onclick="setMedia('placeholder',this)">Brak zdjęcia</button>
+      <button class="mtab" onclick="setMedia('obraz',this)">🖼 Zdjęcie</button>
+      <button class="mtab" onclick="setMedia('youtube',this)">▶ YouTube</button>
+      <button class="mtab" onclick="setMedia('video',this)">🎬 Video</button>
+    </div>
+    <div class="media-field active" id="media-placeholder">
+      <span class="hint">Karta będzie wyświetlać emoji kategorii.</span>
+    </div>
+    <div class="media-field" id="media-obraz">
+      <div class="field">
+        <label>Ścieżka do pliku</label>
+        <input type="text" id="media-obraz-src" placeholder="assets/projekty/nazwa.jpg">
+        <span class="hint">Wgraj zdjęcie do folderu assets/projekty/ i wpisz nazwę pliku</span>
+      </div>
+    </div>
+    <div class="media-field" id="media-youtube">
+      <div class="field">
+        <label>ID filmu YouTube</label>
+        <input type="text" id="media-yt-src" placeholder="np. OMD_hzfnVJU">
+        <span class="hint">Samo ID z końca linku: youtube.com/watch?v=<strong>ID_TUTAJ</strong></span>
+      </div>
+    </div>
+    <div class="media-field" id="media-video">
+      <div class="field">
+        <label>Ścieżka do pliku video</label>
+        <input type="text" id="media-video-src" placeholder="assets/video/nazwa.mp4">
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. NARZĘDZIA -->
+  <div class="section">
+    <div class="section-title">3. Narzędzia</div>
+    <div class="dyn-list" id="narzedzia-list"></div>
+    <button class="btn-add" onclick="addNarzedzie()">+ Dodaj narzędzie</button>
+  </div>
+
+  <!-- 4. WNIOSKI -->
+  <div class="section">
+    <div class="section-title">4. Wnioski</div>
+    <div class="dyn-list" id="wnioski-list"></div>
+    <button class="btn-add" onclick="addWniosek()">+ Dodaj wniosek</button>
+  </div>
+
+  <!-- 5. TAGI + DOC -->
+  <div class="section">
+    <div class="section-title">5. Tagi i dokumentacja</div>
+    <div class="field" style="margin-bottom:1rem">
+      <label>Tagi <span class="req">★</span></label>
+      <input type="text" id="f-tagi" placeholder="tag1, tag2, tag3">
+      <span class="hint">2–5 słów, małe litery, oddzielone przecinkami</span>
+    </div>
+    <div class="field">
+      <label>Link do dokumentacji</label>
+      <input type="text" id="f-dok" placeholder="https://docs.google.com/...">
+    </div>
+  </div>
+
+  <button class="btn-gen" onclick="generate()">Generuj JSON →</button>
+
+  <!-- OUTPUT -->
+  <div class="output-wrap" id="output-wrap">
+    <div class="output-header">
+      <div class="output-title">Gotowy blok JSON</div>
+      <button class="btn-copy" id="btn-copy" onclick="copyJSON()">📋 Kopiuj</button>
+    </div>
+    <div class="output-box" id="output-box"></div>
+    <div style="margin-top:0.8rem;padding:0.8rem 1rem;background:rgba(46,213,115,0.06);border:1px solid rgba(46,213,115,0.15);border-radius:8px;font-size:0.78rem;color:var(--text2);line-height:1.6">
+      Wklej ten blok do <code style="color:var(--gold);background:var(--bg3);padding:1px 4px;border-radius:3px">projekty.json</code> — przed ostatnim <code style="color:var(--gold);background:var(--bg3);padding:1px 4px;border-radius:3px">]</code>, po przecinku kończącym poprzedni projekt.
+    </div>
+  </div>
+
+</div>
+<script>
+/* ── POSTEP SYNC ── */
+const postepMap = {
+  koncepcja:'1. Koncepcja', backlog:'2. Backlog', realizacja:'3. Realizacja',
+  prototypowanie:'4. Prototypowanie', testowanie:'5. Testowanie', zakonczone:'6. Zakończenie'
+};
+function syncPostep() {
+  document.getElementById('f-postep').value = postepMap[document.getElementById('f-status').value];
+}
+
+/* ── MEDIA TABS ── */
+let mediaTyp = 'placeholder';
+function setMedia(typ, btn) {
+  mediaTyp = typ;
+  document.querySelectorAll('.mtab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.media-field').forEach(f=>f.classList.remove('active'));
+  document.getElementById('media-'+typ).classList.add('active');
+}
+
+/* ── NARZĘDZIA ── */
+let narzN = 0;
+function addNarzedzie(nazwa='', opis='') {
+  const id = ++narzN;
+  const div = document.createElement('div');
+  div.className = 'dyn-item';
+  div.id = 'narz-'+id;
+  div.innerHTML = `
+    <input type="text" class="narz-nazwa" placeholder="Nazwa narzędzia" value="${nazwa}" style="flex:1">
+    <input type="text" class="narz-opis" placeholder="Opis zastosowania" value="${opis}" style="flex:2">
+    <button class="btn-remove" onclick="document.getElementById('narz-${id}').remove()">✕</button>`;
+  document.getElementById('narzedzia-list').appendChild(div);
+}
+
+/* ── WNIOSKI ── */
+let wnN = 0;
+function addWniosek(typ='+', tresc='') {
+  const id = ++wnN;
+  const div = document.createElement('div');
+  div.className = 'dyn-item';
+  div.id = 'wn-'+id;
+  div.innerHTML = `
+    <select class="wn-typ narrow" style="flex:0 0 80px">
+      <option value="+" ${typ=='+'?'selected':''}>+ działa</option>
+      <option value="-" ${typ=='-'?'selected':''}>− nie działa</option>
+      <option value="->" ${typ=='->'?'selected':''}>→ rekomendacja</option>
+    </select>
+    <input type="text" class="wn-tresc" placeholder="Treść wniosku..." value="${tresc}" style="flex:1">
+    <button class="btn-remove" onclick="document.getElementById('wn-${id}').remove()">✕</button>`;
+  document.getElementById('wnioski-list').appendChild(div);
+}
+
+/* ── GENERATE ── */
+function generate() {
+  const id       = document.getElementById('f-id').value.trim() || 'p000';
+  const tytul    = document.getElementById('f-tytul').value.trim();
+  const kat      = document.getElementById('f-kategoria').value;
+  const podkat   = document.getElementById('f-podkategoria').value;
+  const pitch    = document.getElementById('f-pitch').value.trim();
+  const miejsce  = document.getElementById('f-miejsce').value.trim();
+  const status   = document.getElementById('f-status').value;
+  const postep   = document.getElementById('f-postep').value;
+  const dok      = document.getElementById('f-dok').value.trim();
+  const tagiRaw  = document.getElementById('f-tagi').value;
+  const tagi     = tagiRaw.split(',').map(t=>t.trim()).filter(Boolean);
+
+  // media
+  let media;
+  if (mediaTyp === 'placeholder') {
+    media = { typ: 'placeholder' };
+  } else if (mediaTyp === 'obraz') {
+    media = { typ: 'obraz', src: document.getElementById('media-obraz-src').value.trim() };
+  } else if (mediaTyp === 'youtube') {
+    media = { typ: 'youtube', src: document.getElementById('media-yt-src').value.trim() };
+  } else {
+    media = { typ: 'video', src: document.getElementById('media-video-src').value.trim() };
+  }
+
+  // narzędzia
+  const narzedzia = [];
+  document.querySelectorAll('#narzedzia-list .dyn-item').forEach(item => {
+    const n = item.querySelector('.narz-nazwa').value.trim();
+    const o = item.querySelector('.narz-opis').value.trim();
+    if (n) narzedzia.push({ nazwa: n, opis: o });
+  });
+
+  // wnioski
+  const wnioski = [];
+  document.querySelectorAll('#wnioski-list .dyn-item').forEach(item => {
+    const t = item.querySelector('.wn-typ').value;
+    const tr = item.querySelector('.wn-tresc').value.trim();
+    if (tr) wnioski.push({ typ: t, tresc: tr });
+  });
+
+  const obj = { id, tytul, kategoria: kat, podkategoria: podkat, pitch, status, postep, miejsce, media, narzedzia, wnioski, tagi, dokumentacja: dok };
+  const json = JSON.stringify(obj, null, 2);
+
+  document.getElementById('output-box').textContent = json;
+  document.getElementById('output-wrap').classList.add('visible');
+  document.getElementById('output-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ── COPY ── */
+function copyJSON() {
+  const text = document.getElementById('output-box').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('btn-copy');
+    btn.textContent = '✓ Skopiowano';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Kopiuj'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+/* ── INIT — default narzędzia i wnioski ── */
+addNarzedzie('Google Docs', 'Dokumentacja projektu');
+addNarzedzie('Canva', 'Plakat i materiały graficzne');
+addWniosek('+', '');
+addWniosek('-', '');
+addWniosek('->', '');
+</script>
+</body>
+</html>
