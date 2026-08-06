@@ -683,7 +683,7 @@ body {
 
       <div class="nav-section">
         <div class="nav-section-label">Projekt</div>
-        <div class="nav-item" onclick="navigate('katalog')" id="nav-katalog">
+        <div class="nav-item" onclick="window.location.href='katalog.html'" id="nav-katalog">
           <span class="nav-icon">🗂️</span> Katalog Innowacji
         </div>
         <div class="nav-item" onclick="navigate('dolacz')" id="nav-dolacz">
@@ -702,16 +702,13 @@ body {
         <div class="nav-item" onclick="navigate('onas'); setAboutTab('kontakt')" id="nav-onas-kontakt">
           <span class="nav-icon">📞</span> Kontakt
         </div>
-        <div class="nav-item" onclick="navigate('onas'); setAboutTab('kontakt')" id="nav-onas-kontakt">
-          <span class="nav-icon">📞</span> Kontakt
-        </div>
       </div>
     </nav>
 
     <div class="sidebar-footer">
-      Kreatywne Klocki · Kielce<br>
-      <a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a><br>
-      <a href="https://www.kreatywneklocki.edu.pl">kreatywneklocki.edu.pl</a>
+      Gildia Innowacji · Kielce<br>
+      <a href="mailto:gildia.innowacji@gmail.com">gildia.innowacji@gmail.com</a><br>
+      <a href="https://gildia.pl">gildia.pl</a>
     </div>
   </aside>
 
@@ -724,7 +721,7 @@ body {
           <span class="icon-moon">🌙</span>
           <span class="icon-sun">☀️</span>
         </button>
-        <button class="topbar-contact" onclick="window.open('https://forms.gle/WSTAW_LINK_DO_FORMULARZA','_blank')">Dołącz →</button>
+        <button class="topbar-contact" onclick="window.open('https://forms.gle/LsK8m9rrMA3jtSYd8','_blank')">Dołącz →</button>
       </div>
     </div>
 
@@ -744,21 +741,32 @@ body {
             <button class="btn-sm btn-ghost-sm" onclick="navigate('oferta')">Zobacz ofertę →</button>
           </div>
         </div>
-        <div class="featured-visual">
-          <div class="fv-stat">
-            <div class="fv-num">100%</div>
-            <div class="fv-label">bezpłatny udział<br>dla uczniów</div>
-          </div>
-          <div class="fv-divider"></div>
-          <div class="fv-stat">
-            <div class="fv-num">A→Z</div>
-            <div class="fv-label">obsługa od finansowania<br>po raport końcowy</div>
-          </div>
-          <div class="fv-divider"></div>
-          <div class="fv-stat">
-            <div class="fv-num">MVP</div>
-            <div class="fv-label">działający prototyp<br>gotowy do wdrożenia</div>
-          </div>
+        <div class="featured-visual" style="padding:0;overflow:hidden;border-radius:10px;position:relative;background:#000;">
+          <a href="https://www.youtube.com/watch?v=OMD_hzfnVJU" target="_blank" rel="noopener"
+             style="display:block;position:relative;padding-bottom:56.25%;text-decoration:none;">
+            <img src="https://img.youtube.com/vi/OMD_hzfnVJU/maxresdefault.jpg"
+                 style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;"
+                 onerror="this.src='https://img.youtube.com/vi/OMD_hzfnVJU/mqdefault.jpg'"
+                 alt="Gildia Innowacji — film">
+            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.25);transition:background 0.3s;"
+                 onmouseover="this.style.background='rgba(0,0,0,0.1)'"
+                 onmouseout="this.style.background='rgba(0,0,0,0.25)'"></div>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.8rem;">
+              <div style="width:64px;height:64px;border-radius:50%;background:rgba(255,0,0,0.9);
+                          display:flex;align-items:center;justify-content:center;
+                          box-shadow:0 4px 24px rgba(0,0,0,0.5);transition:transform 0.2s;"
+                   onmouseover="this.style.transform='scale(1.1)'"
+                   onmouseout="this.style.transform='scale(1)'">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <span style="color:white;font-size:0.78rem;font-weight:700;letter-spacing:0.06em;
+                           text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,0.8);">
+                Obejrzyj film o Gildii →
+              </span>
+            </div>
+          </a>
         </div>
       </div>
 
@@ -1041,7 +1049,7 @@ body {
           <span class="supp-icon">🤝</span>
           <div class="supp-title">Zostań Partnerem Merytorycznym</div>
           <div class="supp-body">Jesteś ekspertem, mentorem lub praktykiem? Podziel się wiedzą z uczestnikami Gildii — prowadź warsztaty, webinary lub zostań mentorem projektowym. Twoja wiedza zmienia życie młodych.</div>
-          <a href="https://forms.gle/WSTAW_LINK_DO_FORMULARZA" target="_blank" class="btn-support bs-violet">Wypełnij formularz →</a>
+          <a href="https://forms.gle/LsK8m9rrMA3jtSYd8" target="_blank" class="btn-support bs-violet">Wypełnij formularz →</a>
         </div>
         <div class="support-card">
           <span class="supp-icon">🏢</span>
@@ -1119,7 +1127,7 @@ body {
           <div class="contact-form-box">
             <div class="cf-h">Dołącz do Gildii</div>
             <div class="cf-sub">Wypełnij formularz zgłoszeniowy — to pierwszy krok do udziału w programie. Bezpłatny dla wszystkich uczestników.</div>
-            <a href="https://forms.gle/WSTAW_LINK_DO_FORMULARZA" target="_blank" rel="noopener"
+            <a href="https://forms.gle/LsK8m9rrMA3jtSYd8" target="_blank" rel="noopener"
                style="display:block;width:100%;background:linear-gradient(135deg,var(--o1),var(--v2));color:white;text-align:center;font-size:0.88rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:1.1rem;border-radius:100px;text-decoration:none;box-shadow:0 4px 16px rgba(244,124,40,0.35);transition:opacity 0.2s,transform 0.15s;margin-bottom:1rem">
               Wypełnij formularz zgłoszeniowy →
             </a>
@@ -1130,9 +1138,9 @@ body {
             <div class="ci-card">
               <div class="ci-card-title">Dane kontaktowe</div>
               <div class="ci-item"><span class="ci-icon">👤</span><span>Wojciech Wolanin</span></div>
-              <div class="ci-item"><span class="ci-icon">📞</span><a href="tel:+48793738281">793 738 281</a></div>
-              <div class="ci-item"><span class="ci-icon">📧</span><a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a></div>
-              <div class="ci-item"><span class="ci-icon">🌐</span><a href="https://www.kreatywneklocki.edu.pl">kreatywneklocki.edu.pl</a></div>
+              <div class="ci-item"><span class="ci-icon">📞</span><a href="tel:+48731370032">731 370 032</a></div>
+              <div class="ci-item"><span class="ci-icon">📧</span><a href="mailto:gildia.innowacji@gmail.com">gildia.innowacji@gmail.com</a></div>
+              <div class="ci-item"><span class="ci-icon">🌐</span><a href="https://gildia.pl">gildia.pl</a></div>
             </div>
             <div class="ci-card">
               <div class="ci-card-title">Media społecznościowe</div>

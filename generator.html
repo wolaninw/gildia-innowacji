@@ -105,6 +105,35 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-he
     <p>Wypełnij formularz i kliknij <strong>Generuj JSON</strong>. Gotowy blok skopiuj i wklej do pliku <code>projekty.json</code> — przed ostatnim <code>]</code>, po przecinku. Zdjęcie lub link do YouTube dodaj w sekcji Media.</p>
   </div>
 
+  <!-- PICKER -->
+  <div class="section" id="picker-section">
+    <div class="section-title">Wybierz projekt do edycji lub utwórz nowy</div>
+    <div style="display:flex;gap:0.8rem;align-items:center;flex-wrap:wrap">
+      <div class="field" style="flex:1;min-width:200px;margin:0">
+        <select id="projekt-picker" onchange="onPickerChange()">
+          <option value="">— Nowy projekt —</option>
+        </select>
+      </div>
+      <button class="btn-add" style="margin:0" onclick="clearForm()">✕ Wyczyść</button>
+    </div>
+    <div id="picker-status" style="font-size:0.72rem;color:var(--text3);margin-top:0.6rem;display:none"></div>
+
+    <div style="margin-top:1.2rem;border-top:1px solid var(--border);padding-top:1.2rem">
+      <div style="font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--text3);font-weight:600;margin-bottom:0.6rem">lub wklej JSON projektu</div>
+      <div style="display:flex;gap:0.6rem;align-items:flex-start">
+        <textarea id="json-import" placeholder='Wklej tutaj obiekt JSON projektu {"id":"p001","tytul":...}'
+          style="flex:1;background:var(--bg3);border:1.5px solid var(--border);color:var(--text);
+                 font-family:monospace;font-size:0.78rem;padding:0.7rem;border-radius:8px;
+                 outline:none;resize:vertical;min-height:72px;line-height:1.5;
+                 transition:border-color 0.2s"
+          onfocus="this.style.borderColor='var(--o1)'"
+          onblur="this.style.borderColor='var(--border)'"></textarea>
+        <button onclick="importJSON()" class="btn-add" style="margin:0;white-space:nowrap;padding:0.7rem 1rem;align-self:flex-start">↑ Wczytaj</button>
+      </div>
+      <div id="import-error" style="font-size:0.72rem;color:#ff6b6b;margin-top:0.4rem;display:none"></div>
+    </div>
+  </div>
+
   <!-- 1. PODSTAWOWE -->
   <div class="section">
     <div class="section-title">1. Informacje podstawowe</div>
@@ -167,6 +196,18 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-he
         <label>Postęp</label>
         <input type="text" id="f-postep" value="1. Koncepcja" readonly style="opacity:0.6;cursor:default">
       </div>
+    </div>
+
+    <div style="margin-top:1rem;padding:1rem 1.2rem;background:var(--bg3);border-radius:8px;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-size:0.82rem;font-weight:600">Wyświetlaj na stronie</div>
+        <div style="font-size:0.72rem;color:var(--text3);margin-top:2px">Ukryj projekt żeby nie był widoczny w katalogu</div>
+      </div>
+      <label style="position:relative;display:inline-block;width:44px;height:24px;cursor:pointer;flex-shrink:0">
+        <input type="checkbox" id="f-widoczny" checked style="opacity:0;width:0;height:0;position:absolute">
+        <span id="toggle-track" style="position:absolute;inset:0;border-radius:100px;background:var(--o1);transition:background 0.2s"></span>
+        <span id="toggle-thumb" style="position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:white;transition:transform 0.2s;transform:translateX(20px)"></span>
+      </label>
     </div>
   </div>
 
@@ -232,27 +273,178 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-he
     </div>
   </div>
 
-  <button class="btn-gen" onclick="generate()">Generuj JSON →</button>
+  <button class="btn-gen" id="btn-gen" onclick="generate()">Generuj JSON →</button>
 
   <!-- OUTPUT -->
   <div class="output-wrap" id="output-wrap">
     <div class="output-header">
-      <div class="output-title">Gotowy blok JSON</div>
+      <div class="output-title" id="output-title">Gotowy blok JSON</div>
       <button class="btn-copy" id="btn-copy" onclick="copyJSON()">📋 Kopiuj</button>
     </div>
     <div class="output-box" id="output-box"></div>
-    <div style="margin-top:0.8rem;padding:0.8rem 1rem;background:rgba(46,213,115,0.06);border:1px solid rgba(46,213,115,0.15);border-radius:8px;font-size:0.78rem;color:var(--text2);line-height:1.6">
+    <div id="output-hint" style="margin-top:0.8rem;padding:0.8rem 1rem;background:rgba(46,213,115,0.06);border:1px solid rgba(46,213,115,0.15);border-radius:8px;font-size:0.78rem;color:var(--text2);line-height:1.6">
       Wklej ten blok do <code style="color:var(--gold);background:var(--bg3);padding:1px 4px;border-radius:3px">projekty.json</code> — przed ostatnim <code style="color:var(--gold);background:var(--bg3);padding:1px 4px;border-radius:3px">]</code>, po przecinku kończącym poprzedni projekt.
     </div>
   </div>
 
 </div>
 <script>
-/* ── POSTEP SYNC ── */
+/* ── STATE ── */
+let projekty = [];
+let editId = null;
+
 const postepMap = {
   koncepcja:'1. Koncepcja', backlog:'2. Backlog', realizacja:'3. Realizacja',
   prototypowanie:'4. Prototypowanie', testowanie:'5. Testowanie', zakonczone:'6. Zakończenie'
 };
+
+/* ── LOAD projekty.json ── */
+const PROJEKTY_FALLBACK = [{"id": "p001", "tytul": "Kiermasz zabawek", "kategoria": "spoleczne", "podkategoria": "Projekty dla szkoły", "pitch": "Organizacja kiermaszu wyprzedażowego zabawek w SP 25 — uczniowie uczą się jak zaplanować wydarzenie, dotrzeć do odbiorców i przeprowadzić akcję społeczną od A do Z.", "status": "zakonczone", "postep": "6. Zakończenie", "miejsce": "SP 25, Kielce", "media": {"typ": "placeholder"}, "tagi": ["kiermasz", "szkoła", "wydarzenie", "społeczny"], "dokumentacja": "https://www.youtube.com/watch?v=vAr5ei4akoY", "narzedzia": [{"nazwa": "Google Forms", "opis": "Formularz zgłoszeniowy dla wystawców"}, {"nazwa": "Canva", "opis": "Plakat i materiały promocyjne"}, {"nazwa": "Facebook Events", "opis": "Komunikacja i dyskusja z uczestnikami"}, {"nazwa": "Google Docs", "opis": "Dokumentacja projektu i regulamin"}], "wnioski": [{"typ": "-", "tresc": "Promocja w social mediach przyniosła znikome efekty — tylko 1 uczestnik z Facebooka"}, {"typ": "+", "tresc": "Większość uczestników dowiedziała się od wychowawcy lub z plakatu — kanał szkolny działa"}, {"typ": "-", "tresc": "Z 26 zarejestrowanych przybyło tylko 10-15 wystawców — rejestracja nie równa sie obecności"}, {"typ": "->", "tresc": "Na plakacie mocniej podkreslić ze szukamy wystawców, nie tylko odwiedzających"}]}, {"id": "p002", "tytul": "Pojemnik na zabawki do piasku", "kategoria": "spoleczne", "podkategoria": "Projekty dla otoczenia", "pitch": "Projekt stworzenia i ustawienia pojemnika na zabawki do piasku na osiedlu Ślichowice — inicjatywa angażująca lokalną społeczność w dbanie o wspólną przestrzeń i sharing.", "status": "zakonczone", "postep": "6. Zakończenie", "miejsce": "Osiedle Ślichowice, Kielce", "media": {"typ": "placeholder"}, "tagi": ["sharing", "osiedle", "dzieci", "otoczenie"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p003", "tytul": "Akademia Małego Mechanika", "kategoria": "biznesowe", "podkategoria": "Projekty związane z Hobby", "pitch": "Warsztaty edukacyjne z mechaniki LEGO dla dzieci — nauka zasad mechaniki, konstrukcji i rozwiązywania problemów technicznych przez zabawę z klockami LEGO Technic.", "status": "testowanie", "postep": "5. Testowanie", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["LEGO", "mechanika", "dzieci", "warsztaty", "edukacja"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p004", "tytul": "Wieża widokowa na górze Ślichowica", "kategoria": "spoleczne", "podkategoria": "Projekty dla otoczenia", "pitch": "Koncepcja budowy wieży widokowej na górze Ślichowica w Kielcach — atrakcja turystyczna do obserwacji panoramy miasta i zjawisk atmosferycznych dla lokalnej społeczności.", "status": "prototypowanie", "postep": "4. Prototypowanie", "miejsce": "Góra Ślichowica, Kielce", "media": {"typ": "placeholder"}, "tagi": ["architektura", "turystyka", "Kielce", "infrastruktura"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p005", "tytul": "Targi Klocki FEST", "kategoria": "spoleczne", "podkategoria": "Projekty związane z Hobby", "pitch": "Organizacja wystawy i targów klocków LEGO na Targach Kielce — wydarzenie łączące fanów LEGO, kolekcjonerów i twórców, promujące kreatywność i pasję do budowania.", "status": "zakonczone", "postep": "6. Zakończenie", "miejsce": "Targi Kielce", "media": {"typ": "placeholder"}, "tagi": ["LEGO", "targi", "event", "kolekcjonerzy"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p006", "tytul": "Ogród sensoryczny", "kategoria": "spoleczne", "podkategoria": "Projekty dla otoczenia", "pitch": "Stworzenie ogrodu sensorycznego w Kielcach — przestrzeni spokoju i relaksu, która pobudza wszystkie zmysły i służy jako miejsce terapeutyczne dla mieszkańców w każdym wieku.", "status": "prototypowanie", "postep": "4. Prototypowanie", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["ogród", "terapia", "sensoryczny", "przestrzeń publiczna"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p007", "tytul": "Aforyzmy na mury", "kategoria": "spoleczne", "podkategoria": "Projekty dla otoczenia", "pitch": "Projekt umieszczania motywujących cytatów i aforyzmów na murach i ścianach budynków w Kielcach — inicjatywa łącząca street art z pozytywnym przekazem społecznym.", "status": "prototypowanie", "postep": "4. Prototypowanie", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["street art", "murales", "motywacja", "miasto"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p008", "tytul": "Barometr Ustawodawczy", "kategoria": "biznesowe", "podkategoria": "Projekty natury komunikacyjnej", "pitch": "Narzędzie do monitorowania i wizualizacji procesu legislacyjnego — platforma umożliwiająca obywatelom śledzenie tworzenia prawa i angażowanie się w konsultacje społeczne.", "status": "prototypowanie", "postep": "4. Prototypowanie", "miejsce": "Polska", "media": {"typ": "placeholder"}, "tagi": ["demokracja", "prawo", "obywatel", "transparentność"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p009", "tytul": "Debata przedwyborcza na prezydenta Kielc", "kategoria": "spoleczne", "podkategoria": "Projekty pod media", "pitch": "Organizacja otwartej debaty przedwyborczej kandydatów na prezydenta Kielc — projekt edukacji demokratycznej angażujący młodych mieszkańców w aktywne życie polityczne.", "status": "zakonczone", "postep": "6. Zakończenie", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["demokracja", "debata", "wybory", "edukacja obywatelska"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p010", "tytul": "Akademia Przedsiębiorczości", "kategoria": "biznesowe", "podkategoria": "Edukacja i rozwój osobisty", "pitch": "Cykl zajęć edukacyjnych z zakresu przedsiębiorczości dla młodych ludzi — od pomysłu biznesowego przez biznesplan po pierwsze kroki w zakładaniu własnej działalności.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["przedsiębiorczość", "biznes", "startup", "edukacja"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p011", "tytul": "Gildia Innowacji", "kategoria": "biznesowe", "podkategoria": "Edukacja i rozwój osobisty", "pitch": "Platforma edukacyjna rozwijająca kompetencje projektowe i przedsiębiorcze u młodych ludzi przez realne działanie — design thinking, agile i praca w zespole w praktyce.", "status": "prototypowanie", "postep": "4. Prototypowanie", "miejsce": "Kielce", "media": {"typ": "youtube", "src": "OMD_hzfnVJU"}, "tagi": ["edukacja", "projekt", "zarządzanie", "innowacje", "młodzież"], "dokumentacja": "", "narzedzia": [{"nazwa": "Google Docs", "opis": "Dokumentacja projektu i szablony"}, {"nazwa": "Canva", "opis": "Grafiki i materialy promocyjne"}, {"nazwa": "Google Forms", "opis": "Formularz zgloszeniowy uczestników"}, {"nazwa": "YouTube", "opis": "Kanal dokumentujacy projekt"}, {"nazwa": "Patronite", "opis": "Finansowanie spolecznosciowe"}], "wnioski": [{"typ": "+", "tresc": "Model open source pozwala na wspóltworzenie bez barier wejscia"}, {"typ": "+", "tresc": "Film na YouTube skutecznie prezentuje idee projektu"}, {"typ": "->", "tresc": "Przed oferta B2B dla instytucji zorganizowac konferencje polityki mlodziezowej jako narzedzie pozycjonowania"}]}, {"id": "p012", "tytul": "Newsletter Gildii Innowacji", "kategoria": "spoleczne", "podkategoria": "Projekty natury komunikacyjnej", "pitch": "Tworzenie regularnych materiałów informacyjnych o Gildii Innowacji — newsletter łączący uczestników, prezentujący projekty i budujący społeczność wokół idei innowacji.", "status": "prototypowanie", "postep": "4. Prototypowanie", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["newsletter", "komunikacja", "content", "social media"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p013", "tytul": "Hymn Gildii Innowacji", "kategoria": "spoleczne", "podkategoria": "Projekty związane z Hobby", "pitch": "Konkurs na oficjalny hymn Gildii Innowacji — projekt łączący muzykę, kreatywność i tożsamość projektu. Zwycięski utwór stanie się motywem przewodnim wszystkich wydarzeń.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["muzyka", "konkurs", "kreatywność", "identyfikacja"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p014", "tytul": "Konkurs na zarząd Kreatywnych Klocków", "kategoria": "spoleczne", "podkategoria": "Projekty związane z Hobby", "pitch": "Symulacja biznesowa — uczestnicy wcielają się w role zarządu firmy, podejmują decyzje strategiczne i uczą się jak działają spółki w praktyce. Nagroda: realna rola w projekcie.", "status": "prototypowanie", "postep": "4. Prototypowanie", "miejsce": "Świętokrzyskie", "media": {"typ": "placeholder"}, "tagi": ["zarządzanie", "biznes", "symulacja", "konkurs", "leadership"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p015", "tytul": "Warsztaty Homemade", "kategoria": "biznesowe", "podkategoria": "Projekty dla szkoły", "pitch": "Warsztaty tworzenia naturalnych kosmetyków — mydło, świece, kule do kąpieli, perfumy. Projekt łączy edukację ekologiczną z przedsiębiorczością i rzemiosłem artystycznym.", "status": "realizacja", "postep": "3. Realizacja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["kosmetyki", "DIY", "ekologia", "warsztaty", "rzemiosło"], "dokumentacja": "", "narzedzia": [{"nazwa": "Google Docs", "opis": "Dokumentacja i konspekty zajec"}, {"nazwa": "Canva", "opis": "Plakat A3 i certyfikat uczestnictwa"}, {"nazwa": "Google Forms", "opis": "Formularz zgloszeniowy"}, {"nazwa": "CRM (Google Sheets)", "opis": "Baza potencjalnych klientów i follow-up"}, {"nazwa": "Facebook Events", "opis": "Promocja warsztatów"}, {"nazwa": "Allegro", "opis": "Sklep Senzi Cosmetics — dostawa materialów"}], "wnioski": [{"typ": "+", "tresc": "Prototyp warsztatów z mydelkami przeslany i przetestowany"}, {"typ": "->", "tresc": "Pozyskac studentów jako prowadzacych przez ogloszenie na uczelni"}, {"typ": "->", "tresc": "Kluczowy kanal sprzedazy: bezposredni kontakt z przedszkolami i swietlicami"}, {"typ": "->", "tresc": "Oszacowac ROA przed pelnym wdrozeniem — sprawdzic ceny materialów i wynajem"}]}, {"id": "p016", "tytul": "Wodny plac zabaw — Ślichowice", "kategoria": "spoleczne", "podkategoria": "Projekty dla otoczenia", "pitch": "Projekt budżetu obywatelskiego — stworzenie wodnego placu zabaw na osiedlu Ślichowice. Uczestnicy uczą się jak działa demokracja lokalna i jak składać wnioski do budżetu obywatelskiego.", "status": "backlog", "postep": "2. Backlog", "miejsce": "Osiedle Ślichowice, Kielce", "media": {"typ": "placeholder"}, "tagi": ["plac zabaw", "budżet obywatelski", "osiedle", "dzieci"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p017", "tytul": "Analiza problemu parkingowego w Kielcach", "kategoria": "biznesowe", "podkategoria": "Projekty dla otoczenia", "pitch": "Badanie i analiza problemu parkingowego w centrum Kielc — projekt łączący research, mapowanie danych i propozycje innowacyjnych rozwiązań dla władz miasta.", "status": "prototypowanie", "postep": "4. Prototypowanie", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["miasto", "transport", "analiza", "innowacje miejskie"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p018", "tytul": "Minecraft — Kamieniołom Ślichowice", "kategoria": "spoleczne", "podkategoria": "Projekty związane z Hobby", "pitch": "Stworzenie wiernego odwzorowania kieleckiego kamieniołomu Ślichowice w grze Minecraft — projekt łączący pasję do gamingu z edukacją geograficzną i historią regionu.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["Minecraft", "gaming", "Kielce", "historia", "3D"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p019", "tytul": "Pokaz mody z VIVE Textile", "kategoria": "spoleczne", "podkategoria": "Projekty związane z Hobby", "pitch": "Organizacja pokazu mody we współpracy z firmą VIVE Textile — uczestnicy projektują i prezentują kolekcje, ucząc się jak wygląda branża modowa od kulis.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["moda", "design", "tekstylia", "pokaz", "kreatywność"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p020", "tytul": "Pomoc sąsiedzka — wypożyczalnia narzędzi", "kategoria": "biznesowe", "podkategoria": "Projekty dla innych organizacji", "pitch": "Platforma wzajemnego wypożyczania narzędzi między sąsiadami — projekt promujący ideę sharingu i ekonomii współdzielenia w lokalnej społeczności.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["sharing economy", "sąsiedzi", "narzędzia", "społeczność"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p021", "tytul": "Turniej piłkarski młodzieżowy", "kategoria": "spoleczne", "podkategoria": "Projekty związane z Hobby", "pitch": "Turniej piłki nożnej w pełni zaplanowany i przeprowadzony przez młodzież — od rekrutacji drużyn przez logistykę po ceremonię dekoracji. Nauka organizacji przez działanie.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["piłka nożna", "sport", "turniej", "młodzież"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p022", "tytul": "Założenie klubu sportowego", "kategoria": "spoleczne", "podkategoria": "Projekty związane z Hobby", "pitch": "Projekt założenia i zarejestrowania klubu sportowego przez młodych ludzi — nauka aspektów prawnych tworzenia organizacji, pozyskiwania sponsorów i budowania struktury.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["sport", "klub", "organizacja", "stowarzyszenie"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p023", "tytul": "Szkolne radio internetowe", "kategoria": "spoleczne", "podkategoria": "Projekty pod media", "pitch": "Stworzenie szkolnej stacji radiowej działającej online — nagrywanie audycji, redagowanie treści, prowadzenie programów na żywo. Projekt rozwijający kompetencje medialne i komunikacyjne.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["radio", "media", "szkoła", "podcast", "dziennikarstwo"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p024", "tytul": "Radio internetowe — inne niż wszystkie", "kategoria": "biznesowe", "podkategoria": "Projekty dla otoczenia", "pitch": "Innowacyjna stacja radiowa online łącząca muzykę, treści edukacyjne i lokalne newsy — projekt budujący medium społecznościowe dla młodych słuchaczy i twórców.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["radio", "media", "innowacje", "internet", "startup"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p025", "tytul": "Opakowania Use Me Again — P&G", "kategoria": "biznesowe", "podkategoria": "Edukacja i rozwój osobisty", "pitch": "Innowacyjny system wielokrotnego użytku dla opakowań kartonowych we współpracy z Procter & Gamble — projekt łączący ekologię, design i biznes w odpowiedzi na problem odpadów.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Polska", "media": {"typ": "placeholder"}, "tagi": ["ekologia", "opakowania", "recykling", "biznes", "CSR"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p026", "tytul": "Lokalny paczkomat — oferta dla InPost", "kategoria": "biznesowe", "podkategoria": "Projekty natury komunikacyjnej", "pitch": "Koncepcja sieciowego systemu lokalnych paczkomatów obsługiwanych przez społeczność — alternatywa dla standardowych paczkomatów, oparta na modelu sharingu.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Polska", "media": {"typ": "placeholder"}, "tagi": ["logistyka", "InPost", "sharing", "innowacje", "startup"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p027", "tytul": "Paczkomat w pociągu — oferta dla PKP", "kategoria": "biznesowe", "podkategoria": "Projekty dla innych organizacji", "pitch": "Innowacyjna koncepcja paczkomatu wbudowanego w wagony pociągów PKP — pasażerowie mogliby odbierać i nadawać paczki podczas podróży, eliminując konieczność wizyty w punkcie.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Polska", "media": {"typ": "placeholder"}, "tagi": ["PKP", "logistyka", "innowacje", "transport", "startup"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p028", "tytul": "Wirtualna waluta wolontariatu CK-i", "kategoria": "biznesowe", "podkategoria": "Projekty dla otoczenia", "pitch": "System kryptograficznej waluty CK-i nagradzającej wolontariat — każda godzina pracy społecznej przeliczana jest na tokeny wymienne na nagrody, usługi lub wsparcie lokalnych inicjatyw.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["blockchain", "wolontariat", "kryptowaluta", "innowacje", "społeczny"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p029", "tytul": "Florystyka LEGO", "kategoria": "biznesowe", "podkategoria": "Projekty dla kultury", "pitch": "Warsztaty tworzenia kompozycji florystycznych z klocków LEGO — niezwykłe połączenie tradycyjnej florystyki z kreatywnością LEGO. Projekt dla miłośników designu i rzemiosła.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["LEGO", "florystyka", "design", "warsztaty", "kreatywność"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p030", "tytul": "Turniej NERF — Arena Innowacji", "kategoria": "spoleczne", "podkategoria": "Projekty dla otoczenia", "pitch": "Organizacja turnieju NERF w Galerii Echo lub Korona — rozgrywki z elementami planowania taktycznego, pracy zespołowej i strategii. Projekt łączący sport z rozrywką.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["NERF", "turniej", "taktyka", "event", "sport"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p031", "tytul": "Legendy starosłowiańskie", "kategoria": "spoleczne", "podkategoria": "Projekty związane z Hobby", "pitch": "Projekt pisania powieści o kulturze i mitologii starosłowiańskiej — grupowy projekt literacki rozwijający kompetencje pisarskie, badawcze i redakcyjne uczestników.", "status": "backlog", "postep": "2. Backlog", "miejsce": "Polska", "media": {"typ": "placeholder"}, "tagi": ["literatura", "historia", "Słowianie", "powieść", "kultura"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p032", "tytul": "Warsztaty fotografii w Ogrodzie Botanicznym", "kategoria": "spoleczne", "podkategoria": "Projekty związane z Hobby", "pitch": "Innowacyjny plener fotograficzny w kieleckim ogrodzie botanicznym — warsztaty kompozycji, oświetlenia i postprodukcji zdjęć w naturalnym środowisku przyrodniczym.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Ogród Botaniczny, Kielce", "media": {"typ": "placeholder"}, "tagi": ["fotografia", "przyroda", "warsztaty", "sztuka", "kreatywność"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p033", "tytul": "Interaktywny koncert", "kategoria": "spoleczne", "podkategoria": "Wydarzenia", "pitch": "Organizacja koncertu z interaktywnymi elementami angażującymi publiczność — głosowania na żywo, live remix, elementy gamifikacji. Nowe doświadczenie muzyczne dla uczestników.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["muzyka", "koncert", "interaktywny", "event", "technologia"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p034", "tytul": "Festiwal muzyczny", "kategoria": "spoleczne", "podkategoria": "Wydarzenia", "pitch": "Organizacja lokalnego festiwalu muzycznego angażującego młodych artystów — scena dla nowych talentów, warsztaty muzyczne i przestrzeń do tworzenia lokalnej kultury.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["muzyka", "festiwal", "event", "młodzi artyści", "kultura"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p035", "tytul": "Warsztaty mechaniki LEGO", "kategoria": "biznesowe", "podkategoria": "Projekty związane z Hobby", "pitch": "Zaawansowane warsztaty mechaniki z LEGO Technic — od prostych maszyn po złożone mechanizmy, robotykę i programowanie. Projekt rozwijający myślenie inżynierskie u młodych.", "status": "prototypowanie", "postep": "4. Prototypowanie", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["LEGO", "mechanika", "inżynieria", "robotyka", "warsztaty"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p036", "tytul": "Warsztaty tworzenia komiksu (Canva)", "kategoria": "biznesowe", "podkategoria": "Edukacja i rozwój osobisty", "pitch": "Warsztaty tworzenia komiksów cyfrowych w narzędziu Canva — od scenariusza przez ilustracje po gotową publikację. Projekt rozwijający kompetencje graficzne i narracyjne.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["komiks", "Canva", "grafika", "warsztaty", "storytelling"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p037", "tytul": "Tworzenie mapy kariery", "kategoria": "biznesowe", "podkategoria": "Edukacja i rozwój osobisty", "pitch": "Warsztaty indywidualnego planowania kariery — uczestnicy tworzą własną mapę drogi zawodowej, odkrywają mocne strony i planują kolejne kroki edukacyjne i zawodowe.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["kariera", "planowanie", "rozwój osobisty", "coaching"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p038", "tytul": "Warsztaty AI — nadzieje i zagrożenia", "kategoria": "biznesowe", "podkategoria": "Edukacja i rozwój osobisty", "pitch": "Cykl zajęć o sztucznej inteligencji — praktyczne narzędzia AI, możliwości i ograniczenia, etyczne aspekty i wpływ na rynek pracy. Nauka krytycznego myślenia o technologii.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["AI", "sztuczna inteligencja", "technologia", "przyszłość", "warsztaty"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p039", "tytul": "Warsztaty projektowania LEGO", "kategoria": "spoleczne", "podkategoria": "Projekty związane z Hobby", "pitch": "Zajęcia z projektowania modeli LEGO — od szkicu koncepcyjnego przez budowę po dokumentację projektu. Rozwijanie myślenia przestrzennego i estetycznego u uczestników.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["LEGO", "projektowanie", "design", "3D", "kreatywność"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p040", "tytul": "Wirtualny influencer AI", "kategoria": "spoleczne", "podkategoria": "Edukacja i rozwój osobisty", "pitch": "Warsztaty tworzenia wirtualnego influencera z AI — Character.AI, Foocus i Midjourney. Projekt na styku technologii, marketingu i kreatywności cyfrowej dla młodych.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["AI", "influencer", "social media", "Midjourney", "marketing"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p041", "tytul": "Dzień wagarowicza 2024", "kategoria": "spoleczne", "podkategoria": "Wydarzenia", "pitch": "Organizacja Dnia Wagarowicza na kamieniołomie Dalnia-Grabina — wydarzenie integracyjne łączące uczniów z różnych szkół, aktywność na świeżym powietrzu i dobry humor.", "status": "zakonczone", "postep": "6. Zakończenie", "miejsce": "Kamieniołom Dalnia-Grabina, Kielce", "media": {"typ": "placeholder"}, "tagi": ["event", "integracja", "outdoor", "szkoła", "Kielce"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p042", "tytul": "Kielecki Klub Street Fight", "kategoria": "spoleczne", "podkategoria": "Projekty związane z Hobby", "pitch": "Założenie i organizacja klubu sportów walki MMA w Kielcach — projekt dla entuzjastów sportów kontaktowych, łączący trening z budowaniem lokalnej społeczności sportowej.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["MMA", "sport", "walki", "klub", "Kielce"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p043", "tytul": "Kino plenerowe na dachu galerii", "kategoria": "spoleczne", "podkategoria": "Wydarzenia", "pitch": "Organizacja kina plenerowego na dachu galerii handlowej w Kielcach — projekt tworzący nowe, niestandardowe miejsce spotkań kulturalnych dla młodych mieszkańców miasta.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["kino", "event", "kultura", "plener", "galeria"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p044", "tytul": "Cele samorządu Kielce 2024", "kategoria": "biznesowe", "podkategoria": "Projekty pod media", "pitch": "Projekt monitorowania i komunikowania celów samorządu Kielc — narzędzie edukacji demokratycznej pokazujące jak działają lokalne władze i jak rozliczać je z obietnic.", "status": "koncepcja", "postep": "1. Koncepcja", "miejsce": "Kielce", "media": {"typ": "placeholder"}, "tagi": ["samorząd", "demokracja", "Kielce", "transparentność", "media"], "dokumentacja": "", "narzedzia": [], "wnioski": []}, {"id": "p045", "tytul": "Przystanek Sassiedzki", "kategoria": "spoleczne", "podkategoria": "Projekty dla otoczenia", "pitch": "Pilotazowe wykorzystanie nieuzytkowywanej poczekalni autobusowej przy ul. Massalskiego jako przestrzeni edukacji, wspóldzielenia zasobów i testowania nowych inicjatyw spolecznych.", "status": "prototypowanie", "postep": "4. Prototypowanie", "miejsce": "ul. Massalskiego, Kielce", "media": {"typ": "placeholder"}, "narzedzia": [{"nazwa": "Google Docs", "opis": "Dokumentacja projektu i regulamin"}, {"nazwa": "Social media", "opis": "Promocja i komunikacja z mieszkancami"}, {"nazwa": "System ewidencji", "opis": "Rejestr wypozyczen zasobów"}], "wnioski": [], "tagi": ["przestrzen publiczna", "spolecznosc", "sharing", "edukacja", "osiedle"], "dokumentacja": "https://maps.app.goo.gl/HW8WDYQzEZVz8DWy7"}];
+
+async function loadProjekty() {
+  // Zawsze załaduj dane wbudowane najpierw
+  projekty = PROJEKTY_FALLBACK;
+  fillPicker();
+  // Spróbuj nadpisać świeższymi danymi z serwera
+  if (location.protocol !== 'file:') {
+    try {
+      const r = await fetch('projekty.json');
+      if (r.ok) {
+        projekty = await r.json();
+        fillPicker();
+      }
+    } catch(e) {}
+  }
+}
+
+function fillPicker() {
+  const sel = document.getElementById('projekt-picker');
+  sel.innerHTML = '<option value="">— Nowy projekt —</option>';
+  projekty.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.id;
+    opt.textContent = `${p.id} — ${p.tytul}`;
+    sel.appendChild(opt);
+  });
+  if (projekty.length) {
+    document.getElementById('picker-status').style.display = 'block';
+    document.getElementById('picker-status').textContent = `Załadowano ${projekty.length} projektów z projekty.json`;
+  }
+}
+
+function onPickerChange() {
+  const id = document.getElementById('projekt-picker').value;
+  if (!id) { clearForm(); return; }
+  const p = projekty.find(x => x.id === id);
+  if (p) loadIntoForm(p);
+}
+
+/* ── LOAD INTO FORM ── */
+function loadIntoForm(p) {
+  editId = p.id;
+  document.getElementById('f-id').value      = p.id || '';
+  document.getElementById('f-tytul').value   = p.tytul || '';
+  document.getElementById('f-kategoria').value = p.kategoria || 'spoleczne';
+  document.getElementById('f-podkategoria').value = p.podkategoria || '';
+  document.getElementById('f-pitch').value   = p.pitch || '';
+  document.getElementById('f-miejsce').value = p.miejsce || '';
+  document.getElementById('f-status').value  = p.status || 'koncepcja';
+  document.getElementById('f-postep').value  = p.postep || '1. Koncepcja';
+  document.getElementById('f-tagi').value    = (p.tagi||[]).join(', ');
+  document.getElementById('f-dok').value     = p.dokumentacja || '';
+
+  // widoczny
+  const widocznyEl = document.getElementById('f-widoczny');
+  widocznyEl.checked = p.widoczny !== false; // domyślnie true
+  widocznyEl.dispatchEvent(new Event('change'));
+  const m = p.media || {};
+  const typ = m.typ || 'placeholder';
+  mediaTyp = typ;
+  document.querySelectorAll('.mtab').forEach((b,i) => {
+    b.classList.toggle('active', ['placeholder','obraz','youtube','video'][i] === typ);
+  });
+  document.querySelectorAll('.media-field').forEach(f => f.classList.remove('active'));
+  document.getElementById('media-'+typ).classList.add('active');
+  if (typ==='obraz')   document.getElementById('media-obraz-src').value = m.src||'';
+  if (typ==='youtube') document.getElementById('media-yt-src').value   = m.src||'';
+  if (typ==='video')   document.getElementById('media-video-src').value = m.src||'';
+
+  // narzędzia
+  document.getElementById('narzedzia-list').innerHTML = '';
+  narzN = 0;
+  (p.narzedzia||[]).forEach(n => addNarzedzie(n.nazwa, n.opis));
+
+  // wnioski
+  document.getElementById('wnioski-list').innerHTML = '';
+  wnN = 0;
+  (p.wnioski||[]).forEach(w => addWniosek(w.typ, w.tresc));
+  if (!(p.wnioski||[]).length) {
+    addWniosek('+',''); addWniosek('-',''); addWniosek('->','');
+  }
+
+  // zmień przycisk
+  document.getElementById('btn-gen').textContent = `Zapisz zmiany w ${p.id} →`;
+  document.getElementById('output-wrap').classList.remove('visible');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* ── CLEAR FORM ── */
+function clearForm() {
+  editId = null;
+  document.getElementById('projekt-picker').value = '';
+  ['f-id','f-tytul','f-pitch','f-miejsce','f-tagi','f-dok',
+   'media-obraz-src','media-yt-src','media-video-src'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.getElementById('f-kategoria').value = 'spoleczne';
+  document.getElementById('f-podkategoria').value = 'Projekty dla szkoły';
+  document.getElementById('f-status').value = 'koncepcja';
+  document.getElementById('f-postep').value = '1. Koncepcja';
+  setMedia('placeholder', document.querySelector('.mtab'));
+  document.getElementById('narzedzia-list').innerHTML = '';
+  document.getElementById('wnioski-list').innerHTML = '';
+  document.getElementById('f-widoczny').checked = true;
+  document.getElementById('f-widoczny').dispatchEvent(new Event('change'));
+  narzN = 0; wnN = 0;
+  addNarzedzie('Google Docs','Dokumentacja projektu');
+  addNarzedzie('Canva','Plakat i materiały graficzne');
+  addWniosek('+',''); addWniosek('-',''); addWniosek('->','');
+  document.getElementById('btn-gen').textContent = 'Generuj JSON →';
+  document.getElementById('output-wrap').classList.remove('visible');
+}
+
+/* ── IMPORT JSON ── */
+function importJSON() {
+  const raw = document.getElementById('json-import').value.trim();
+  const err = document.getElementById('import-error');
+  err.style.display = 'none';
+  if (!raw) { err.textContent = 'Pole jest puste.'; err.style.display = 'block'; return; }
+  try {
+    const p = JSON.parse(raw);
+    if (!p.id || !p.tytul) throw new Error('Brak pola id lub tytul');
+    loadIntoForm(p);
+    document.getElementById('json-import').value = '';
+    document.getElementById('json-import').style.borderColor = 'var(--green)';
+    setTimeout(() => document.getElementById('json-import').style.borderColor = 'var(--border)', 1500);
+  } catch(e) {
+    err.textContent = 'Błąd JSON: ' + e.message;
+    err.style.display = 'block';
+  }
+}
+
+/* ── WIDOCZNY TOGGLE ── */
+document.getElementById('f-widoczny').addEventListener('change', function() {
+  const thumb = document.getElementById('toggle-thumb');
+  const track = document.getElementById('toggle-track');
+  if (this.checked) {
+    thumb.style.transform = 'translateX(20px)';
+    track.style.background = 'var(--o1)';
+  } else {
+    thumb.style.transform = 'translateX(0)';
+    track.style.background = 'var(--surface2)';
+  }
+});
 function syncPostep() {
   document.getElementById('f-postep').value = postepMap[document.getElementById('f-status').value];
 }
@@ -262,7 +454,7 @@ let mediaTyp = 'placeholder';
 function setMedia(typ, btn) {
   mediaTyp = typ;
   document.querySelectorAll('.mtab').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+  if (btn) btn.classList.add('active');
   document.querySelectorAll('.media-field').forEach(f=>f.classList.remove('active'));
   document.getElementById('media-'+typ).classList.add('active');
 }
@@ -301,58 +493,56 @@ function addWniosek(typ='+', tresc='') {
 
 /* ── GENERATE ── */
 function generate() {
-  const id       = document.getElementById('f-id').value.trim() || 'p000';
-  const tytul    = document.getElementById('f-tytul').value.trim();
-  const kat      = document.getElementById('f-kategoria').value;
-  const podkat   = document.getElementById('f-podkategoria').value;
-  const pitch    = document.getElementById('f-pitch').value.trim();
-  const miejsce  = document.getElementById('f-miejsce').value.trim();
-  const status   = document.getElementById('f-status').value;
-  const postep   = document.getElementById('f-postep').value;
-  const dok      = document.getElementById('f-dok').value.trim();
-  const tagiRaw  = document.getElementById('f-tagi').value;
-  const tagi     = tagiRaw.split(',').map(t=>t.trim()).filter(Boolean);
+  const id      = document.getElementById('f-id').value.trim() || 'p000';
+  const tytul   = document.getElementById('f-tytul').value.trim();
+  const kat     = document.getElementById('f-kategoria').value;
+  const podkat  = document.getElementById('f-podkategoria').value;
+  const pitch   = document.getElementById('f-pitch').value.trim();
+  const miejsce = document.getElementById('f-miejsce').value.trim();
+  const status  = document.getElementById('f-status').value;
+  const postep  = document.getElementById('f-postep').value;
+  const dok     = document.getElementById('f-dok').value.trim();
+  const tagi    = document.getElementById('f-tagi').value.split(',').map(t=>t.trim()).filter(Boolean);
 
-  // media
   let media;
-  if (mediaTyp === 'placeholder') {
-    media = { typ: 'placeholder' };
-  } else if (mediaTyp === 'obraz') {
-    media = { typ: 'obraz', src: document.getElementById('media-obraz-src').value.trim() };
-  } else if (mediaTyp === 'youtube') {
-    media = { typ: 'youtube', src: document.getElementById('media-yt-src').value.trim() };
-  } else {
-    media = { typ: 'video', src: document.getElementById('media-video-src').value.trim() };
-  }
+  if (mediaTyp==='placeholder') media = { typ:'placeholder' };
+  else if (mediaTyp==='obraz')  media = { typ:'obraz',   src: document.getElementById('media-obraz-src').value.trim() };
+  else if (mediaTyp==='youtube')media = { typ:'youtube', src: document.getElementById('media-yt-src').value.trim() };
+  else                          media = { typ:'video',   src: document.getElementById('media-video-src').value.trim() };
 
-  // narzędzia
   const narzedzia = [];
   document.querySelectorAll('#narzedzia-list .dyn-item').forEach(item => {
     const n = item.querySelector('.narz-nazwa').value.trim();
     const o = item.querySelector('.narz-opis').value.trim();
-    if (n) narzedzia.push({ nazwa: n, opis: o });
+    if (n) narzedzia.push({ nazwa:n, opis:o });
   });
 
-  // wnioski
   const wnioski = [];
   document.querySelectorAll('#wnioski-list .dyn-item').forEach(item => {
     const t = item.querySelector('.wn-typ').value;
     const tr = item.querySelector('.wn-tresc').value.trim();
-    if (tr) wnioski.push({ typ: t, tresc: tr });
+    if (tr) wnioski.push({ typ:t, tresc:tr });
   });
 
-  const obj = { id, tytul, kategoria: kat, podkategoria: podkat, pitch, status, postep, miejsce, media, narzedzia, wnioski, tagi, dokumentacja: dok };
+  const widoczny = document.getElementById('f-widoczny').checked;
+  const obj = { id, tytul, kategoria:kat, podkategoria:podkat, pitch, status, postep, miejsce, widoczny, media, narzedzia, wnioski, tagi, dokumentacja:dok };
   const json = JSON.stringify(obj, null, 2);
 
   document.getElementById('output-box').textContent = json;
+
+  const isEdit = !!editId;
+  document.getElementById('output-title').textContent = isEdit ? `Zaktualizowany projekt ${editId}` : 'Nowy projekt — gotowy blok JSON';
+  document.getElementById('output-hint').innerHTML = isEdit
+    ? `Znajdź w <code style="color:var(--gold);background:var(--bg3);padding:1px 4px;border-radius:3px">projekty.json</code> obiekt z <code style="color:var(--gold);background:var(--bg3);padding:1px 4px;border-radius:3px">"id": "${editId}"</code> i zastąp go całym tym blokiem.`
+    : `Wklej ten blok do <code style="color:var(--gold);background:var(--bg3);padding:1px 4px;border-radius:3px">projekty.json</code> — przed ostatnim <code style="color:var(--gold);background:var(--bg3);padding:1px 4px;border-radius:3px">]</code>, po przecinku kończącym poprzedni projekt.`;
+
   document.getElementById('output-wrap').classList.add('visible');
-  document.getElementById('output-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.getElementById('output-wrap').scrollIntoView({ behavior:'smooth', block:'start' });
 }
 
 /* ── COPY ── */
 function copyJSON() {
-  const text = document.getElementById('output-box').textContent;
-  navigator.clipboard.writeText(text).then(() => {
+  navigator.clipboard.writeText(document.getElementById('output-box').textContent).then(() => {
     const btn = document.getElementById('btn-copy');
     btn.textContent = '✓ Skopiowano';
     btn.classList.add('copied');
@@ -360,12 +550,11 @@ function copyJSON() {
   });
 }
 
-/* ── INIT — default narzędzia i wnioski ── */
+/* ── INIT ── */
 addNarzedzie('Google Docs', 'Dokumentacja projektu');
 addNarzedzie('Canva', 'Plakat i materiały graficzne');
-addWniosek('+', '');
-addWniosek('-', '');
-addWniosek('->', '');
+addWniosek('+',''); addWniosek('-',''); addWniosek('->','');
+loadProjekty();
 </script>
 </body>
 </html>
