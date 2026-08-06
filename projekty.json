@@ -109,6 +109,7 @@
     "status": "prototypowanie",
     "postep": "4. Prototypowanie",
     "miejsce": "Góra Ślichowica, Kielce",
+    "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -131,6 +132,7 @@
     "status": "zakonczone",
     "postep": "6. Zakończenie",
     "miejsce": "Targi Kielce",
+    "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -189,47 +191,27 @@
     "wnioski": []
   },
   {
-    {
-  "id": "p008",
-  "tytul": "Prawdziwa Demokracja \"barometr ustawodawczy\"",
-  "kategoria": "spoleczne",
-  "podkategoria": "Projekty natury komunikacyjnej",
-  "pitch": "Narzędzie do monitorowania i wizualizacji procesu legislacyjnego — platforma umożliwiająca obywatelom śledzenie tworzenia prawa i angażowanie się w konsultacje społeczne.",
-  "status": "prototypowanie",
-  "postep": "4. Prototypowanie",
-  "miejsce": "Polska",
-  "widoczny": true,
-  "media": {
-    "typ": "youtube",
-    "src": "quMyQPTdroQ"
-  },
-  "narzedzia": [
-    {
-      "nazwa": "SQL",
-      "opis": "prototypowanie bazy danych"
+    "id": "p008",
+    "tytul": "Barometr Ustawodawczy",
+    "kategoria": "biznesowe",
+    "podkategoria": "Projekty natury komunikacyjnej",
+    "pitch": "Narzędzie do monitorowania i wizualizacji procesu legislacyjnego — platforma umożliwiająca obywatelom śledzenie tworzenia prawa i angażowanie się w konsultacje społeczne.",
+    "status": "prototypowanie",
+    "postep": "4. Prototypowanie",
+    "miejsce": "Polska",
+    "widoczny": false,
+    "media": {
+      "typ": "placeholder"
     },
-    {
-      "nazwa": "Canva",
-      "opis": "Grafika i materiały promocyjne"
-    },
-    {
-      "nazwa": "MIRO",
-      "opis": "komunikacja  z partnerami"
-    },
-    {
-      "nazwa": "synapsa",
-      "opis": "Agregator opinii"
-    }
-  ],
-  "wnioski": [],
-  "tagi": [
-    "demokracja",
-    "prawo",
-    "obywatel",
-    "transparentność"
-  ],
-  "dokumentacja": "https://prawdziwademokracja.pl/"
-}
+    "tagi": [
+      "demokracja",
+      "prawo",
+      "obywatel",
+      "transparentność"
+    ],
+    "dokumentacja": "",
+    "narzedzia": [],
+    "wnioski": []
   },
   {
     "id": "p009",
@@ -262,6 +244,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -342,6 +325,7 @@
     "status": "prototypowanie",
     "postep": "4. Prototypowanie",
     "miejsce": "Kielce",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -364,6 +348,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -408,8 +393,8 @@
     "pitch": "Warsztaty tworzenia naturalnych kosmetyków — mydło, świece, kule do kąpieli, perfumy. Projekt łączy edukację ekologiczną z przedsiębiorczością i rzemiosłem artystycznym.",
     "status": "realizacja",
     "postep": "3. Realizacja",
-    "miejsce": "Powiat Kielce",
-    "media": { "typ": "obraz", "src": "assets/projekty/homemade.png" }
+    "miejsce": "Kielce",
+    "media": {
       "typ": "placeholder"
     },
     "tagi": [
@@ -541,6 +526,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -564,6 +550,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -586,6 +573,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -608,6 +596,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -630,6 +619,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -653,6 +643,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -676,6 +667,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Polska",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -699,6 +691,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Polska",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -722,6 +715,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Polska",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -745,6 +739,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -768,6 +763,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -814,6 +810,7 @@
     "status": "backlog",
     "postep": "2. Backlog",
     "miejsce": "Polska",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -860,6 +857,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -929,6 +927,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -997,6 +996,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -1043,6 +1043,7 @@
     "status": "zakonczone",
     "postep": "6. Zakończenie",
     "miejsce": "Kamieniołom Dalnia-Grabina, Kielce",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -1089,6 +1090,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -1112,6 +1114,7 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
+      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -1135,7 +1138,7 @@
     "status": "prototypowanie",
     "postep": "4. Prototypowanie",
     "miejsce": "ul. Massalskiego, Kielce",
-    "media": { "typ": "obraz", "src": "assets/projekty/Przystanek_sasiedzki.png" }
+    "media": {
       "typ": "placeholder"
     },
     "narzedzia": [
@@ -1151,7 +1154,18 @@
         "nazwa": "System ewidencji",
         "opis": "Rejestr wypozyczen zasobów"
       }
-    {
+    ],
+    "wnioski": [],
+    "tagi": [
+      "przestrzen publiczna",
+      "spolecznosc",
+      "sharing",
+      "edukacja",
+      "osiedle"
+    ],
+    "dokumentacja": "https://maps.app.goo.gl/HW8WDYQzEZVz8DWy7"
+  },
+  {
   "id": "p047",
   "tytul": "Wszyscy WON!",
   "kategoria": "spoleczne",
@@ -1160,10 +1174,9 @@
   "status": "realizacja",
   "postep": "3. Realizacja",
   "miejsce": "Polska",
-  "widoczny": true,
   "media": {
     "typ": "obraz",
-    "src": "assets/p047/Wszyscy_WON!.png"
+    "src": "assets/projekty/Wszyscy_WON!.png"
   },
   "narzedzia": [
     {
@@ -1188,15 +1201,4 @@
   ],
   "dokumentacja": "https://www.wszyscy.org/"
 }
-    ],
-    "wnioski": [],
-    "tagi": [
-      "przestrzen publiczna",
-      "spolecznosc",
-      "sharing",
-      "edukacja",
-      "osiedle"
-    ],
-    "dokumentacja": "https://maps.app.goo.gl/HW8WDYQzEZVz8DWy7"
-  }
 ]
