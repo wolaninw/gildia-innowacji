@@ -189,47 +189,26 @@
     "wnioski": []
   },
   {
-    {
-  "id": "p008",
-  "tytul": "Prawdziwa Demokracja \"barometr ustawodawczy\"",
-  "kategoria": "spoleczne",
-  "podkategoria": "Projekty natury komunikacyjnej",
-  "pitch": "Narzędzie do monitorowania i wizualizacji procesu legislacyjnego — platforma umożliwiająca obywatelom śledzenie tworzenia prawa i angażowanie się w konsultacje społeczne.",
-  "status": "prototypowanie",
-  "postep": "4. Prototypowanie",
-  "miejsce": "Polska",
-  "widoczny": true,
-  "media": {
-    "typ": "youtube",
-    "src": "quMyQPTdroQ"
-  },
-  "narzedzia": [
-    {
-      "nazwa": "SQL",
-      "opis": "prototypowanie bazy danych"
+    "id": "p008",
+    "tytul": "Barometr Ustawodawczy",
+    "kategoria": "biznesowe",
+    "podkategoria": "Projekty natury komunikacyjnej",
+    "pitch": "Narzędzie do monitorowania i wizualizacji procesu legislacyjnego — platforma umożliwiająca obywatelom śledzenie tworzenia prawa i angażowanie się w konsultacje społeczne.",
+    "status": "prototypowanie",
+    "postep": "4. Prototypowanie",
+    "miejsce": "Polska",
+    "media": {
+      "typ": "placeholder"
     },
-    {
-      "nazwa": "Canva",
-      "opis": "Grafika i materiały promocyjne"
-    },
-    {
-      "nazwa": "MIRO",
-      "opis": "komunikacja  z partnerami"
-    },
-    {
-      "nazwa": "synapsa",
-      "opis": "Agregator opinii"
-    }
-  ],
-  "wnioski": [],
-  "tagi": [
-    "demokracja",
-    "prawo",
-    "obywatel",
-    "transparentność"
-  ],
-  "dokumentacja": "https://prawdziwademokracja.pl/"
-}
+    "tagi": [
+      "demokracja",
+      "prawo",
+      "obywatel",
+      "transparentność"
+    ],
+    "dokumentacja": "",
+    "narzedzia": [],
+    "wnioski": []
   },
   {
     "id": "p009",
@@ -408,8 +387,8 @@
     "pitch": "Warsztaty tworzenia naturalnych kosmetyków — mydło, świece, kule do kąpieli, perfumy. Projekt łączy edukację ekologiczną z przedsiębiorczością i rzemiosłem artystycznym.",
     "status": "realizacja",
     "postep": "3. Realizacja",
-    "miejsce": "Powiat Kielce",
-    "media": { "typ": "obraz", "src": "assets/projekty/homemade.png" }
+    "miejsce": "Kielce",
+    "media": {
       "typ": "placeholder"
     },
     "tagi": [
@@ -1128,14 +1107,14 @@
   },
   {
     "id": "p045",
-    "tytul": "Przystanek Sąsiedzki",
+    "tytul": "Przystanek Sassiedzki",
     "kategoria": "spoleczne",
     "podkategoria": "Projekty dla otoczenia",
     "pitch": "Pilotazowe wykorzystanie nieuzytkowywanej poczekalni autobusowej przy ul. Massalskiego jako przestrzeni edukacji, wspóldzielenia zasobów i testowania nowych inicjatyw spolecznych.",
     "status": "prototypowanie",
     "postep": "4. Prototypowanie",
     "miejsce": "ul. Massalskiego, Kielce",
-    "media": { "typ": "obraz", "src": "assets/projekty/Przystanek_sasiedzki.png" }
+    "media": {
       "typ": "placeholder"
     },
     "narzedzia": [
@@ -1151,43 +1130,6 @@
         "nazwa": "System ewidencji",
         "opis": "Rejestr wypozyczen zasobów"
       }
-    {
-  "id": "p047",
-  "tytul": "Wszyscy WON!",
-  "kategoria": "spoleczne",
-  "podkategoria": "Projekty natury komunikacyjnej",
-  "pitch": "Wszyscy WON! to obywatelska inicjatywa łącząca wiedzę, konsultacje i społeczności lokalne. Projekt pomaga obywatelom współdecydować i odzyskiwać wpływ na państwo.",
-  "status": "realizacja",
-  "postep": "3. Realizacja",
-  "miejsce": "Polska",
-  "widoczny": true,
-  "media": {
-    "typ": "obraz",
-    "src": "assets/p047/Wszyscy_WON!.png"
-  },
-  "narzedzia": [
-    {
-      "nazwa": "Wix",
-      "opis": "Budowa i rozwój portalu internetowego"
-    },
-    {
-      "nazwa": "WhatsApp",
-      "opis": "Komunikacja i organizacja lokalnych grup powiatowych"
-    },
-    {
-      "nazwa": "Wikikracja",
-      "opis": "Dyskusje, konsultacje i rozwój narzędzi demokracji uczestniczącej"
-    }
-  ],
-  "wnioski": [],
-  "tagi": [
-    "społeczeństwo obywatelskie",
-    "demokracja",
-    "konsultacje społeczne",
-    "społeczności lokalne"
-  ],
-  "dokumentacja": "https://www.wszyscy.org/"
-}
     ],
     "wnioski": [],
     "tagi": [

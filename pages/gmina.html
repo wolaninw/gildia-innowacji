@@ -3,1187 +3,574 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gildia Innowacji – Program dla gmin i JST</title>
+<title>Gildia Innowacji – Partnerstwo Regionalne</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --ink:      #0d0814;
-  --paper:    #f9f6f1;
-  --warm:     #f1ece3;
-  --purple:   #45276e;
-  --burgundy: #621708;
-  --red:      #941b0c;
-  --orange:   #f4643a;
-  --gold:     #f7bb35;
-  --muted:    #9a8fa8;
-  --border:   rgba(69,39,110,0.12);
-  --white:    #ffffff;
+  --bg:#faf7f2; --ink:#0d0814; --warm:#f2ebe0; --card:#ffffff;
+  --purple:#45276e; --burgundy:#621708; --red:#941b0c;
+  --orange:#f4643a; --gold:#f7bb35; --muted:#6b5c4e; --border:rgba(13,8,20,0.1); --white:#ffffff;
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden;}
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--paper);
-  color: var(--ink);
-  font-family: 'Barlow', sans-serif;
-  font-weight: 300;
-  overflow-x: hidden;
-}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1rem 4rem;background:rgba(250,247,242,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+.nav-brand{display:flex;align-items:center;gap:0.8rem;text-decoration:none;}
+.nav-brand img{width:44px;height:44px;object-fit:contain;border-radius:50%;box-shadow:0 2px 12px rgba(244,100,58,0.3),0 0 0 2px rgba(244,100,58,0.12);background:var(--bg);padding:2px;}
+.nav-brand-text{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--ink);}
+.nav-brand-text span{color:var(--orange);}
+.nav-badge{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;background:rgba(69,39,110,0.1);color:var(--purple);border:1px solid rgba(69,39,110,0.2);padding:0.2rem 0.7rem;border-radius:100px;}
+.nav-right{display:flex;align-items:center;gap:2rem;}
+.nav-right a{font-size:0.82rem;font-weight:500;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-right a:hover{color:var(--ink);}
+.nav-cta{background:linear-gradient(135deg,var(--purple),var(--red));color:white;font-size:0.78rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:0.65rem 1.6rem;border:none;border-radius:100px;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 4px 16px rgba(69,39,110,0.35);transition:opacity 0.2s,transform 0.15s;}
+.nav-cta:hover{opacity:0.85;transform:translateY(-2px);}
 
-/* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 1rem 4rem;
-  background: rgba(13,8,20,0.95);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(247,187,53,0.15);
-}
-.nav-brand { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
-.nav-brand img {
-  width: 44px; height: 44px; object-fit: contain;
-  border-radius: 50%;
-  box-shadow: 0 2px 12px rgba(247,187,53,0.35), 0 0 0 2px rgba(247,187,53,0.15);
-  background: var(--paper);
-  padding: 2px;
-}
-.nav-brand-text {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem; font-weight: 700; color: var(--paper);
-  letter-spacing: 0.02em;
-}
-.nav-brand-text span { color: var(--gold); }
-.nav-badge {
-  font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase;
-  background: rgba(247,187,53,0.15); color: var(--gold);
-  border: 1px solid rgba(247,187,53,0.3);
-  padding: 0.2rem 0.7rem; border-radius: 100px;
-}
-.nav-right { display: flex; align-items: center; gap: 2rem; }
-.nav-right a {
-  font-size: 0.8rem; font-weight: 500; letter-spacing: 0.04em;
-  color: rgba(249,246,241,0.75); text-decoration: none;
-  transition: color 0.2s;
-}
-.nav-right a:hover { color: var(--paper); }
-.nav-cta {
-  background: var(--gold); color: var(--ink);
-  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.07em;
-  text-transform: uppercase; padding: 0.65rem 1.6rem;
-  border: none; border-radius: 100px; cursor: pointer;
-  text-decoration: none; display: inline-block;
-  box-shadow: 0 4px 16px rgba(247,187,53,0.4), 0 1px 3px rgba(0,0,0,0.2);
-  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-}
-.nav-cta:hover { background: var(--orange); color: white; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(244,100,58,0.45); }
+/* HERO */
+.hero{min-height:100vh;background:var(--ink);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding-top:72px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 55% 65% at 15% 50%,rgba(69,39,110,0.55),transparent 60%),radial-gradient(ellipse 40% 50% at 85% 30%,rgba(98,23,8,0.4),transparent 60%);}
+.hero-left{padding:5rem 4rem 5rem 5rem;position:relative;z-index:2;}
+.hero-kicker{display:inline-flex;align-items:center;gap:0.8rem;font-size:0.65rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:2rem;animation:fadeUp 0.8s ease both;}
+.kicker-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,4.5vw,5rem);font-weight:900;line-height:1.02;color:white;margin-bottom:1.8rem;animation:fadeUp 0.8s 0.1s ease both;}
+.hero-h1 em{color:var(--gold);font-style:italic;}
+.hero-lead{font-size:1.05rem;line-height:1.85;color:rgba(250,247,242,0.65);max-width:480px;margin-bottom:2.5rem;animation:fadeUp 0.8s 0.2s ease both;}
+.hero-lead strong{color:white;font-weight:500;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp 0.8s 0.3s ease both;}
+.btn-gold{background:var(--gold);color:var(--ink);font-family:'Barlow',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:1rem 2.2rem;border:none;border-radius:100px;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 6px 20px rgba(247,187,53,0.45);transition:transform 0.2s,box-shadow 0.2s;}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(247,187,53,0.5);}
+.btn-outline-light{background:transparent;color:rgba(250,247,242,0.8);font-size:0.85rem;font-weight:500;padding:1rem 2.2rem;border:1.5px solid rgba(250,247,242,0.2);border-radius:100px;cursor:pointer;text-decoration:none;display:inline-block;transition:border-color 0.2s,color 0.2s;}
+.btn-outline-light:hover{border-color:var(--gold);color:var(--gold);}
 
-/* ── HERO ── */
-.hero {
-  background: var(--ink);
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  position: relative;
-  overflow: hidden;
-  padding-top: 72px;
-}
+/* hero right */
+.hero-right{padding:5rem 5rem 5rem 3rem;position:relative;z-index:2;animation:fadeIn 1s 0.4s ease both;}
+.stat-panel{display:flex;flex-direction:column;gap:1.2rem;}
+.stat-block{padding:1.6rem 2rem;border:1px solid rgba(250,247,242,0.07);border-radius:10px;background:rgba(250,247,242,0.03);position:relative;overflow:hidden;transition:border-color 0.3s;}
+.stat-block:hover{border-color:rgba(247,187,53,0.3);}
+.stat-block::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--gold),var(--orange));border-radius:3px 0 0 3px;}
+.sb-title{font-weight:600;font-size:0.9rem;color:white;margin-bottom:0.35rem;}
+.sb-body{font-size:0.82rem;color:rgba(250,247,242,0.5);line-height:1.6;}
+.sb-badge{display:inline-block;margin-top:0.5rem;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;background:rgba(244,100,58,0.15);color:var(--orange);padding:0.2rem 0.6rem;border-radius:100px;font-weight:700;}
 
-/* diagonal split */
-.hero::after {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0;
-  left: 48%; width: 4px;
-  background: linear-gradient(180deg, transparent, var(--gold) 30%, var(--orange) 70%, transparent);
-  opacity: 0.4;
-  z-index: 1;
-}
+/* bottom bar */
+.hero-bottom{grid-column:1/-1;border-top:1px solid rgba(250,247,242,0.06);display:grid;grid-template-columns:repeat(4,1fr);position:relative;z-index:2;}
+.hb-item{padding:1.8rem 2.5rem;border-right:1px solid rgba(250,247,242,0.06);}
+.hb-item:last-child{border-right:none;}
+.hb-num{font-family:'Playfair Display',serif;font-weight:900;font-size:2rem;line-height:1;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hb-label{font-size:0.78rem;color:rgba(250,247,242,0.45);line-height:1.4;margin-top:0.3rem;}
 
-.hero-bg {
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 60% 70% at 20% 50%, rgba(69,39,110,0.5) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 50% at 80% 30%, rgba(98,23,8,0.4) 0%, transparent 60%);
-}
+/* AUDIENCE STRIP */
+.astrip{background:var(--white);border-bottom:1px solid var(--border);padding:1.4rem 4rem;text-align:center;font-size:0.88rem;color:var(--muted);}
+.astrip strong{color:var(--ink);}
 
-.hero-left {
-  padding: 6rem 4rem 5rem 5rem;
-  display: flex; flex-direction: column; justify-content: center;
-  position: relative; z-index: 2;
-}
+/* SECTIONS */
+.sec{padding:7rem 4rem;}
+.sec-inner{max-width:1200px;margin:0 auto;}
+.eyebrow{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--orange);font-weight:600;display:flex;align-items:center;gap:0.6rem;margin-bottom:0.8rem;}
+.eyebrow::before{content:'';width:20px;height:2px;background:var(--orange);border-radius:2px;}
+.sec-h{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(2rem,3.5vw,3rem);line-height:1.1;margin-bottom:1rem;}
+.sec-h em{color:var(--orange);font-style:italic;}
+.sec-sub{font-size:1rem;color:var(--muted);line-height:1.8;max-width:640px;}
 
-.hero-kicker {
-  display: inline-flex; align-items: center; gap: 0.8rem;
-  font-size: 0.65rem; letter-spacing: 0.24em; text-transform: uppercase;
-  color: var(--gold); font-weight: 600;
-  margin-bottom: 2.5rem;
-  animation: fadeUp 0.8s ease both;
-}
-.kicker-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+/* PROBLEM */
+.problem{background:var(--white);}
+.problem-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.prob-card{padding:2.2rem 2rem;border:1.5px solid var(--border);border-radius:12px;background:var(--bg);position:relative;overflow:hidden;transition:border-color 0.2s,transform 0.2s;}
+.prob-card:hover{border-color:var(--orange);transform:translateY(-3px);}
+.prob-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--purple),var(--orange));transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+.prob-card:hover::before{transform:scaleX(1);}
+.prob-num{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:rgba(13,8,20,0.05);line-height:1;margin-bottom:0.5rem;}
+.prob-title{font-weight:700;font-size:1.1rem;margin-bottom:0.6rem;}
+.prob-body{font-size:0.85rem;color:var(--muted);line-height:1.75;}
 
-.hero-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(3rem, 5vw, 5.5rem);
-  font-weight: 900; line-height: 1.02;
-  letter-spacing: -0.02em;
-  color: var(--paper);
-  margin-bottom: 2rem;
-  animation: fadeUp 0.8s 0.1s ease both;
-}
-.hero-h1 em { color: var(--gold); font-style: italic; font-weight: 700; display: block; }
+/* VISION */
+.vision{background:var(--ink);color:white;padding:7rem 4rem;}
+.vision-inner{max-width:1200px;margin:0 auto;}
+.vision .eyebrow{color:var(--gold);}
+.vision .eyebrow::before{background:var(--gold);}
+.vision-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.5rem,5vw,4.5rem);line-height:1.02;color:white;margin-bottom:1.5rem;}
+.vision-h em{color:var(--gold);font-style:italic;}
+.vision-lead{font-size:1.1rem;color:rgba(250,247,242,0.65);line-height:1.85;max-width:680px;margin-bottom:4rem;}
+.vision-lead strong{color:white;font-weight:500;}
 
-.hero-lead {
-  font-size: 1.05rem; line-height: 1.8;
-  color: rgba(249,246,241,0.78);
-  max-width: 460px; margin-bottom: 3rem;
-  animation: fadeUp 0.8s 0.2s ease both;
-}
-.hero-lead strong { color: var(--paper); font-weight: 500; }
+/* mikro centra grid */
+.mck-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(250,247,242,0.06);border:1px solid rgba(250,247,242,0.06);border-radius:12px;overflow:hidden;margin-bottom:4rem;}
+.mck{background:#18140f;padding:2.2rem 2rem;transition:background 0.3s;}
+.mck:hover{background:rgba(98,23,8,0.25);}
+.mck-icon{font-size:1.5rem;margin-bottom:1rem;display:block;}
+.mck-title{font-weight:700;font-size:0.95rem;margin-bottom:0.4rem;}
+.mck-body{font-size:0.82rem;color:rgba(250,247,242,0.48);line-height:1.65;}
 
-.hero-btns {
-  display: flex; gap: 1rem; flex-wrap: wrap;
-  animation: fadeUp 0.8s 0.3s ease both;
-}
-.btn-gold {
-  background: var(--gold); color: var(--ink);
-  font-family: 'Barlow', sans-serif;
-  font-size: 0.85rem; font-weight: 700; letter-spacing: 0.06em;
-  text-transform: uppercase; padding: 1rem 2.2rem;
-  border: none; border-radius: 100px; cursor: pointer;
-  text-decoration: none; display: inline-block;
-  box-shadow: 0 6px 20px rgba(247,187,53,0.45), 0 2px 6px rgba(0,0,0,0.15);
-  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-}
-.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(247,187,53,0.5); background: #ffc840; }
-.btn-outline-light {
-  background: rgba(249,246,241,0.07); color: rgba(249,246,241,0.85);
-  font-size: 0.85rem; font-weight: 500;
-  padding: 1rem 2.2rem;
-  border: 1.5px solid rgba(249,246,241,0.25);
-  border-radius: 100px; cursor: pointer;
-  text-decoration: none; display: inline-block;
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
-}
-.btn-outline-light:hover { border-color: var(--gold); color: var(--gold); background: rgba(247,187,53,0.08); }
+/* ekosystem */
+.eco{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:2rem;}
+.eco-text h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:1rem;}
+.eco-text h3 em{color:var(--gold);font-style:italic;}
+.eco-text p{font-size:0.9rem;color:rgba(250,247,242,0.6);line-height:1.8;margin-bottom:0.8rem;}
+.eco-nodes{display:flex;flex-direction:column;gap:0.8rem;}
+.eco-node{display:flex;align-items:center;gap:1rem;padding:1rem 1.4rem;background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.07);border-radius:8px;font-size:0.85rem;color:rgba(250,247,242,0.75);transition:border-color 0.2s;}
+.eco-node:hover{border-color:rgba(247,187,53,0.3);}
+.eco-node-icon{font-size:1.1rem;flex-shrink:0;}
 
-/* hero right — stats panel */
-.hero-right {
-  padding: 6rem 4rem 5rem 5rem;
-  display: flex; flex-direction: column; justify-content: center;
-  position: relative; z-index: 2;
-  animation: fadeIn 1s 0.4s ease both;
-}
+/* WHY NOW */
+.whynow{background:var(--warm);}
+.why-grid{display:grid;grid-template-columns:1fr 2fr;gap:6rem;align-items:start;}
+.why-sticky{position:sticky;top:7rem;}
+.why-items{display:flex;flex-direction:column;gap:1.2rem;}
+.why-item{display:grid;grid-template-columns:3rem 1fr;gap:1.2rem;align-items:start;padding:1.6rem 1.8rem;background:var(--card);border-radius:10px;border:1.5px solid var(--border);transition:border-color 0.2s,transform 0.2s;}
+.why-item:hover{border-color:var(--orange);transform:translateX(4px);}
+.wi-num{font-family:'Playfair Display',serif;font-weight:900;font-size:2rem;line-height:1;color:rgba(13,8,20,0.07);}
+.wi-h{font-weight:700;font-size:0.95rem;margin-bottom:0.3rem;}
+.wi-p{font-size:0.83rem;color:var(--muted);line-height:1.65;}
 
-.stat-panel { display: flex; flex-direction: column; gap: 1.5rem; }
+/* MODEL */
+.model{background:var(--white);}
+.model-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:3rem;}
+.ms{background:var(--bg);padding:2.5rem 2rem;transition:background 0.3s;}
+.ms:hover{background:var(--warm);}
+.ms-n{font-family:'Playfair Display',serif;font-weight:900;font-size:3.5rem;line-height:1;color:rgba(13,8,20,0.05);margin-bottom:0.8rem;}
+.ms-icon{font-size:1.6rem;margin-bottom:1rem;display:block;}
+.ms-title{font-weight:700;font-size:1.05rem;margin-bottom:0.6rem;}
+.ms-body{font-size:0.83rem;color:var(--muted);line-height:1.7;}
 
-.stat-block {
-  padding: 1.8rem 2rem;
-  border: 1px solid rgba(249,246,241,0.06);
-  border-radius: 8px;
-  background: rgba(249,246,241,0.03);
-  position: relative; overflow: hidden;
-  transition: border-color 0.3s, background 0.3s;
-}
-.stat-block:hover {
-  border-color: rgba(247,187,53,0.3);
-  background: rgba(247,187,53,0.05);
-}
-.stat-block::before {
-  content: '';
-  position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-  background: linear-gradient(180deg, var(--gold), var(--orange));
-  border-radius: 3px 0 0 3px;
-}
-.sb-top {
-  display: flex; align-items: flex-start;
-  justify-content: space-between; gap: 1rem;
-  margin-bottom: 0.6rem;
-}
-.sb-title { font-weight: 600; font-size: 0.92rem; color: var(--paper); }
-.sb-badge {
-  font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
-  background: rgba(244,100,58,0.15); color: var(--orange);
-  padding: 0.2rem 0.6rem; border-radius: 100px; white-space: nowrap; flex-shrink: 0;
-}
-.sb-body { font-size: 0.82rem; color: rgba(249,246,241,0.72); line-height: 1.6; }
+/* CONFERENCE */
+.conference{background:linear-gradient(135deg,#1a0e30,#2e1a0e);color:white;padding:7rem 4rem;}
+.conf-inner{max-width:1200px;margin:0 auto;}
+.conf-eyebrow{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:0.6rem;margin-bottom:1rem;}
+.conf-eyebrow::before{content:'';width:20px;height:2px;background:var(--gold);border-radius:2px;}
+.conf-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,4vw,3.5rem);line-height:1.05;color:white;margin-bottom:1.2rem;}
+.conf-h em{color:var(--gold);font-style:italic;}
+.conf-lead{font-size:1rem;color:rgba(250,247,242,0.6);line-height:1.8;max-width:620px;margin-bottom:3rem;}
+.conf-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.conf-topics{display:flex;flex-direction:column;gap:0.7rem;}
+.conf-topic{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.4rem;background:rgba(250,247,242,0.04);border:1px solid rgba(250,247,242,0.07);border-radius:8px;font-size:0.85rem;color:rgba(250,247,242,0.75);transition:border-color 0.2s;}
+.conf-topic:hover{border-color:rgba(247,187,53,0.3);}
+.ct-icon{font-size:1.1rem;flex-shrink:0;}
+.conf-format{background:rgba(247,187,53,0.08);border:1px solid rgba(247,187,53,0.15);border-radius:12px;padding:2.5rem;}
+.cf-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;margin-bottom:1rem;color:var(--gold);}
+.cf-items{display:flex;flex-direction:column;gap:0.6rem;}
+.cf-item{display:flex;gap:0.7rem;font-size:0.85rem;color:rgba(250,247,242,0.72);}
+.cf-item::before{content:'→';color:var(--gold);flex-shrink:0;}
+.conf-cta{margin-top:2rem;}
 
-/* hero bottom bar */
-.hero-bottom {
-  grid-column: 1 / -1;
-  border-top: 1px solid rgba(249,246,241,0.06);
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  position: relative; z-index: 2;
-}
-.hb-item {
-  padding: 1.8rem 2.5rem;
-  border-right: 1px solid rgba(249,246,241,0.06);
-  display: flex; align-items: center; gap: 1rem;
-}
-.hb-item:last-child { border-right: none; }
-.hb-num {
-  font-family: 'Playfair Display', serif;
-  font-weight: 900; font-size: 2rem; line-height: 1;
-  background: linear-gradient(135deg, var(--gold), var(--orange));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hb-label { font-size: 0.78rem; color: rgba(249,246,241,0.68); line-height: 1.4; }
+/* PARTNERSHIP */
+.partner{background:var(--warm);}
+.partner-h{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(2rem,3.5vw,3rem);line-height:1.1;margin-bottom:1rem;}
+.partner-h em{color:var(--orange);font-style:italic;}
+.partner-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3rem;}
+.part-card{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:2rem;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;}
+.part-card:hover{border-color:var(--orange);transform:translateY(-3px);box-shadow:0 12px 36px rgba(13,8,20,0.08);}
+.pc-icon{font-size:2rem;margin-bottom:1rem;display:block;}
+.pc-title{font-weight:700;font-size:1rem;margin-bottom:0.5rem;}
+.pc-body{font-size:0.83rem;color:var(--muted);line-height:1.7;}
+.partner-note{margin-top:2rem;padding:1.4rem 1.8rem;background:rgba(244,100,58,0.07);border:1px solid rgba(244,100,58,0.15);border-radius:10px;font-size:0.88rem;color:var(--ink);line-height:1.7;display:flex;gap:1rem;align-items:flex-start;}
 
-/* ── SECTIONS ── */
-.section { padding: 7rem 4rem; }
-.section-inner { max-width: 1200px; margin: 0 auto; }
+/* CONTACT */
+.contact{background:linear-gradient(135deg,var(--purple),var(--burgundy));color:white;padding:7rem 4rem;}
+.contact-inner{max-width:1200px;margin:0 auto;}
+.contact .eyebrow{color:var(--gold);}
+.contact .eyebrow::before{background:var(--gold);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;}
+.contact-left p{font-size:1rem;color:rgba(250,247,242,0.72);line-height:1.8;margin-bottom:2rem;}
+.ci-items{display:flex;flex-direction:column;gap:0.8rem;margin-bottom:2rem;}
+.ci-item{display:flex;align-items:center;gap:0.8rem;font-size:0.88rem;}
+.ci-item a{color:var(--gold);text-decoration:none;}
+.ci-item a:hover{text-decoration:underline;}
+.ci-item span{color:rgba(250,247,242,0.7);}
+.trust-list{display:flex;flex-direction:column;gap:0.7rem;}
+.trust-item{display:flex;gap:0.8rem;align-items:flex-start;padding:0.9rem 1.2rem;background:rgba(250,247,242,0.07);border:1px solid rgba(250,247,242,0.1);border-radius:8px;font-size:0.82rem;color:rgba(250,247,242,0.7);line-height:1.5;}
 
-.eyebrow {
-  font-size: 0.67rem; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--orange); font-weight: 600;
-  display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem;
-}
-.eyebrow::before { content: ''; width: 20px; height: 1.5px; background: var(--orange); }
+.cform{background:rgba(250,247,242,0.06);border:1px solid rgba(250,247,242,0.12);border-radius:14px;padding:2.5rem;}
+.cf-h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin-bottom:0.3rem;}
+.cf-sub{font-size:0.82rem;color:rgba(250,247,242,0.5);margin-bottom:2rem;line-height:1.5;}
+.fgroup{display:flex;flex-direction:column;gap:0.35rem;margin-bottom:1rem;}
+.flabel{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(250,247,242,0.45);font-weight:600;}
+.finput,.fselect,.ftextarea{background:rgba(250,247,242,0.07);border:1.5px solid rgba(250,247,242,0.12);color:white;font-family:'Barlow',sans-serif;font-size:0.9rem;padding:0.85rem 1rem;outline:none;border-radius:8px;transition:border-color 0.2s;}
+.finput::placeholder,.ftextarea::placeholder{color:rgba(250,247,242,0.22);}
+.finput:focus,.fselect:focus,.ftextarea:focus{border-color:var(--gold);}
+.fselect option{background:var(--burgundy);}
+.ftextarea{resize:vertical;min-height:90px;}
+.btn-submit{width:100%;background:var(--gold);color:var(--ink);font-family:'Barlow',sans-serif;font-size:0.88rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:1.1rem;border:none;border-radius:100px;cursor:pointer;margin-top:0.5rem;box-shadow:0 4px 16px rgba(247,187,53,0.4);transition:transform 0.2s,box-shadow 0.2s;}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(247,187,53,0.5);}
+.form-note{text-align:center;font-size:0.72rem;color:rgba(250,247,242,0.35);margin-top:0.8rem;}
+.success-box{display:none;text-align:center;padding:3rem 1rem;}
+.success-box h3{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:0.5rem;}
+.success-box p{font-size:0.88rem;color:rgba(250,247,242,0.6);line-height:1.6;}
 
-.sec-h {
-  font-family: 'Playfair Display', serif;
-  font-weight: 900; font-size: clamp(2rem, 3.5vw, 3rem);
-  line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 1rem;
-}
-.sec-h em { color: var(--orange); font-style: italic; font-weight: 700; }
-.sec-sub { font-size: 1rem; color: var(--muted); line-height: 1.8; max-width: 600px; }
+footer{background:#08040e;color:rgba(250,247,242,0.3);padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;border-top:1px solid rgba(247,187,53,0.1);}
+.foot-brand{font-family:'Playfair Display',serif;font-size:0.95rem;color:white;font-weight:700;}
+.foot-brand span{color:var(--gold);}
+.foot-links{display:flex;gap:2rem;}
+.foot-links a{color:rgba(250,247,242,0.3);text-decoration:none;transition:color 0.2s;}
+.foot-links a:hover{color:white;}
 
-/* ── PROBLEM ── */
-.problem-sec { background: var(--white); }
+/* reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.on{opacity:1;transform:none;}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.4s}
 
-.prob-grid {
-  display: grid; grid-template-columns: 5fr 7fr; gap: 6rem; align-items: start;
-  margin-top: 1rem;
-}
-.prob-sticky { position: sticky; top: 7rem; }
-.prob-desc { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-top: 1rem; }
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(0.6);}}
 
-.prob-items { display: flex; flex-direction: column; gap: 1.2rem; }
-.prob-item {
-  display: grid; grid-template-columns: 3rem 1fr;
-  gap: 1.2rem; align-items: start;
-  padding: 1.6rem 1.8rem;
-  background: var(--warm);
-  border-radius: 8px;
-  border-left: 3px solid transparent;
-  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-}
-.prob-item:hover {
-  border-left-color: var(--orange);
-  transform: translateX(4px);
-  box-shadow: 0 6px 24px rgba(13,8,20,0.06);
-}
-.prob-n {
-  font-family: 'Playfair Display', serif;
-  font-weight: 900; font-size: 2rem; line-height: 1;
-  color: rgba(13,8,20,0.06);
-}
-.prob-content h3 { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.3rem; }
-.prob-content p { font-size: 0.83rem; color: var(--muted); line-height: 1.65; }
-
-/* ── OFFER ── */
-.offer-sec { background: var(--warm); }
-
-.offer-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
-.offer-card {
-  background: var(--white);
-  border-radius: 10px;
-  border: 1.5px solid var(--border);
-  padding: 2.2rem 2rem;
-  position: relative; overflow: hidden;
-  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-}
-.offer-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(69,39,110,0.1);
-  border-color: var(--orange);
-}
-.offer-card::after {
-  content: '';
-  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, var(--purple), var(--orange), var(--gold));
-  transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
-}
-.offer-card:hover::after { transform: scaleX(1); }
-.oc-icon { font-size: 2rem; margin-bottom: 1.2rem; display: block; }
-.oc-title {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700; font-size: 1.2rem; margin-bottom: 0.7rem;
-}
-.oc-body { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
-.oc-tag {
-  display: inline-block; margin-top: 1.2rem;
-  font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 0.22rem 0.6rem; border-radius: 100px;
-  border: 1px solid var(--border); color: #5a4f65;
-}
-
-/* resources row */
-.resources-row {
-  display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-top: 2rem;
-}
-.res-item {
-  padding: 1.2rem 1.4rem;
-  background: var(--white); border: 1.5px solid var(--border); border-radius: 8px;
-  display: flex; align-items: flex-start; gap: 0.8rem;
-  transition: border-color 0.2s;
-}
-.res-item:hover { border-color: var(--orange); }
-.res-icon { font-size: 1.2rem; flex-shrink: 0; }
-.res-text strong { display: block; font-weight: 600; font-size: 0.82rem; margin-bottom: 0.15rem; }
-.res-text span { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
-
-/* ── GOALS ── */
-.goals-sec { background: var(--purple); color: var(--paper); }
-.goals-sec .eyebrow { color: var(--gold); }
-.goals-sec .eyebrow::before { background: var(--gold); }
-.goals-sec .sec-h { color: var(--paper); }
-.goals-sec .sec-h em { color: var(--gold); }
-.goals-sec .sec-sub { color: rgba(249,246,241,0.75); }
-
-.goals-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(249,246,241,0.06); border: 1px solid rgba(249,246,241,0.06); border-radius: 10px; overflow: hidden; margin-top: 3rem; }
-.goal-item {
-  background: rgba(13,8,20,0.3);
-  padding: 2.2rem 2rem;
-  transition: background 0.3s;
-}
-.goal-item:hover { background: rgba(98,23,8,0.3); }
-.gi-num {
-  font-family: 'Playfair Display', serif;
-  font-weight: 900; font-size: 3rem; line-height: 1;
-  color: rgba(249,246,241,0.05); margin-bottom: 0.6rem;
-}
-.gi-icon { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
-.gi-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem; }
-.gi-body { font-size: 0.82rem; color: rgba(249,246,241,0.72); line-height: 1.65; }
-
-/* ── PROCESS ── */
-.process-sec { background: var(--white); }
-
-.process-track { position: relative; margin-top: 4rem; }
-.process-track::before {
-  content: '';
-  position: absolute; left: 2rem; top: 0; bottom: 0; width: 1px;
-  background: linear-gradient(180deg, var(--orange), var(--purple));
-  opacity: 0.2;
-}
-
-.pt-item {
-  display: grid; grid-template-columns: 5rem 1fr; gap: 2rem;
-  padding: 2rem 0; position: relative;
-}
-.pt-item + .pt-item { border-top: 1px solid var(--border); }
-.pt-left { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
-.pt-dot {
-  width: 16px; height: 16px; border-radius: 50%;
-  background: var(--orange); border: 3px solid var(--white);
-  box-shadow: 0 0 0 1px var(--orange);
-  flex-shrink: 0;
-}
-.pt-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 0.72rem; color: var(--muted); font-weight: 700;
-  letter-spacing: 0.1em;
-}
-.pt-time {
-  font-size: 0.63rem; letter-spacing: 0.1em; text-transform: uppercase;
-  background: rgba(244,100,58,0.08); color: var(--orange);
-  border: 1px solid rgba(244,100,58,0.2);
-  padding: 0.2rem 0.5rem; border-radius: 100px; white-space: nowrap;
-  margin-top: 0.2rem;
-}
-.pt-content h3 { font-weight: 600; font-size: 1rem; margin-bottom: 0.4rem; }
-.pt-content p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; max-width: 640px; }
-.pt-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.8rem; }
-.pt-tag {
-  font-size: 0.63rem; letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 0.22rem 0.6rem; border-radius: 100px;
-  background: var(--warm); color: var(--muted); border: 1px solid var(--border);
-}
-
-/* ── FUNDING ── */
-.funding-sec { background: var(--ink); color: var(--paper); }
-.funding-sec .eyebrow { color: var(--gold); }
-.funding-sec .eyebrow::before { background: var(--gold); }
-.funding-sec .sec-h { color: var(--paper); }
-.funding-sec .sec-h em { color: var(--gold); }
-
-.funding-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 1rem; }
-
-.funding-sources { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
-.fs-item {
-  display: flex; gap: 1.2rem; align-items: flex-start;
-  padding: 1.4rem 1.6rem;
-  background: rgba(249,246,241,0.03);
-  border: 1px solid rgba(249,246,241,0.07);
-  border-radius: 8px;
-  transition: border-color 0.3s, background 0.3s;
-}
-.fs-item:hover {
-  border-color: rgba(247,187,53,0.3);
-  background: rgba(247,187,53,0.05);
-}
-.fs-icon { font-size: 1.3rem; flex-shrink: 0; }
-.fs-title { font-weight: 600; font-size: 0.88rem; color: var(--paper); margin-bottom: 0.2rem; }
-.fs-body { font-size: 0.78rem; color: rgba(249,246,241,0.68); line-height: 1.5; }
-
-.funding-process {
-  background: rgba(247,187,53,0.07);
-  border: 1px solid rgba(247,187,53,0.15);
-  border-radius: 10px; padding: 2.5rem;
-}
-.fp-title {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700; font-size: 1.3rem; margin-bottom: 0.5rem;
-}
-.fp-sub { font-size: 0.82rem; color: rgba(249,246,241,0.72); margin-bottom: 2rem; line-height: 1.6; }
-.fp-steps { display: flex; flex-direction: column; gap: 1rem; }
-.fp-step { display: flex; gap: 1rem; align-items: flex-start; font-size: 0.85rem; }
-.fp-step-num {
-  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(247,187,53,0.15); color: var(--gold);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.7rem; font-weight: 700; margin-top: 0.05rem;
-}
-.fp-step-text { color: rgba(249,246,241,0.7); line-height: 1.5; }
-.fp-step-text strong { color: var(--paper); font-weight: 500; display: block; margin-bottom: 0.1rem; }
-
-.funding-note {
-  margin-top: 2.5rem; padding: 1.4rem 1.8rem;
-  background: rgba(244,100,58,0.12);
-  border: 1px solid rgba(244,100,58,0.25);
-  border-radius: 8px; font-size: 0.88rem;
-  color: rgba(249,246,241,0.8); line-height: 1.65;
-}
-.funding-note strong { color: var(--orange); }
-
-/* ── PACKAGES ── */
-.pkg-sec { background: var(--paper); }
-.pkg-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; align-items: start; }
-.pkg-card {
-  background: var(--white);
-  border: 1.5px solid var(--border);
-  border-radius: 12px; overflow: hidden;
-  transition: transform 0.25s, box-shadow 0.25s;
-}
-.pkg-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(69,39,110,0.1); }
-.pkg-card.feat { border-color: var(--orange); position: relative; }
-.pkg-card.feat::before {
-  content: 'Rekomendowany'; position: absolute; top: 1rem; right: 1rem;
-  background: var(--orange); color: white;
-  font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 0.25rem 0.7rem; border-radius: 100px;
-}
-
-.pkg-head { padding: 2rem 2rem 1.5rem; border-bottom: 1px solid var(--border); }
-.pkg-tier { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
-.pkg-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.5rem; margin-bottom: 0.4rem; }
-.pkg-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
-
-.pkg-price { padding: 1.2rem 2rem; background: var(--warm); border-bottom: 1px solid var(--border); }
-.pkg-price-label { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
-.pkg-price-val { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-top: 0.2rem; }
-.pkg-price-val em { font-size: 0.78rem; font-style: normal; color: var(--muted); font-family: 'Barlow', sans-serif; }
-
-.pkg-body { padding: 2rem; }
-.pkg-list { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
-.pkg-list li { font-size: 0.84rem; display: flex; align-items: flex-start; gap: 0.7rem; line-height: 1.45; }
-.pkg-list li::before { content: '✓'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
-.pkg-list li.no::before { content: '–'; color: rgba(13,8,20,0.2); }
-.pkg-list li.no { color: var(--muted); opacity: 0.5; }
-
-.pkg-cta {
-  display: block; margin: 0 2rem 2rem; text-align: center;
-  padding: 0.9rem; border-radius: 100px;
-  font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em;
-  text-transform: uppercase; text-decoration: none; cursor: pointer; border: none;
-  transition: all 0.2s;
-}
-.pkg-cta-o { border: 1.5px solid var(--border); color: var(--ink); background: transparent; }
-.pkg-cta-o:hover { border-color: var(--orange); color: var(--orange); }
-.pkg-cta-f { background: var(--orange); color: white; box-shadow: 0 4px 16px rgba(244,100,58,0.35); }
-.pkg-cta-f:hover { background: var(--red); box-shadow: 0 6px 20px rgba(148,27,12,0.4); }
-
-.pkg-note {
-  margin-top: 1.5rem;
-  padding: 1.4rem 1.8rem;
-  background: rgba(247,187,53,0.08);
-  border: 1px solid rgba(247,187,53,0.2);
-  border-radius: 8px;
-  font-size: 0.88rem; color: var(--ink); line-height: 1.7;
-  display: flex; align-items: flex-start; gap: 1rem;
-}
-.pkg-note-icon { font-size: 1.2rem; flex-shrink: 0; }
-
-/* ── CONTACT ── */
-.contact-sec { background: var(--burgundy); color: var(--paper); }
-.contact-sec .eyebrow { color: var(--gold); }
-.contact-sec .eyebrow::before { background: var(--gold); }
-.contact-sec .sec-h { color: var(--paper); }
-.contact-sec .sec-h em { color: var(--gold); }
-
-.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
-
-.contact-info { padding-top: 1rem; }
-.contact-info p { font-size: 1rem; color: rgba(249,246,241,0.78); line-height: 1.8; margin-bottom: 2rem; }
-
-.ci-items { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem; }
-.ci-item {
-  display: flex; align-items: center; gap: 1rem;
-  font-size: 0.88rem;
-}
-.ci-icon { font-size: 1.1rem; flex-shrink: 0; }
-.ci-item a { color: var(--gold); text-decoration: none; }
-.ci-item a:hover { text-decoration: underline; }
-.ci-item span { color: rgba(249,246,241,0.65); }
-
-.trust-list { display: flex; flex-direction: column; gap: 0.8rem; }
-.trust-item {
-  display: flex; gap: 0.8rem; align-items: flex-start;
-  padding: 0.9rem 1.2rem;
-  background: rgba(249,246,241,0.05);
-  border: 1px solid rgba(249,246,241,0.08);
-  border-radius: 7px; font-size: 0.82rem;
-  color: rgba(249,246,241,0.78); line-height: 1.5;
-}
-.trust-item-icon { flex-shrink: 0; }
-
-.contact-form-box {
-  background: rgba(249,246,241,0.05);
-  border: 1px solid rgba(249,246,241,0.1);
-  border-radius: 12px; padding: 2.5rem;
-}
-.cf-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.5rem; margin-bottom: 0.3rem; }
-.cf-sub { font-size: 0.82rem; color: rgba(249,246,241,0.72); margin-bottom: 2rem; line-height: 1.5; }
-
-.fgroup { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
-.flabel {
-  font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
-  color: rgba(249,246,241,0.72); font-weight: 500;
-}
-.finput, .fselect, .ftextarea {
-  background: rgba(249,246,241,0.07);
-  border: 1.5px solid rgba(249,246,241,0.12);
-  color: var(--paper);
-  font-family: 'Barlow', sans-serif; font-size: 0.9rem;
-  padding: 0.85rem 1rem; outline: none; border-radius: 6px;
-  transition: border-color 0.2s, background 0.2s;
-}
-.finput::placeholder, .ftextarea::placeholder { color: rgba(249,246,241,0.2); }
-.finput:focus, .fselect:focus, .ftextarea:focus {
-  border-color: var(--gold); background: rgba(247,187,53,0.07);
-}
-.fselect option { background: var(--burgundy); }
-.ftextarea { resize: vertical; min-height: 90px; }
-
-.btn-submit {
-  width: 100%; background: var(--gold); color: var(--ink);
-  font-family: 'Barlow', sans-serif; font-size: 0.88rem; font-weight: 700;
-  letter-spacing: 0.07em; text-transform: uppercase;
-  padding: 1.1rem; border: none; border-radius: 100px;
-  cursor: pointer; margin-top: 0.5rem;
-  box-shadow: 0 4px 16px rgba(247,187,53,0.4), 0 2px 6px rgba(0,0,0,0.15);
-  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-}
-.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(247,187,53,0.5); background: #ffc840; }
-.form-note { text-align: center; font-size: 0.72rem; color: rgba(249,246,241,0.55); margin-top: 0.8rem; }
-
-.success-box { display: none; text-align: center; padding: 3rem 1rem; }
-.success-box .si { font-size: 2.5rem; margin-bottom: 1rem; }
-.success-box h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
-.success-box p { font-size: 0.88rem; color: rgba(249,246,241,0.75); line-height: 1.6; }
-
-/* ── FOOTER ── */
-footer {
-  background: var(--ink); color: rgba(249,246,241,0.55);
-  padding: 2rem 4rem;
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: 0.76rem;
-  border-top: 1px solid rgba(247,187,53,0.1);
-}
-.foot-brand { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--paper); font-weight: 700; }
-.foot-brand span { color: var(--gold); }
-.foot-links { display: flex; gap: 2rem; }
-.foot-links a { color: rgba(249,246,241,0.55); text-decoration: none; transition: color 0.2s; }
-.foot-links a:hover { color: var(--paper); }
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@keyframes pulse { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:0.4; transform:scale(0.6); } }
-
-.reveal { opacity:0; transform:translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.reveal.on { opacity:1; transform:none; }
-.d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s}
-.d4{transition-delay:.32s} .d5{transition-delay:.4s}
-
-/* ── RESPONSIVE ── */
 @media(max-width:1024px){
-  nav { padding:1rem 1.5rem; }
-  .hero { grid-template-columns:1fr; }
-  .hero::after { display:none; }
-  .hero-right { display:none; }
-  .hero-left { padding:5rem 2rem 3rem; }
-  .hero-bottom { grid-template-columns:1fr 1fr; }
-  .section { padding:5rem 1.5rem; }
-  .prob-grid,.funding-grid,.contact-grid { grid-template-columns:1fr; gap:3rem; }
-  .prob-sticky { position:static; }
-  .offer-grid,.goals-grid,.pkg-grid { grid-template-columns:1fr; }
-  .resources-row { grid-template-columns:1fr 1fr; }
-  footer { flex-direction:column; gap:1rem; text-align:center; padding:1.5rem; }
+  nav{padding:1rem 1.5rem;}
+  .nav-right a:not(.nav-cta){display:none;}
+  .hero{grid-template-columns:1fr;padding-top:5rem;}
+  .hero-right{display:none;}
+  .hero-bottom{grid-template-columns:1fr 1fr;}
+  .sec,.vision,.conference,.contact,.partner{padding:5rem 1.5rem;}
+  .astrip{padding:1rem 1.5rem;}
+  .problem-3,.mck-grid,.model-steps,.partner-grid,.conf-grid,.contact-grid,.why-grid,.eco{grid-template-columns:1fr;gap:2rem;}
+  .why-sticky{position:static;}
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:1.5rem;}
 }
 @media(max-width:640px){
-  .hero-bottom { grid-template-columns:1fr; }
-  .resources-row { grid-template-columns:1fr; }
-  nav .nav-right a:not(.nav-cta){ display:none; }
+  .hero-bottom{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="../index.html" class="nav-brand">
-    <img src="../assets/logo.png" alt="Logo">
-    <div>
-      <div class="nav-brand-text">Gildia<span>.</span>Innowacji</div>
-    </div>
+    <img src="../assets/logo.png" alt="Logo" onerror="this.style.display='none'">
+    <div class="nav-brand-text">Gildia<span>.</span>Innowacji</div>
   </a>
-  <div style="display:flex; align-items:center; gap:1rem;">
+  <div style="display:flex;align-items:center;gap:0.8rem;">
     <span class="nav-badge">Dla gmin i JST</span>
   </div>
   <div class="nav-right">
-    <a href="#oferta">Oferta</a>
-    <a href="#finansowanie">Finansowanie</a>
-    <a href="#pakiety">Pakiety</a>
-    <a href="#kontakt" class="nav-cta">Umów konsultację</a>
+    <a href="#wizja">Wizja</a>
+    <a href="#konferencja">Konferencja</a>
+    <a href="#partnerstwo">Partnerstwo</a>
+    <a href="#kontakt" class="nav-cta">Zostań partnerem</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-
   <div class="hero-left">
-    <div class="hero-kicker"><span class="kicker-dot"></span>Program dla gmin, urzędów i JST</div>
+    <div class="hero-kicker"><span class="kicker-dot"></span>Program dla gmin · samorządów · JST</div>
     <h1 class="hero-h1">
-      Aktywizacja<br>młodzieży,
-      <em>która przynosi efekty.</em>
+      Regionalny ekosystem<br>
+      młodzieży — <em>już dziś.</em>
     </h1>
     <p class="hero-lead">
-      Gotowy program edukacji przedsiębiorczości dla Twojej gminy — <strong>z finansowaniem zewnętrznym, dokumentacją i realizacją po naszej stronie.</strong> Instytucja dostaje efekt, nie biurokrację.
+      Gildia Innowacji to <strong>systemowe rozwiązanie</strong> problemu odpływu talentów i niskiej aktywności młodych. Nie warsztat. Nie projekt. <strong>Infrastruktura społeczna</strong> dla Twojego regionu.
     </p>
     <div class="hero-btns">
-      <a href="#kontakt" class="btn-gold">Umów 30-min konsultację →</a>
-      <a href="#oferta" class="btn-outline-light">Zobacz ofertę</a>
+      <a href="#kontakt" class="btn-gold">Zostań partnerem regionalnym →</a>
+      <a href="#wizja" class="btn-outline-light">Zobacz wizję</a>
     </div>
   </div>
-
   <div class="hero-right">
     <div class="stat-panel">
       <div class="stat-block">
-        <div class="sb-top">
-          <div class="sb-title">Finansowanie zewnętrzne</div>
-          <div class="sb-badge">Kluczowe</div>
-        </div>
-        <div class="sb-body">Wskazujemy dostępne fundusze UE, programy rządowe i granty samorządowe. Program może być w pełni finansowany ze środków dotacyjnych.</div>
+        <div class="sb-title">Systemowe rozwiązanie</div>
+        <div class="sb-body">Nie jednorazowy warsztat — trwały ekosystem łączący młodzież, samorządy, ekspertów i projekty w jednym modelu działania.</div>
+        <span class="sb-badge">Model sieciowy</span>
       </div>
       <div class="stat-block">
-        <div class="sb-top">
-          <div class="sb-title">Pisanie wniosku</div>
-          <div class="sb-badge">W pakiecie</div>
-        </div>
-        <div class="sb-body">Przygotowujemy pełną dokumentację aplikacyjną — gotową do podpisu i złożenia. Czas: 2–3 tygodnie od decyzji.</div>
+        <div class="sb-title">Finansowanie zewnętrzne</div>
+        <div class="sb-body">Program może być w pełni realizowany ze środków UE i dotacyjnych. Wskazujemy źródła, piszemy wniosek, rozliczamy.</div>
+        <span class="sb-badge">0 zł z budżetu gminy</span>
       </div>
       <div class="stat-block">
-        <div class="sb-top">
-          <div class="sb-title">Realizacja i raport</div>
-          <div class="sb-badge">Kompleksowo</div>
-        </div>
-        <div class="sb-body">Prowadzimy cały program — warsztaty, mentoring, platformę. Na końcu dostarczamy pełną dokumentację wyników do sprawozdania.</div>
+        <div class="sb-title">Gotowy do wdrożenia</div>
+        <div class="sb-body">Działający prototyp z dokumentacją, narzędziami i katalogiem projektów. Szukamy pierwszych partnerów regionalnych.</div>
+        <span class="sb-badge">Etap pilotażu</span>
       </div>
     </div>
   </div>
-
   <div class="hero-bottom">
-    <div class="hb-item">
-      <div>
-        <div class="hb-num">0 zł</div>
-        <div class="hb-label">Koszt dla instytucji<br>w modelu dotacyjnym</div>
-      </div>
-    </div>
-    <div class="hb-item">
-      <div>
-        <div class="hb-num">30 min</div>
-        <div class="hb-label">Bezpłatna konsultacja<br>z konkretną rekomendacją</div>
-      </div>
-    </div>
-    <div class="hb-item">
-      <div>
-        <div class="hb-num">A–Z</div>
-        <div class="hb-label">Od finansowania<br>po raport końcowy</div>
-      </div>
-    </div>
-    <div class="hb-item">
-      <div>
-        <div class="hb-num">Pilot</div>
-        <div class="hb-label">Możliwość współtworzenia<br>modelu wdrożenia</div>
-      </div>
-    </div>
+    <div class="hb-item"><div class="hb-num">A→Z</div><div class="hb-label">Obsługa od finansowania<br>po raport końcowy</div></div>
+    <div class="hb-item"><div class="hb-num">0 zł</div><div class="hb-label">Koszt dla gminy<br>w modelu dotacyjnym</div></div>
+    <div class="hb-item"><div class="hb-num">30'</div><div class="hb-label">Bezpłatna konsultacja<br>z konkretną rekomendacją</div></div>
+    <div class="hb-item"><div class="hb-num">MVP</div><div class="hb-label">Możliwość współtworzenia<br>modelu wdrożenia</div></div>
   </div>
 </section>
 
-<!-- AUDIENCE STRIP -->
-<div style="background:var(--white); border-bottom:1px solid var(--border); padding:1.5rem 4rem; text-align:center;">
-  <p style="font-size:0.88rem; color:var(--muted);">
-    Program odpowiada na potrzeby: <strong style="color:var(--ink);">urzędów gmin i miast · starostw powiatowych · urzędów marszałkowskich · jednostek samorządu terytorialnego</strong>
-  </p>
+<div class="astrip">
+  Partnerstwo dla: <strong>gmin wiejskich i miejskich · starostw powiatowych · urzędów marszałkowskich · instytucji kultury · NGO</strong>
 </div>
 
 <!-- PROBLEM -->
-<section class="section problem-sec">
-  <div class="section-inner">
-    <div class="prob-grid">
-      <div class="prob-sticky">
-        <div class="eyebrow reveal">Wyzwanie JST</div>
-        <h2 class="sec-h reveal">Młodzi mają potencjał.<br><em>System go nie wykorzystuje.</em></h2>
-        <p class="prob-desc reveal">Gminy i JST stoją przed realnym wyzwaniem aktywizacji młodzieży — bez gotowych, sprawdzonych narzędzi i przy ograniczonych zasobach kadrowych.</p>
+<section class="sec problem">
+  <div class="sec-inner">
+    <div class="eyebrow reveal">Problem społeczny</div>
+    <h2 class="sec-h reveal">Trzy fakty, których <em>nie możemy ignorować.</em></h2>
+    <div class="problem-3">
+      <div class="prob-card reveal">
+        <div class="prob-num">01</div>
+        <div class="prob-title">Młodzi nie mają przestrzeni</div>
+        <p class="prob-body">Lokalne talenty nie mają gdzie realizować pomysłów. Brak infrastruktury społecznej przekłada się bezpośrednio na odpływ kapitału ludzkiego z regionów do dużych miast.</p>
       </div>
-      <div class="prob-items">
-        <div class="prob-item reveal">
-          <div class="prob-n">01</div>
-          <div class="prob-content">
-            <h3>Brak kompetencji projektowych u młodzieży</h3>
-            <p>Uczniowie nie zdobywają w szkole umiejętności definiowania celów, planowania i zarządzania — kompetencji kluczowych dla lokalnej przedsiębiorczości i rynku pracy.</p>
-          </div>
+      <div class="prob-card reveal d1">
+        <div class="prob-num">02</div>
+        <div class="prob-title">Edukacja nie uczy realizacji celu</div>
+        <p class="prob-body">System edukacji przekazuje wiedzę, ale nie uczy jak definiować cel, planować działania i doprowadzać projekty do końca. To luka, którą czuje rynek pracy i społeczności lokalne.</p>
+      </div>
+      <div class="prob-card reveal d2">
+        <div class="prob-num">03</div>
+        <div class="prob-title">Talenty odpływają z regionów</div>
+        <p class="prob-body">Bez lokalnego ekosystemu wsparcia, mentoringu i możliwości działania — młodzi ludzie wybierają metropolie. Regiony tracą właśnie tych, których najbardziej potrzebują.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section class="vision" id="wizja">
+  <div class="vision-inner">
+    <div class="eyebrow reveal">Wizja</div>
+    <h2 class="vision-h reveal">Mikro Centra<br><em>Kreatywności.</em></h2>
+    <p class="vision-lead reveal">
+      Lokalne przestrzenie współpracy, mentoringu i realizacji projektów — <strong>infrastruktura społeczna przyszłości</strong>, która zatrzymuje talenty w regionach i buduje lokalny kapitał innowacji.
+    </p>
+
+    <div class="mck-grid">
+      <div class="mck reveal">
+        <span class="mck-icon">🤝</span>
+        <div class="mck-title">Współpraca i sieciowanie</div>
+        <div class="mck-body">Przestrzeń łącząca młodzież, mentorów, ekspertów i lokalnych przedsiębiorców wokół wspólnych celów.</div>
+      </div>
+      <div class="mck reveal d1">
+        <span class="mck-icon">🧭</span>
+        <div class="mck-title">Mentoring i wsparcie</div>
+        <div class="mck-body">Każdy uczestnik ma dostęp do mentora — praktyka, który pomaga przejść od pomysłu do realizacji.</div>
+      </div>
+      <div class="mck reveal d2">
+        <span class="mck-icon">🚀</span>
+        <div class="mck-title">Realizacja projektów</div>
+        <div class="mck-body">Realne projekty społeczne i startupy młodzieżowe — z dokumentacją, budżetem i efektem mierzalnym dla gminy.</div>
+      </div>
+      <div class="mck reveal d3">
+        <span class="mck-icon">📚</span>
+        <div class="mck-title">Edukacja projektowa</div>
+        <div class="mck-body">Design Thinking, Agile, Kanban — kompetencje przyszłości w praktycznym, angażującym wydaniu dla młodych.</div>
+      </div>
+      <div class="mck reveal d4">
+        <span class="mck-icon">💼</span>
+        <div class="mck-title">Przedsiębiorczość młodzieżowa</div>
+        <div class="mck-body">Od projektu społecznego do inicjatywy biznesowej — ścieżka, która buduje lokalnych liderów i przedsiębiorców.</div>
+      </div>
+      <div class="mck reveal d5">
+        <span class="mck-icon">🌐</span>
+        <div class="mck-title">Sieć regionalna</div>
+        <div class="mck-body">Centra w różnych gminach tworzą sieć — wymiana doświadczeń, wspólne projekty, ogólnopolska widoczność.</div>
+      </div>
+    </div>
+
+    <div class="eco">
+      <div class="eco-text">
+        <h3>Platforma łącząca <em>pięć światów.</em></h3>
+        <p>Gildia Innowacji nie jest organizatorem warsztatów. Jest platformą łączącą wszystkich kluczowych aktorów lokalnego ekosystemu innowacji — w jednym, spójnym modelu działania.</p>
+        <p>To dużo większa historia niż program edukacyjny.</p>
+      </div>
+      <div class="eco-nodes">
+        <div class="eco-node"><span class="eco-node-icon">👥</span>Młodzież — realizuje projekty, zdobywa kompetencje</div>
+        <div class="eco-node"><span class="eco-node-icon">🏛️</span>Samorządy — finansują, wspierają, raportują efekty</div>
+        <div class="eco-node"><span class="eco-node-icon">🎓</span>Eksperci i mentorzy — dzielą się wiedzą i doświadczeniem</div>
+        <div class="eco-node"><span class="eco-node-icon">🏢</span>Firmy lokalne — angażują się w CSR, pozyskują talenty</div>
+        <div class="eco-node"><span class="eco-node-icon">🗂️</span>Projekty i startupy — realne efekty dla społeczności</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOW -->
+<section class="sec whynow">
+  <div class="sec-inner">
+    <div class="why-grid">
+      <div class="why-sticky">
+        <div class="eyebrow reveal">Dlaczego teraz?</div>
+        <h2 class="sec-h reveal">Okno<br><em>możliwości</em><br>jest otwarte.</h2>
+        <p class="sec-sub reveal" style="margin-top:0.8rem;">Cztery powody, dla których właśnie teraz jest najlepszy moment na budowanie lokalnych ekosystemów innowacji.</p>
+      </div>
+      <div class="why-items">
+        <div class="why-item reveal">
+          <div class="wi-num">01</div>
+          <div><div class="wi-h">Fundusze UE na nową perspektywę</div><p class="wi-p">Środki z FEdR i EFS+ na lata 2021–2027 są dostępne właśnie teraz. Programy aktywizacji młodzieży i edukacji to priorytet polityki spójności. Okno aplikacyjne jest otwarte.</p></div>
         </div>
-        <div class="prob-item reveal d1">
-          <div class="prob-n">02</div>
-          <div class="prob-content">
-            <h3>Niska aktywność społeczna i obywatelska</h3>
-            <p>Młodzież nie angażuje się w życie lokalnej społeczności. Brak przestrzeni i narzędzi do działania przekłada się na odpływ kapitału ludzkiego z regionu.</p>
-          </div>
+        <div class="why-item reveal d1">
+          <div class="wi-num">02</div>
+          <div><div class="wi-h">Polityka młodzieżowa jako priorytet</div><p class="wi-p">Samorządy, które budują dziś infrastrukturę dla młodych, zyskują przewagę w pozyskiwaniu talentów i przyciąganiu inwestycji w perspektywie 10–15 lat.</p></div>
         </div>
-        <div class="prob-item reveal d2">
-          <div class="prob-n">03</div>
-          <div class="prob-content">
-            <h3>Trudność w pozyskaniu finansowania</h3>
-            <p>Dostępne są środki UE i rządowe na aktywizację młodzieży — ale przygotowanie wniosków wymaga specjalistycznej wiedzy i czasu, którego urzędy nie mają.</p>
-          </div>
+        <div class="why-item reveal d2">
+          <div class="wi-num">03</div>
+          <div><div class="wi-h">AI zmienia rynek kompetencji</div><p class="wi-p">Kompetencje projektowe, kreatywne myślenie i umiejętność realizacji celów to właśnie te, których AI nie zastąpi. Inwestycja w nie teraz to inwestycja w lokalny kapitał ludzki przyszłości.</p></div>
         </div>
-        <div class="prob-item reveal d3">
-          <div class="prob-n">04</div>
-          <div class="prob-content">
-            <h3>Jednorazowe działania bez trwałego efektu</h3>
-            <p>Pojedyncze warsztaty czy eventy nie budują trwałych kompetencji. Potrzebny jest cykl z mentorem, projektem i dokumentacją — gotową do wskaźników UE.</p>
-          </div>
+        <div class="why-item reveal d3">
+          <div class="wi-num">04</div>
+          <div><div class="wi-h">Gotowy model do wdrożenia</div><p class="wi-p">Gildia Innowacji jest na etapie pilotażu — pierwsi partnerzy regionalni współtworzą model, mają realny wpływ na jego kształt i korzystają z preferencyjnych warunków realizacji.</p></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- OFFER -->
-<section class="section offer-sec" id="oferta">
-  <div class="section-inner">
-    <div class="eyebrow reveal">Co oferujemy</div>
-    <h2 class="sec-h reveal">Trzy filary <em>programu.</em></h2>
-    <p class="sec-sub reveal">Gildia Innowacji to gotowy ekosystem — angażujemy młodych ludzi w projekty oparte na ich pasjach i rozwijamy kompetencje projektowe oraz przedsiębiorcze.</p>
-    <div class="offer-grid">
-      <div class="offer-card reveal">
-        <span class="oc-icon">🎓</span>
-        <div class="oc-title">Centrum Edukacji</div>
-        <p class="oc-body">Sympozja i warsztaty z zarządzania projektami, design thinking i agile. Program dostosowany do grupy wiekowej — uczestnicy uczą się przez działanie, nie teorię.</p>
-        <span class="oc-tag">Realizacja bezpośrednia</span>
+<!-- MODEL -->
+<section class="sec model">
+  <div class="sec-inner">
+    <div class="eyebrow reveal">Jak działa model</div>
+    <h2 class="sec-h reveal">Trzy kroki do <em>lokalnego ekosystemu.</em></h2>
+    <p class="sec-sub reveal">Prosty model, który transformuje bierną młodzież w aktywnych uczestników życia społecznego i lokalnych innowatorów.</p>
+    <div class="model-steps">
+      <div class="ms reveal">
+        <div class="ms-n">01</div>
+        <span class="ms-icon">⚡</span>
+        <div class="ms-title">Aktywizacja młodych</div>
+        <p class="ms-body">Rejestracja, test profilujący, dostęp do katalogu projektów. Każdy uczestnik znajdzie coś dla siebie — niezależnie od pasji, wieku i doświadczenia. Udział zawsze bezpłatny.</p>
       </div>
-      <div class="offer-card reveal d1">
-        <span class="oc-icon">🧪</span>
-        <div class="oc-title">Centrum Prototypowania</div>
-        <p class="oc-body">Każdy uczestnik zapisuje swój projekt i poddaje go ocenie. Mentor towarzyszy od pomysłu przez prototyp do gotowego, działającego projektu społecznego lub biznesowego.</p>
-        <span class="oc-tag">Mentoring indywidualny</span>
+      <div class="ms reveal d1">
+        <div class="ms-n">02</div>
+        <span class="ms-icon">🏘️</span>
+        <div class="ms-title">Budowa lokalnych społeczności</div>
+        <p class="ms-body">Grupy projektowe wokół wspólnych zainteresowań — sport, kultura, technologia, ekologia, media. Mentorzy i eksperci towarzyszą od pierwszego pomysłu do gotowego efektu.</p>
       </div>
-      <div class="offer-card reveal d2">
-        <span class="oc-icon">🗂️</span>
-        <div class="oc-title">Katalog Idei</div>
-        <p class="oc-body">Baza kilkudziesięciu gotowych projektów społecznych z dokumentacją — uczestnicy dołączają do istniejących lub tworzą własne. Zawiera szablony, materiały i narzędzia.</p>
-        <span class="oc-tag">Dostęp ciągły</span>
-      </div>
-    </div>
-
-    <div class="eyebrow reveal" style="margin-top:4rem;">W ramach współpracy gmina/instytucja otrzymuje</div>
-    <div class="resources-row">
-      <div class="res-item reveal">
-        <div class="res-icon">🖥️</div>
-        <div class="res-text"><strong>Platforma projektowa</strong><span>Gotowe pomysły z dokumentacją do wdrożenia</span></div>
-      </div>
-      <div class="res-item reveal d1">
-        <div class="res-icon">📣</div>
-        <div class="res-text"><strong>Materiały marketingowe</strong><span>Plakaty, grafiki do druku i social mediów</span></div>
-      </div>
-      <div class="res-item reveal d2">
-        <div class="res-icon">📋</div>
-        <div class="res-text"><strong>Szablony projektowe</strong><span>Gotowe do użycia przez uczestników</span></div>
-      </div>
-      <div class="res-item reveal d3">
-        <div class="res-icon">📊</div>
-        <div class="res-text"><strong>Raport ewaluacyjny</strong><span>Dokumentacja wyników do sprawozdania</span></div>
+      <div class="ms reveal d2">
+        <div class="ms-n">03</div>
+        <span class="ms-icon">🌱</span>
+        <div class="ms-title">Projekty i startupy społeczne</div>
+        <p class="ms-body">Realne inicjatywy z mierzalnym wpływem na lokalną społeczność. Dokumentacja wyników gotowa do sprawozdań dotacyjnych. Portfolio dla uczestników, wskaźniki dla samorządu.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- GOALS -->
-<section class="section goals-sec">
-  <div class="section-inner">
-    <div class="eyebrow reveal">Cele programu</div>
-    <h2 class="sec-h reveal">Co program <em>realnie osiąga.</em></h2>
-    <p class="sec-sub reveal" style="color:rgba(249,246,241,0.5);">Efekty mierzalne — gotowe do ujęcia w sprawozdaniu z realizacji projektu dotacyjnego.</p>
-    <div class="goals-grid">
-      <div class="goal-item reveal">
-        <div class="gi-num">01</div>
-        <span class="gi-icon">🧠</span>
-        <div class="gi-title">Rozwój kompetencji projektowych</div>
-        <div class="gi-body">Zarządzanie projektami, komunikacja, kreatywne myślenie i praca zespołowa — umiejętności mierzalne i udokumentowane.</div>
-      </div>
-      <div class="goal-item reveal d1">
-        <div class="gi-num">02</div>
-        <span class="gi-icon">🎯</span>
-        <div class="gi-title">Indywidualizacja edukacji</div>
-        <div class="gi-body">Projekty oparte na zainteresowaniach uczestników — większe zaangażowanie i motywacja do działania w lokalnej społeczności.</div>
-      </div>
-      <div class="goal-item reveal d2">
-        <div class="gi-num">03</div>
-        <span class="gi-icon">🔄</span>
-        <div class="gi-title">Innowacyjne metody nauczania</div>
-        <div class="gi-body">Design Thinking i Agile w praktyce — metody używane przez Google i Apple, dostępne dla młodzieży w Twojej gminie.</div>
-      </div>
-      <div class="goal-item reveal d3">
-        <div class="gi-num">04</div>
-        <span class="gi-icon">💼</span>
-        <div class="gi-title">Praktyczne doświadczenie</div>
-        <div class="gi-body">Realne projekty w portfolio — przygotowanie do rynku pracy i zwiększenie konkurencyjności absolwentów z regionu.</div>
-      </div>
-      <div class="goal-item reveal d4">
-        <div class="gi-num">05</div>
-        <span class="gi-icon">🤝</span>
-        <div class="gi-title">Budowanie społeczności</div>
-        <div class="gi-body">Współpraca między uczniami, nauczycielami i ekspertami — integracja i budowanie kapitału społecznego gminy.</div>
-      </div>
-      <div class="goal-item reveal d5">
-        <div class="gi-num">06</div>
-        <span class="gi-icon">🏛️</span>
-        <div class="gi-title">Postawy obywatelskie</div>
-        <div class="gi-body">Zaangażowanie w życie lokalnej społeczności — uczniowie realizują projekty, które mają znaczenie dla ich otoczenia.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section class="section process-sec">
-  <div class="section-inner">
-    <div class="eyebrow reveal">Przebieg współpracy</div>
-    <h2 class="sec-h reveal">Od decyzji do <em>gotowego programu.</em></h2>
-    <p class="sec-sub reveal">Zajmujemy się całością — gmina dostaje działający program bez zbędnego nakładu administracyjnego.</p>
-
-    <div class="process-track">
-      <div class="pt-item reveal">
-        <div class="pt-left">
-          <div class="pt-dot"></div>
-          <div class="pt-num">KROK 01</div>
-          <div class="pt-time">30 min</div>
-        </div>
-        <div class="pt-content">
-          <h3>Bezpłatna konsultacja</h3>
-          <p>Omawiamy potrzeby instytucji, grupę docelową i możliwy zakres programu. Konsultacja kończy się konkretną rekomendacją działania — nie ogólnymi wskazówkami.</p>
-          <div class="pt-tags"><span class="pt-tag">Online / telefon</span><span class="pt-tag">Bez zobowiązań</span></div>
-        </div>
-      </div>
-      <div class="pt-item reveal">
-        <div class="pt-left">
-          <div class="pt-dot"></div>
-          <div class="pt-num">KROK 02</div>
-          <div class="pt-time">do 7 dni</div>
-        </div>
-        <div class="pt-content">
-          <h3>Analiza finansowania</h3>
-          <p>Wskazujemy 2–3 optymalne źródła finansowania dopasowane do profilu instytucji — fundusze UE, programy rządowe, granty samorządowe. Pracujemy na realnych programach, nie ogólnych założeniach.</p>
-          <div class="pt-tags"><span class="pt-tag">FEdR / EFS+</span><span class="pt-tag">Programy MEN</span><span class="pt-tag">Fundusze norweskie</span></div>
-        </div>
-      </div>
-      <div class="pt-item reveal">
-        <div class="pt-left">
-          <div class="pt-dot"></div>
-          <div class="pt-num">KROK 03</div>
-          <div class="pt-time">2–3 tyg.</div>
-        </div>
-        <div class="pt-content">
-          <h3>Przygotowanie dokumentacji</h3>
-          <p>Piszemy pełny wniosek aplikacyjny. Instytucja otrzymuje gotowy dokument do podpisu i złożenia. Wspieramy przy ewentualnych pytaniach instytucji finansującej.</p>
-          <div class="pt-tags"><span class="pt-tag">Wniosek aplikacyjny</span><span class="pt-tag">Budżet projektu</span><span class="pt-tag">Harmonogram</span></div>
-        </div>
-      </div>
-      <div class="pt-item reveal">
-        <div class="pt-left">
-          <div class="pt-dot"></div>
-          <div class="pt-num">KROK 04</div>
-          <div class="pt-time">1–3 mies.</div>
-        </div>
-        <div class="pt-content">
-          <h3>Realizacja programu</h3>
-          <p>Prowadzimy cykl warsztatów, wykładów i mentoringu. Uczestnicy tworzą realne projekty dostępne w Katalogu Idei. Wszystko dokumentujemy na bieżąco.</p>
-          <div class="pt-tags"><span class="pt-tag">Warsztaty</span><span class="pt-tag">Mentoring</span><span class="pt-tag">Platforma projektowa</span></div>
-        </div>
-      </div>
-      <div class="pt-item reveal">
-        <div class="pt-left">
-          <div class="pt-dot"></div>
-          <div class="pt-num">KROK 05</div>
-          <div class="pt-time">~2 tyg.</div>
-        </div>
-        <div class="pt-content">
-          <h3>Raport i ewaluacja</h3>
-          <p>Dostarczamy pełną dokumentację wyników — wskaźniki, portfolio projektów uczestników, ankiety ewaluacyjne. Raport gotowy do sprawozdania z realizacji projektu dotacyjnego.</p>
-          <div class="pt-tags"><span class="pt-tag">Wskaźniki ilościowe</span><span class="pt-tag">Portfolio uczestników</span><span class="pt-tag">Gotowe do sprawozdania</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FUNDING -->
-<section class="section funding-sec" id="finansowanie">
-  <div class="section-inner">
-    <div class="eyebrow reveal">Finansowanie</div>
-    <h2 class="sec-h reveal">Program może nic<br><em>nie kosztować gminy.</em></h2>
-
-    <div class="funding-grid">
+<!-- CONFERENCE -->
+<section class="conference" id="konferencja">
+  <div class="conf-inner">
+    <div class="conf-eyebrow">Wydarzenie</div>
+    <h2 class="conf-h">Ogólnopolska Konferencja<br><em>Polityki Młodzieżowej.</em></h2>
+    <p class="conf-lead">Przestrzeń dla samorządów, ekspertów i liderów społecznych, którzy chcą wspólnie budować ekosystemy innowacji dla młodych. Networking, case studies, partnerstwa regionalne.</p>
+    <div class="conf-grid">
       <div>
-        <p class="sec-sub reveal" style="color:rgba(249,246,241,0.55);">W praktyce większość instytucji realizuje program w modelu dotacyjnym — bez angażowania własnych środków budżetowych.</p>
-        <p style="font-size:0.85rem; color:rgba(249,246,241,0.4); margin:0.8rem 0 2rem; line-height:1.7;">Pracujemy na realnych programach finansowania — nie ogólnych założeniach.</p>
-        <div class="funding-sources reveal">
-          <div class="fs-item">
-            <div class="fs-icon">🇪🇺</div>
-            <div>
-              <div class="fs-title">Fundusze UE (FEdR, EFS+)</div>
-              <div class="fs-body">Programy regionalne i krajowe na edukację, aktywizację i rozwój kompetencji młodzieży.</div>
-            </div>
-          </div>
-          <div class="fs-item">
-            <div class="fs-icon">🏛️</div>
-            <div>
-              <div class="fs-title">Programy rządowe i MEN</div>
-              <div class="fs-body">Laboratoria przyszłości, programy aktywizacji młodzieży, granty ministerialne na innowacje w edukacji.</div>
-            </div>
-          </div>
-          <div class="fs-item">
-            <div class="fs-icon">🌍</div>
-            <div>
-              <div class="fs-title">Fundusze norweskie i EOG</div>
-              <div class="fs-body">Inicjatywy wspierające edukację obywatelską i przedsiębiorczość na poziomie lokalnym.</div>
-            </div>
-          </div>
-          <div class="fs-item">
-            <div class="fs-icon">🤝</div>
-            <div>
-              <div class="fs-title">Granty samorządowe i CSR</div>
-              <div class="fs-body">Programy grantowe urzędów marszałkowskich oraz programy CSR lokalnych firm i przedsiębiorstw.</div>
-            </div>
-          </div>
+        <div style="font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(250,247,242,0.4);font-weight:600;margin-bottom:1rem;">Tematy przewodnie</div>
+        <div class="conf-topics">
+          <div class="conf-topic"><span class="ct-icon">🚀</span>Przedsiębiorczość młodych i edukacja przyszłości</div>
+          <div class="conf-topic"><span class="ct-icon">🤖</span>AI, automatyzacja i kompetencje przyszłości</div>
+          <div class="conf-topic"><span class="ct-icon">🏛️</span>Mikro Centra Kreatywności jako infrastruktura społeczna</div>
+          <div class="conf-topic"><span class="ct-icon">🌐</span>Lokalne ekosystemy innowacji — modele i case studies</div>
+          <div class="conf-topic"><span class="ct-icon">🤝</span>Współpraca samorządów — sieć regionalna</div>
+          <div class="conf-topic"><span class="ct-icon">💶</span>Finansowanie polityki młodzieżowej z funduszy UE</div>
+          <div class="conf-topic"><span class="ct-icon">🧭</span>Jak zatrzymać talenty w regionach?</div>
         </div>
       </div>
-
-      <div class="reveal d1">
-        <div class="funding-process">
-          <div class="fp-title">Jak przeprowadzamy przez finansowanie</div>
-          <div class="fp-sub">Od analizy możliwości po złożenie wniosku — każdy krok po naszej stronie.</div>
-          <div class="fp-steps">
-            <div class="fp-step">
-              <div class="fp-step-num">1</div>
-              <div class="fp-step-text"><strong>Diagnoza potrzeb i możliwości</strong>Analiza profilu instytucji i dopasowanie do wymogów programów.</div>
-            </div>
-            <div class="fp-step">
-              <div class="fp-step-num">2</div>
-              <div class="fp-step-text"><strong>Wskazanie 2–3 źródeł finansowania</strong>Konkretne programy z terminami i wymogami aplikacyjnymi.</div>
-            </div>
-            <div class="fp-step">
-              <div class="fp-step-num">3</div>
-              <div class="fp-step-text"><strong>Przygotowanie dokumentacji</strong>Pełny wniosek aplikacyjny, budżet, harmonogram.</div>
-            </div>
-            <div class="fp-step">
-              <div class="fp-step-num">4</div>
-              <div class="fp-step-text"><strong>Wsparcie przy składaniu</strong>Odpowiadamy na pytania instytucji finansującej.</div>
-            </div>
-            <div class="fp-step">
-              <div class="fp-step-num">5</div>
-              <div class="fp-step-text"><strong>Pomoc w rozliczeniu</strong>Dokumentacja wyników gotowa do sprawozdania końcowego.</div>
-            </div>
-          </div>
+      <div class="conf-format">
+        <div class="cf-title">Format konferencji</div>
+        <div class="cf-items">
+          <div class="cf-item">Wystąpienia ekspertów i praktyków</div>
+          <div class="cf-item">Panele dyskusyjne z przedstawicielami samorządów</div>
+          <div class="cf-item">Case studies z wdrożeń regionalnych</div>
+          <div class="cf-item">Networking i spotkania bilateralne</div>
+          <div class="cf-item">Prezentacja modelu Gildii Innowacji</div>
+          <div class="cf-item">Podpisanie listów intencyjnych partnerstw</div>
         </div>
-        <div class="funding-note">
-          💡 <strong>Ważne dla JST:</strong> Program w fazie pilotażu — możliwość współtworzenia modelu wdrożenia. Pierwsze gminy partnerskie otrzymują szczególnie korzystne warunki realizacji.
+        <div class="conf-cta">
+          <a href="#kontakt" class="btn-gold" style="display:inline-block;font-size:0.8rem;padding:0.85rem 1.8rem;">Wyraź zainteresowanie →</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PACKAGES -->
-<section class="section pkg-sec" id="pakiety">
-  <div class="section-inner">
-    <div class="eyebrow reveal">Pakiety</div>
-    <h2 class="sec-h reveal">Wycena <em>indywidualna</em> — trzy punkty startowe.</h2>
-    <p class="sec-sub reveal">Ostateczna cena zależy od liczby uczestników, czasu trwania i zakresu. W modelu dotacyjnym koszt dla gminy może wynosić 0 zł.</p>
-
-    <div class="pkg-note reveal">
-      <span class="pkg-note-icon">💡</span>
-      <span>W praktyce większość gmin realizuje program w modelu dotacyjnym — bez angażowania własnych środków. Pomagamy znaleźć i pozyskać finansowanie zewnętrzne.</span>
+<!-- PARTNERSHIP -->
+<section class="sec partner" id="partnerstwo">
+  <div class="sec-inner">
+    <div class="eyebrow reveal">Partnerstwo regionalne</div>
+    <h2 class="partner-h reveal">Zostań partnerem.<br>Nie <em>klientem.</em></h2>
+    <p class="sec-sub reveal">Szukamy samorządów, instytucji i organizacji, które chcą współtworzyć model — nie tylko z niego korzystać. To różnica między zakupem usługi a budowaniem przyszłości regionu.</p>
+    <div class="partner-grid">
+      <div class="part-card reveal">
+        <span class="pc-icon">🏛️</span>
+        <div class="pc-title">Gminy i urzędy</div>
+        <p class="pc-body">Aktywizacja młodzieży, wskaźniki do sprawozdań UE, lokalna infrastruktura społeczna. Program finansowany zewnętrznie — bez obciążania budżetu bieżącego.</p>
+      </div>
+      <div class="part-card reveal d1">
+        <span class="pc-icon">🎓</span>
+        <div class="pc-title">Szkoły i uczelnie</div>
+        <p class="pc-body">Realne kompetencje projektowe dla uczniów i studentów. Minimalne obciążenie nauczycieli. Portfolio i doświadczenie dla absolwentów.</p>
+      </div>
+      <div class="part-card reveal d2">
+        <span class="pc-icon">🎭</span>
+        <div class="pc-title">Instytucje kultury</div>
+        <p class="pc-body">Domy kultury i biblioteki jako naturalne centra społeczności — idealna przestrzeń dla Mikro Centrum Kreatywności w gminie.</p>
+      </div>
+      <div class="part-card reveal d3">
+        <span class="pc-icon">🌱</span>
+        <div class="pc-title">NGO i fundacje</div>
+        <p class="pc-body">Wspólna aplikacja o środki, realizacja programu, budowanie lokalnego kapitału społecznego. Model open source — współtworzymy razem.</p>
+      </div>
+      <div class="part-card reveal d4">
+        <span class="pc-icon">🏢</span>
+        <div class="pc-title">Firmy lokalne</div>
+        <p class="pc-body">CSR z realnym wpływem — mentorzy z biznesu, staże dla uczestników, dostęp do lokalnych talentów zanim trafią na rynek pracy.</p>
+      </div>
+      <div class="part-card reveal d5">
+        <span class="pc-icon">🔬</span>
+        <div class="pc-title">Ośrodki badawcze</div>
+        <p class="pc-body">Gildia jako środowisko badawcze — badamy jakie kompetencje i metody pracy realnie wspierają innowacje. Wspólne publikacje i dane.</p>
+      </div>
     </div>
-
-    <div class="pkg-grid">
-      <div class="pkg-card reveal">
-        <div class="pkg-head">
-          <div class="pkg-tier">Pakiet podstawowy</div>
-          <div class="pkg-name">Gildia Start</div>
-          <div class="pkg-desc">Dla gminy stawiającej pierwsze kroki w aktywizacji młodzieży przez projekty.</div>
-        </div>
-        <div class="pkg-price">
-          <div class="pkg-price-label">Wycena od</div>
-          <div class="pkg-price-val">do uzgodnienia <em>/ grupa</em></div>
-        </div>
-        <div class="pkg-body">
-          <ul class="pkg-list">
-            <li>Cykl 6 warsztatów (design thinking + agile)</li>
-            <li>Do 20 uczestników</li>
-            <li>Dostęp do platformy projektowej (3 mies.)</li>
-            <li>Materiały i szablony projektowe</li>
-            <li>Raport końcowy z wskaźnikami</li>
-            <li class="no">Mentoring projektowy</li>
-            <li class="no">Wsparcie w pozyskaniu finansowania</li>
-            <li class="no">Pisanie wniosku aplikacyjnego</li>
-          </ul>
-        </div>
-        <a href="#kontakt" class="pkg-cta pkg-cta-o">Zapytaj o wycenę</a>
-      </div>
-
-      <div class="pkg-card feat reveal d1">
-        <div class="pkg-head">
-          <div class="pkg-tier">Pakiet rozszerzony</div>
-          <div class="pkg-name">Gildia Pro</div>
-          <div class="pkg-desc">Pełny program z mentoringiem, projektem końcowym i dokumentacją ewaluacyjną.</div>
-        </div>
-        <div class="pkg-price">
-          <div class="pkg-price-label">Wycena od</div>
-          <div class="pkg-price-val">do uzgodnienia <em>/ program</em></div>
-        </div>
-        <div class="pkg-body">
-          <ul class="pkg-list">
-            <li>Cykl 12 warsztatów i 2 wykładów</li>
-            <li>Do 30 uczestników</li>
-            <li>Mentoring grupowy i indywidualny</li>
-            <li>Dostęp do platformy projektowej (12 mies.)</li>
-            <li>Materiały, szablony, zasoby graficzne</li>
-            <li>Prezentacja projektów końcowych</li>
-            <li>Raport i dokumentacja ewaluacyjna</li>
-            <li class="no">Wsparcie w pozyskaniu finansowania</li>
-          </ul>
-        </div>
-        <a href="#kontakt" class="pkg-cta pkg-cta-f">Zapytaj o wycenę</a>
-      </div>
-
-      <div class="pkg-card reveal d2">
-        <div class="pkg-head">
-          <div class="pkg-tier">Pakiet kompleksowy</div>
-          <div class="pkg-name">Gildia Full</div>
-          <div class="pkg-desc">Obsługa A–Z: finansowanie, wniosek, realizacja, rozliczenie.</div>
-        </div>
-        <div class="pkg-price">
-          <div class="pkg-price-label">Wycena od</div>
-          <div class="pkg-price-val">do uzgodnienia <em>/ projekt</em></div>
-        </div>
-        <div class="pkg-body">
-          <ul class="pkg-list">
-            <li>Wszystko z pakietu Pro</li>
-            <li>Analiza źródeł finansowania</li>
-            <li>Napisanie wniosku aplikacyjnego</li>
-            <li>Wsparcie w rozliczeniu projektu</li>
-            <li>Nieograniczona liczba uczestników</li>
-            <li>Dedykowany opiekun programu</li>
-            <li>Platforma projektowa 24 mies.</li>
-          </ul>
-        </div>
-        <a href="#kontakt" class="pkg-cta pkg-cta-o">Zapytaj o wycenę</a>
-      </div>
+    <div class="partner-note reveal">
+      <span>💡</span>
+      <span>Program może być finansowany ze środków UE (FEdR, EFS+), programów rządowych MEN, funduszy norweskich i grantów samorządowych. Pomagamy zidentyfikować źródło, piszemy wniosek i rozliczamy projekt. <strong>W praktyce koszt dla instytucji może wynosić 0 zł.</strong></span>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section class="section contact-sec" id="kontakt">
-  <div class="section-inner">
+<section class="contact" id="kontakt">
+  <div class="contact-inner">
     <div class="contact-grid">
-      <div class="contact-info">
+      <div class="contact-left">
         <div class="eyebrow reveal">Kontakt</div>
-        <h2 class="sec-h reveal">Zacznijmy <em>rozmowę.</em></h2>
-        <p class="reveal">Bezpłatna konsultacja trwa 30 minut i kończy się konkretną rekomendacją działania. Omawiamy potrzeby gminy, możliwe źródła finansowania i zakres programu.</p>
-
+        <h2 class="sec-h reveal" style="color:white;">Zacznijmy<br><em style="color:var(--gold)">rozmowę.</em></h2>
+        <p class="reveal">Bezpłatna konsultacja trwa 30 minut i kończy się konkretną rekomendacją. Omawiamy potrzeby regionu, możliwe źródła finansowania i zakres partnerstwa.</p>
         <div class="ci-items reveal">
-          <div class="ci-item"><span class="ci-icon">👤</span><span>Wojciech Wolanin · Kreatywne Klocki, Kielce</span></div>
-          <div class="ci-item"><span class="ci-icon">📞</span><a href="tel:+48793738281">793 738 281</a></div>
-          <div class="ci-item"><span class="ci-icon">📧</span><a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a></div>
-          <div class="ci-item"><span class="ci-icon">🌐</span><a href="https://www.kreatywneklocki.edu.pl">kreatywneklocki.edu.pl</a></div>
+          <div class="ci-item">👤 <span>Wojciech Wolanin · Kreatywne Klocki</span></div>
+          <div class="ci-item">📞 <a href="tel:+48793738281">793 738 281</a></div>
+          <div class="ci-item">📧 <a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a></div>
+          <div class="ci-item">🌐 <a href="https://www.kreatywneklocki.edu.pl">kreatywneklocki.edu.pl</a></div>
         </div>
-
         <div class="trust-list reveal d1">
-          <div class="trust-item"><span class="trust-item-icon">📋</span><span>Dostarczamy pełną dokumentację programu przed podpisaniem umowy.</span></div>
-          <div class="trust-item"><span class="trust-item-icon">🧪</span><span>Program w fazie pilotażu — możliwość współtworzenia modelu wdrożenia na preferencyjnych warunkach.</span></div>
-          <div class="trust-item"><span class="trust-item-icon">🤝</span><span>Elastyczne warunki dopasowane do budżetu i harmonogramu instytucji.</span></div>
+          <div class="trust-item"><span>🧪</span>Program w fazie pilotażu — możliwość współtworzenia modelu wdrożenia na preferencyjnych warunkach.</div>
+          <div class="trust-item"><span>📋</span>Pełna dokumentacja programu dostępna przed podpisaniem jakiejkolwiek umowy.</div>
+          <div class="trust-item"><span>🤝</span>Elastyczne warunki dopasowane do budżetu i harmonogramu instytucji.</div>
         </div>
       </div>
-
       <div class="reveal d1">
-        <div class="contact-form-box" id="form-box">
-          <div class="cf-title">Umów konsultację</div>
+        <div class="cform" id="form-wrap">
+          <div class="cf-h2">Wyraź zainteresowanie partnerstwem</div>
           <div class="cf-sub">Odpiszemy w ciągu 24h i zaproponujemy termin rozmowy.</div>
-          <form onsubmit="submitForm(event)">
+          <form onsubmit="sub(event)">
+            <div class="fgroup"><label class="flabel">Imię i nazwisko</label><input type="text" class="finput" placeholder="Anna Kowalska" required></div>
+            <div class="fgroup"><label class="flabel">Instytucja</label><input type="text" class="finput" placeholder="Urząd Gminy w..." required></div>
             <div class="fgroup">
-              <label class="flabel">Imię i nazwisko</label>
-              <input type="text" class="finput" placeholder="Anna Kowalska" required>
-            </div>
-            <div class="fgroup">
-              <label class="flabel">Instytucja</label>
-              <input type="text" class="finput" placeholder="Urząd Gminy w..." required>
-            </div>
-            <div class="fgroup">
-              <label class="flabel">Rodzaj JST</label>
+              <label class="flabel">Rodzaj instytucji</label>
               <select class="fselect" required>
                 <option value="" disabled selected>Wybierz</option>
-                <option>Gmina wiejska</option>
-                <option>Gmina miejska / miasto</option>
+                <option>Gmina / urząd</option>
                 <option>Starostwo powiatowe</option>
                 <option>Urząd marszałkowski</option>
-                <option>Inna jednostka samorządu</option>
+                <option>Szkoła / uczelnia</option>
+                <option>Instytucja kultury</option>
+                <option>NGO / fundacja</option>
+                <option>Firma</option>
               </select>
             </div>
-            <div class="fgroup">
-              <label class="flabel">E-mail służbowy</label>
-              <input type="email" class="finput" placeholder="a.kowalska@gmina.pl" required>
-            </div>
-            <div class="fgroup">
-              <label class="flabel">Telefon (opcjonalnie)</label>
-              <input type="tel" class="finput" placeholder="+48 ...">
-            </div>
-            <div class="fgroup">
-              <label class="flabel">Czego szukasz?</label>
-              <textarea class="ftextarea finput" placeholder="Np. szukamy programu dla 50 uczniów, interesuje nas pakiet z finansowaniem..."></textarea>
-            </div>
+            <div class="fgroup"><label class="flabel">E-mail służbowy</label><input type="email" class="finput" placeholder="a.kowalska@gmina.pl" required></div>
+            <div class="fgroup"><label class="flabel">Czego szukasz?</label><textarea class="ftextarea finput" placeholder="Opisz potrzeby swojej instytucji..."></textarea></div>
             <button type="submit" class="btn-submit">Wysyłam zapytanie →</button>
-            <p class="form-note">Odpowiadamy w 24h • Bez zobowiązań • Bez spamu</p>
+            <p class="form-note">Odpowiadamy w 24h · Bez zobowiązań · Bez spamu</p>
           </form>
-          <div class="success-box" id="success-box">
-            <div class="si">✉️</div>
-            <h3>Zapytanie wysłane!</h3>
-            <p>Dziękujemy. Odpiszemy w ciągu 24 godzin i zaproponujemy termin bezpłatnej konsultacji.</p>
+          <div class="success-box" id="success">
+            <div style="font-size:2.5rem;margin-bottom:0.8rem">✉️</div>
+            <h3>Wiadomość wysłana!</h3>
+            <p>Odezwiemy się w ciągu 24h z propozycją terminu konsultacji.</p>
           </div>
         </div>
       </div>
@@ -1191,35 +578,21 @@ footer {
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="foot-brand">Gildia<span>.</span>Innowacji</div>
   <div class="foot-links">
     <a href="szkola.html">Oferta dla szkół →</a>
-    <a href="https://www.kreatywneklocki.edu.pl">kreatywneklocki.edu.pl</a>
+    <a href="../index.html">Strona główna</a>
     <a href="mailto:wolanin.w@gmail.com">wolanin.w@gmail.com</a>
   </div>
   <div>© 2025 Kreatywne Klocki · Kielce</div>
 </footer>
 
 <script>
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } });
-}, { threshold: 0.08 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-function submitForm(e) {
-  e.preventDefault();
-  e.target.style.display = 'none';
-  document.getElementById('success-box').style.display = 'block';
-}
-
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const t = document.querySelector(a.getAttribute('href'));
-    if(t){ e.preventDefault(); t.scrollIntoView({ behavior:'smooth' }); }
-  });
-});
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');obs.unobserve(x.target);}});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+function sub(e){e.preventDefault();e.target.style.display='none';document.getElementById('success').style.display='block';}
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}});});
 </script>
 </body>
 </html>

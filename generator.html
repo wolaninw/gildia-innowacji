@@ -274,6 +274,9 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-he
   </div>
 
   <button class="btn-gen" id="btn-gen" onclick="generate()">Generuj JSON →</button>
+  <button onclick="downloadJSON()" style="width:100%;background:var(--surface);border:1.5px solid var(--border);color:var(--text2);font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.9rem;border-radius:100px;cursor:pointer;margin-bottom:1.2rem;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">
+    ⬇ Pobierz zaktualizowany projekty.json
+  </button>
 
   <!-- OUTPUT -->
   <div class="output-wrap" id="output-wrap">
@@ -414,7 +417,60 @@ function clearForm() {
   document.getElementById('output-wrap').classList.remove('visible');
 }
 
-/* ── IMPORT JSON ── */
+/* ── DOWNLOAD projekty.json ── */
+function downloadJSON() {
+  // Jeśli jest aktywna edycja — najpierw zaktualizuj w tablicy
+  if (editId) {
+    const current = buildObj();
+    const idx = projekty.findIndex(p => p.id === editId);
+    if (idx >= 0) projekty[idx] = current;
+    else projekty.push(current);
+  }
+  const json = JSON.stringify(projekty, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'projekty.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function buildObj() {
+  const id      = document.getElementById('f-id').value.trim() || 'p000';
+  const tytul   = document.getElementById('f-tytul').value.trim();
+  const kat     = document.getElementById('f-kategoria').value;
+  const podkat  = document.getElementById('f-podkategoria').value;
+  const pitch   = document.getElementById('f-pitch').value.trim();
+  const miejsce = document.getElementById('f-miejsce').value.trim();
+  const status  = document.getElementById('f-status').value;
+  const postep  = document.getElementById('f-postep').value;
+  const dok     = document.getElementById('f-dok').value.trim();
+  const tagi    = document.getElementById('f-tagi').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const widoczny = document.getElementById('f-widoczny').checked;
+
+  let media;
+  if (mediaTyp==='placeholder') media = { typ:'placeholder' };
+  else if (mediaTyp==='obraz')  media = { typ:'obraz',   src: document.getElementById('media-obraz-src').value.trim() };
+  else if (mediaTyp==='youtube')media = { typ:'youtube', src: document.getElementById('media-yt-src').value.trim() };
+  else                          media = { typ:'video',   src: document.getElementById('media-video-src').value.trim() };
+
+  const narzedzia = [];
+  document.querySelectorAll('#narzedzia-list .dyn-item').forEach(item => {
+    const n = item.querySelector('.narz-nazwa').value.trim();
+    const o = item.querySelector('.narz-opis').value.trim();
+    if (n) narzedzia.push({ nazwa:n, opis:o });
+  });
+
+  const wnioski = [];
+  document.querySelectorAll('#wnioski-list .dyn-item').forEach(item => {
+    const t = item.querySelector('.wn-typ').value;
+    const tr = item.querySelector('.wn-tresc').value.trim();
+    if (tr) wnioski.push({ typ:t, tresc:tr });
+  });
+
+  return { id, tytul, kategoria:kat, podkategoria:podkat, pitch, status, postep, miejsce, widoczny, media, narzedzia, wnioski, tagi, dokumentacja:dok };
+}
 function importJSON() {
   const raw = document.getElementById('json-import').value.trim();
   const err = document.getElementById('import-error');
@@ -493,48 +549,20 @@ function addWniosek(typ='+', tresc='') {
 
 /* ── GENERATE ── */
 function generate() {
-  const id      = document.getElementById('f-id').value.trim() || 'p000';
-  const tytul   = document.getElementById('f-tytul').value.trim();
-  const kat     = document.getElementById('f-kategoria').value;
-  const podkat  = document.getElementById('f-podkategoria').value;
-  const pitch   = document.getElementById('f-pitch').value.trim();
-  const miejsce = document.getElementById('f-miejsce').value.trim();
-  const status  = document.getElementById('f-status').value;
-  const postep  = document.getElementById('f-postep').value;
-  const dok     = document.getElementById('f-dok').value.trim();
-  const tagi    = document.getElementById('f-tagi').value.split(',').map(t=>t.trim()).filter(Boolean);
-
-  let media;
-  if (mediaTyp==='placeholder') media = { typ:'placeholder' };
-  else if (mediaTyp==='obraz')  media = { typ:'obraz',   src: document.getElementById('media-obraz-src').value.trim() };
-  else if (mediaTyp==='youtube')media = { typ:'youtube', src: document.getElementById('media-yt-src').value.trim() };
-  else                          media = { typ:'video',   src: document.getElementById('media-video-src').value.trim() };
-
-  const narzedzia = [];
-  document.querySelectorAll('#narzedzia-list .dyn-item').forEach(item => {
-    const n = item.querySelector('.narz-nazwa').value.trim();
-    const o = item.querySelector('.narz-opis').value.trim();
-    if (n) narzedzia.push({ nazwa:n, opis:o });
-  });
-
-  const wnioski = [];
-  document.querySelectorAll('#wnioski-list .dyn-item').forEach(item => {
-    const t = item.querySelector('.wn-typ').value;
-    const tr = item.querySelector('.wn-tresc').value.trim();
-    if (tr) wnioski.push({ typ:t, tresc:tr });
-  });
-
-  const widoczny = document.getElementById('f-widoczny').checked;
-  const obj = { id, tytul, kategoria:kat, podkategoria:podkat, pitch, status, postep, miejsce, widoczny, media, narzedzia, wnioski, tagi, dokumentacja:dok };
+  const obj  = buildObj();
   const json = JSON.stringify(obj, null, 2);
 
-  document.getElementById('output-box').textContent = json;
+  // Zaktualizuj w tablicy lokalnej żeby Pobierz miało świeże dane
+  const idx = projekty.findIndex(p => p.id === obj.id);
+  if (idx >= 0) projekty[idx] = obj;
+  else if (!editId) projekty.push(obj);
 
+  document.getElementById('output-box').textContent = json;
   const isEdit = !!editId;
-  document.getElementById('output-title').textContent = isEdit ? `Zaktualizowany projekt ${editId}` : 'Nowy projekt — gotowy blok JSON';
+  document.getElementById('output-title').textContent = isEdit ? `Zaktualizowany projekt ${obj.id}` : 'Nowy projekt — gotowy blok JSON';
   document.getElementById('output-hint').innerHTML = isEdit
-    ? `Znajdź w <code style="color:var(--gold);background:var(--bg3);padding:1px 4px;border-radius:3px">projekty.json</code> obiekt z <code style="color:var(--gold);background:var(--bg3);padding:1px 4px;border-radius:3px">"id": "${editId}"</code> i zastąp go całym tym blokiem.`
-    : `Wklej ten blok do <code style="color:var(--gold);background:var(--bg3);padding:1px 4px;border-radius:3px">projekty.json</code> — przed ostatnim <code style="color:var(--gold);background:var(--bg3);padding:1px 4px;border-radius:3px">]</code>, po przecinku kończącym poprzedni projekt.`;
+    ? `Znajdź w <code style="color:var(--gold);background:var(--bg3);padding:1px 4px;border-radius:3px">projekty.json</code> obiekt z <code style="color:var(--gold);background:var(--bg3);padding:1px 4px;border-radius:3px">"id": "${obj.id}"</code> i zastąp go tym blokiem. Lub użyj ⬇ Pobierz projekty.json żeby pobrać cały plik od razu.`
+    : `Wklej ten blok do <code style="color:var(--gold);background:var(--bg3);padding:1px 4px;border-radius:3px">projekty.json</code> przed ostatnim <code style="color:var(--gold);background:var(--bg3);padding:1px 4px;border-radius:3px">]</code>. Lub użyj ⬇ Pobierz projekty.json żeby pobrać cały plik z nowym projektem.`;
 
   document.getElementById('output-wrap').classList.add('visible');
   document.getElementById('output-wrap').scrollIntoView({ behavior:'smooth', block:'start' });

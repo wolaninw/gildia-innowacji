@@ -399,6 +399,7 @@ function setFilter(kat, btn) {
 function renderGrid() {
   const q = document.getElementById('searchInput').value.trim().toLowerCase();
   const filtered = projekty.filter(p => {
+    if (p.widoczny === false) return false;
     let matchKat;
     if (activeFilter === 'all') matchKat = true;
     else if (activeFilter.startsWith('_status_')) matchKat = p.status === activeFilter.replace('_status_','');
