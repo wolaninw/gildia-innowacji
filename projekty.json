@@ -9,7 +9,8 @@
     "postep": "6. Zakończenie",
     "miejsce": "SP 25, Kielce",
     "media": {
-      "typ": "placeholder"
+      "typ": "obraz",
+      "src": "assets/projekty/Kiermasz_zabawek.png"
     },
     "tagi": [
       "kiermasz",
@@ -17,7 +18,7 @@
       "wydarzenie",
       "społeczny"
     ],
-    "dokumentacja": "https://www.youtube.com/watch?v=vAr5ei4akoY",
+    "dokumentacja": "https://docs.google.com/document/d/1NFNPjRFogTN5iPwxQBoqBuOsMbrfuN3H9m4PciHMvZI/edit?usp=sharing",
     "narzedzia": [
       {
         "nazwa": "Google Forms",
@@ -109,7 +110,6 @@
     "status": "prototypowanie",
     "postep": "4. Prototypowanie",
     "miejsce": "Góra Ślichowica, Kielce",
-    "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -132,7 +132,6 @@
     "status": "zakonczone",
     "postep": "6. Zakończenie",
     "miejsce": "Targi Kielce",
-    "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -199,9 +198,9 @@
     "status": "prototypowanie",
     "postep": "4. Prototypowanie",
     "miejsce": "Polska",
-    "widoczny": false,
     "media": {
-      "typ": "placeholder"
+      "typ": "obraz",
+      "src": "assets/projekty/Barometr Ustawodawczy miniatura YT.png"
     },
     "tagi": [
       "demokracja",
@@ -223,7 +222,8 @@
     "postep": "6. Zakończenie",
     "miejsce": "Kielce",
     "media": {
-      "typ": "placeholder"
+      "typ": "obraz",
+      "src": "assets/projekty/Debata 4K.png"
     },
     "tagi": [
       "demokracja",
@@ -244,7 +244,6 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -268,8 +267,8 @@
     "postep": "4. Prototypowanie",
     "miejsce": "Kielce",
     "media": {
-      "typ": "youtube",
-      "src": "OMD_hzfnVJU"
+      "typ": "obraz",
+      "src": "assets/projekty/Czym jest Gildia Innowacji bez tytulu.png"
     },
     "tagi": [
       "edukacja",
@@ -314,7 +313,8 @@
         "typ": "->",
         "tresc": "Przed oferta B2B dla instytucji zorganizowac konferencje polityki mlodziezowej jako narzedzie pozycjonowania"
       }
-    ]
+    ],
+    "youtube": "OMD_hzfnVJU"
   },
   {
     "id": "p012",
@@ -325,7 +325,6 @@
     "status": "prototypowanie",
     "postep": "4. Prototypowanie",
     "miejsce": "Kielce",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -348,7 +347,6 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -395,7 +393,8 @@
     "postep": "3. Realizacja",
     "miejsce": "Kielce",
     "media": {
-      "typ": "placeholder"
+      "typ": "obraz",
+      "src": "assets/projekty/warsztaty mydlarstwa plakat.png"
     },
     "tagi": [
       "kosmetyki",
@@ -526,7 +525,6 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -550,7 +548,6 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -573,7 +570,6 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -596,7 +592,6 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -619,7 +614,6 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -643,7 +637,6 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -667,7 +660,6 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Polska",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -691,7 +683,6 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Polska",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -715,7 +706,6 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Polska",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -739,7 +729,6 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -763,9 +752,9 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
-      "widoczny": false,
     "media": {
-      "typ": "placeholder"
+      "typ": "obraz",
+      "src": "assets/projekty/Florystyka LEGO (4).png"
     },
     "tagi": [
       "LEGO",
@@ -810,7 +799,6 @@
     "status": "backlog",
     "postep": "2. Backlog",
     "miejsce": "Polska",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -857,7 +845,6 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -927,7 +914,6 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -996,7 +982,6 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -1043,7 +1028,6 @@
     "status": "zakonczone",
     "postep": "6. Zakończenie",
     "miejsce": "Kamieniołom Dalnia-Grabina, Kielce",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -1090,7 +1074,6 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -1114,7 +1097,6 @@
     "status": "koncepcja",
     "postep": "1. Koncepcja",
     "miejsce": "Kielce",
-      "widoczny": false,
     "media": {
       "typ": "placeholder"
     },
@@ -1131,7 +1113,7 @@
   },
   {
     "id": "p045",
-    "tytul": "Przystanek Sąsiedzki",
+    "tytul": "Przystanek Sassiedzki",
     "kategoria": "spoleczne",
     "podkategoria": "Projekty dla otoczenia",
     "pitch": "Pilotazowe wykorzystanie nieuzytkowywanej poczekalni autobusowej przy ul. Massalskiego jako przestrzeni edukacji, wspóldzielenia zasobów i testowania nowych inicjatyw spolecznych.",
@@ -1139,7 +1121,8 @@
     "postep": "4. Prototypowanie",
     "miejsce": "ul. Massalskiego, Kielce",
     "media": {
-      "typ": "placeholder"
+      "typ": "obraz",
+      "src": "assets/projekty/plakat przystanek sasiedzki.png"
     },
     "narzedzia": [
       {
@@ -1164,41 +1147,5 @@
       "osiedle"
     ],
     "dokumentacja": "https://maps.app.goo.gl/HW8WDYQzEZVz8DWy7"
-  },
-  {
-  "id": "p047",
-  "tytul": "Wszyscy WON!",
-  "kategoria": "spoleczne",
-  "podkategoria": "Projekty natury komunikacyjnej",
-  "pitch": "Wszyscy WON! to obywatelska inicjatywa łącząca wiedzę, konsultacje i społeczności lokalne. Projekt pomaga obywatelom współdecydować i odzyskiwać wpływ na państwo.",
-  "status": "realizacja",
-  "postep": "3. Realizacja",
-  "miejsce": "Polska",
-  "media": {
-    "typ": "obraz",
-    "src": "assets/projekty/Wszyscy_WON!.png"
-  },
-  "narzedzia": [
-    {
-      "nazwa": "Wix",
-      "opis": "Budowa i rozwój portalu internetowego"
-    },
-    {
-      "nazwa": "WhatsApp",
-      "opis": "Komunikacja i organizacja lokalnych grup powiatowych"
-    },
-    {
-      "nazwa": "Wikikracja",
-      "opis": "Dyskusje, konsultacje i rozwój narzędzi demokracji uczestniczącej"
-    }
-  ],
-  "wnioski": [],
-  "tagi": [
-    "społeczeństwo obywatelskie",
-    "demokracja",
-    "konsultacje społeczne",
-    "społeczności lokalne"
-  ],
-  "dokumentacja": "https://www.wszyscy.org/"
-}
+  }
 ]
