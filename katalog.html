@@ -417,7 +417,7 @@ function openModal(id) {
   document.getElementById('modalPitch').textContent = p.pitch;
 
   // YouTube link po pitchu
-  const ytEl = document.getElementById('modalYT');
+  let ytEl = document.getElementById('modalYT');
   if (p.media && p.media.typ === 'youtube' && p.media.src) {
     ytEl.innerHTML = `
       <a href="https://www.youtube.com/watch?v=${p.media.src}" target="_blank" rel="noopener"
@@ -472,7 +472,7 @@ function openModal(id) {
   const kolory = {'+':`color:#2ed573`,'-':`color:var(--o1)`,'->':'color:#60a5fa'};
 
   // YouTube button jeśli projekt ma pole youtube
-  const ytEl = document.getElementById('modalYT');
+  ytEl = document.getElementById('modalYT');
   if (p.youtube) {
     ytEl.innerHTML = `
       <a href="https://www.youtube.com/watch?v=${p.youtube}" target="_blank" rel="noopener"
