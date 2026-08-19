@@ -2,7 +2,7 @@
 
 Program edukacji przedsiębiorczości dla młodych ludzi.
 
-## Struktura
+## Struktura 
 
 ```
 gildia-innowacji/
