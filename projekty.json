@@ -1,60 +1,51 @@
 [
   {
     "id": "p001",
-    "tytul": "Kiermasz zabawek",
-    "kategoria": "spoleczne",
-    "podkategoria": "Projekty dla szkoły",
-    "pitch": "Organizacja kiermaszu wyprzedażowego zabawek w SP 25 — uczniowie uczą się jak zaplanować wydarzenie, dotrzeć do odbiorców i przeprowadzić akcję społeczną od A do Z.",
-    "status": "zakonczone",
-    "postep": "6. Zakończenie",
-    "miejsce": "SP 25, Kielce",
-    "media": {
-      "typ": "obraz",
-      "src": "assets/projekty/Kiermasz_zabawek.png"
-    },
-    "tagi": [
-      "kiermasz",
-      "szkoła",
-      "wydarzenie",
-      "społeczny"
+    "nazwa_projektu": "Kiermasz zabawek",
+    "data_rozpoczecia": "2024-09-01",
+    "data_zakonczenia": "2024-12-15",
+    "uczestnicy": [
+      {"imie": "Jan", "rola": "Organizator"},
+      {"imie": "Anna", "rola": "Promotor"}
     ],
-    "dokumentacja": "https://docs.google.com/document/d/1NFNPjRFogTN5iPwxQBoqBuOsMbrfuN3H9m4PciHMvZI/edit?usp=sharing",
-    "narzedzia": [
-      {
-        "nazwa": "Google Forms",
-        "opis": "Formularz zgłoszeniowy dla wystawców"
-      },
-      {
-        "nazwa": "Canva",
-        "opis": "Plakat i materiały promocyjne"
-      },
-      {
-        "nazwa": "Facebook Events",
-        "opis": "Komunikacja i dyskusja z uczestnikami"
-      },
-      {
-        "nazwa": "Google Docs",
-        "opis": "Dokumentacja projektu i regulamin"
-      }
+    "omowienie": "Organizacja kiermaszu wyprzedażowego zabawek w SP 25. Uczniowie uczą się jak zaplanować wydarzenie, dotrzeć do odbiorców i przeprowadzić akcję społeczną od A do Z. Projekt rozwija umiejętności organizacyjne i przedsiębiorcze.",
+    "cele": {
+      "potrzeba": "Brak wydarzeń integrujących społeczność szkolną",
+      "cel_glowny": "Zorganizowanie kiermaszu zabawek z udziałem uczniów",
+      "grupa_docelowa": "Uczniowie SP 25 w Kielcach"
+    },
+    "specyfikacje": {
+      "technologia": ["Google Forms", "Canva", "Facebook"],
+      "umiejetnosci": ["Organizacja wydarzeń", "Marketing", "Komunikacja"],
+      "pomoc_oczekiwana": "Wsparcie wychowawcy, sala w szkole",
+      "termin": "Wrzesień-grudzień 2024",
+      "zgody": "Zgoda dyrektora szkoły",
+      "miejsce": "SP 25 Kielce",
+      "samodzielnie": "Promocja, koordynacja wystawców",
+      "szanse": "Wysokie zainteresowanie uczniów",
+      "zagrozenia": "Niska frekwencja wystawców"
+    },
+    "etapy": {
+      "koncepcja": "Zakończona",
+      "backlog": "Zakończona", 
+      "realizacja": "Zakończona",
+      "prototyp": "Zakończona",
+      "testowanie": "Zakończona"
+    },
+    "materialy_dodatkowe": [
+      {"typ": "link", "opis": "Plakat", "url": "assets/projekty/Kiermasz_zabawek.png"},
+      {"typ": "link", "opis": "Formularz", "url": "https://forms.google.com/..."}
     ],
     "wnioski": [
-      {
-        "typ": "-",
-        "tresc": "Promocja w social mediach przyniosła znikome efekty — tylko 1 uczestnik z Facebooka"
-      },
-      {
-        "typ": "+",
-        "tresc": "Większość uczestników dowiedziała się od wychowawcy lub z plakatu — kanał szkolny działa"
-      },
-      {
-        "typ": "-",
-        "tresc": "Z 26 zarejestrowanych przybyło tylko 10-15 wystawców — rejestracja nie równa sie obecności"
-      },
-      {
-        "typ": "->",
-        "tresc": "Na plakacie mocniej podkreslić ze szukamy wystawców, nie tylko odwiedzających"
-      }
-    ]
+      {"typ": "-", "tresc": "Promocja w social mediach przyniosła znikome efekty — tylko 1 uczestnik z Facebooka"},
+      {"typ": "+", "tresc": "Większość uczestników dowiedziała się od wychowawcy lub z plakatu — kanał szkolny działa"},
+      {"typ": "-", "tresc": "Z 26 zarejestrowanych przybyło tylko 10-15 wystawców — rejestracja nie równa się obecności"},
+      {"typ": "->", "tresc": "Na plakacie mocniej podkreślić że szukamy wystawców, nie tylko odwiedzających"}
+    ],
+    "status": "zakonczone",
+    "kategoria": "spoleczne",
+    "tagi": ["kiermasz", "szkoła", "wydarzenie", "społeczny"],
+    "typ_osobowosci_autora": "organizator"
   },
   {
     "id": "p002",

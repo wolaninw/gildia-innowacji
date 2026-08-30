@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gildia Innowacji — Edukacja Przedsiębiorczości dla Młodych</title>
+<title>Gildia Innowacji – pomysły, projekty i działania społeczne</title>
 
 <!-- SEO -->
-<meta name="description" content="Gildia Innowacji — program edukacji przedsiębiorczości dla młodych. Realne projekty, design thinking, agile. Bezpłatny udział dla uczniów i studentów. Kielce.">
-<meta name="keywords" content="gildia innowacji, edukacja przedsiębiorczość, projekty młodzieżowe, design thinking, agile, Kielce, warsztaty dla młodzieży, kompetencje przyszłości, innowacje społeczne, mikro centra kreatywności, program edukacyjny, zarządzanie projektami">
+<meta name="description" content="Gildia Innowacji pomaga zamieniać pomysły w konkretne projekty. Łączymy ludzi, testujemy rozwiązania i wspólnie zmieniamy edukację oraz lokalne otoczenie.">
+<meta name="keywords" content="Gildia Innowacji, projekty społeczne, innowacje społeczne, edukacja, inicjatywy lokalne, młodzież, Kielce, rozwój pomysłów, aktywność społeczna">
 <meta name="author" content="Kreatywne Klocki — Wojciech Wolanin">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://gildiainnowacji.pl/">
@@ -15,16 +15,16 @@
 <!-- Open Graph (Facebook, LinkedIn) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://gildiainnowacji.pl/">
-<meta property="og:title" content="Gildia Innowacji — Edukacja Przedsiębiorczości dla Młodych">
-<meta property="og:description" content="Program edukacji przedsiębiorczości dla młodych — realne projekty, design thinking i agile. Bezpłatny udział dla uczniów i studentów.">
+<meta property="og:title" content="Gildia Innowacji – pomysły, projekty i działania społeczne">
+<meta property="og:description" content="Gildia Innowacji pomaga zamieniać pomysły w konkretne projekty. Łączymy ludzi, testujemy rozwiązania i wspólnie zmieniamy edukację oraz lokalne otoczenie.">
 <meta property="og:image" content="https://gildiainnowacji.pl/assets/logo.png">
 <meta property="og:locale" content="pl_PL">
 <meta property="og:site_name" content="Gildia Innowacji">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Gildia Innowacji — Edukacja Przedsiębiorczości dla Młodych">
-<meta name="twitter:description" content="Program edukacji przedsiębiorczości dla młodych — realne projekty, design thinking i agile.">
+<meta name="twitter:title" content="Gildia Innowacji – pomysły, projekty i działania społeczne">
+<meta name="twitter:description" content="Gildia Innowacji pomaga zamieniać pomysły w konkretne projekty. Łączymy ludzi, testujemy rozwiązania i wspólnie zmieniamy edukację oraz lokalne otoczenie.">
 <meta name="twitter:image" content="https://gildiainnowacji.pl/assets/logo.png">
 
 <!-- Geo -->
@@ -462,27 +462,169 @@ body {
 .status-soon { background: var(--gold); }
 
 /* ── HOW TO JOIN ── */
-.join-steps { display: flex; flex-direction: column; gap: 1px; margin-top: 2rem; }
-.join-step {
-  display: grid; grid-template-columns: 5rem 1fr auto;
-  gap: 2rem; align-items: start;
-  background: var(--surface); padding: 2rem;
-  border-radius: var(--radius); margin-bottom: 0.8rem;
-  border: 1px solid var(--border);
+.hero-section {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+  align-items: center; padding: 4rem 2rem;
+  background: linear-gradient(135deg, rgba(244,124,40,0.05), rgba(131,16,158,0.05));
+  border-radius: var(--radius); margin-bottom: 3rem;
+}
+.hero-content { max-width: 600px; }
+.hero-badge {
+  display: inline-block; padding: 0.4rem 1rem;
+  background: rgba(244,124,40,0.15); color: var(--o1);
+  border-radius: 100px; font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem;
+}
+.hero-title {
+  font-family: 'Fraunces', serif; font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700; line-height: 1.1; margin-bottom: 1rem;
+}
+.hero-sub {
+  font-size: 1rem; color: var(--text2); line-height: 1.7;
+  margin-bottom: 2rem; max-width: 500px;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-hero {
+  background: linear-gradient(135deg, var(--o1), var(--v2));
+  color: white; padding: 1rem 2rem; border-radius: 100px;
+  font-weight: 700; font-size: 0.9rem; letter-spacing: 0.05em;
+  border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(244,124,40,0.3);
+}
+.btn-hero:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(244,124,40,0.4); }
+.btn-hero-outline {
+  background: transparent; color: var(--text);
+  padding: 1rem 2rem; border-radius: 100px;
+  font-weight: 700; font-size: 0.9rem; letter-spacing: 0.05em;
+  border: 2px solid var(--border); cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-hero-outline:hover { border-color: var(--o1); color: var(--o1); }
+
+.hero-visual {
+  position: relative; height: 300px;
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-card {
+  position: absolute; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 16px;
+  padding: 1.5rem; display: flex; flex-direction: column;
+  align-items: center; gap: 0.5rem; min-width: 120px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+.hero-card:hover { transform: translateY(-5px); }
+.hero-card-1 { top: 20%; left: 10%; }
+.hero-card-2 { top: 50%; right: 20%; }
+.hero-card-3 { bottom: 10%; left: 30%; }
+.card-icon { font-size: 2rem; }
+.card-text { font-size: 0.8rem; font-weight: 700; text-align: center; }
+
+.steps-section { margin-bottom: 3rem; }
+.section-header { text-align: center; margin-bottom: 3rem; }
+.section-badge {
+  display: inline-block; padding: 0.3rem 1rem;
+  background: rgba(247,193,70,0.15); color: var(--gold);
+  border-radius: 100px; font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 700; line-height: 1.2;
+}
+
+.steps-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem; margin-bottom: 2rem;
+}
+.step-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 2rem; position: relative;
+  transition: transform 0.3s, border-color 0.3s;
+  overflow: hidden;
+}
+.step-card:hover { transform: translateY(-5px); border-color: rgba(244,124,40,0.3); }
+.step-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--o1), var(--v2));
+  opacity: 0; transition: opacity 0.3s;
+}
+.step-card:hover::before { opacity: 1; }
+
+.step-number {
+  position: absolute; top: 1rem; right: 1rem;
+  font-family: 'Fraunces', serif; font-size: 2rem;
+  font-weight: 700; color: rgba(245,240,234,0.1);
+}
+.step-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.step-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; }
+.step-desc { font-size: 0.85rem; color: var(--text2); line-height: 1.6; margin-bottom: 1rem; }
+.step-link {
+  display: inline-block; color: var(--o1); font-weight: 700;
+  font-size: 0.8rem; text-decoration: none; cursor: pointer;
+  transition: color 0.2s;
+}
+.step-link:hover { color: var(--gold); }
+.step-meta {
+  font-size: 0.7rem; color: var(--text3);
+  margin-top: 1rem; padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.cta-section {
+  background: linear-gradient(135deg, var(--v1), var(--v2));
+  border-radius: 20px; padding: 3rem; text-align: center;
+  margin-bottom: 3rem;
+}
+.cta-title {
+  font-family: 'Fraunces', serif; font-size: 2rem;
+  font-weight: 700; margin-bottom: 1rem; color: white;
+}
+.cta-desc { font-size: 1rem; color: rgba(255,255,255,0.8); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+.cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn-cta {
+  background: white; color: var(--v1); padding: 1rem 2rem;
+  border-radius: 100px; font-weight: 700; font-size: 0.9rem;
+  border: none; cursor: pointer; transition: transform 0.2s;
+}
+.btn-cta:hover { transform: translateY(-2px); }
+.btn-cta-outline {
+  background: transparent; color: white; padding: 1rem 2rem;
+  border-radius: 100px; font-weight: 700; font-size: 0.9rem;
+  border: 2px solid rgba(255,255,255,0.3); cursor: pointer;
   transition: border-color 0.2s;
 }
-.join-step:hover { border-color: rgba(244,124,40,0.25); }
-.js-num {
-  font-family: 'Fraunces', serif; font-weight: 700;
-  font-size: 3rem; line-height: 1; color: rgba(245,240,234,0.06);
+.btn-cta-outline:hover { border-color: white; }
+
+/* LOGIN MODAL */
+.login-modal-content { max-width: 450px; }
+.login-tabs {
+  display: flex; gap: 1rem; margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
 }
-.js-content h3 { font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
-.js-content p { font-size: 0.83rem; color: var(--text2); line-height: 1.65; }
-.js-time {
-  font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
-  background: rgba(244,124,40,0.1); color: var(--o1);
-  padding: 0.3rem 0.8rem; border-radius: 100px; white-space: nowrap; font-weight: 700;
-  align-self: flex-start; margin-top: 0.3rem;
+.login-tab {
+  padding: 0.8rem 1.5rem; background: none; border: none;
+  color: var(--text3); font-weight: 700; cursor: pointer;
+  font-size: 0.85rem; transition: color 0.2s;
+}
+.login-tab.active { color: var(--o1); border-bottom: 2px solid var(--o1); }
+.login-link { color: var(--o1); text-decoration: none; font-size: 0.8rem; }
+.login-link:hover { text-decoration: underline; }
+
+/* RESPONSIVE */
+@media(max-width: 900px) {
+  .hero-section { grid-template-columns: 1fr; padding: 2rem; }
+  .hero-visual { display: none; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .cta-section { padding: 2rem; }
+  .cta-actions { flex-direction: column; }
+  .btn-cta, .btn-cta-outline { width: 100%; }
+
+  /* Contact responsive */
+  .contact-grid-modern { grid-template-columns: 1fr; }
+  .social-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-footer-content { flex-direction: column; text-align: center; }
+}
 }
 
 /* ── SUPPORT ── */
@@ -598,6 +740,108 @@ body {
 }
 .social-btn:hover { border-color: var(--o1); background: rgba(244,124,40,0.1); }
 
+/* ── CONTACT MODERN ── */
+.contact-hero {
+  text-align: center; padding: 3rem 2rem;
+  background: linear-gradient(135deg, rgba(244,124,40,0.05), rgba(131,16,158,0.05));
+  border-radius: var(--radius); margin-bottom: 3rem;
+}
+.contact-badge {
+  display: inline-block; padding: 0.4rem 1rem;
+  background: rgba(244,124,40,0.15); color: var(--o1);
+  border-radius: 100px; font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem;
+}
+.contact-title {
+  font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 700; line-height: 1.2; margin-bottom: 1rem;
+}
+.contact-sub {
+  font-size: 1rem; color: var(--text2); line-height: 1.6;
+  max-width: 600px; margin: 0 auto;
+}
+
+.contact-grid-modern {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem; margin-bottom: 3rem;
+}
+.contact-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 2rem; text-align: center;
+  transition: transform 0.3s, border-color 0.3s;
+}
+.contact-card:hover { transform: translateY(-5px); border-color: rgba(244,124,40,0.3); }
+.contact-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.contact-card-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; }
+.contact-card-desc { font-size: 0.85rem; color: var(--text2); margin-bottom: 1rem; }
+.contact-details { display: flex; flex-direction: column; gap: 0.5rem; }
+.contact-link {
+  color: var(--text2); text-decoration: none; font-size: 0.85rem;
+  transition: color 0.2s;
+}
+.contact-link:hover { color: var(--o1); }
+.contact-link-main {
+  display: inline-block; color: var(--o1); font-weight: 700;
+  text-decoration: none; font-size: 0.9rem;
+  transition: color 0.2s;
+}
+.contact-link-main:hover { color: var(--gold); }
+
+.social-section { margin-bottom: 3rem; }
+.social-header { text-align: center; margin-bottom: 2rem; }
+.social-badge {
+  display: inline-block; padding: 0.3rem 1rem;
+  background: rgba(247,193,70,0.15); color: var(--gold);
+  border-radius: 100px; font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem;
+}
+.social-title {
+  font-family: 'Fraunces', serif; font-size: 1.8rem;
+  font-weight: 700; line-height: 1.2;
+}
+
+.social-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.social-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.5rem; text-align: center;
+  text-decoration: none; color: var(--text);
+  transition: transform 0.3s, border-color 0.3s;
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+}
+.social-card:hover { transform: translateY(-5px); border-color: rgba(244,124,40,0.3); }
+.social-logo {
+  width: 60px; height: 60px; object-fit: contain;
+  border-radius: 12px; margin-bottom: 0.5rem;
+  background: transparent;
+}
+.social-icon-large { font-size: 2rem; }
+.social-name { font-weight: 700; font-size: 0.9rem; }
+.social-handle { font-size: 0.75rem; color: var(--text3); }
+
+.social-instagram:hover { border-color: #E1306C; }
+.social-facebook:hover { border-color: #1877F2; }
+.social-youtube:hover { border-color: #FF0000; }
+.social-patronite:hover { border-color: var(--gold); }
+.social-zrzutka:hover { border-color: #2ed573; }
+.social-linkedin:hover { border-color: #0077B5; }
+.social-whatsapp:hover { border-color: #25D366; }
+.social-x:hover { border-color: #000000; }
+
+.contact-footer {
+  background: linear-gradient(135deg, var(--v1), var(--v2));
+  border-radius: 20px; padding: 2rem;
+}
+.contact-footer-content {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 2rem; flex-wrap: wrap;
+}
+.footer-text { flex: 1; min-width: 200px; }
+.footer-text strong { display: block; font-size: 1.1rem; margin-bottom: 0.5rem; color: white; }
+.footer-text p { font-size: 0.9rem; color: rgba(255,255,255,0.8); margin: 0; }
+
 /* ── PAGE HEADERS ── */
 .page-header { margin-bottom: 2rem; }
 .page-eyebrow {
@@ -661,6 +905,11 @@ body {
   .news-card.featured { grid-template-columns: 1fr; }
   .offer-grid, .catalog-grid, .support-grid, .vision-grid, .contact-grid { grid-template-columns: 1fr; }
   .goals-grid { grid-template-columns: 1fr; }
+
+  /* Additional responsive for new contact */
+  .contact-grid-modern { grid-template-columns: 1fr; }
+  .social-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-footer-content { flex-direction: column; text-align: center; }
   .mobile-overlay {
     display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99;
   }
@@ -737,7 +986,7 @@ body {
     <div class="sidebar-footer">
       Gildia Innowacji · Kielce<br>
       <a href="mailto:gildia.innowacji@gmail.com">gildia.innowacji@gmail.com</a><br>
-      <a href="https://gildia.pl">gildia.pl</a>
+      <a href="https://gildia.edu.pl/">gildia.edu.pl</a>
     </div>
   </aside>
 
@@ -1000,63 +1249,150 @@ body {
 
     <!-- ── PAGE: JAK DOŁĄCZYĆ ── -->
     <div class="page fade-in" id="page-dolacz">
-      <div class="page-header">
-        <div class="page-eyebrow">Jak dołączyć?</div>
-        <h1 class="page-h">Sześć kroków do <em>pierwszego projektu.</em></h1>
-        <p class="page-sub">Proces jest prosty — wypełniasz formularz, poznajesz swój styl działania i wybierasz projekt. Resztą zajmujemy się my.</p>
-      </div>
-      <div class="join-steps">
-        <div class="join-step">
-          <div class="js-num">01</div>
-          <div class="js-content">
-            <h3>Zarejestruj się</h3>
-            <p>Wypełnij krótki formularz zgłoszeniowy zostawiając nam swoje dane kontaktowe. To wszystko — zaczynasz od razu.</p>
+      <div class="hero-section">
+        <div class="hero-content">
+          <div class="hero-badge">🚀 Dołącz do społeczności innowatorów</div>
+          <h1 class="hero-title">Zdefiniuj swój cel.<br><em>Zrealizuj go z Gildią.</em></h1>
+          <p class="hero-sub">Gildia Innowacji to akcelerator dla młodych ludzi, którzy chcą zmieniać świat przez realizację własnych projektów. Poznaj swój typ osobowości, znajdź podobnych ludzi i zacznij działać.</p>
+          <div class="hero-actions">
+            <button class="btn-hero" onclick="navigate('onas'); setAboutTab('kontakt')">💬 Zaczynamy →</button>
+            <button class="btn-hero-outline" onclick="window.open('https://www.16personalities.com/pl/darmowy-test-osobowosci', '_blank')">🧠 Test osobowości</button>
           </div>
-          <div class="js-time">1–2 min</div>
         </div>
-        <div class="join-step">
-          <div class="js-num">02</div>
-          <div class="js-content">
-            <h3>Daj się poznać — test profilujący</h3>
-            <p>Przejdź przez krótki test 16Personalities, aby inni wiedzieli kim jesteś. Poznasz swoje mocne i słabe strony oraz optymalną rolę w projekcie.</p>
+        <div class="hero-visual">
+          <div class="hero-card hero-card-1">
+            <div class="card-icon">🎯</div>
+            <div class="card-text">Definiuj cele</div>
           </div>
-          <div class="js-time">10–15 min</div>
-        </div>
-        <div class="join-step">
-          <div class="js-num">03</div>
-          <div class="js-content">
-            <h3>Poznaj Katalog Projektów</h3>
-            <p>W katalogu znajdziesz kilkadziesiąt projektów o charakterze społecznym w różnych kategoriach — sport, kultura, technologia, ekologia i inne.</p>
+          <div class="hero-card hero-card-2">
+            <div class="card-icon">🤝</div>
+            <div class="card-text">Znajdź zespół</div>
           </div>
-          <div class="js-time">Kiedy chcesz</div>
-        </div>
-        <div class="join-step">
-          <div class="js-num">04</div>
-          <div class="js-content">
-            <h3>Dołącz lub załóż swój projekt</h3>
-            <p>W każdym projekcie są różne zadania dopasowane do każdej chętnej osoby. Możesz też skopiować projekt od innych i uruchomić własną wersję.</p>
+          <div class="hero-card hero-card-3">
+            <div class="card-icon">🚀</div>
+            <div class="card-text">Realizuj projekty</div>
           </div>
-          <div class="js-time">1 spotkanie</div>
-        </div>
-        <div class="join-step">
-          <div class="js-num">05</div>
-          <div class="js-content">
-            <h3>Sieciuj swoją ideę</h3>
-            <p>Daj projektom życie — wyślij link do projektów innym osobom, zaproś znajomych i buduj swój zespół wokół wspólnej pasji.</p>
-          </div>
-          <div class="js-time">Na bieżąco</div>
-        </div>
-        <div class="join-step">
-          <div class="js-num">06</div>
-          <div class="js-content">
-            <h3>Przygotuj się na feedback</h3>
-            <p>Przygotuj się na opinię innych, która nie zawsze jest pozytywna. Pamiętaj — najważniejsze są wnioski! Feedback to paliwo innowacji.</p>
-          </div>
-          <div class="js-time">Iteracyjnie</div>
         </div>
       </div>
-      <div style="margin-top:2rem;">
-        <button class="btn-sm btn-orange" style="font-size:0.85rem; padding:0.9rem 2rem;" onclick="navigate('onas'); setAboutTab('kontakt')">Zapisz się na spotkanie →</button>
+
+      <div class="steps-section">
+        <div class="section-header">
+          <div class="section-badge">Proces dołączenia</div>
+          <h2 class="section-title">6 kroków do <em>twój pierwszy projekt</em></h2>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card step-card-1">
+            <div class="step-number">01</div>
+            <div class="step-icon">📝</div>
+            <h3 class="step-title">Zarejestruj się</h3>
+            <p class="step-desc">Wypełnij krótki formularz i utwórz konto w systemie Gildii Innowacji.</p>
+            <div class="step-meta">⏱️ 1-2 minuty</div>
+          </div>
+
+          <div class="step-card step-card-2">
+            <div class="step-number">02</div>
+            <div class="step-icon">🧠</div>
+            <h3 class="step-title">Poznaj swój typ osobowości</h3>
+            <p class="step-desc">Wykonaj darmowy test 16Personalities, abyśmy mogli Cię dopasować do odpowiednich zespołów.</p>
+            <a href="https://www.16personalities.com/pl/darmowy-test-osobowosci" target="_blank" class="step-link">🧠 Wykonaj test →</a>
+            <div class="step-meta">⏱️ 10-15 minut</div>
+          </div>
+
+          <div class="step-card step-card-3">
+            <div class="step-number">03</div>
+            <div class="step-icon">📋</div>
+            <h3 class="step-title">Pobierz szablon projektu</h3>
+            <p class="step-desc">Skorzystaj z naszego sprawdzonego szablonu do planowania i realizacji projektów.</p>
+            <a href="https://docs.google.com/document/d/1Q3LwdRMzVupJUdDJgqp55hmq9Rm_QcOBIZYUQkDjFo4/edit?usp=sharing" target="_blank" class="step-link">📋 Pobierz szablon →</a>
+            <div class="step-meta">⏱️ 5 minut</div>
+          </div>
+
+          <div class="step-card step-card-4">
+            <div class="step-number">04</div>
+            <div class="step-icon">🗂️</div>
+            <h3 class="step-title">Poznaj Katalog Innowacji</h3>
+            <p class="step-desc">Przeglądaj projekty innych, szukaj inspiracji lub dołącz do istniejących inicjatyw.</p>
+            <button class="step-link" onclick="window.location.href='katalog.html'">🗂️ Przeglądaj katalog →</button>
+            <div class="step-meta">⏱️ Kiedy chcesz</div>
+          </div>
+
+          <div class="step-card step-card-5">
+            <div class="step-number">05</div>
+            <div class="step-icon">🤝</div>
+            <h3 class="step-title">Znajdź swój zespół</h3>
+            <p class="step-desc">Nasz system dopasuje Cię do ludzi o podobnych typach osobowości i celach projektowych.</p>
+            <div class="step-meta">⏱️ Automatycznie</div>
+          </div>
+
+          <div class="step-card step-card-6">
+            <div class="step-number">06</div>
+            <div class="step-icon">🚀</div>
+            <h3 class="step-title">Zacznij realizować!</h3>
+            <p class="step-desc">Zrealizuj swój projekt z wsparciem społeczności Gildii Innowacji.</p>
+            <div class="step-meta">⏱️ Na bieżąco</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-section">
+        <div class="cta-content">
+          <h2 class="cta-title">Gotowy/a do działania?</h2>
+          <p class="cta-desc">Dołącz do społeczności młodych innowatorów i zacznij realizować swoje cele już dziś.</p>
+          <div class="cta-actions">
+            <button class="btn-cta" onclick="showLoginModal()">🔐 Zaloguj się</button>
+            <button class="btn-cta-outline" onclick="navigate('onas'); setAboutTab('kontakt')">💬 Porozmawiajmy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- LOGIN MODAL -->
+      <div class="modal" id="login-modal">
+        <div class="modal-content login-modal-content">
+          <div class="modal-header">
+            <div class="modal-title">Logowanie do Gildii Innowacji</div>
+            <button class="modal-close" onclick="closeLoginModal()">✕</button>
+          </div>
+          <div class="login-tabs">
+            <button class="login-tab active" onclick="switchLoginTab('login')">Logowanie</button>
+            <button class="login-tab" onclick="switchLoginTab('register')">Rejestracja</button>
+          </div>
+
+          <div class="login-form" id="login-form">
+            <div class="field">
+              <label>Email</label>
+              <input type="email" id="login-email" placeholder="twoj@email.com">
+            </div>
+            <div class="field">
+              <label>Hasło</label>
+              <input type="password" id="login-password" placeholder="••••••••">
+            </div>
+            <button class="btn-gen" onclick="handleLogin()">Zaloguj się</button>
+            <div class="login-footer">
+              <a href="#" class="login-link">Zapomniałeś hasła?</a>
+            </div>
+          </div>
+
+          <div class="login-form" id="register-form" style="display:none">
+            <div class="field">
+              <label>Imię</label>
+              <input type="text" id="reg-name" placeholder="Twoje imię">
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input type="email" id="reg-email" placeholder="twoj@email.com">
+            </div>
+            <div class="field">
+              <label>Hasło</label>
+              <input type="password" id="reg-password" placeholder="••••••••">
+            </div>
+            <div class="field">
+              <label>Powtórz hasło</label>
+              <input type="password" id="reg-password-confirm" placeholder="••••••••">
+            </div>
+            <button class="btn-gen" onclick="handleRegister()">Zarejestruj się</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1170,41 +1506,102 @@ body {
 
       <!-- KONTAKT -->
       <div class="about-content" id="about-kontakt">
-        <div class="contact-grid">
-          <div class="contact-form-box">
-            <div class="cf-h">Dołącz do Gildii</div>
-            <div class="cf-sub">Wypełnij formularz zgłoszeniowy — to pierwszy krok do udziału w programie. Bezpłatny dla wszystkich uczestników.</div>
-            <a href="https://forms.gle/LsK8m9rrMA3jtSYd8" target="_blank" rel="noopener"
-               style="display:block;width:100%;background:linear-gradient(135deg,var(--o1),var(--v2));color:white;text-align:center;font-size:0.88rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:1.1rem;border-radius:100px;text-decoration:none;box-shadow:0 4px 16px rgba(244,124,40,0.35);transition:opacity 0.2s,transform 0.15s;margin-bottom:1rem">
-              Wypełnij formularz zgłoszeniowy →
-            </a>
-            <p style="text-align:center;font-size:0.72rem;color:var(--text3)">Udział zawsze bezpłatny · Bez zobowiązań</p>
+        <div class="contact-hero">
+          <div class="contact-badge">📞 Kontakt z nami</div>
+          <h2 class="contact-title">Połącz się z <em>Gildią Innowacji</em></h2>
+          <p class="contact-sub">Masz pytania? Chcesz dołączyć? Wspólnie zrealizujemy Twoje cele!</p>
+        </div>
+
+        <div class="contact-grid-modern">
+          <div class="contact-card contact-card-1">
+            <div class="contact-icon">👤</div>
+            <h3 class="contact-card-title">Wojciech Wolanin</h3>
+            <p class="contact-card-desc">Założyciel Gildii Innowacji</p>
+            <div class="contact-details">
+              <a href="tel:+48731370032" class="contact-link">📞 731 370 032</a>
+              <a href="mailto:gildia.innowacji@gmail.com" class="contact-link">📧 gildia.innowacji@gmail.com</a>
+            </div>
           </div>
 
-          <div class="contact-info-box">
-            <div class="ci-card">
-              <div class="ci-card-title">Dane kontaktowe</div>
-              <div class="ci-item"><span class="ci-icon">👤</span><span>Wojciech Wolanin</span></div>
-              <div class="ci-item"><span class="ci-icon">📞</span><a href="tel:+48731370032">731 370 032</a></div>
-              <div class="ci-item"><span class="ci-icon">📧</span><a href="mailto:gildia.innowacji@gmail.com">gildia.innowacji@gmail.com</a></div>
-              <div class="ci-item"><span class="ci-icon">🌐</span><a href="https://gildia.pl">gildia.pl</a></div>
+          <div class="contact-card contact-card-2">
+            <div class="contact-icon">🌐</div>
+            <h3 class="contact-card-title">Nasza strona</h3>
+            <p class="contact-card-desc">Główna strona Gildii Innowacji</p>
+            <a href="https://gildia.edu.pl/" target="_blank" class="contact-link-main">🚀 gildia.edu.pl</a>
+          </div>
+
+          <div class="contact-card contact-card-3">
+            <div class="contact-icon">📋</div>
+            <h3 class="contact-card-title">Dołącz do nas</h3>
+            <p class="contact-card-desc">Wypełnij formularz i zacznij działać</p>
+            <a href="https://forms.gle/LsK8m9rrMA3jtSYd8" target="_blank" class="contact-link-main">� Formularz zgłoszeniowy →</a>
+          </div>
+        </div>
+
+        <div class="social-section">
+          <div class="social-header">
+            <div class="social-badge">🔗 Social Media</div>
+            <h3 class="social-title">Bądźmy w kontakcie!</h3>
+          </div>
+
+          <div class="social-grid">
+            <a href="https://www.instagram.com/gildiainnowacji/" target="_blank" class="social-card social-instagram">
+              <img src="assets/socialmedia/instagram.png" alt="Instagram" class="social-logo">
+              <div class="social-name">Instagram</div>
+              <div class="social-handle">@gildiainnowacji</div>
+            </a>
+
+            <a href="https://www.facebook.com/profile.php?id=61567864624513" target="_blank" class="social-card social-facebook">
+              <img src="assets/socialmedia/facebook.png" alt="Facebook" class="social-logo">
+              <div class="social-name">Facebook</div>
+              <div class="social-handle">Gildia Innowacji</div>
+            </a>
+
+            <a href="https://www.youtube.com/@GildiaInnowacji" target="_blank" class="social-card social-youtube">
+              <img src="assets/socialmedia/youtube.png" alt="YouTube" class="social-logo">
+              <div class="social-name">YouTube</div>
+              <div class="social-handle">@GildiaInnowacji</div>
+            </a>
+
+            <a href="https://patronite.pl/Gildia.Innowacji?podglad-autora" target="_blank" class="social-card social-patronite">
+              <img src="assets/socialmedia/patronite.png" alt="Patronite" class="social-logo">
+              <div class="social-name">Patronite</div>
+              <div class="social-handle">Wspieraj nas</div>
+            </a>
+
+            <a href="https://zrzutka.pl/user/whip-rounds/active" target="_blank" class="social-card social-zrzutka">
+              <img src="assets/socialmedia/zrzutka.pl.png" alt="Zrzutka.pl" class="social-logo">
+              <div class="social-name">Zrzutka.pl</div>
+              <div class="social-handle">Wesprzyj projekt</div>
+            </a>
+
+            <a href="https://www.linkedin.com/" target="_blank" class="social-card social-linkedin">
+              <img src="assets/socialmedia/linkedin.png" alt="LinkedIn" class="social-logo">
+              <div class="social-name">LinkedIn</div>
+              <div class="social-handle">Gildia Innowacji</div>
+            </a>
+
+            <a href="https://wa.me/48731370032" target="_blank" class="social-card social-whatsapp">
+              <img src="assets/socialmedia/what'sup.png" alt="WhatsApp" class="social-logo">
+              <div class="social-name">WhatsApp</div>
+              <div class="social-handle">731 370 032</div>
+            </a>
+
+            <a href="https://x.com/" target="_blank" class="social-card social-x">
+              <img src="assets/socialmedia/x.png" alt="X (Twitter)" class="social-logo">
+              <div class="social-name">X (Twitter)</div>
+              <div class="social-handle">@GildiaInnowacji</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-footer">
+          <div class="contact-footer-content">
+            <div class="footer-text">
+              <strong>Gotowy/a do działania?</strong>
+              <p>Dołącz do społeczności młodych innowatorów i zacznij realizować swoje cele już dziś.</p>
             </div>
-            <div class="ci-card">
-              <div class="ci-card-title">Media społecznościowe</div>
-              <div class="social-row">
-                <a href="https://patronite.pl/KreatywneKlocki" class="social-btn" title="Patronite">🎗</a>
-                <a href="#" class="social-btn" title="YouTube">▶</a>
-                <a href="#" class="social-btn" title="Instagram">📷</a>
-                <a href="#" class="social-btn" title="Facebook">𝐟</a>
-              </div>
-            </div>
-            <div class="ci-card">
-              <div class="ci-card-title">Spotkania online</div>
-              <div style="font-size:0.83rem; color:var(--text2); line-height:1.7;">
-                Organizujemy bezpłatne spotkania online prezentujące Gildię Innowacji w działaniu.<br><br>
-                Napisz do nas aby ustalić termin konsultacji dopasowany do Twoich potrzeb.
-              </div>
-            </div>
+            <button class="btn-cta" onclick="navigate('dolacz')">🚀 Jak dołączyć?</button>
           </div>
         </div>
       </div>
@@ -1230,6 +1627,63 @@ function navigate(id) {
   document.querySelectorAll(`[id^="nav-${id}"]`).forEach(n => n.classList.add('active'));
   document.getElementById('topbar-title').textContent = titles[id] || id;
   if(window.innerWidth <= 900) closeSidebar();
+}
+
+/* ── LOGIN MODAL FUNCTIONS ── */
+function showLoginModal() {
+  document.getElementById('login-modal').classList.add('active');
+}
+
+function closeLoginModal() {
+  document.getElementById('login-modal').classList.remove('active');
+}
+
+function switchLoginTab(tab) {
+  document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+
+  if(tab === 'login') {
+    document.getElementById('login-form').style.display = 'block';
+    document.getElementById('register-form').style.display = 'none';
+  } else {
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('register-form').style.display = 'block';
+  }
+}
+
+function handleLogin() {
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  if(!email || !password) {
+    alert('Wypełnij wszystkie pola');
+    return;
+  }
+
+  // Placeholder - tutaj będzie prawdziwa logika logowania
+  alert('Logowanie: ' + email + '\n\nFunkcja logowania zostanie zaimplementowana w kolejnym etapie.');
+  closeLoginModal();
+}
+
+function handleRegister() {
+  const name = document.getElementById('reg-name').value;
+  const email = document.getElementById('reg-email').value;
+  const password = document.getElementById('reg-password').value;
+  const passwordConfirm = document.getElementById('reg-password-confirm').value;
+
+  if(!name || !email || !password || !passwordConfirm) {
+    alert('Wypełnij wszystkie pola');
+    return;
+  }
+
+  if(password !== passwordConfirm) {
+    alert('Hasła nie są zgodne');
+    return;
+  }
+
+  // Placeholder - tutaj będzie prawdziwa logika rejestracji
+  alert('Rejestracja: ' + name + ' (' + email + ')\n\nFunkcja rejestracji zostanie zaimplementowana w kolejnym etapie.');
+  closeLoginModal();
 }
 
 function setOfferTab(tab) {

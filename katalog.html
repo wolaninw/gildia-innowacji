@@ -98,6 +98,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .pcard-tags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:auto;padding-top:0.4rem;}
 .ptag{font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;padding:0.18rem 0.55rem;border-radius:100px;background:var(--surface2);color:var(--text3);}
 
+/* documentation button */
+.pcard-doc-btn{
+  display:none; padding:0.4rem 0.8rem; background:rgba(247,193,70,0.1);
+  border:1px solid rgba(247,193,70,0.2); color:var(--gold);
+  border-radius:8px; font-size:0.7rem; font-weight:700; text-decoration:none;
+  text-align:center; transition:all 0.2s; margin-top:0.5rem;
+}
+.pcard-doc-btn:hover{background:rgba(247,193,70,0.2); border-color:var(--gold);}
+.pcard-doc-btn.visible{display:block;}
+
 /* footer */
 .pcard-footer{padding:0.8rem 1.4rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:0.72rem;color:var(--text3);}
 .pcard-more{color:var(--o2);font-weight:600;display:flex;align-items:center;gap:0.3rem;transition:color 0.2s;}
@@ -345,9 +355,10 @@ function cardHTML(p) {
   </div>
   <div class="pcard-body">
     <div class="pcard-sub">${p.podkategoria||''}</div>
-    <div class="pcard-title">${p.tytul}</div>
-    <div class="pcard-pitch">${p.pitch}</div>
+    <div class="pcard-title">${p.nazwa_projektu || p.tytul}</div>
+    <div class="pcard-pitch">${p.omowienie || p.pitch}</div>
     <div class="pcard-tags">${tagsHTML}</div>
+    ${p.dokumentacja ? `<a href="${p.dokumentacja}" target="_blank" class="pcard-doc-btn visible" onclick="event.stopPropagation()">📋 Dokumentacja</a>` : ''}
   </div>
   <div class="pcard-footer">
     <span>${p.postep}</span>
