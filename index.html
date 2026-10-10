@@ -3,12 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Analytics 4 + zgoda cookies (Consent Mode v2) -->
+<script src="assets/analytics.js"></script>
 <title>Gildia Innowacji – pomysły, projekty i działania społeczne</title>
+
+<!-- COOKIE CONSENT -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
 
 <!-- SEO -->
 <meta name="description" content="Gildia Innowacji pomaga zamieniać pomysły w konkretne projekty. Łączymy ludzi, testujemy rozwiązania i wspólnie zmieniamy edukację oraz lokalne otoczenie.">
 <meta name="keywords" content="Gildia Innowacji, projekty społeczne, innowacje społeczne, edukacja, inicjatywy lokalne, młodzież, Kielce, rozwój pomysłów, aktywność społeczna">
-<meta name="author" content="Kreatywne Klocki — Wojciech Wolanin">
+<meta name="author" content="Gildia Innowacji — Wojciech Wolanin">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://gildiainnowacji.pl/">
 
@@ -290,6 +296,9 @@ body {
 .cat-orange { color: var(--o1); }
 .cat-violet { color: var(--v3); }
 .cat-gold { color: var(--gold); }
+.cat-green { color: #2ecc71; }
+.cat-blue { color: #3498db; }
+.cat-teal { color: #1abc9c; }
 .nc-title { font-size: 1rem; font-weight: 700; line-height: 1.35; margin-bottom: 0.7rem; }
 .nc-body { font-size: 0.8rem; color: var(--text2); line-height: 1.65; }
 .nc-footer {
@@ -611,6 +620,14 @@ body {
 .login-link { color: var(--o1); text-decoration: none; font-size: 0.8rem; }
 .login-link:hover { text-decoration: underline; }
 
+.checkbox-label {
+  display: flex; align-items: flex-start; gap: 0.5rem;
+  font-size: 0.75rem; color: var(--text2); line-height: 1.4;
+}
+.checkbox-label input[type="checkbox"] {
+  margin-top: 0.2rem; flex-shrink: 0;
+}
+
 /* RESPONSIVE */
 @media(max-width: 900px) {
   .hero-section { grid-template-columns: 1fr; padding: 2rem; }
@@ -842,6 +859,47 @@ body {
 .footer-text strong { display: block; font-size: 1.1rem; margin-bottom: 0.5rem; color: white; }
 .footer-text p { font-size: 0.9rem; color: rgba(255,255,255,0.8); margin: 0; }
 
+/* ── LEGAL SECTION ── */
+.legal-section {
+  margin-top: 3rem; padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+.legal-links {
+  display: flex; gap: 1.5rem; justify-content: center;
+  margin-bottom: 1rem; flex-wrap: wrap;
+}
+.legal-links a {
+  color: var(--text3); text-decoration: none; font-size: 0.8rem;
+  transition: color 0.2s;
+}
+.legal-links a:hover { color: var(--o1); }
+.legal-text {
+  text-align: center; font-size: 0.75rem; color: var(--text3);
+}
+
+/* ── LEGAL MODALS ── */
+.legal-modal-content { max-width: 600px; }
+.legal-body {
+  padding: 1.5rem 0;
+}
+.legal-body h3 {
+  font-family: 'Fraunces', serif; font-size: 1.1rem;
+  font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.8rem;
+  color: var(--o1);
+}
+.legal-body h3:first-child { margin-top: 0; }
+.legal-body p {
+  font-size: 0.85rem; color: var(--text2); line-height: 1.7;
+  margin-bottom: 1rem;
+}
+.legal-body ul {
+  margin-bottom: 1rem; padding-left: 1.5rem;
+}
+.legal-body li {
+  font-size: 0.85rem; color: var(--text2); line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+
 /* ── PAGE HEADERS ── */
 .page-header { margin-bottom: 2rem; }
 .page-eyebrow {
@@ -942,7 +1000,7 @@ body {
         <div class="nav-section-label">Menu</div>
         <div class="nav-item active" onclick="navigate('aktualnosci')" id="nav-aktualnosci">
           <span class="nav-icon">📰</span> Aktualności
-          <span class="nav-badge">3</span>
+          <span class="nav-badge">4</span>
         </div>
       </div>
 
@@ -1050,6 +1108,21 @@ body {
 
       <div class="section-label">Ostatnie wpisy</div>
       <div class="news-grid">
+        <div class="news-card" onclick="window.open('https://www.facebook.com/events/','_blank')">
+          <div class="nc-cat cat-green">📢 Spotkanie Online</div>
+          <div class="nc-title">Spotkanie online — założenia projektowe Gildii Innowacji</div>
+          <div class="nc-body">Zapraszamy na spotkanie online, podczas którego omówimy założenia projektowe Gildii Innowacji. Podczas spotkania przedstawimy:
+<ul style="margin:0.5rem 0 0 1.5rem;padding:0;">
+<li>Główne cele i misję Gildii</li>
+<li>Strukturę programu edukacyjnego</li>
+<li>Możliwości współpracy i dołączenia</li>
+<li>Odpowiedzi na pytania uczestników</li>
+</ul></div>
+          <div class="nc-footer">
+            <span class="nc-date">Sierpień 2026</span>
+            <span class="nc-more">Dołącz do wydarzenia →</span>
+          </div>
+        </div>
         <div class="news-card" onclick="navigate('katalog')">
           <div class="nc-cat cat-orange">🗂️ Katalog</div>
           <div class="nc-title">Katalog Innowacji — kilkadziesiąt projektów czeka na realizatorów</div>
@@ -1287,6 +1360,8 @@ body {
             <div class="step-icon">📝</div>
             <h3 class="step-title">Zarejestruj się</h3>
             <p class="step-desc">Wypełnij krótki formularz i utwórz konto w systemie Gildii Innowacji.</p>
+            <!-- TYMCZASOWO: rejestracja przez Formularz Google -->
+            <a href="https://forms.gle/kk2JXbny7eKAAnNU6" target="_blank" rel="noopener" class="step-link">📝 Zarejestruj się →</a>
             <div class="step-meta">⏱️ 1-2 minuty</div>
           </div>
 
@@ -1340,7 +1415,9 @@ body {
           <h2 class="cta-title">Gotowy/a do działania?</h2>
           <p class="cta-desc">Dołącz do społeczności młodych innowatorów i zacznij realizować swoje cele już dziś.</p>
           <div class="cta-actions">
-            <button class="btn-cta" onclick="showLoginModal()">🔐 Zaloguj się</button>
+            <!-- TYMCZASOWO: rejestracja przez Formularz Google -->
+            <button class="btn-cta" onclick="window.open('https://forms.gle/kk2JXbny7eKAAnNU6','_blank')">📝 Zarejestruj się</button>
+            <button class="btn-cta-outline" onclick="showLoginModal()">🔐 Zaloguj się</button>
             <button class="btn-cta-outline" onclick="navigate('onas'); setAboutTab('kontakt')">💬 Porozmawiajmy</button>
           </div>
         </div>
@@ -1390,7 +1467,16 @@ body {
               <label>Powtórz hasło</label>
               <input type="password" id="reg-password-confirm" placeholder="••••••••">
             </div>
+            <div class="field" style="margin-bottom:0.5rem">
+              <label class="checkbox-label">
+                <input type="checkbox" id="reg-rodo" style="margin-right:0.5rem;">
+                <span>Zgadzam na przetwarzanie moich danych osobowych w celach realizacji programu Gildia Innowacji zgodnie z Polityką Prywatności. *</span>
+              </label>
+            </div>
             <button class="btn-gen" onclick="handleRegister()">Zarejestruj się</button>
+            <div class="login-footer">
+              <a href="#" class="login-link" onclick="showPrivacyModal()">🔒 Polityka Prywatności</a>
+            </div>
           </div>
         </div>
       </div>
@@ -1604,11 +1690,125 @@ body {
             <button class="btn-cta" onclick="navigate('dolacz')">🚀 Jak dołączyć?</button>
           </div>
         </div>
+
+        <div class="legal-section">
+          <div class="legal-links">
+            <a href="#" onclick="showPrivacyModal()">🔒 Polityka Prywatności</a>
+            <a href="#" onclick="showCookiesModal()">🍪 Polityka Cookies</a>
+            <a href="#" onclick="showTermsModal()">📜 Regulamin</a>
+          </div>
+          <div class="legal-text">
+            © 2026 Gildia Innowacji. Wszystkie prawa zastrzeżone.
+          </div>
+        </div>
       </div>
     </div>
 
   </div><!-- end main -->
 </div><!-- end layout -->
+
+<!-- PRIVACY MODAL -->
+<div class="modal" id="privacy-modal">
+  <div class="modal-content legal-modal-content">
+    <div class="modal-header">
+      <div class="modal-title">Polityka Prywatności</div>
+      <button class="modal-close" onclick="closePrivacyModal()">✕</button>
+    </div>
+    <div class="legal-body">
+      <h3>1. Administrator danych osobowych</h3>
+      <p>Administratorem Twoich danych osobowych jest: Wojciech Wolanin, prowadzący działalność pod nazwą Kreatywne Klocki, kontakt: gildia.innowacji@gmail.com, tel: 731 370 032.</p>
+
+      <h3>2. Cel przetwarzania danych</h3>
+      <p>Twoje dane osobowe są przetwarzane w celu:</p>
+      <ul>
+        <li>Realizacji programu Gildia Innowacji</li>
+        <li>Komunikacji z uczestnikami programu</li>
+        <li>Organizacji wydarzeń i warsztatów</li>
+        <li>Poprawy i rozwoju usług oferowanych przez Gildię Innowacji</li>
+        <li>Marketingu i promocji (za Twoją zgodą)</li>
+      </ul>
+
+      <h3>3. Podstawa prawna przetwarzania</h3>
+      <p>Podstawą prawną przetwarzania Twoich danych osobowych jest zgoda - art. 6 ust. 1 lit. a) Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych (RODO).</p>
+
+      <h3>4. Odbiorcy danych</h3>
+      <p>Twoje dane mogą być udostępnione podmiotom trzecim wyłącznie w casesie koniecznym do realizacji celów określonych w punkcie 2. Przekazanie danych następuje na podstawie umowy powierzenia przetwarzania danych osobowych.</p>
+
+      <h3>5. Prawa do wycofania zgody</h3>
+      <p>Masz prawo do wycofania zgody na przetwarzanie danych osobowych w dowolnym momencie. Wycofanie zgody nie wpływa na zgodność z prawem przetwarzania, którego dokonano przed jej wycofaniem.</p>
+
+      <h3>6. Prawo dostępu do danych</h3>
+      <p>Przysługuje Ci prawo dostępu do Twoich danych osobowych, ich sprostowania, usunięcia lub ograniczenia przetwarzania.</p>
+
+      <h3>7. Prawo do wniesienia skargi</h3>
+      <p>Przysługuje Ci prawo do wniesienia skargi do Prezesa UODO (Urzędu Ochrony Danych Osobowych).</p>
+
+      <h3>8. Kontakt w sprawach RODO</h3>
+      <p>W sprawach związanych z przetwarzaniem Twoich danych osobowych możesz kontaktować się z nami pod adresem: gildia.innowacji@gmail.com</p>
+    </div>
+  </div>
+</div>
+
+<!-- COOKIES MODAL -->
+<div class="modal" id="cookies-modal">
+  <div class="modal-content legal-modal-content">
+    <div class="modal-header">
+      <div class="modal-title">Polityka Cookies</div>
+      <button class="modal-close" onclick="closeCookiesModal()">✕</button>
+    </div>
+    <div class="legal-body">
+      <h3>1. Czym są pliki cookies?</h3>
+      <p>Pliki cookies to małe pliki tekstowe, które są zapisywane na Twoim urządzeniu podczas odwiedzania stron internetowych. Służą one do zapamiętywania Twoich preferencji i celów statystycznych.</p>
+
+      <h3>2. Jakie cookies używamy?</h3>
+      <ul>
+        <li><strong>Cookies niezbędne:</strong> do funkcjonowania strony</li>
+        <li><strong>Cookies analityczne:</strong> do zbierania statystyk o odwiedzinach</li>
+        <li><strong>Cookies funkcjonalne:</strong> do zapamiętywania Twoich preferencji</li>
+      </ul>
+
+      <h3>3. Zarządzanie cookies</h3>
+      <p>Możesz zarządzać ustawieniami cookies w swojej przeglądarce internetowej.</p>
+
+      <h3>4. Kontakt</h3>
+      <p>W sprawach związanych z cookies możesz kontaktować się z nami pod adresem: gildia.innowacji@gmail.com</p>
+    </div>
+  </div>
+</div>
+
+<!-- TERMS MODAL -->
+<div class="modal" id="terms-modal">
+  <div class="modal-content legal-modal-content">
+    <div class="modal-header">
+      <div class="modal-title">Regulamin Gildii Innowacji</div>
+      <button class="modal-close" onclick="closeTermsModal()">✕</button>
+    </div>
+    <div class="legal-body">
+      <h3>1. Postanowienia ogólne</h3>
+      <p>Niniejszy regulamin określa zasady uczestnictwa w programie Gildia Innowacji.</p>
+
+      <h3>2. Uczestnictwo w programie</h3>
+      <p>Udział w programie Gildia Innowacji jest dobrowolny i bezpłatny. Uczestnik zobowiązuje się do aktywnego udziału w projektach i przestrzegania zasad społeczności.</p>
+
+      <h3>3. Prawa i obowiązki uczestników</h3>
+      <ul>
+        <li>Aktywny udział w projektach</li>
+        <li>Szanowanie innych uczestników i mentorów</li>
+        <li>Dbanie o terminy i zobowiązania</li>
+        <li>Przestrzeganie zasad bezpieczeństwa</li>
+      </ul>
+
+      <h3>4. Ochrona danych osobowych</h3>
+      <p>Uczestnicy wyrażają zgodę na przetwarzanie ich danych osobowych zgodnie z Polityką Prywatności Gildii Innowacji.</p>
+
+      <h3>5. Właściwość intelektualna</h3>
+        <p>Wszystkie projekty i materiały stworzone w ramach Gildii Innowacji są własnością ich autorów, chyba że uzgodniono inaczej.</p>
+
+      <h3>6. Kontakt</h3>
+      <p>W sprawach związanych z regulaminem kontaktuj się: gildia.innowacji@gmail.com</p>
+    </div>
+  </div>
+</div>
 
 <script>
 const pages = ['aktualnosci','oferta','katalog','dolacz','wsparcie','onas'];
@@ -1670,6 +1870,7 @@ function handleRegister() {
   const email = document.getElementById('reg-email').value;
   const password = document.getElementById('reg-password').value;
   const passwordConfirm = document.getElementById('reg-password-confirm').value;
+  const rodo = document.getElementById('reg-rodo').checked;
 
   if(!name || !email || !password || !passwordConfirm) {
     alert('Wypełnij wszystkie pola');
@@ -1681,10 +1882,43 @@ function handleRegister() {
     return;
   }
 
+  if(!rodo) {
+    alert('Musisz wyrazić zgodę na przetwarzanie danych osobowych (RODO)');
+    return;
+  }
+
   // Placeholder - tutaj będzie prawdziwa logika rejestracji
   alert('Rejestracja: ' + name + ' (' + email + ')\n\nFunkcja rejestracji zostanie zaimplementowana w kolejnym etapie.');
   closeLoginModal();
 }
+
+/* ── LEGAL MODALS ── */
+function showPrivacyModal() {
+  document.getElementById('privacy-modal').classList.add('active');
+}
+
+function closePrivacyModal() {
+  document.getElementById('privacy-modal').classList.remove('active');
+}
+
+function showCookiesModal() {
+  document.getElementById('cookies-modal').classList.add('active');
+}
+
+function closeCookiesModal() {
+  document.getElementById('cookies-modal').classList.remove('active');
+}
+
+function showTermsModal() {
+  document.getElementById('terms-modal').classList.add('active');
+}
+
+function closeTermsModal() {
+  document.getElementById('terms-modal').classList.remove('active');
+}
+
+/* ── COOKIE CONSENT ── baner i Google Analytics: assets/analytics.js */
+if (location.hash === '#cookies') window.addEventListener('load', function(){ showCookiesModal(); });
 
 function setOfferTab(tab) {
   document.querySelectorAll('.offer-tab').forEach((t,i) => {
