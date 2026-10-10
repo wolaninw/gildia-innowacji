@@ -1,0 +1,233 @@
+[
+  {
+    "id": "p001",
+    "nazwa_projektu": "Kiermasz zabawek",
+    "kategoria": "spoleczne",
+    "podkategoria": "Projekty dla szkoły",
+    "status": "zakonczone",
+    "omowienie": "Organizacja kiermaszu wyprzedażowego zabawek w SP 25. Uczniowie uczą się jak zaplanować wydarzenie, dotrzeć do odbiorców i przeprowadzić akcję społeczną od A do Z.",
+    "pitch": "Organizacja kiermaszu wyprzedażowego zabawek w SP 25 — uczniowie uczą się jak zaplanować wydarzenie.",
+    "data_rozpoczecia": "2024-09-01",
+    "data_zakonczenia": "2024-12-15",
+    "cele": {
+      "potrzeba": "Brak wydarzeń integrujących społeczność szkolną",
+      "cel_glowny": "Zorganizowanie kiermaszu zabawek z udziałem uczniów",
+      "grupa_docelowa": "Uczniowie SP 25 w Kielcach"
+    },
+    "specyfikacje": {
+      "technologia": "Google Forms, Canva, Facebook",
+      "umiejetnosci": "Organizacja wydarzeń, Marketing, Komunikacja",
+      "miejsce": "SP 25 Kielce",
+      "termin": "Wrzesień-grudzień 2024"
+    },
+    "media": {
+      "zdjecie": "assets/projekty/Kiermasz_zabawek.png",
+      "youtube": "vAr5ei4akoY",
+      "facebook": "https://facebook.com/events/123",
+      "instagram": "https://instagram.com/kiermasz"
+    },
+    "dokumentacja": "https://docs.google.com/document/d/1NFNPjRFogTN5iPwxQBoqBuOsMbrfuN3H9m4PciHMvZI/edit",
+    "tagi": ["kiermasz", "szkoła", "wydarzenie", "społeczny"]
+  },
+  {
+    "id": "p002",
+    "nazwa_projektu": "Pojemnik na zabawki do piasku",
+    "kategoria": "spoleczne",
+    "podkategoria": "Projekty dla otoczenia",
+    "status": "zakonczone",
+    "omowienie": "Projekt stworzenia i ustawienia pojemnika na zabawki do piasku na osiedlu Ślichowice. Inicjatywa angażująca lokalną społeczność w dbanie o wspólną przestrzeń i sharing.",
+    "pitch": "Pojemnik na zabawki do piasku na osiedlu Ślichowice — inicjatywa sharingowa.",
+    "data_rozpoczecia": "2024-06-01",
+    "data_zakonczenia": "2024-08-30",
+    "cele": {
+      "potrzeba": "Brak miejsc do wspólnej zabawy",
+      "cel_glowny": "Stworzenie pojemnika na zabawki",
+      "grupa_docelowa": "Dzieci z osiedla Ślichowice"
+    },
+    "specyfikacje": {
+      "technologia": "Projekt CAD, drewno",
+      "umiejetnosci": "Projektowanie, stolarstwo",
+      "miejsce": "Osiedle Ślichowice, Kielce",
+      "termin": "Czerwiec-sierpień 2024"
+    },
+    "media": {
+      "zdjecie": "assets/projekty/drzewo chrobotek.jpg"
+    },
+    "dokumentacja": "",
+    "tagi": ["sharing", "osiedle", "dzieci", "otoczenie"]
+  },
+  {
+    "id": "p003",
+    "nazwa_projektu": "Akademia Małego Mechanika",
+    "kategoria": "biznesowe",
+    "podkategoria": "Projekty związane z Hobby",
+    "status": "testowanie",
+    "omowienie": "Warsztaty edukacyjne z mechaniki LEGO dla dzieci. Nauka zasad mechaniki, konstrukcji i rozwiązywania problemów technicznych przez zabawę z klockami LEGO Technic.",
+    "pitch": "Warsztaty z mechaniki LEGO dla dzieci — nauka przez zabawę.",
+    "data_rozpoczecia": "2024-09-01",
+    "data_zakonczenia": "2024-12-31",
+    "cele": {
+      "potrzeba": "Brak edukacji technicznej dla dzieci",
+      "cel_glowny": "Warsztaty z mechaniki LEGO",
+      "grupa_docelowa": "Dzieci 8-12 lat"
+    },
+    "specyfikacje": {
+      "technologia": "LEGO Technic, instrukcje",
+      "umiejetnosci": "Edukacja, mechanika",
+      "miejsce": "Kielce",
+      "termin": "Wrzesień-grudzień 2024"
+    },
+    "media": {
+      "zdjecie": "assets/projekty/Warsztaty_młodego_inzyniera.png"
+    },
+    "dokumentacja": "",
+    "tagi": ["LEGO", "mechanika", "dzieci", "warsztaty", "edukacja"]
+  },
+  {
+    "id": "p004",
+    "nazwa_projektu": "Warsztaty Homemade",
+    "kategoria": "biznesowe",
+    "podkategoria": "Projekty dla szkoły",
+    "status": "realizacja",
+    "omowienie": "Warsztaty tworzenia naturalnych kosmetyków — mydło, świece, kule do kąpieli, perfumy. Projekt łączy edukację ekologiczną z przedsiębiorczością i rzemiosłem artystycznym.",
+    "pitch": "Warsztaty kosmetyków naturalnych — mydło, świece, perfumy.",
+    "data_rozpoczecia": "2024-08-01",
+    "data_zakonczenia": "2025-06-30",
+    "cele": {
+      "potrzeba": "Zainteresowanie naturalnymi kosmetykami",
+      "cel_glowny": "Warsztaty tworzenia kosmetyków",
+      "grupa_docelowa": "Młodzież 13-18 lat"
+    },
+    "specyfikacje": {
+      "technologia": "Naturalne składniki, Canva",
+      "umiejetnosci": "Chemia, marketing, sprzedaż",
+      "miejsce": "Kielce",
+      "termin": "Wrzesień 2024 - czerwiec 2025"
+    },
+    "media": {
+      "zdjecie": "assets/projekty/warsztaty mydlarstwa plakat.png",
+      "instagram": "https://instagram.com/homemade",
+      "facebook": "https://facebook.com/homemade",
+      "linkedin": "https://linkedin.com/company/homemade"
+    },
+    "dokumentacja": "https://docs.google.com/document/d/homemade-warsztaty",
+    "tagi": ["kosmetyki", "DIY", "ekologia", "warsztaty", "rzemiosło"]
+  },
+  {
+    "id": "p005",
+    "nazwa_projektu": "Barometr Ustawodawczy",
+    "kategoria": "biznesowe",
+    "podkategoria": "Projekty natury komunikacyjnej",
+    "status": "prototypowanie",
+    "omowienie": "Narzędzie do monitorowania i wizualizacji procesu legislacyjnego. Platforma umożliwiająca obywatelom śledzenie tworzenia prawa i angażowanie się w konsultacje społeczne.",
+    "pitch": "Platforma do monitorowania procesu legislacyjnego dla obywateli.",
+    "data_rozpoczecia": "2024-07-01",
+    "data_zakonczenia": "2025-12-31",
+    "cele": {
+      "potrzeba": "Brak transparentności w procesie legislacyjnym",
+      "cel_glowny": "Platforma monitorowania prawa",
+      "grupa_docelowa": "Obywatele zainteresowani polityką"
+    },
+    "specyfikacje": {
+      "technologia": "Web development, API parliament",
+      "umiejetnosci": "Programowanie, analiza danych",
+      "miejsce": "Polska",
+      "termin": "2024-2025"
+    },
+    "media": {
+      "zdjecie": "assets/projekty/Barometr Ustawodawczy miniatura YT.png",
+      "youtube": "OMD_hzfnVJU",
+      "linkedin": "https://linkedin.com/company/barometr"
+    },
+    "dokumentacja": "",
+    "tagi": ["demokracja", "prawo", "obywatel", "transparentność"]
+  },
+  {
+    "id": "p006",
+    "nazwa_projektu": "Debata przedwyborcza",
+    "kategoria": "spoleczne",
+    "podkategoria": "Projekty pod media",
+    "status": "zakonczone",
+    "omowienie": "Organizacja otwartej debaty przedwyborczej kandydatów na prezydenta Kielc. Projekt edukacji demokratycznej angażujący młodych mieszkańców w aktywne życie polityczne.",
+    "pitch": "Debata przedwyborcza kandydatów na prezydenta Kielc.",
+    "data_rozpoczecia": "2024-03-01",
+    "data_zakonczenia": "2024-05-30",
+    "cele": {
+      "potrzeba": "Brak edukacji politycznej dla młodzieży",
+      "cel_glowny": "Debata przedwyborcza",
+      "grupa_docelowa": "Młodzież Kielce"
+    },
+    "specyfikacje": {
+      "technologia": "Facebook Events, Canva",
+      "umiejetnosci": "Organizacja debat, PR",
+      "miejsce": "Kielce",
+      "termin": "Marzec-maj 2024"
+    },
+    "media": {
+      "zdjecie": "assets/projekty/Debata 4K.png",
+      "youtube": "youtube_id_here",
+      "wydarzenie": "https://fb.me/events/debata"
+    },
+    "dokumentacja": "",
+    "tagi": ["demokracja", "debata", "wybory", "edukacja obywatelska"]
+  },
+  {
+    "id": "p007",
+    "nazwa_projektu": "Gildia Innowacji",
+    "kategoria": "biznesowe",
+    "podkategoria": "Edukacja i rozwój osobisty",
+    "status": "prototypowanie",
+    "omowienie": "Platforma edukacyjna rozwijająca kompetencje projektowe i przedsiębiorcze u młodych ludzi przez realne działanie. Design thinking, agile i praca w zespole w praktyce.",
+    "pitch": "Platforma edukacyjna dla kompetencji projektowych młodzieży.",
+    "data_rozpoczecia": "2024-01-01",
+    "data_zakonczenia": "2025-12-31",
+    "cele": {
+      "potrzeba": "Brak praktycznej edukacji projektowej",
+      "cel_glowny": "Platforma edukacyjna Gildii Innowacji",
+      "grupa_docelowa": "Młodzież 15-25 lat"
+    },
+    "specyfikacje": {
+      "technologia": "Web, Google Docs, Canva, YouTube",
+      "umiejetnosci": "Zarządzanie projektami, mentoring",
+      "miejsce": "Kielce",
+      "termin": "2024-2025"
+    },
+    "media": {
+      "zdjecie": "assets/projekty/Czym jest Gildia Innowacji bez tytulu.png",
+      "youtube": "OMD_hzfnVJU",
+      "facebook": "https://facebook.com/gildiainnowacji",
+      "instagram": "https://instagram.com/gildiainnowacji",
+      "linkedin": "https://linkedin.com/company/gildiainnowacji",
+      "youtube": "https://youtube.com/@gildiainnowacji"
+    },
+    "dokumentacja": "https://docs.google.com/document/d/gildia-innowacji",
+    "tagi": ["edukacja", "projekt", "zarządzanie", "innowacje", "młodzież"]
+  },
+  {
+    "id": "p008",
+    "nazwa_projektu": "Newsletter Gildii",
+    "kategoria": "spoleczne",
+    "podkategoria": "Projekty natury komunikacyjnej",
+    "status": "koncepcja",
+    "omowienie": "Tworzenie regularnych materiałów informacyjnych o Gildii Innowacji. Newsletter łączący uczestników, prezentujący projekty i budujący społeczność wokół idei innowacji.",
+    "pitch": "Newsletter informacyjny o projektach Gildii Innowacji.",
+    "data_rozpoczecia": "2024-10-01",
+    "data_zakonczenia": "2025-12-31",
+    "cele": {
+      "potrzeba": "Brak regularnej komunikacji z społecznością",
+      "cel_glowny": "Newsletter Gildii Innowacji",
+      "grupa_docelowa": "Uczestnicy i sympatycy"
+    },
+    "specyfikacje": {
+      "technologia": "Email marketing, Canva",
+      "umiejetnosci": "Copywriting, design",
+      "miejsce": "Online",
+      "termin": "2024-2025"
+    },
+    "media": {
+      "instagram": "https://instagram.com/gildianewsletter"
+    },
+    "dokumentacja": "",
+    "tagi": ["newsletter", "komunikacja", "content", "social media"]
+  }
+]

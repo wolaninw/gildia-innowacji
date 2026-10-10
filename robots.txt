@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gildiainnowacji.pl/sitemap.xml
+Sitemap: https://gildia.edu.pl/sitemap.xml

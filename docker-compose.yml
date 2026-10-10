@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  pocketbase:
+    build: .
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./pb_data:/app/pb_data
+    restart: unless-stopped
+    environment:
+      - POCKETBASE_HTTP_PORT=8090
+      - POCKETBASE_SERVE_HTTPS=false

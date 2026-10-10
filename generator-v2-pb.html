@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generator V2 (PocketBase) — Gildia Innowacji</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --o1:#F47C28; --o2:#F69F37; --gold:#F7C146;
+  --v1:#471F7D; --v2:#83109E; --v3:#BF01BF;
+  --bg:#1e1a1c; --bg2:#252022; --bg3:#2e282a;
+  --surface:#332d2f; --surface2:#3d3538;
+  --text:#f5f0ea; --text2:rgba(245,240,234,0.62); --text3:rgba(245,240,234,0.35);
+  --border:rgba(245,240,234,0.08);
+  --radius:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;padding:2rem 1rem;}
+
+.wrap{max-width:900px;margin:0 auto;}
+
+/* HEADER */
+.hdr{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);}
+.hdr-logo{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:700;background:linear-gradient(135deg,var(--o1),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hdr-sub{font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);}
+.hdr-actions{margin-left:auto;display:flex;gap:0.5rem;align-items:center;}
+.user-info{font-size:0.8rem;color:var(--text2);margin-right:1rem;}
+
+/* NAVIGATION */
+.nav{display:flex;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+.nav-btn{padding:0.5rem 1rem;border-radius:100px;font-size:0.75rem;font-weight:700;cursor:pointer;border:1.5px solid var(--border);color:var(--text2);background:transparent;transition:all 0.2s;letter-spacing:0.05em;text-transform:uppercase;}
+.nav-btn:hover,.nav-btn.active{border-color:var(--o1);color:var(--o1);background:rgba(244,124,40,0.08);}
+
+/* OUTLINE CONTAINER */
+.outline-container{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;}
+
+/* OUTLINE ITEM */
+.outline-item{border-bottom:1px solid var(--border);}
+.outline-item:last-child{border-bottom:none;}
+
+.outline-header{display:flex;align-items:center;gap:0.8rem;padding:1rem 0;cursor:pointer;transition:background 0.2s;border-radius:8px;padding-left:0.5rem;padding-right:0.5rem;}
+.outline-header:hover{background:var(--bg3);}
+.outline-icon{width:24px;height:24px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:transform 0.2s;flex-shrink:0;}
+.outline-item.expanded .outline-icon{transform:rotate(90deg);background:var(--o1);}
+.outline-title{flex:1;font-weight:600;font-size:0.95rem;}
+.outline-status{font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:100px;background:var(--surface2);color:var(--text3);flex-shrink:0;}
+
+.outline-content{display:none;padding:0 0.5rem 1rem 3.5rem;}
+.outline-item.expanded .outline-content{display:block;}
+
+/* FIELDS */
+.field{margin-bottom:1rem;}
+.field label{display:block;font-size:0.75rem;font-weight:600;color:var(--text2);margin-bottom:0.4rem;}
+.field input,.field textarea,.field select{width:100%;padding:0.7rem;background:var(--bg3);border:1.5px solid var(--border);color:var(--text);font-family:'Syne',sans-serif;font-size:0.85rem;border-radius:8px;outline:none;transition:border-color 0.2s;}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--o1);}
+.field textarea{min-height:80px;resize:vertical;}
+
+/* BUTTONS */
+.btn{padding:0.6rem 1.2rem;border-radius:100px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;border:none;transition:all 0.2s;font-family:'Syne',sans-serif;}
+.btn-primary{background:linear-gradient(135deg,var(--o1),var(--v2));color:white;box-shadow:0 4px 14px rgba(244,124,40,0.3);}
+.btn-primary:hover{opacity:0.88;transform:translateY(-1px);}
+.btn-secondary{background:var(--surface);border:1.5px solid var(--border);color:var(--text2);}
+.btn-secondary:hover{border-color:var(--o1);color:var(--o1);}
+.btn-action{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border-radius:8px;font-size:0.75rem;font-weight:700;text-decoration:none;transition:all 0.2s;border:1px solid var(--border);background:var(--surface2);color:var(--text2);}
+.btn-action:hover{border-color:var(--o1);color:var(--o1);}
+
+/* PROJECT LIST */
+.project-list{display:flex;flex-direction:column;gap:0.8rem;}
+.project-item{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1rem;cursor:pointer;transition:border-color 0.2s;}
+.project-item:hover{border-color:var(--o1);}
+.project-item.active{border-color:var(--o1);background:rgba(244,124,40,0.05);}
+.project-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;}
+.project-id{font-size:0.7rem;color:var(--o1);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;}
+.project-name{font-weight:700;font-size:0.95rem;flex:1;margin-left:0.8rem;}
+.project-meta{font-size:0.75rem;color:var(--text3);display:flex;gap:1rem;}
+.project-actions{display:flex;gap:0.5rem;margin-top:0.5rem;}
+
+/* STATUS BADGES */
+.status-badge{font-size:0.65rem;padding:0.2rem 0.6rem;border-radius:100px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;}
+.status-koncepcja{background:rgba(246,159,55,0.15);color:var(--o2);border:1px solid rgba(246,159,55,0.25);}
+.status-backlog{background:rgba(245,240,234,0.08);color:var(--text3);border:1px solid var(--border);}
+.status-realizacja{background:rgba(244,124,40,0.15);color:var(--o1);border:1px solid rgba(244,124,40,0.25);}
+.status-prototypowanie{background:rgba(191,1,191,0.15);color:var(--v3);border:1px solid rgba(191,1,191,0.25);}
+.status-testowanie{background:rgba(6,182,212,0.15);color:#06b6d4;border:1px solid rgba(6,182,212,0.25);}
+.status-wdrozenie{background:rgba(168,85,247,0.15);color:#a855f7;border:1px solid rgba(168,85,247,0.25);}
+.status-zakonczone{background:rgba(46,213,115,0.15);color:#2ed573;border:1px solid rgba(46,213,115,0.25);}
+
+/* CATEGORY BADGES */
+.cat-badge{font-size:0.65rem;padding:0.2rem 0.6rem;border-radius:100px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;}
+.cat-spoleczne{background:rgba(59,130,246,0.15);color:#3b82f6;border:1px solid rgba(59,130,246,0.25);}
+.cat-biznesowe{background:rgba(247,193,70,0.15);color:var(--gold);border:1px solid rgba(247,193,70,0.25);}
+
+/* MEDIA PREVIEW */
+.media-preview{position:relative;padding-bottom:56.25%;overflow:hidden;background:var(--bg3);border-radius:8px;margin-top:0.5rem;}
+.media-preview img,.media-preview iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.media-preview iframe{border:none;}
+.media-placeholder{font-size:2rem;color:var(--text3);}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:3rem;color:var(--text3);}
+.empty-icon{font-size:3rem;margin-bottom:1rem;}
+.empty h3{font-size:1.1rem;color:var(--text2);margin-bottom:0.5rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <div>
+      <div class="hdr-logo">Generator V2 (PocketBase)</div>
+      <div class="hdr-sub">Zarządzanie projektami — konspekt</div>
+    </div>
+    <div class="hdr-actions">
+      <div class="user-info" id="userInfo">Nie zalogowany</div>
+      <button class="btn btn-secondary" onclick="loadProjects()">🔄 Odśwież</button>
+      <button class="btn btn-secondary" onclick="logout()">🚪 Wyloguj</button>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button class="nav-btn active" onclick="switchView('list')" data-view="list">📋 Lista projektów</button>
+    <button class="nav-btn" onclick="switchView('detail')" data-view="detail">📝 Widok szczegółowy</button>
+  </div>
+
+  <!-- LIST VIEW -->
+  <div id="view-list" class="outline-container">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border)">
+      <h2 style="font-size:1.1rem;font-weight:700">Lista projektów</h2>
+      <button class="btn btn-secondary" onclick="createNewProject()">+ Nowy projekt</button>
+    </div>
+    
+    <!-- QUICK PICKER -->
+    <div style="margin-bottom:1rem;padding:1rem;background:var(--bg3);border-radius:8px;border:1px solid var(--border)">
+      <label style="font-size:0.8rem;font-weight:600;color:var(--text2);display:block;margin-bottom:0.5rem">Szybki wybór projektu do edycji:</label>
+      <select id="projectPicker" onchange="selectProjectToEdit()" style="width:100%;padding:0.7rem;background:var(--surface);border:1.5px solid var(--border);color:var(--text);font-family:'Syne',sans-serif;font-size:0.9rem;border-radius:8px;cursor:pointer">
+        <option value="">-- Wybierz projekt do edycji --</option>
+      </select>
+    </div>
+    
+    <div id="project-list" class="project-list"></div>
+  </div>
+
+  <!-- DETAIL VIEW -->
+  <div id="view-detail" class="outline-container" style="display:none">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border)">
+      <h2 style="font-size:1.1rem;font-weight:700" id="detail-title">Szczegóły projektu</h2>
+      <div style="display:flex;gap:0.5rem">
+        <button class="btn btn-secondary" onclick="switchView('list')">← Wróć do listy</button>
+        <button class="btn btn-primary" onclick="saveCurrentProject()">💾 Zapisz projekt</button>
+      </div>
+    </div>
+    
+    <div id="outline-root"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pocketbase@0.21.5/dist/pocketbase.umd.min.js"></script>
+<script>
+const pb = new PocketBase('http://127.0.0.1:8090');
+let projects = [];
+let currentProject = null;
+let currentView = 'list';
+
+// Sprawdź czy zalogowany
+if (!pb.authStore.isValid) {
+  window.location.href = 'login.html';
+}
+
+// Wyświetl info o użytkowniku
+function updateUserInfo() {
+  const userInfo = document.getElementById('userInfo');
+  if (pb.authStore.model) {
+    userInfo.textContent = `Witaj, ${pb.authStore.model.name || pb.authStore.model.email}`;
+  }
+}
+
+// Pobierz projekty z PocketBase
+async function loadProjects() {
+  try {
+    const response = await pb.collection('projekty').getList(1, 50, {
+      sort: '-created'
+    });
+    projects = response.items;
+    renderProjectList();
+    fillPicker();
+  } catch (error) {
+    console.error('Błąd ładowania projektów:', error);
+    alert('Błąd ładowania projektów');
+  }
+}
+
+// Renderuj listę projektów
+function renderProjectList() {
+  const container = document.getElementById('project-list');
+
+  if (projects.length === 0) {
+    container.innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">📂</div>
+        <h3>Brak projektów</h3>
+        <p>Utwórz pierwszy projekt</p>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = projects.map(p => `
+    <div class="project-item ${currentProject?.id === p.id ? 'active' : ''}" onclick="selectProject('${p.id}')">
+      <div class="project-header">
+        <span class="project-id">${p.id.substring(0, 8)}</span>
+        <span class="project-name">${p.nazwa_projektu || p.tytul}</span>
+        <span class="status-badge status-${p.status}">${getStatusLabel(p.status)}</span>
+      </div>
+      <div class="project-meta">
+        <span class="cat-badge cat-${p.kategoria}">${getCategoryLabel(p.kategoria)}</span>
+        <span>${p.podkategoria || 'Brak podkategorii'}</span>
+      </div>
+      <div class="project-actions">
+        <span class="project-actions-item">📄 ${p.dokumentacja ? 'Dokumentacja' : 'Brak dokumentacji'}</span>
+        <span class="project-actions-item">🖼️ ${hasContent(p.media) ? 'Media' : 'Brak media'}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Wybierz projekt
+function selectProject(id) {
+  currentProject = projects.find(p => p.id === id);
+  if (currentProject) {
+    renderProjectList();
+    renderDetailOutline();
+    syncPicker();
+    switchView('detail');
+  }
+}
+
+// Przełącz widok
+function switchView(view) {
+  currentView = view;
+  document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelector(`[data-view="${view}"]`).classList.add('active');
+  
+  document.getElementById('view-list').style.display = view === 'list' ? 'block' : 'none';
+  document.getElementById('view-detail').style.display = view === 'detail' ? 'block' : 'none';
+  
+  if (view === 'detail' && currentProject) {
+    renderDetailOutline();
+  }
+  
+  if (view === 'list') {
+    syncPicker();
+  }
+}
+
+// Nowy projekt
+function createNewProject() {
+  currentProject = {
+    nazwa_projektu: '',
+    kategoria: 'spoleczne',
+    podkategoria: '',
+    status: 'koncepcja',
+    omowienie: '',
+    pitch: '',
+    data_rozpoczecia: '',
+    data_zakonczenia: '',
+    cele: { potrzeba: '', cel_glowny: '', grupa_docelowa: '' },
+    specyfikacje: { technologia: '', umiejetnosci: '', miejsce: '', termin: '' },
+    media: { zdjecie: '', youtube: '', facebook: '', instagram: '', linkedin: '', wydarzenie: '', artykul: '', inny: '' },
+    dokumentacja: '',
+    tagi: [],
+    uczestnicy: [],
+    wnioski: []
+  };
+  
+  renderDetailOutline();
+  switchView('detail');
+}
+
+// Renderuj konspekt szczegółów
+function renderDetailOutline() {
+  if (!currentProject) return;
+
+  document.getElementById('detail-title').textContent = currentProject.nazwa_projektu || 'Nowy projekt';
+
+  const container = document.getElementById('outline-root');
+
+  container.innerHTML = `
+    <!-- INFORMACJE PODSTAWOWE (zawsze rozwinięte) -->
+    <div class="outline-item expanded" data-section="basic">
+      <div class="outline-header" onclick="toggleSection(this)">
+        <div class="outline-icon">▶</div>
+        <div class="outline-title">📋 Informacje podstawowe</div>
+        <div class="outline-status">Zawsze widoczne</div>
+      </div>
+      <div class="outline-content">
+        <div class="field">
+          <label>ID projektu</label>
+          <input type="text" value="${currentProject.id ? currentProject.id.substring(0, 8) : 'Nowy projekt'}" readonly style="opacity:0.7">
+        </div>
+        <div class="field">
+          <label>Nazwa projektu</label>
+          <input type="text" value="${currentProject.nazwa_projektu || ''}" onchange="updateField('nazwa_projektu', this.value)">
+        </div>
+        <div class="field">
+          <label>Kategoria</label>
+          <select onchange="updateField('kategoria', this.value)">
+            <option value="spoleczne" ${currentProject.kategoria === 'spoleczne' ? 'selected' : ''}>Społeczne</option>
+            <option value="biznesowe" ${currentProject.kategoria === 'biznesowe' ? 'selected' : ''}>Biznesowe</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Podkategoria</label>
+          <input type="text" value="${currentProject.podkategoria || ''}" onchange="updateField('podkategoria', this.value)">
+        </div>
+        <div class="field">
+          <label>Status</label>
+          <select onchange="updateField('status', this.value)">
+            <option value="koncepcja" ${currentProject.status === 'koncepcja' ? 'selected' : ''}>Koncepcja</option>
+            <option value="backlog" ${currentProject.status === 'backlog' ? 'selected' : ''}>Backlog</option>
+            <option value="realizacja" ${currentProject.status === 'realizacja' ? 'selected' : ''}>Realizacja</option>
+            <option value="prototypowanie" ${currentProject.status === 'prototypowanie' ? 'selected' : ''}>Prototypowanie</option>
+            <option value="testowanie" ${currentProject.status === 'testowanie' ? 'selected' : ''}>Testowanie</option>
+            <option value="wdrozenie" ${currentProject.status === 'wdrozenie' ? 'selected' : ''}>Wdrożenie</option>
+            <option value="zakonczone" ${currentProject.status === 'zakonczone' ? 'selected' : ''}>Zakończone</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Krótki opis (pitch)</label>
+          <textarea onchange="updateField('pitch', this.value)">${currentProject.pitch || ''}</textarea>
+        </div>
+        <div class="field">
+          <label>Szczegółowy opis</label>
+          <textarea onchange="updateField('omowienie', this.value)">${currentProject.omowienie || ''}</textarea>
+        </div>
+        <div class="field">
+          <label>Data rozpoczęcia</label>
+          <input type="date" value="${currentProject.data_rozpoczecia || ''}" onchange="updateField('data_rozpoczecia', this.value)">
+        </div>
+        <div class="field">
+          <label>Data zakończenia</label>
+          <input type="date" value="${currentProject.data_zakonczenia || ''}" onchange="updateField('data_zakonczenia', this.value)">
+        </div>
+      </div>
+    </div>
+
+    <!-- CELE PROJEKTU -->
+    <div class="outline-item" data-section="cele">
+      <div class="outline-header" onclick="toggleSection(this)">
+        <div class="outline-icon">▶</div>
+        <div class="outline-title">🎯 Cele projektu</div>
+        <div class="outline-status">${hasContent(currentProject.cele) ? '✓' : '×'}</div>
+      </div>
+      <div class="outline-content">
+        <div class="field">
+          <label>Potrzeba (co zaspokajamy?)</label>
+          <textarea onchange="updateNestedField('cele', 'potrzeba', this.value)">${currentProject.cele?.potrzeba || ''}</textarea>
+        </div>
+        <div class="field">
+          <label>Cel główny</label>
+          <textarea onchange="updateNestedField('cele', 'cel_glowny', this.value)">${currentProject.cele?.cel_glowny || ''}</textarea>
+        </div>
+        <div class="field">
+          <label>Grupa docelowa</label>
+          <textarea onchange="updateNestedField('cele', 'grupa_docelowa', this.value)">${currentProject.cele?.grupa_docelowa || ''}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPECYFIKACJE -->
+    <div class="outline-item" data-section="specyfikacje">
+      <div class="outline-header" onclick="toggleSection(this)">
+        <div class="outline-icon">▶</div>
+        <div class="outline-title">⚙️ Specyfikacje</div>
+        <div class="outline-status">${hasContent(currentProject.specyfikacje) ? '✓' : '×'}</div>
+      </div>
+      <div class="outline-content">
+        <div class="field">
+          <label>Technologia (oddzielone przecinkami)</label>
+          <input type="text" value="${currentProject.specyfikacje?.technologia || ''}" onchange="updateNestedField('specyfikacje', 'technologia', this.value)">
+        </div>
+        <div class="field">
+          <label>Umiejętności (oddzielone przecinkami)</label>
+          <input type="text" value="${currentProject.specyfikacje?.umiejetnosci || ''}" onchange="updateNestedField('specyfikacje', 'umiejetnosci', this.value)">
+        </div>
+        <div class="field">
+          <label>Miejsce realizacji</label>
+          <input type="text" value="${currentProject.specyfikacje?.miejsce || ''}" onchange="updateNestedField('specyfikacje', 'miejsce', this.value)">
+        </div>
+        <div class="field">
+          <label>Termin realizacji</label>
+          <input type="text" value="${currentProject.specyfikacje?.termin || ''}" onchange="updateNestedField('specyfikacje', 'termin', this.value)">
+        </div>
+      </div>
+    </div>
+
+    <!-- MEDIA -->
+    <div class="outline-item" data-section="media">
+      <div class="outline-header" onclick="toggleSection(this)">
+        <div class="outline-icon">▶</div>
+        <div class="outline-title">🖼️ Media</div>
+        <div class="outline-status">${hasContent(currentProject.media) ? '✓' : '×'}</div>
+      </div>
+      <div class="outline-content">
+        <div class="field">
+          <label>Główne zdjęcie/plakat</label>
+          <input type="text" value="${currentProject.media?.zdjecie || ''}" placeholder="assets/projekty/zdjecie.png" onchange="updateMediaField('zdjecie', this.value)">
+        </div>
+        <div class="field">
+          <label>YouTube (ID filmu)</label>
+          <input type="text" value="${currentProject.media?.youtube || ''}" placeholder="OMD_hzfnVJU" onchange="updateMediaField('youtube', this.value)">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="field">
+            <label>Facebook</label>
+            <input type="text" value="${currentProject.media?.facebook || ''}" placeholder="URL" onchange="updateMediaField('facebook', this.value)">
+          </div>
+          <div class="field">
+            <label>Instagram</label>
+            <input type="text" value="${currentProject.media?.instagram || ''}" placeholder="URL" onchange="updateMediaField('instagram', this.value)">
+          </div>
+          <div class="field">
+            <label>LinkedIn</label>
+            <input type="text" value="${currentProject.media?.linkedin || ''}" placeholder="URL" onchange="updateMediaField('linkedin', this.value)">
+          </div>
+          <div class="field">
+            <label>Wydarzenie</label>
+            <input type="text" value="${currentProject.media?.wydarzenie || ''}" placeholder="URL" onchange="updateMediaField('wydarzenie', this.value)">
+          </div>
+          <div class="field">
+            <label>Artykuł</label>
+            <input type="text" value="${currentProject.media?.artykul || ''}" placeholder="URL" onchange="updateMediaField('artykul', this.value)">
+          </div>
+          <div class="field">
+            <label>Inny link</label>
+            <input type="text" value="${currentProject.media?.inny || ''}" placeholder="URL" onchange="updateMediaField('inny', this.value)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOKUMENTACJA -->
+    <div class="outline-item" data-section="dokumentacja">
+      <div class="outline-header" onclick="toggleSection(this)">
+        <div class="outline-icon">▶</div>
+        <div class="outline-title">📄 Dokumentacja</div>
+        <div class="outline-status">${currentProject.dokumentacja ? '✓' : '×'}</div>
+      </div>
+      <div class="outline-content">
+        <div class="field">
+          <label>Link do dokumentacji</label>
+          <input type="text" value="${currentProject.dokumentacja || ''}" onchange="updateField('dokumentacja', this.value)">
+        </div>
+      </div>
+    </div>
+
+    <!-- TAGI -->
+    <div class="outline-item" data-section="tagi">
+      <div class="outline-header" onclick="toggleSection(this)">
+        <div class="outline-icon">▶</div>
+        <div class="outline-title">🏷️ Tagi</div>
+        <div class="outline-status">${currentProject.tagi?.length ? '✓' : '×'}</div>
+      </div>
+      <div class="outline-content">
+        <div class="field">
+          <label>Tagi (oddzielone przecinkami)</label>
+          <input type="text" value="${(currentProject.tagi || []).join(', ')}" onchange="updateTags(this.value)">
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// Przełącz sekcję
+function toggleSection(header) {
+  const item = header.closest('.outline-item');
+  item.classList.toggle('expanded');
+}
+
+// Aktualizuj pole
+function updateField(field, value) {
+  if (currentProject) {
+    currentProject[field] = value;
+  }
+}
+
+// Aktualizuj zagnieżdżone pole
+function updateNestedField(parent, field, value) {
+  if (currentProject) {
+    if (!currentProject[parent]) currentProject[parent] = {};
+    currentProject[parent][field] = value;
+  }
+}
+
+// Aktualizuj pole media
+function updateMediaField(field, value) {
+  if (currentProject) {
+    if (!currentProject.media) currentProject.media = {};
+    currentProject.media[field] = value;
+  }
+}
+
+// Aktualizuj tagi
+function updateTags(value) {
+  if (currentProject) {
+    currentProject.tagi = value.split(',').map(t => t.trim()).filter(Boolean);
+  }
+}
+
+// Sprawdź czy obiekt ma zawartość
+function hasContent(obj) {
+  if (!obj) return false;
+  if (Array.isArray(obj)) return obj.length > 0;
+  if (typeof obj === 'object') {
+    return Object.values(obj).some(v => v && v !== '');
+  }
+  return Boolean(obj);
+}
+
+// Zapisz obecny projekt
+async function saveCurrentProject() {
+  if (!currentProject) return;
+
+  try {
+    if (currentProject.id) {
+      // Aktualizacja
+      await pb.collection('projekty').update(currentProject.id, currentProject);
+    } else {
+      // Nowy projekt
+      const created = await pb.collection('projekty').create(currentProject);
+      currentProject.id = created.id;
+    }
+    
+    alert('Projekt zapisany!');
+    await loadProjects();
+  } catch (error) {
+    console.error('Błąd zapisu:', error);
+    alert('Błąd zapisu projektu: ' + error.message);
+  }
+}
+
+// Wyloguj
+function logout() {
+  pb.authStore.clear();
+  window.location.href = 'login.html';
+}
+
+// Pomocnicze funkcje
+function getStatusLabel(status) {
+  const labels = {
+    koncepcja: 'Koncepcja', backlog: 'Backlog', realizacja: 'Realizacja',
+    prototypowanie: 'Prototypowanie', testowanie: 'Testowanie',
+    wdrozenie: 'Wdrożenie', zakonczone: 'Zakończone'
+  };
+  return labels[status] || status;
+}
+
+function getCategoryLabel(kategoria) {
+  const labels = { spoleczne: 'Społeczne', biznesowe: 'Biznesowe' };
+  return labels[kategoria] || kategoria;
+}
+
+// Wypełnij picker projektów
+function fillPicker() {
+  const picker = document.getElementById('projectPicker');
+  picker.innerHTML = '<option value="">-- Wybierz projekt do edycji --</option>';
+  projects.forEach(p => {
+    const label = `${p.id.substring(0, 8)} - ${p.nazwa_projektu || p.tytul}`;
+    picker.innerHTML += `<option value="${p.id}">${label}</option>`;
+  });
+}
+
+// Wybierz projekt z pickera
+function selectProjectToEdit() {
+  const picker = document.getElementById('projectPicker');
+  const id = picker.value;
+  if (id) {
+    selectProject(id);
+    switchView('detail');
+  }
+}
+
+// Synchronizuj picker z bieżącym projektem
+function syncPicker() {
+  const picker = document.getElementById('projectPicker');
+  if (currentProject) {
+    picker.value = currentProject.id;
+  } else {
+    picker.value = '';
+  }
+}
+
+// Inicjalizacja
+updateUserInfo();
+loadProjects();
+</script>
+</body>
+</html>

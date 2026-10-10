@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Migracja do PocketBase — Gildia Innowacji</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --o1:#F47C28; --o2:#F69F37; --gold:#F7C146;
+  --v1:#471F7D; --v2:#83109E; --v3:#BF01BF;
+  --bg:#1e1a1c; --bg2:#252022; --bg3:#2e282a;
+  --surface:#332d2f; --surface2:#3d3538;
+  --text:#f5f0ea; --text2:rgba(245,240,234,0.62); --text3:rgba(245,240,234,0.35);
+  --border:rgba(245,240,234,0.08);
+  --radius:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;padding:2rem 1rem;}
+
+.container{max-width:600px;margin:0 auto;}
+.header{text-align:center;margin-bottom:2rem;}
+.title{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:700;margin-bottom:0.5rem;background:linear-gradient(135deg,var(--o1),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.subtitle{font-size:0.85rem;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;}
+
+.box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;}
+.section-title{font-size:1.1rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+.step-number{width:28px;height:28px;border-radius:50%;background:var(--o1);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;flex-shrink:0;}
+
+.instruction{font-size:0.9rem;color:var(--text2);line-height:1.6;margin-bottom:1rem;padding-left:3rem;}
+.code{background:var(--bg3);padding:0.8rem;border-radius:8px;font-family:'Courier New',monospace;font-size:0.85rem;color:var(--o2);margin:0.5rem 0;overflow-x:auto;}
+
+.btn{width:100%;padding:1rem 1.5rem;border-radius:100px;font-size:0.9rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;border:none;transition:all 0.2s;font-family:'Syne',sans-serif;margin-top:1rem;}
+.btn-primary{background:linear-gradient(135deg,var(--o1),var(--v2));color:white;box-shadow:0 4px 14px rgba(244,124,40,0.3);}
+.btn-primary:hover{opacity:0.88;transform:translateY(-1px);}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed;}
+
+.status{margin-top:1rem;padding:1rem;border-radius:8px;font-size:0.85rem;display:none;}
+.status.success{background:rgba(46,213,115,0.1);border:1px solid rgba(46,213,115,0.3);color:#2ed573;}
+.status.error{background:rgba(247,103,104,0.1);border:1px solid rgba(247,103,104,0.3);color:#f76c6c;}
+.status.info{background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#3b82f6;}
+
+.progress{margin-top:1rem;background:var(--bg3);border-radius:8px;overflow:hidden;}
+.progress-bar{height:8px;background:linear-gradient(90deg,var(--o1),var(--v2));transition:width 0.3s;}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="title">Migracja do PocketBase</div>
+    <div class="subtitle">Przenoszenie projektów z JSON do bazy danych</div>
+  </div>
+
+  <div class="box">
+    <div class="section-title">
+      <div class="step-number">1</div>
+      <div>Uruchom PocketBase</div>
+    </div>
+    <div class="instruction">
+      Upewnij się że PocketBase jest uruchomiony na <code>http://127.0.0.1:8090</code>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="section-title">
+      <div class="step-number">2</div>
+      <div>Skonfiguruj kolekcję "projekty"</div>
+    </div>
+    <div class="instruction">
+      Wejdź do Admin Panel: <a href="http://127.0.0.1:8090/_" target="_blank" style="color:var(--o2)">http://127.0.0.1:8090/_</a><br>
+      Utwórz kolekcję "projekty" z polami:<br>
+      <div class="code">nazwa_projektu (text)</div>
+      <div class="code">kategoria (select: spoleczne, biznesowe)</div>
+      <div class="code">podkategoria (text)</div>
+      <div class="code">status (select: koncepcja, backlog, realizacja, prototypowanie, testowanie, wdrozenie, zakonczone)</div>
+      <div class="code">omowienie (text)</div>
+      <div class="code">pitch (text)</div>
+      <div class="code">data_rozpoczecia (date)</div>
+      <div class="code">data_zakonczenia (date)</div>
+      <div class="code">cele (json)</div>
+      <div class="code">specyfikacje (json)</div>
+      <div class="code">media (json)</div>
+      <div class="code">dokumentacja (url)</div>
+      <div class="code">tagi (json)</div>
+      <div class="code">author (relation to users)</div>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="section-title">
+      <div class="step-number">3</div>
+      <div>Migracja danych</div>
+    </div>
+    <div class="instruction">
+      Kliknij przycisk poniżej aby przenieść projekty z <code>projekty-v2.json</code> do PocketBase
+    </div>
+    <button class="btn btn-primary" id="migrateBtn" onclick="migrateData()">🚀 Rozpocznij migrację</button>
+    
+    <div class="progress" id="progress" style="display:none">
+      <div class="progress-bar" id="progressBar" style="width:0%"></div>
+    </div>
+    
+    <div class="status" id="status"></div>
+  </div>
+
+  <div class="box">
+    <div class="section-title">
+      <div class="step-number">4</div>
+      <div>Weryfikacja</div>
+    </div>
+    <div class="instruction">
+      Po migracji sprawdź Admin Panel czy projekty są poprawnie zaimportowane
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pocketbase@0.21.5/dist/pocketbase.umd.min.js"></script>
+<script>
+const pb = new PocketBase('http://127.0.0.1:8090');
+
+async function migrateData() {
+  const btn = document.getElementById('migrateBtn');
+  const status = document.getElementById('status');
+  const progress = document.getElementById('progress');
+  const progressBar = document.getElementById('progressBar');
+  
+  btn.disabled = true;
+  btn.textContent = '⏳ Migracja w toku...';
+  progress.style.display = 'block';
+  
+  try {
+    // Pobierz projekty z JSON
+    status.className = 'status info';
+    status.style.display = 'block';
+    status.textContent = 'Ładowanie projektów z projekty-v2.json...';
+    
+    const response = await fetch('projekty-v2.json');
+    if (!response.ok) throw new Error('Nie można załadować projekty-v2.json');
+    
+    const projects = await response.json();
+    status.textContent = `Znaleziono ${projects.length} projektów. Rozpoczynam migrację...`;
+    
+    let successCount = 0;
+    let errorCount = 0;
+    
+    for (let i = 0; i < projects.length; i++) {
+      const project = projects[i];
+      
+      try {
+        // Usuń ID jeśli istnieje (PocketBase wygeneruje własne)
+        const projectData = { ...project };
+        delete projectData.id;
+        
+        await pb.collection('projekty').create(projectData);
+        successCount++;
+        
+        // Aktualizuj pasek postępu
+        const percent = ((i + 1) / projects.length) * 100;
+        progressBar.style.width = percent + '%';
+        
+        status.textContent = `Migracja: ${i + 1}/${projects.length} (${successCount} sukcesów, ${errorCount} błędów)`;
+        
+      } catch (error) {
+        errorCount++;
+        console.error(`Błąd migracji projektu ${project.id}:`, error);
+      }
+    }
+    
+    // Wynik końcowy
+    if (errorCount === 0) {
+      status.className = 'status success';
+      status.textContent = `✅ Migracja zakończona pomyślnie! Przeniesiono ${successCount} projektów.`;
+      btn.textContent = '✅ Migracja zakończona';
+    } else {
+      status.className = 'status error';
+      status.textContent = `⚠️ Migracja zakończona z błędami: ${successCount} sukcesów, ${errorCount} błędów. Sprawdź konsolę.`;
+      btn.textContent = '⚠️ Błędy w migracji';
+    }
+    
+  } catch (error) {
+    status.className = 'status error';
+    status.textContent = `❌ Błąd migracji: ${error.message}`;
+    btn.textContent = '❌ Błąd migracji';
+    btn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>

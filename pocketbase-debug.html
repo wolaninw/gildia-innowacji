@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PocketBase Debug — Gildia Innowacji</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --o1:#F47C28; --o2:#F69F37; --gold:#F7C146;
+  --v1:#471F7D; --v2:#83109E; --v3:#BF01BF;
+  --bg:#1e1a1c; --bg2:#252022; --bg3:#2e282a;
+  --surface:#332d2f; --surface2:#3d3538;
+  --text:#f5f0ea; --text2:rgba(245,240,234,0.62); --text3:rgba(245,240,234,0.35);
+  --border:rgba(245,240,234,0.08);
+  --radius:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;padding:2rem 1rem;}
+
+.container{max-width:800px;margin:0 auto;}
+.header{text-align:center;margin-bottom:2rem;}
+.title{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:700;margin-bottom:0.5rem;background:linear-gradient(135deg,var(--o1),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.subtitle{font-size:0.85rem;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;}
+
+.box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.5rem;}
+.section-title{font-size:1rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+.icon{font-size:1.2rem;}
+
+.status-indicator{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border-radius:100px;font-size:0.8rem;font-weight:600;}
+.status-success{background:rgba(46,213,115,0.15);color:#2ed573;border:1px solid rgba(46,213,115,0.25);}
+.status-error{background:rgba(247,103,104,0.15);color:#f76c6c;border:1px solid rgba(247,103,104,0.25);}
+.status-warning{background:rgba(246,159,55,0.15);color:var(--o2);border:1px solid rgba(246,159,55,0.25);}
+
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-top:1rem;}
+.stat-card{background:var(--bg3);padding:1rem;border-radius:8px;text-align:center;}
+.stat-value{font-size:1.8rem;font-weight:700;color:var(--o1);font-family:'Fraunces',serif;}
+.stat-label{font-size:0.75rem;color:var(--text3);margin-top:0.3rem;}
+
+.btn{padding:0.6rem 1.2rem;border-radius:100px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;border:none;transition:all 0.2s;font-family:'Syne',sans-serif;margin-right:0.5rem;margin-bottom:0.5rem;}
+.btn-primary{background:linear-gradient(135deg,var(--o1),var(--v2));color:white;box-shadow:0 4px 14px rgba(244,124,40,0.3);}
+.btn-primary:hover{opacity:0.88;transform:translateY(-1px);}
+.btn-secondary{background:var(--surface);border:1.5px solid var(--border);color:var(--text2);}
+.btn-secondary:hover{border-color:var(--o1);color:var(--o1);}
+
+.logs{background:var(--bg3);padding:1rem;border-radius:8px;font-family:'Courier New',monospace;font-size:0.8rem;color:var(--text2);max-height:300px;overflow-y:auto;margin-top:1rem;}
+.log-entry{margin-bottom:0.5rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
+.log-time{color:var(--o2);font-size:0.7rem;}
+.log-message{margin-top:0.2rem;}
+.log-error{color:#f76c6c;}
+.log-success{color:#2ed573;}
+
+.user-info{display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--bg3);border-radius:8px;margin-top:1rem;}
+.user-avatar{width:40px;height:40px;border-radius:50%;background:var(--o1);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;}
+.user-details{flex:1;}
+.user-name{font-weight:700;font-size:0.9rem;}
+.user-email{font-size:0.75rem;color:var(--text3);}
+.user-role{font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:100px;background:var(--surface2);color:var(--text3);margin-top:0.3rem;display:inline-block;}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="title">PocketBase Debug</div>
+    <div class="subtitle">Diagnostyka i zarządzanie</div>
+  </div>
+
+  <!-- Connection Status -->
+  <div class="box">
+    <div class="section-title">
+      <div class="icon">🔗</div>
+      <div>Status połączenia</div>
+    </div>
+    <div id="connectionStatus">
+      <div class="status-indicator status-warning">⏳ Sprawdzanie połączenia...</div>
+    </div>
+  </div>
+
+  <!-- User Info -->
+  <div class="box">
+    <div class="section-title">
+      <div class="icon">👤</div>
+      <div>Obecny użytkownik</div>
+    </div>
+    <div id="userInfo">
+      <div style="color:var(--text3);font-size:0.85rem">Nie zalogowany</div>
+    </div>
+  </div>
+
+  <!-- Statistics -->
+  <div class="box">
+    <div class="section-title">
+      <div class="icon">📊</div>
+      <div>Statystyki bazy danych</div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="userCount">-</div>
+        <div class="stat-label">Użytkownicy</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="projectCount">-</div>
+        <div class="stat-label">Projekty</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="collectionCount">-</div>
+        <div class="stat-label">Kolekcje</div>
+      </div>
+    </div>
+    <div style="margin-top:1rem">
+      <button class="btn btn-secondary" onclick="refreshStats()">🔄 Odśwież statystyki</button>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="box">
+    <div class="section-title">
+      <div class="icon">⚡</div>
+      <div>Szybkie akcje</div>
+    </div>
+    <div>
+      <button class="btn btn-primary" onclick="testConnection()">🔍 Test połączenia</button>
+      <button class="btn btn-secondary" onclick="checkAuth()">🔐 Sprawdź autoryzację</button>
+      <button class="btn btn-secondary" onclick="listUsers()">👥 Lista użytkowników</button>
+      <button class="btn btn-secondary" onclick="listProjects()">📋 Lista projektów</button>
+      <button class="btn btn-secondary" onclick="clearLogs()">🗑️ Wyczyść logi</button>
+    </div>
+  </div>
+
+  <!-- Logs -->
+  <div class="box">
+    <div class="section-title">
+      <div class="icon">📝</div>
+      <div>Logi</div>
+    </div>
+    <div class="logs" id="logs">
+      <div class="log-entry">
+        <div class="log-time">--:--:--</div>
+        <div class="log-message">Rozpoczęcie sesji debug</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pocketbase@0.21.5/dist/pocketbase.umd.min.js"></script>
+<script>
+const pb = new PocketBase('http://127.0.0.1:8090');
+
+function log(message, type = 'info') {
+  const logs = document.getElementById('logs');
+  const time = new Date().toLocaleTimeString();
+  const logClass = type === 'error' ? 'log-error' : type === 'success' ? 'log-success' : '';
+  
+  logs.innerHTML = `
+    <div class="log-entry">
+      <div class="log-time">${time}</div>
+      <div class="log-message ${logClass}">${message}</div>
+    </div>
+  ` + logs.innerHTML;
+}
+
+function clearLogs() {
+  document.getElementById('logs').innerHTML = '';
+  log('Logi wyczyszczone');
+}
+
+async function testConnection() {
+  log('Testowanie połączenia z PocketBase...');
+  
+  try {
+    const response = await pb.send('/api/health', {
+      method: 'GET'
+    });
+    
+    document.getElementById('connectionStatus').innerHTML = 
+      '<div class="status-indicator status-success">✅ Połączono z PocketBase</div>';
+    
+    log('Połączenie z PocketBase OK', 'success');
+    await refreshStats();
+  } catch (error) {
+    document.getElementById('connectionStatus').innerHTML = 
+      '<div class="status-indicator status-error">❌ Brak połączenia z PocketBase</div>';
+    
+    log('Błąd połączenia: ' + error.message, 'error');
+  }
+}
+
+function checkAuth() {
+  log('Sprawdzanie autoryzacji...');
+  
+  if (pb.authStore.isValid) {
+    const user = pb.authStore.model;
+    log('Zalogowany jako: ' + (user.name || user.email), 'success');
+    updateUserInfo(user);
+  } else {
+    log('Nie zalogowany', 'warning');
+    updateUserInfo(null);
+  }
+}
+
+function updateUserInfo(user) {
+  const userInfo = document.getElementById('userInfo');
+  
+  if (user) {
+    userInfo.innerHTML = `
+      <div class="user-info">
+        <div class="user-avatar">${(user.name || user.email).charAt(0).toUpperCase()}</div>
+        <div class="user-details">
+          <div class="user-name">${user.name || 'Bez nazwy'}</div>
+          <div class="user-email">${user.email}</div>
+          <div class="user-role">${user.role || 'user'}</div>
+        </div>
+      </div>
+    `;
+  } else {
+    userInfo.innerHTML = '<div style="color:var(--text3);font-size:0.85rem">Nie zalogowany</div>';
+  }
+}
+
+async function refreshStats() {
+  log('Pobieranie statystyk...');
+  
+  try {
+    // Pobierz liczbę użytkowników
+    const users = await pb.collection('users').getList(1, 1, { total: true });
+    document.getElementById('userCount').textContent = users.totalItems;
+    
+    // Pobierz liczbę projektów
+    const projects = await pb.collection('projekty').getList(1, 1, { total: true });
+    document.getElementById('projectCount').textContent = projects.totalItems;
+    
+    // Pobierz kolekcje
+    const collections = await pb.collections.getList();
+    document.getElementById('collectionCount').textContent = collections.items.length;
+    
+    log('Statystyki zaktualizowane', 'success');
+  } catch (error) {
+    log('Błąd pobierania statystyk: ' + error.message, 'error');
+    document.getElementById('userCount').textContent = '-';
+    document.getElementById('projectCount').textContent = '-';
+    document.getElementById('collectionCount').textContent = '-';
+  }
+}
+
+async function listUsers() {
+  log('Pobieranie listy użytkowników...');
+  
+  try {
+    const users = await pb.collection('users').getList(1, 50);
+    log(`Znaleziono ${users.items.length} użytkowników:`, 'success');
+    
+    users.items.forEach(user => {
+      log(`  - ${user.name || 'Bez nazwy'} (${user.email}) - ${user.role || 'user'}`);
+    });
+  } catch (error) {
+    log('Błąd pobierania użytkowników: ' + error.message, 'error');
+  }
+}
+
+async function listProjects() {
+  log('Pobieranie listy projektów...');
+  
+  try {
+    const projects = await pb.collection('projekty').getList(1, 50);
+    log(`Znaleziono ${projects.items.length} projektów:`, 'success');
+    
+    projects.items.forEach(project => {
+      log(`  - ${project.nazwa_projektu || project.tytul || 'Bez nazwy'} (${project.status})`);
+    });
+  } catch (error) {
+    log('Błąd pobierania projektów: ' + error.message, 'error');
+  }
+}
+
+// Automatyczny test przy starcie
+testConnection();
+checkAuth();
+</script>
+</body>
+</html>
