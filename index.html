@@ -877,6 +877,31 @@ body {
   text-align: center; font-size: 0.75rem; color: var(--text3);
 }
 
+/* ── MODALS (base) ── okna Polityki prywatności, Cookies, Regulaminu i logowania są ukryte, dopóki się ich nie otworzy */
+.modal {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.6); padding: 1.5rem;
+  align-items: center; justify-content: center;
+}
+.modal.active { display: flex; }
+.modal-content {
+  background: var(--bg2); color: var(--text);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: 0 20px 60px var(--shadow);
+  width: 100%; max-width: 560px; max-height: 85vh; overflow-y: auto;
+  padding: 1.5rem 1.75rem;
+}
+.modal-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding-bottom: 1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border);
+}
+.modal-title { font-family: 'Fraunces', serif; font-size: 1.25rem; font-weight: 700; }
+.modal-close {
+  background: none; border: none; color: var(--text2);
+  font-size: 1.2rem; cursor: pointer; line-height: 1; padding: 0.25rem 0.4rem;
+}
+.modal-close:hover { color: var(--o1); }
+
 /* ── LEGAL MODALS ── */
 .legal-modal-content { max-width: 600px; }
 .legal-body {
@@ -1945,6 +1970,10 @@ function showTermsModal() {
 function closeTermsModal() {
   document.getElementById('terms-modal').classList.remove('active');
 }
+
+/* Zamykanie okien: kliknięcie w tło lub klawisz Esc */
+document.addEventListener('click', function(e){ if (e.target.classList && e.target.classList.contains('modal')) e.target.classList.remove('active'); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') document.querySelectorAll('.modal.active').forEach(function(m){ m.classList.remove('active'); }); });
 
 /* ── COOKIE CONSENT ── baner i Google Analytics: assets/analytics.js */
 if (location.hash === '#cookies') window.addEventListener('load', function(){ showCookiesModal(); });
