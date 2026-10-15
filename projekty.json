@@ -152,7 +152,8 @@
       "ogród",
       "terapia",
       "sensoryczny",
-      "przestrzeń publiczna"
+      "przestrzeń publiczna",
+      "sztuka jako marketing"
     ],
     "dokumentacja": "",
     "narzedzia": [],
@@ -1138,5 +1139,41 @@
       "osiedle"
     ],
     "dokumentacja": "https://maps.app.goo.gl/HW8WDYQzEZVz8DWy7"
+  },
+  {
+    "id": "p046",
+    "tytul": "Wystawa Kasztaniaków",
+    "kategoria": "spoleczne",
+    "podkategoria": "Projekty dla otoczenia",
+    "pitch": "Kasztanowe ludziki zamieszkały na drzewach kieleckiego osiedla. Street artowa wystawa dla każdego, wstęp wolny.",
+    "status": "realizacja",
+    "postep": "3. Realizacja",
+    "miejsce": "Kielce",
+    "media": {
+      "typ": "obraz",
+      "src": "assets/projekty/wystawa-kasztaniakow-plakat.jpg"
+    },
+    "narzedzia": [
+      {
+        "nazwa": "Materiały naturalne",
+        "opis": "Kasztany, liście, wykałaczki, sznurek"
+      },
+      {
+        "nazwa": "Plakat z kodem QR",
+        "opis": "Promocja i wskazanie lokalizacji"
+      },
+      {
+        "nazwa": "Podstrona projektu",
+        "opis": "gildia.edu.pl/pages/wystawa-kasztaniakow.html"
+      }
+    ],
+    "wnioski": [],
+    "tagi": [
+      "street art",
+      "kasztany",
+      "osiedle",
+      "przestrzeń publiczna"
+    ],
+    "dokumentacja": "https://gildia.edu.pl/pages/wystawa-kasztaniakow.html"
   }
 ]

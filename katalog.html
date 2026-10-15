@@ -190,6 +190,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
   .filter-select{flex:1;min-width:auto;}
   .search-wrap{max-width:100%;}
 }
+
+/* SZTUKA JAKO MARKETING: wyróżniony projekt z plakatem */
+.art-spot{max-width:1300px;margin:0 auto 2.2rem;padding:0 2.5rem;}
+.art-spot-inner{display:grid;grid-template-columns:auto 1fr;gap:2.4rem;align-items:center;background:linear-gradient(135deg,rgba(244,124,40,0.16),rgba(131,16,158,0.12));border:1px solid rgba(244,124,40,0.3);border-radius:18px;padding:1.8rem 2.2rem;}
+.art-spot-poster{width:200px;transform:rotate(-2.5deg);transition:transform .25s;cursor:zoom-in;border:none;background:none;padding:0;}
+.art-spot-poster:hover{transform:rotate(0) scale(1.03);}
+.art-spot-poster img{width:100%;height:auto;display:block;border-radius:6px;box-shadow:0 14px 34px rgba(0,0,0,0.45);}
+.art-spot-label{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:0.7rem;}
+.art-spot h2{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.1;margin-bottom:0.7rem;}
+.art-spot p{color:var(--text2);line-height:1.7;max-width:560px;margin-bottom:1.2rem;font-size:0.92rem;}
+.art-spot-btns{display:flex;gap:0.7rem;flex-wrap:wrap;}
+.art-spot-btns a,.art-spot-btns button{font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;padding:0.65rem 1.2rem;border-radius:100px;text-decoration:none;cursor:pointer;}
+.art-spot-btns .main{background:linear-gradient(135deg,var(--o1),var(--v2));color:#fff;border:none;}
+.art-spot-btns .ghost{background:transparent;color:var(--text);border:1.5px solid rgba(245,240,234,0.25);}
+@media(max-width:700px){.art-spot{padding:0 1.2rem}.art-spot-inner{grid-template-columns:1fr;padding:1.4rem;justify-items:start}.art-spot-poster{width:170px}}
 </style>
 </head>
 <body>
@@ -210,6 +225,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
   <h1 class="ch-title">Projekty czekające<br>na <em>realizatorów.</em></h1>
   <p class="ch-sub">Dołącz do istniejącego projektu lub zaproponuj własny. Każdy projekt ma dokumentację, mentora i miejsce w ekosystemie Gildii.</p>
 </div>
+
+<!-- SZTUKA JAKO MARKETING: wyróżniony projekt z plakatem -->
+<section class="art-spot" aria-label="Wyróżniony projekt">
+  <div class="art-spot-inner">
+    <a class="art-spot-poster" href="assets/projekty/wystawa-kasztaniakow-plakat.jpg" target="_blank" rel="noopener" aria-label="Otwórz plakat w pełnym rozmiarze">
+      <img src="assets/projekty/wystawa-kasztaniakow-plakat.jpg" alt="Plakat Wystawy Kasztaniaków" width="1024" height="1536">
+    </a>
+    <div>
+      <div class="art-spot-label">🎨 Wyróżniony projekt: sztuka w przestrzeni</div>
+      <h2>Wystawa Kasztaniaków</h2>
+      <p>Street artowa wystawa kasztanowych ludzików na drzewach kieleckiego osiedla. Mały projekt, który przyciąga uwagę mieszkańców i opowiada o Gildii bez jednej ulotki. Wstęp wolny, a własnego kasztaniaka może dołożyć każdy.</p>
+      <div class="art-spot-btns">
+        <a class="main" href="pages/wystawa-kasztaniakow.html">Zobacz wystawę</a>
+        <button class="ghost" type="button" onclick="openModal('p009')">Szczegóły projektu</button>
+      </div>
+    </div>
+  </div>
+</section>
 
 <div class="controls">
   <div class="view-switcher">
@@ -830,6 +863,9 @@ function openModal(id) {
   const actionsContainer = document.getElementById('modalActions');
   let actions = `<button class="btn-action btn-action-main" onclick="window.location.href='mailto:wolanin.w@gmail.com?subject=Dolaczam do projektu: ${encodeURIComponent(p.nazwa_projektu || p.tytul)}'">🤝 Dołącz do projektu →</button>`;
   
+  if (p.strona) {
+    actions += `<a class="btn-action btn-action-outline" href="${p.strona}">🌐 Strona projektu</a>`;
+  }
   if (p.dokumentacja) {
     actions += `<a class="btn-action btn-action-outline" href="${p.dokumentacja}" target="_blank" rel="noopener">📄 Dokumentacja</a>`;
   }

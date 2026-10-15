@@ -973,6 +973,17 @@ body {
   }
   .mobile-overlay.open { display: block; }
 }
+
+/* ── SZTUKA JAKO MARKETING: plakat projektu ── */
+.art-spot { display:grid; grid-template-columns: minmax(0,1.2fr) minmax(0,0.8fr); gap:2rem; align-items:center; margin:1.4rem 0 1.6rem; cursor:pointer;
+  background: linear-gradient(135deg, rgba(244,124,40,0.18), rgba(247,193,70,0.08)); border-color: rgba(244,124,40,0.35); }
+[data-theme="light"] .art-spot { background: linear-gradient(135deg, rgba(244,124,40,0.12), rgba(247,193,70,0.10)); }
+.art-spot .art-poster { justify-self:center; max-width:260px; transform: rotate(2.5deg); transition: transform .25s; }
+.art-spot:hover .art-poster { transform: rotate(0deg) scale(1.03); }
+.art-spot .art-poster img { width:100%; height:auto; display:block; border-radius:6px; box-shadow: 0 14px 34px rgba(0,0,0,0.35); }
+.art-spot a.btn-sm { text-decoration:none; display:inline-block; }
+.ft-art { background: rgba(247,193,70,0.22); color: var(--gold); }
+@media (max-width: 760px) { .art-spot { grid-template-columns: 1fr; } .art-spot .art-poster { max-width:220px; order:-1; } }
 </style>
 </head>
 <body>
@@ -1103,6 +1114,24 @@ body {
               </span>
             </div>
           </a>
+        </div>
+      </div>
+
+      <div class="news-card art-spot" onclick="window.location.href='pages/wystawa-kasztaniakow.html'">
+        <div class="featured-content">
+          <div class="featured-meta">
+            <span class="featured-tag ft-new">🌰 Nowy projekt</span>
+            <span class="featured-tag ft-art">🎨 Sztuka w przestrzeni</span>
+          </div>
+          <div class="featured-h">Wystawa Kasztaniaków</div>
+          <div class="featured-p">Kasztanowe ludziki zamieszkały na drzewach kieleckiego osiedla. Wąż, odlotowy punk, strażnik z mrówką, zaloty do panny i protest „zbieram na piwo”. Street art dla każdego, o każdej porze, wstęp wolny. Tak Gildia pokazuje, że lokalna zmiana może zacząć się od garści kasztanów.</div>
+          <div style="display:flex; gap:0.7rem; flex-wrap:wrap;">
+            <a class="btn-sm btn-orange" href="pages/wystawa-kasztaniakow.html" onclick="event.stopPropagation()">Zobacz wystawę</a>
+            <a class="btn-sm btn-ghost-sm" href="https://maps.app.goo.gl/191pcH6nHMkbPJjYA" target="_blank" rel="noopener" onclick="event.stopPropagation()">Jak trafić →</a>
+          </div>
+        </div>
+        <div class="art-poster">
+          <img src="assets/projekty/wystawa-kasztaniakow-plakat.jpg" alt="Plakat Wystawy Kasztaniaków: małe figurki wielkiej wyobraźni, wstęp wolny" loading="lazy" width="1024" height="1536">
         </div>
       </div>
 

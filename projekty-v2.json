@@ -229,5 +229,41 @@
     },
     "dokumentacja": "",
     "tagi": ["newsletter", "komunikacja", "content", "social media"]
+  },
+  {
+    "id": "p009",
+    "nazwa_projektu": "Wystawa Kasztaniaków",
+    "kategoria": "spoleczne",
+    "podkategoria": "Projekty dla otoczenia",
+    "status": "realizacja",
+    "omowienie": "Plenerowa, street artowa wystawa figurek z kasztanów rozmieszczonych na drzewach osiedla w Kielcach. Figurki powstają z kasztanów, wykałaczek, liści, sznurka i przedmiotów z odzysku. Wystawa jest otwarta dla każdego, a mieszkańcy mogą dokładać własne postacie.",
+    "pitch": "Kasztanowe ludziki zamieszkały na drzewach kieleckiego osiedla. Street artowa wystawa dla każdego, wstęp wolny.",
+    "data_rozpoczecia": "2026-10-12",
+    "data_zakonczenia": "",
+    "cele": {
+      "potrzeba": "Brak drobnych, oddolnych inicjatyw ożywiających wspólną przestrzeń osiedla",
+      "cel_glowny": "Pokazać, jak małym kosztem zamienić osiedlowe drzewa w galerię dostępną dla wszystkich",
+      "grupa_docelowa": "Mieszkańcy osiedla, rodziny z dziećmi, przechodnie"
+    },
+    "specyfikacje": {
+      "technologia": "Kasztany, wykałaczki, sznurek, materiały z odzysku, plakat z kodem QR",
+      "umiejetnosci": "Prace manualne, kreatywność, street art, komunikacja z mieszkańcami",
+      "miejsce": "Osiedle w Kielcach",
+      "termin": "Październik 2026"
+    },
+    "media": {
+      "zdjecie": "assets/projekty/wystawa-kasztaniakow-plakat.jpg",
+      "inny": "https://maps.app.goo.gl/191pcH6nHMkbPJjYA"
+    },
+    "strona": "pages/wystawa-kasztaniakow.html",
+    "dokumentacja": "",
+    "tagi": [
+      "street art",
+      "kasztany",
+      "osiedle",
+      "przestrzeń publiczna",
+      "rodzina",
+      "sztuka jako marketing"
+    ]
   }
 ]
