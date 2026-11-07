@@ -265,5 +265,138 @@
       "rodzina",
       "sztuka jako marketing"
     ]
+  },
+  {
+    "id": "p010",
+    "nazwa_projektu": "Ogród sensoryczny na Ślichowicach",
+    "kategoria": "spoleczne",
+    "podkategoria": "Projekty dla otoczenia",
+    "status": "koncepcja",
+    "omowienie": "Konkurs na zaprojektowanie i zbudowanie ogrodu sensorycznego w miejscu zniszczonego placu zabaw przy ul. Dewońskiej w Kielcach, obok kamieniołomu Ślichowice. Ogród ma mieć dużo roślin i ziół oraz elementy działające na zmysły. Mieszkańcy współtworzą go przez konsultacje online.",
+    "pitch": "Zniszczony plac zabaw ma się zmienić w ogród do odpoczynku i spotkań. Powiedz, jak ma wyglądać.",
+    "data_rozpoczecia": "2024-04-26",
+    "data_zakonczenia": "",
+    "cele": {
+      "potrzeba": "Zaniedbany plac zabaw i brak spokojnego miejsca do odpoczynku na osiedlu",
+      "cel_glowny": "Stworzyć przestrzeń do wyciszenia i spotkań, zaprojektowaną razem z mieszkańcami",
+      "grupa_docelowa": "Mieszkańcy osiedla w każdym wieku"
+    },
+    "specyfikacje": {
+      "technologia": "Rośliny i zioła, odporne donice, elementy sensoryczne, konsultacje online (kod QR)",
+      "umiejetnosci": "Projektowanie przestrzeni, konsultacje społeczne, ogrodnictwo",
+      "miejsce": "ul. Dewońska, Kielce (obok kamieniołomu Ślichowice)",
+      "termin": "Od kwietnia 2024"
+    },
+    "media": {
+      "zdjecie": "assets/projekty/ogrod-sensoryczny-konsultacje.jpg"
+    },
+    "dokumentacja": "",
+    "tagi": [
+      "ogród",
+      "konsultacje",
+      "osiedle",
+      "zieleń",
+      "ślichowice"
+    ]
+  },
+  {
+    "id": "p011",
+    "nazwa_projektu": "Sztuka debaty — warsztaty w modelu 4K",
+    "kategoria": "spoleczne",
+    "podkategoria": "Edukacja i rozwój osobisty",
+    "status": "testowanie",
+    "omowienie": "Wykład z warsztatem dla młodzieży i studentów, który pokazuje, że do rozwiązania problemu potrzebne są zrozumienie i szacunek, a nie wygrywanie kłótni. Uczestnicy przechodzą przez model 4K (Konflikt, Konfrontacja, Konsultacja, Konkluzja) i wspólnie piszą rekomendację w otwartym dokumencie. Część inicjatywy Prawdziwa Demokracja.",
+    "pitch": "Czy wygrywanie dyskusji oznacza, że masz rację? Warsztat, na którym zamiast się kłócić, wspólnie szukamy rozwiązania.",
+    "data_rozpoczecia": "2026-05-14",
+    "data_zakonczenia": "2026-05-14",
+    "cele": {
+      "potrzeba": "Debata publiczna opiera się na emocjach i walce o zwycięstwo zamiast na szukaniu rozwiązań",
+      "cel_glowny": "Pokazać młodym, czym jest deliberacja, i przetestować model 4K na ich prawdziwych problemach",
+      "grupa_docelowa": "Młodzież i studenci, grupa 15–40 osób"
+    },
+    "specyfikacje": {
+      "technologia": "Model 4K, prezentacja, wspólny dokument Google Docs, prototyp narzędzia SYNAPSA",
+      "umiejetnosci": "Słuchanie, budowanie argumentów, analiza problemu z wielu stron, pisanie rekomendacji",
+      "miejsce": "UrbanLab Kielce, ul. Paderewskiego 49/51",
+      "termin": "14 maja 2026, 90–120 minut"
+    },
+    "media": {
+      "zdjecie": "assets/projekty/Sztuka debaty.png"
+    },
+    "dokumentacja": "",
+    "tagi": [
+      "debata",
+      "deliberacja",
+      "model 4k",
+      "młodzież",
+      "prawdziwa demokracja"
+    ]
+  },
+  {
+    "id": "p012",
+    "nazwa_projektu": "Przystanek sąsiedzki",
+    "kategoria": "spoleczne",
+    "podkategoria": "Projekty dla otoczenia",
+    "status": "testowanie",
+    "omowienie": "Pilotaż, w którym nieużywana poczekalnia autobusowa przy ul. Massalskiego w Kielcach ma stać się miejscem spotkań, warsztatów i wymiany książek, gier i zabawek. Pomysły testowane na miejscu to m.in. budowanie z LEGO w poczekalni, kino, debaty osiedlowe i „Angielskie czwartki”. Mieszkańcy wypowiadają się w konsultacjach przez kod QR.",
+    "pitch": "Czy to miejsce ma dalej stać puste? Zamieniamy opuszczoną poczekalnię w przestrzeń dla mieszkańców.",
+    "data_rozpoczecia": "2026-07-15",
+    "data_zakonczenia": "2026-09-30",
+    "cele": {
+      "potrzeba": "Pusta, nieużywana poczekalnia na osiedlu i brak miejsca na wspólne działania mieszkańców",
+      "cel_glowny": "Przetestować, czy taka przestrzeń może działać jako społeczne miejsce edukacji, i stworzyć model do powtórzenia",
+      "grupa_docelowa": "Dzieci, młodzież, rodziny, mieszkańcy osiedla, wolontariusze"
+    },
+    "specyfikacje": {
+      "technologia": "Regały i ekspozytory, prosty system wypożyczeń, konsultacje online (kod QR), media społecznościowe",
+      "umiejetnosci": "Organizacja wolontariatu, prowadzenie zajęć, promocja, rozmowy z mieszkańcami i instytucjami",
+      "miejsce": "Poczekalnia przy ul. Massalskiego, Kielce (Ślichowice)",
+      "termin": "15 lipca – 30 września 2026 (pilotaż)"
+    },
+    "media": {
+      "zdjecie": "assets/projekty/przystanek-sasiedzki-plakat.jpg"
+    },
+    "dokumentacja": "",
+    "tagi": [
+      "przestrzeń publiczna",
+      "osiedle",
+      "wymiana",
+      "konsultacje",
+      "ślichowice"
+    ]
+  },
+  {
+    "id": "p013",
+    "nazwa_projektu": "Wypożyczalnia Kreatywna",
+    "kategoria": "biznesowe",
+    "podkategoria": "Projekty dla szkoły",
+    "status": "prototypowanie",
+    "omowienie": "Zamykana szafka w szkole z pakietami kreatywnymi, które uczeń wypożycza do domu: mydełka, świece, zestaw do nagrywania podcastów i modele LEGO Technic. Każdy pakiet ma wszystko, czego potrzeba, i instrukcję krok po kroku. Prototyp szafki jest gotowy, a pomysł chcemy przetestować w Szkole Podstawowej nr 25 w Kielcach. Projekt łączy doświadczenia Warsztatów Małej Mechaniki i Warsztatów Homemade.",
+    "pitch": "Szafka w szkole, a w niej pakiety do zrobienia w domu z rodziną. Wypożyczasz, tworzysz, oddajesz.",
+    "data_rozpoczecia": "2026-11-04",
+    "data_zakonczenia": "",
+    "cele": {
+      "potrzeba": "Rodziny szukają ciekawych zajęć do zrobienia razem w domu, a szkoły nie mają budżetu ani ludzi na warsztaty",
+      "cel_glowny": "Sprawdzić w jednej szkole, czy uczniowie i rodzice będą korzystać z wypożyczalni pakietów",
+      "grupa_docelowa": "Uczniowie szkoły podstawowej i ich rodzice"
+    },
+    "specyfikacje": {
+      "technologia": "Szafka z witryną i zamykaną częścią, pakiety (mydełka, świece, podcast, 4 zestawy LEGO Technic), rezerwacja przez kod QR",
+      "umiejetnosci": "Prace manualne, nagrywanie dźwięku, konstrukcje mechaniczne, praca z instrukcją",
+      "miejsce": "Kielce (test planowany w SP 25)",
+      "termin": "Od listopada 2026"
+    },
+    "media": {
+      "zdjecie": "assets/wypozyczalnia/pakiet-podcast.jpg"
+    },
+    "strona": "pages/wypozyczalnia-kreatywna.html",
+    "dokumentacja": "",
+    "tagi": [
+      "szkoła",
+      "pakiety",
+      "rodzina",
+      "LEGO",
+      "podcast"
+    ]
   }
 ]

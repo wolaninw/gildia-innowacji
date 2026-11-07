@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="../assets/analytics.js"></script>
+<meta property="og:image" content="https://gildia.edu.pl/assets/wypozyczalnia/pakiet-podcast.jpg">
+<meta property="og:url" content="https://gildia.edu.pl/pages/wypozyczalnia-kreatywna.html">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://gildia.edu.pl/pages/wypozyczalnia-kreatywna.html">
+<link rel="icon" href="../assets/logo.png">
+<title>Wypożyczalnia Kreatywna – Pakiety Kreatywne | Gildia Innowacji</title>
+<meta name="description" content="Szkolna szafka z pakietami kreatywnymi do zrobienia w domu: mydełka, świece, podcast i LEGO Technic. Projekt Gildii Innowacji testowany w Kielcach.">
+<meta property="og:title" content="Wypożyczalnia Kreatywna – Pakiety Kreatywne">
+<meta property="og:description" content="Co o tym myślisz? Weź udział w konsultacjach projektu Gildii Innowacji.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --paper: #FBF1DC;
+    --paper-deep: #F5E3BF;
+    --ink: #4A2A12;
+    --ink-soft: #7A5232;
+    --mustard: #F2B825;
+    --brown: #5A3015;
+    --on-brown: #FFF6E3;
+    --wood: #D9A05B;
+    --wood-dark: #B37A3A;
+    --pink: #EE7DB4;
+    --yellow: #F5C842;
+    --blue: #4A95DC;
+    --green: #93C94A;
+    --leaf: #E2662A;
+    --card: #FFFAF0;
+    --line: #E3CFA6;
+    --display: "Caveat Brush", "Comic Sans MS", "Segoe Print", cursive;
+    --body: "Nunito", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --paper: #2B1B0E;
+      --paper-deep: #362313;
+      --ink: #FBEBD0;
+      --ink-soft: #D9BE98;
+      --brown: #F2B825;
+      --on-brown: #2B1B0E;
+      --card: #3A2616;
+      --line: #5A3E24;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #2B1B0E; --paper-deep: #362313; --ink: #FBEBD0; --ink-soft: #D9BE98;
+    --brown: #F2B825; --on-brown: #2B1B0E; --card: #3A2616; --line: #5A3E24;
+  }
+
+  :root { box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  *, *::before, *::after { box-sizing: inherit; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    background-image: radial-gradient(rgba(122, 82, 50, .07) 1px, transparent 1px);
+    background-size: 18px 18px;
+    color: var(--ink);
+    font: 400 1.0625rem/1.6 var(--body);
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--leaf); outline-offset: 3px; border-radius: 4px; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.25rem; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.05; margin: 0; }
+  h2 { font-size: clamp(2.2rem, 5vw, 3rem); margin-bottom: .6rem; }
+  p { margin: 0 0 1rem; max-width: 62ch; }
+
+  /* Top bar */
+  .top { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; font-weight: 800; }
+  .top a { text-decoration: none; }
+  .top nav a { margin-left: 1.2rem; font-weight: 600; color: var(--ink-soft); }
+  .top nav a:hover { color: var(--ink); text-decoration: underline; }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 3rem; align-items: center; padding: 2.5rem 0 4rem; position: relative; }
+  .title { font-size: clamp(3.2rem, 9vw, 6rem); position: relative; display: inline; }
+  .title span {
+    background: linear-gradient(transparent 18%, var(--mustard) 18%, var(--mustard) 88%, transparent 88%);
+    padding: 0 .25em; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+    color: #4A2A12; border-radius: .2em .5em .3em .45em;
+  }
+  .subtitle { font-weight: 800; font-size: 1.15rem; color: var(--ink-soft); margin: 1.4rem 0 .4rem; }
+  .ask { font-family: var(--display); font-size: clamp(2rem, 4.5vw, 2.8rem); margin: .2rem 0 1.4rem; display: inline-block; border-bottom: 5px solid var(--mustard); line-height: 1.1; }
+  .lead { font-size: 1.15rem; }
+  .btn {
+    display: inline-block; background: var(--brown); color: var(--on-brown); text-decoration: none;
+    font-family: var(--display); font-size: 1.6rem; padding: .45rem 1.4rem .55rem;
+    border-radius: 14px 22px 16px 26px; transform: rotate(-1.2deg);
+    box-shadow: 4px 5px 0 var(--mustard); transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { transform: rotate(0deg) translateY(-2px); box-shadow: 6px 7px 0 var(--mustard); }
+  .poster { position: relative; transform: rotate(2.5deg); }
+  .poster img { border-radius: 6px; box-shadow: 0 14px 30px rgba(74, 42, 18, .25); }
+  .poster::before {
+    content: ""; position: absolute; top: -14px; left: 50%; width: 110px; height: 30px; transform: translateX(-50%) rotate(-3deg);
+    background: rgba(242, 184, 37, .75); border-radius: 3px; z-index: 1;
+  }
+  .leaf { position: absolute; pointer-events: none; }
+
+  /* Cabinet */
+  .section { padding: 4rem 0; }
+  .cab-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 3rem; align-items: start; margin-top: 1.5rem; }
+  .box {
+    width: 100%; border: 3px solid rgba(74, 42, 18, .55); border-radius: 10px; cursor: pointer;
+    font-family: var(--display); font-size: 1.7rem; color: #4A2A12; text-align: left;
+    padding: .55rem 1rem; display: flex; justify-content: space-between; align-items: center;
+    box-shadow: inset 0 -6px 0 rgba(0, 0, 0, .12); transition: transform .15s ease;
+  }
+  .box:hover { transform: translateX(4px); }
+  .box[aria-pressed="true"] { transform: translateX(14px) rotate(-1deg); box-shadow: inset 0 -6px 0 rgba(0, 0, 0, .12), -6px 6px 0 rgba(74, 42, 18, .25); }
+  .box svg { width: 34px; height: 34px; flex: none; }
+  .b-pink { background: var(--pink); } .b-yellow { background: var(--yellow); }
+  .b-blue { background: var(--blue); } .b-green { background: var(--green); }
+
+  .kit-photo { margin: 0; transform: rotate(-1.5deg); }
+  .kit-photo img { border-radius: 10px; box-shadow: 0 14px 30px rgba(74, 42, 18, .25); }
+  .kit-photo figcaption { font-family: var(--display); font-size: 1.4rem; text-align: center; margin-top: .7rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 1.2rem; }
+  .chips .box { width: auto; font-size: 1.4rem; padding: .3rem 1rem; }
+  .chips .box:hover { transform: translateY(-2px); }
+  .chips .box[aria-pressed="true"] { transform: translateY(-3px) rotate(-1.5deg); box-shadow: inset 0 -6px 0 rgba(0, 0, 0, .12), 0 5px 0 #4A2A12; }
+  .note {
+    background: var(--card); border: 3px solid var(--ink); border-radius: 26px 30px 24px 34px;
+    padding: 1.6rem 1.8rem; position: relative; min-height: 260px;
+  }
+      .note h3 { font-size: 2.4rem; margin-bottom: .6rem; }
+  .note ul { margin: .4rem 0 1rem; padding-left: 1.2rem; }
+  .note li { margin-bottom: .25rem; }
+  .kit-art { width: 100%; max-width: 340px; height: auto; display: block; margin: .2rem 0 .8rem; color: var(--ink); }
+  .tag { display: inline-block; font-weight: 800; font-size: .9rem; background: var(--paper-deep); border-radius: 999px; padding: .15rem .8rem; }
+
+  /* Steps */
+  .steps { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem; counter-reset: s; }
+  .steps li { counter-increment: s; position: relative; padding-top: 3.6rem; }
+  .steps li::before {
+    content: counter(s); position: absolute; top: 0; left: 0; width: 2.9rem; height: 2.9rem; display: grid; place-items: center;
+    font-family: var(--display); font-size: 1.9rem; background: var(--mustard); color: #4A2A12; border-radius: 48% 52% 45% 55%;
+  }
+  .steps strong { display: block; font-size: 1.1rem; margin-bottom: .2rem; }
+
+  /* Prototype */
+  .proto { display: grid; grid-template-columns: .8fr 1.2fr; gap: 3rem; align-items: center; }
+  .proto figure { margin: 0 auto; max-width: 380px; transform: rotate(-2deg); background: #fff; padding: .7rem .7rem 2.4rem; box-shadow: 0 12px 26px rgba(74, 42, 18, .22); }
+  .proto figcaption { font-family: var(--display); font-size: 1.3rem; color: #4A2A12; text-align: center; margin-top: .6rem; }
+
+  /* Status */
+  .timeline { list-style: none; padding: 0; margin: 1.2rem 0 0; border-left: 4px dashed var(--line); }
+  .timeline li { position: relative; padding: 0 0 1.2rem 1.6rem; }
+  .timeline li::before { content: ""; position: absolute; left: -13px; top: .25rem; width: 22px; height: 22px; border-radius: 50%; border: 4px solid var(--ink); background: var(--paper); }
+  .timeline .done::before { background: var(--green); }
+  .timeline .now::before { background: var(--mustard); animation: pulse 2s ease-in-out infinite; }
+  .timeline .now strong { background: var(--mustard); color: #4A2A12; padding: 0 .3em; border-radius: 4px; }
+  .stamp { font-size: .95rem; color: var(--ink-soft); }
+  @keyframes pulse { 50% { box-shadow: 0 0 0 7px rgba(242, 184, 37, .35); } }
+
+  /* Consultations band */
+  .band { background: var(--brown); color: var(--on-brown); border-radius: 30px 46px 26px 40px; padding: 3rem 2.5rem; margin: 2rem 0 4rem; position: relative; }
+  .band h2 { font-size: clamp(2.6rem, 6vw, 3.8rem); }
+  .band p { font-size: 1.15rem; }
+  .bubbles { display: flex; flex-wrap: wrap; gap: .8rem; margin: 1.4rem 0 2rem; padding: 0; list-style: none; }
+  .bubbles li { background: var(--paper); color: var(--ink); font-family: var(--display); font-size: 1.45rem; padding: .4rem 1.1rem; border-radius: 22px 26px 20px 6px; }
+  .band .btn { background: var(--mustard); color: #4A2A12; box-shadow: 4px 5px 0 var(--on-brown); }
+
+  footer { border-top: 3px solid var(--line); padding: 2rem 0 3rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.5rem; }
+  footer .motto { font-family: var(--display); font-size: 1.8rem; }
+  footer p { margin: 0 0 .3rem; }
+
+  @media (max-width: 860px) {
+    .hero, .cab-grid, .proto { grid-template-columns: 1fr; gap: 2rem; }
+    .poster { max-width: 420px; margin: 0 auto; }
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .proto figure { max-width: 360px; margin: 0 auto; }
+    .top nav { display: none; }
+  }
+  @media (max-width: 520px) {
+    .steps { grid-template-columns: 1fr; }
+    .band { padding: 2.2rem 1.4rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a href="https://www.gildia.edu.pl">Gildia Innowacji</a>
+    <nav aria-label="Na tej stronie">
+      <a href="#pakiety">Przykładowe pakiety</a>
+      <a href="#jak">Jak to działa</a>
+      <a href="#status">Status</a>
+      <a href="#konsultacje">Konsultacje</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <svg class="leaf" style="left:-10px;top:10px;width:46px;transform:rotate(-30deg)" viewBox="0 0 40 60" aria-hidden="true"><path d="M20 2C34 16 38 38 20 58 2 38 6 16 20 2Z" fill="#E2662A"/><path d="M20 8V56" stroke="#4A2A12" stroke-width="2"/></svg>
+    <svg class="leaf" style="right:42%;bottom:20px;width:34px;transform:rotate(40deg)" viewBox="0 0 40 60" aria-hidden="true"><path d="M20 2C34 16 38 38 20 58 2 38 6 16 20 2Z" fill="#93C94A"/><path d="M20 8V56" stroke="#4A2A12" stroke-width="2"/></svg>
+    <div>
+      <h1 class="title"><span>Wypożyczalnia Kreatywna</span></h1>
+      <p class="subtitle">Pakiety Kreatywne. Projekt Gildii Innowacji w Kielcach</p>
+      <p class="ask">Co o tym myślisz?</p>
+      <p class="lead">Szafka w szkole, a w niej pakiety do zrobienia w domu: mydełka, świece, własny podcast i modele LEGO Technic. Wypożyczasz pakiet, tworzysz z rodziną i oddajesz sprzęt do szafki.</p>
+      <p>Chcemy przetestować ten pomysł w Szkole Podstawowej nr 25 w Kielcach. Zanim ruszymy, zapytaj nas, podpowiedz i powiedz, czego Ci brakuje.</p>
+      <a class="btn" href="#konsultacje">Weź udział w konsultacjach</a>
+    </div>
+    <div class="poster">
+      <img src="../assets/wypozyczalnia/plakat.jpg" alt="Plakat Wypożyczalni Kreatywnej: szafka z pakietami mydełka, świece, podcast i LEGO Technic oraz zaproszenie do konsultacji" width="800" height="1131">
+    </div>
+  </section>
+
+  <section class="section" id="pakiety">
+    <h2>Przykładowe pakiety kreatywne</h2>
+    <p>Tak mogą wyglądać pakiety w szafce. Wybierz pakiet, żeby zobaczyć, co jest w środku.</p>
+    <div class="cab-grid">
+      <figure class="kit-photo">
+        <img src="../assets/wypozyczalnia/pakiet-podcast.jpg" alt="Przykładowy pakiet do podcastów w kartonowym pudełku: gimbal do telefonu i podwójny mikrofon krawatowy w etui" width="1000" height="666" loading="lazy">
+        <figcaption>Przykładowy pakiet: Podcast</figcaption>
+      </figure>
+      <div>
+        <div class="chips" role="group" aria-label="Wybierz pakiet">
+          <button class="box b-blue" data-kit="podcast" aria-pressed="true" aria-controls="note">Podcast</button>
+          <button class="box b-pink" data-kit="mydelka" aria-pressed="false" aria-controls="note">Mydełka</button>
+          <button class="box b-yellow" data-kit="swiece" aria-pressed="false" aria-controls="note">Świece</button>
+          <button class="box b-green" data-kit="lego" aria-pressed="false" aria-controls="note">LEGO Technic</button>
+        </div>
+      <div class="note" id="note" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="jak">
+    <h2>Jak to działa</h2>
+    <ol class="steps">
+      <li><strong>Zarezerwuj</strong>Zeskanuj kod QR na szafce i wybierz wolny pakiet.</li>
+      <li><strong>Odbierz</strong>Weź pakiet ze szkolnej szafki.</li>
+      <li><strong>Twórz w domu</strong>Zrób projekt według instrukcji, najlepiej razem z rodzicem.</li>
+      <li><strong>Oddaj</strong>Odnieś sprzęt do szafki, żeby mógł z niego skorzystać ktoś następny.</li>
+    </ol>
+  </section>
+
+  <section class="section proto">
+    <figure>
+      <img src="../assets/wypozyczalnia/prototyp-szafki.jpg" alt="Prototyp szafki: szklana witryna z modelami LEGO Technic na białej zamykanej szafce z plakatami i kodem QR" width="700" height="933" loading="lazy">
+      <figcaption>Nasz prototyp</figcaption>
+    </figure>
+    <div>
+      <h2>Szafka już stoi gotowa</h2>
+      <p>Na górze jest szklana witryna z modelami LEGO Technic, która przyciąga uwagę. Na dole jest zamykana część na pakiety. Na drzwiach wiszą plakaty i kod QR z listą modeli.</p>
+      <p>Szafka powstała z doświadczeń dwóch naszych projektów: Warsztatów Małej Mechaniki i Warsztatów Homemade. Nauczyły nas, że zamiast jeździć na każde zajęcia, lepiej dać ludziom sprzęt i dobre instrukcje.</p>
+    </div>
+  </section>
+
+  <section class="section" id="status">
+    <h2>Gdzie jesteśmy</h2>
+    <p class="stamp">Stan na 7 listopada 2026</p>
+    <ol class="timeline">
+      <li class="done">Prototyp szafki jest gotowy.</li>
+      <li class="done">Pakiety na start są prawie gotowe, zostało pakowanie.</li>
+      <li class="done">Wysłaliśmy propozycję do Szkoły Podstawowej nr 25 w Kielcach.</li>
+      <li class="now"><strong>Czekamy na odpowiedź dyrekcji SP 25.</strong></li>
+      <li>Ustawienie szafki w szkole i pierwsze wypożyczenia.</li>
+    </ol>
+  </section>
+
+  <section class="band" id="konsultacje">
+    <h2>Weź udział w konsultacjach!</h2>
+    <p>Twoja opinia pomoże nam dopasować projekt do potrzeb mieszkańców Kielc. Wypełnienie formularza zajmie kilka minut.</p>
+    <ul class="bubbles">
+      <li>Czy chciałbyś skorzystać z takiej usługi?</li>
+      <li>Jakie pakiety byłyby dla Ciebie najciekawsze?</li>
+      <li>Czy to dobry pomysł?</li>
+      <li>Masz jeszcze inne pomysły?</li>
+    </ul>
+    <a class="btn" href="https://forms.gle/UMsggrCgPPEeFMmh9" target="_blank" rel="noopener">Wypełnij formularz</a>
+  </section>
+
+  <footer>
+    <div>
+      <p class="motto">Razem tworzymy bardziej kreatywne Kielce!</p>
+      <p>Gildia Innowacji i Kreatywne Klocki</p>
+    </div>
+    <div>
+      <p>Kontakt: <a href="tel:+48731370032">731 370 032</a></p>
+      <p><a href="https://www.gildia.edu.pl">gildia.edu.pl</a> &nbsp; <a href="https://www.kreatywneklocki.edu.pl">kreatywneklocki.edu.pl</a></p>
+    </div>
+  </footer>
+</div>
+
+<script>
+  const kits = {
+    mydelka: {
+      name: "Mydełka", make: "Zrobisz 2 kolorowe mydełka w silikonowych formach.",
+      items: ["baza glicerynowa do przetapiania", "zapach i barwnik", "silikonowe formy", "instrukcja krok po kroku"],
+      back: "Mydełka zostają u Ciebie, formy wracają do szafki."
+    },
+    swiece: {
+      name: "Świece", make: "Zrobisz 2 świece z własnym zapachem.",
+      items: ["wosk i knoty", "zapach", "silikonowe formy", "instrukcja krok po kroku"],
+      back: "Wosk topi osoba dorosła. Świece zostają u Ciebie, formy wracają do szafki."
+    },
+    podcast: {
+      name: "Podcast", make: "Nagrasz własny odcinek podcastu telefonem: wywiad, opowieść albo audycję.",
+      items: ["gimbal do telefonu", "2 mikrofony krawatowe z wtyczką do telefonu", "instrukcja krok po kroku"],
+      back: "Nagranie zostaje u Ciebie, sprzęt wraca do szafki."
+    },
+    lego: {
+      name: "LEGO Technic", make: "Zbudujesz model z prawdziwymi mechanizmami i sprawdzisz, jak działają.",
+      items: ["na start 4 zestawy do wyboru", "instrukcje budowy"],
+      back: "Po zabawie rozbierasz model i oddajesz komplet do szafki."
+    }
+  };
+  const note = document.getElementById("note");
+  const boxes = document.querySelectorAll(".box");
+  function show(key) {
+    const k = kits[key];
+    note.innerHTML = "<h3>" + k.name + "</h3>" + (k.art || "") + "<p>" + k.make + "</p><p><strong>W pakiecie:</strong></p><ul>" +
+      k.items.map(i => "<li>" + i + "</li>").join("") + "</ul><span class=\"tag\">" + k.back + "</span>";
+    boxes.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.kit === key)));
+  }
+  boxes.forEach(b => b.addEventListener("click", () => show(b.dataset.kit)));
+  show("podcast");
+</script>
+</body>
+</html>
