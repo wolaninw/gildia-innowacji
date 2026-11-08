@@ -125,7 +125,7 @@
   .b-blue { background: var(--blue); } .b-green { background: var(--green); }
 
   .kit-photo { margin: 0; transform: rotate(-1.5deg); }
-  .kit-photo img { border-radius: 10px; box-shadow: 0 14px 30px rgba(74, 42, 18, .25); }
+  .kit-photo img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 10px; box-shadow: 0 14px 30px rgba(74, 42, 18, .25); }
   .kit-photo figcaption { font-family: var(--display); font-size: 1.4rem; text-align: center; margin-top: .7rem; }
   .chips { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 1.2rem; }
   .chips .box { width: auto; font-size: 1.4rem; padding: .3rem 1rem; }
@@ -226,8 +226,8 @@
     <p>Tak mogą wyglądać pakiety w szafce. Wybierz pakiet, żeby zobaczyć, co jest w środku.</p>
     <div class="cab-grid">
       <figure class="kit-photo">
-        <img src="../assets/wypozyczalnia/pakiet-podcast.jpg" alt="Przykładowy pakiet do podcastów w kartonowym pudełku: gimbal do telefonu i podwójny mikrofon krawatowy w etui" width="1000" height="666" loading="lazy">
-        <figcaption>Przykładowy pakiet: Podcast</figcaption>
+        <img id="kit-img" src="../assets/wypozyczalnia/pakiet-podcast-v2.jpg" alt="" width="1000" height="667" loading="lazy">
+        <figcaption id="kit-cap">Przykładowy pakiet: Podcast</figcaption>
       </figure>
       <div>
         <div class="chips" role="group" aria-label="Wybierz pakiet">
@@ -301,35 +301,44 @@
 <script>
   const kits = {
     mydelka: {
+      img: "../assets/wypozyczalnia/pakiet-mydelka.jpg", alt: "Przykładowy pakiet do mydełek: baza, olejki zapachowe, płatki róż, miarka i różowe silikonowe formy",
       name: "Mydełka", make: "Zrobisz 2 kolorowe mydełka w silikonowych formach.",
       items: ["baza glicerynowa do przetapiania", "zapach i barwnik", "silikonowe formy", "instrukcja krok po kroku"],
       back: "Mydełka zostają u Ciebie, formy wracają do szafki."
     },
     swiece: {
+      img: "../assets/wypozyczalnia/pakiet-swiece.jpg", alt: "Przykładowy pakiet do świec: silikonowe formy, wosk, knoty, barwniki i olejki zapachowe",
       name: "Świece", make: "Zrobisz 2 świece z własnym zapachem.",
       items: ["wosk i knoty", "zapach", "silikonowe formy", "instrukcja krok po kroku"],
       back: "Wosk topi osoba dorosła. Świece zostają u Ciebie, formy wracają do szafki."
     },
     podcast: {
+      img: "../assets/wypozyczalnia/pakiet-podcast-v2.jpg", alt: "Przykładowy pakiet do podcastów w kartonowym pudełku: gimbal do telefonu i podwójny mikrofon krawatowy w etui",
       name: "Podcast", make: "Nagrasz własny odcinek podcastu telefonem: wywiad, opowieść albo audycję.",
       items: ["gimbal do telefonu", "2 mikrofony krawatowe z wtyczką do telefonu", "instrukcja krok po kroku"],
       back: "Nagranie zostaje u Ciebie, sprzęt wraca do szafki."
     },
     lego: {
-      name: "LEGO Technic", make: "Zbudujesz model z prawdziwymi mechanizmami i sprawdzisz, jak działają.",
-      items: ["na start 4 zestawy do wyboru", "instrukcje budowy"],
+      img: "../assets/wypozyczalnia/pakiet-lego.jpg", alt: "Przykładowy pakiet LEGO Technic: cztery modele z silnikami Krab Filip, Sprężysty Franek, Zakręcony Jarek i Dziki Grześ",
+      name: "LEGO Technic", make: "Wybierasz jeden z 4 modeli z silnikiem i budujesz go według instrukcji.",
+      items: ["Krab Filip: 131 części, ok. 30 min, silnik PF L", "Sprężysty Franek: 95 części, ok. 30 min, silnik PF L", "Zakręcony Jarek: 122 części, ok. 45 min, silnik PF XL", "Dziki Grześ: 127 części, ok. 30 min, silnik PF M", "instrukcja budowy"],
       back: "Po zabawie rozbierasz model i oddajesz komplet do szafki."
     }
   };
   const note = document.getElementById("note");
+  const kitImg = document.getElementById("kit-img");
+  const kitCap = document.getElementById("kit-cap");
   const boxes = document.querySelectorAll(".box");
   function show(key) {
     const k = kits[key];
     note.innerHTML = "<h3>" + k.name + "</h3>" + (k.art || "") + "<p>" + k.make + "</p><p><strong>W pakiecie:</strong></p><ul>" +
       k.items.map(i => "<li>" + i + "</li>").join("") + "</ul><span class=\"tag\">" + k.back + "</span>";
+    kitImg.src = k.img; kitImg.alt = k.alt;
+    kitCap.textContent = k.cap || "Przykładowy pakiet: " + k.name;
     boxes.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.kit === key)));
   }
   boxes.forEach(b => b.addEventListener("click", () => show(b.dataset.kit)));
+  Object.values(kits).forEach(k => { new Image().src = k.img; });
   show("podcast");
 </script>
 </body>
