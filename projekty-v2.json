@@ -398,5 +398,39 @@
       "LEGO",
       "podcast"
     ]
+  },
+  {
+    "id": "p014",
+    "nazwa_projektu": "Legenda o Sercu Ślichowic",
+    "kategoria": "spoleczne",
+    "podkategoria": "Projekty dla otoczenia",
+    "status": "zakonczone",
+    "omowienie": "Legenda wymyślona przez uczestników Gildii Innowacji o kamieniołomie Ślichowice w Kielcach. Opowiada o dwojgu zakochanych, kłótni na dnie kamieniołomu i jeziorze w kształcie nierównego serca. To legenda, a nie historia: ma ożywić lokalne miejsce i zachęcić do odwiedzania Ślichowic. Ma własną stronę, którą można udostępniać.",
+    "pitch": "Historia miłości, kamieniołomu i nierównego serca. Legenda z Kielc stworzona przez uczestników Gildii Innowacji.",
+    "data_rozpoczecia": "",
+    "data_zakonczenia": "",
+    "cele": {
+      "potrzeba": "Lokalne miejsca nie mają własnych opowieści, które przyciągałyby mieszkańców",
+      "cel_glowny": "Pokazać, że lokalne miejsca mogą mieć własne legendy, i zachęcić do odwiedzania Ślichowic",
+      "grupa_docelowa": "Mieszkańcy Kielc, rodziny, odwiedzający Ślichowice"
+    },
+    "specyfikacje": {
+      "technologia": "Opowieść, strona internetowa z możliwością udostępniania",
+      "umiejetnosci": "Pisanie, opowiadanie historii, promocja miejsca",
+      "miejsce": "Kamieniołom Ślichowice, Kielce",
+      "termin": "2025"
+    },
+    "media": {
+      "zdjecie": "assets/projekty/legenda-slichowice-plakat.jpg"
+    },
+    "strona": "pages/legenda-slichowice.html",
+    "dokumentacja": "",
+    "tagi": [
+      "legenda",
+      "Ślichowice",
+      "kamieniołom",
+      "Kielce",
+      "opowieść"
+    ]
   }
 ]
